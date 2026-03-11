@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>VelarisUI — Documentation</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #1a1a1a;
+    --sidebar-bg: #1f1f1f;
+    --border: #2e2e2e;
+    --text: #d4d4d4;
+    --muted: #6b6b6b;
+    --active: #ffffff;
+    --code-bg: #252525;
+    --code-border: #333;
+    --sidebar-w: 165px;
+  }
+  html, body { height: 100%; }
+  body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); font-size: 14px; display: flex; flex-direction: column; }
+
+  /* TOPBAR */
+  .topbar {
+    height: 36px; background: var(--bg); border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; padding: 0 14px; gap: 8px;
+    flex-shrink: 0; position: sticky; top: 0; z-index: 200;
+  }
+  .topbar-title { font-size: 13px; font-weight: 500; color: var(--active); }
+  .topbar-spacer { flex: 1; }
+  .topbar-gear { color: var(--muted); font-size: 15px; cursor: pointer; user-select: none; }
+
+  .layout { display: flex; flex: 1; overflow: hidden; }
+
+  /* SIDEBAR */
+  aside {
+    width: var(--sidebar-w); background: var(--sidebar-bg);
+    border-right: 1px solid var(--border); overflow-y: auto; flex-shrink: 0; padding-bottom: 32px;
+  }
+  aside::-webkit-scrollbar { width: 3px; }
+  aside::-webkit-scrollbar-thumb { background: var(--border); border-radius: 99px; }
+
+  .proj-select {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 8px 12px; border-bottom: 1px solid var(--border); cursor: pointer;
+  }
+  .proj-name { font-size: 13px; font-weight: 500; color: var(--active); }
+  .proj-arrow { color: var(--muted); font-size: 11px; }
+
+  .nav-section { padding: 16px 0 4px; }
+  .nav-label { font-size: 10px; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase; color: var(--muted); padding: 0 12px 6px; }
+  .nav-item {
+    display: block; padding: 4px 12px; font-size: 13px; color: var(--muted);
+    text-decoration: none; cursor: pointer; transition: color .12s; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .nav-item:hover { color: var(--text); }
+  .nav-item.active { color: var(--active); font-weight: 500; }
+
+  /* MAIN */
+  main { flex: 1; overflow-y: auto; padding: 32px 48px 60px; }
+  main::-webkit-scrollbar { width: 4px; }
+  main::-webkit-scrollbar-thumb { background: var(--border); border-radius: 99px; }
+
+  .page { display: none; }
+  .page.active { display: block; }
+
+  .page-title { font-size: 28px; font-weight: 600; color: var(--active); margin-bottom: 6px; }
+  .page-subtitle { font-size: 14px; color: var(--muted); margin-bottom: 36px; }
+
+  h2 { font-size: 17px; font-weight: 600; color: var(--active); margin: 36px 0 16px; }
+  h3 { font-size: 14px; font-weight: 500; color: var(--active); margin: 22px 0 10px; display: flex; align-items: center; gap: 8px; }
+  p { color: var(--muted); font-size: 13.5px; line-height: 1.65; margin-bottom: 12px; }
+
+  /* BADGE */
+  .badge {
+    display: inline-flex; align-items: center; gap: 4px;
+    font-size: 10px; font-weight: 600; padding: 2px 8px;
+    border-radius: 20px; letter-spacing: .3px;
+  }
+  .badge-green  { background: #1a3a2a; color: #4ade80; border: 1px solid #2a5a3a; }
+  .badge-red    { background: #3a1a1a; color: #f87171; border: 1px solid #5a2a2a; }
+  .badge-yellow { background: #3a2e1a; color: #fbbf24; border: 1px solid #5a4a2a; }
+  .badge-blue   { background: #1a2a3a; color: #60a5fa; border: 1px solid #2a3a5a; }
+  .badge-dot::before { content: ''; display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+
+  /* CODE BLOCK */
+  .code-block {
+    background: var(--code-bg); border: 1px solid var(--code-border);
+    border-radius: 6px; padding: 14px 16px; margin: 10px 0;
+    overflow-x: auto; position: relative;
+  }
+  .code-block code {
+    font-family: 'JetBrains Mono', monospace; font-size: 12.5px;
+    line-height: 1.65; color: #c9c9c9; white-space: pre;
+  }
+  /* Lua syntax colors */
+  .kw  { color: #c084fc; } /* local, function, end, true, false, if, then, else, return */
+  .fn  { color: #93c5fd; } /* function calls */
+  .str { color: #86efac; } /* strings */
+  .var { color: #d4d4d4; } /* variables */
+  .op  { color: #94a3b8; } /* operators */
+  .cm  { color: #4b5563; } /* comments */
+  .num { color: #f9a8d4; } /* numbers */
+
+  .copy-btn {
+    position: absolute; top: 8px; right: 8px;
+    background: #333; border: 1px solid var(--code-border);
+    color: var(--muted); font-size: 10px; padding: 3px 8px;
+    border-radius: 4px; cursor: pointer; font-family: 'Inter', sans-serif; transition: all .15s;
+  }
+  .copy-btn:hover { color: var(--text); border-color: #555; }
+
+  code.il {
+    font-family: 'JetBrains Mono', monospace; font-size: 12px;
+    background: var(--code-bg); border: 1px solid var(--code-border);
+    border-radius: 4px; padding: 1px 5px; color: #c9c9c9;
+  }
+
+  hr.div { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+
+  /* TABLE */
+  table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 12px 0; }
+  thead th {
+    text-align: left; padding: 8px 12px; background: #252525;
+    color: var(--muted); font-size: 11px; font-weight: 600; letter-spacing: .8px; text-transform: uppercase;
+  }
+  tbody td { padding: 9px 12px; border-bottom: 1px solid var(--border); color: var(--muted); vertical-align: top; }
+  tbody td:first-child { color: var(--text); font-family: 'JetBrains Mono', monospace; font-size: 12px; }
+
+  /* ALERT / INFO BOX */
+  .info-box {
+    background: #1e2533; border: 1px solid #2a3a5a; border-left: 3px solid #60a5fa;
+    border-radius: 0 6px 6px 0; padding: 10px 14px; margin: 14px 0;
+    font-size: 13px; color: #93c5fd; line-height: 1.55;
+  }
+
+  /* PAGE NAV */
+  .page-nav { display: flex; justify-content: space-between; margin-top: 48px; gap: 12px; }
+  .pnav-btn {
+    flex: 1; background: #252525; border: 1px solid var(--border);
+    border-radius: 6px; padding: 12px 16px; cursor: pointer;
+    color: var(--muted); font-size: 12px; text-align: left; transition: border-color .15s, color .15s;
+    font-family: 'Inter', sans-serif;
+  }
+  .pnav-btn:hover { border-color: #555; color: var(--text); }
+  .pnav-btn strong { display: block; font-size: 13px; color: var(--active); margin-top: 2px; }
+  .pnav-btn.right { text-align: right; }
+
+  /* SUB-TABS inside a page */
+  .subtabs { display: flex; gap: 2px; margin: 16px 0 0; border-bottom: 1px solid var(--border); }
+  .stab {
+    font-size: 12px; padding: 6px 14px; cursor: pointer;
+    color: var(--muted); border-bottom: 2px solid transparent; transition: all .15s;
+    font-family: 'Inter', sans-serif;
+  }
+  .stab:hover { color: var(--text); }
+  .stab.active { color: var(--active); border-bottom-color: var(--active); }
+  .stab-content { display: none; padding-top: 16px; }
+  .stab-content.active { display: block; }
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <span style="font-size:13px">📄</span>
+  <span class="topbar-title">Documentation</span>
+  <div class="topbar-spacer"></div>
+  <span class="topbar-gear">⚙</span>
+</div>
+
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <aside>
+    <div class="proj-select">
+      <span class="proj-name">VelarisUI</span>
+      <span class="proj-arrow">⌄</span>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-label">Setup</div>
+      <a class="nav-item active" onclick="show('loadstring',this)">Loadstring</a>
+      <a class="nav-item" onclick="show('window',this)">Window</a>
+      <a class="nav-item" onclick="show('tags',this)">Tags</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-label">UI</div>
+      <a class="nav-item" onclick="show('tabs',this)">Tabs</a>
+      <a class="nav-item" onclick="show('section',this)">Section</a>
+      <a class="nav-item" onclick="show('notification',this)">Notification</a>
+      <a class="nav-item" onclick="show('dialog',this)">Dialog</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-label">Elements</div>
+      <a class="nav-item" onclick="show('button',this)">Button</a>
+      <a class="nav-item" onclick="show('toggle',this)">Toggle</a>
+      <a class="nav-item" onclick="show('slider',this)">Slider</a>
+      <a class="nav-item" onclick="show('dropdown',this)">Dropdown</a>
+      <a class="nav-item" onclick="show('input',this)">Input</a>
+      <a class="nav-item" onclick="show('panel',this)">Panel</a>
+      <a class="nav-item" onclick="show('paragraph',this)">Paragraph</a>
+      <a class="nav-item" onclick="show('keybind',this)">Keybind</a>
+      <a class="nav-item" onclick="show('divider',this)">Divider & SubSection</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-label">More</div>
+      <a class="nav-item" onclick="show('fullexample',this)">Full Example</a>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main>
+
+    <!-- ══ LOADSTRING ══ -->
+    <div id="page-loadstring" class="page active">
+      <div class="page-title">Loadstring</div>
+      <div class="page-subtitle">Load VelarisUI menggunakan loadstring</div>
+
+      <div class="info-box">
+        💬 Support: <strong>VikaiHub</strong> & <strong>NexaHub</strong> version<br/>
+        Discord: <code class="il">discord.gg/ECxQFc97F5</code>
+      </div>
+
+      <h2>Load methods</h2>
+      <h3>Loadstring <span class="badge badge-green badge-dot">Recommended</span></h3>
+      <div class="code-block">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <code><span class="kw">local</span> <span class="var">VelarisUI</span> <span class="op">=</span> <span class="fn">loadstring</span>(<span class="var">game</span>:<span class="fn">HttpGet</span>(<span class="str">"https://raw.githubusercontent.com/Gato290/ui/refs/heads/main/main.lua"</span>))()</code>
+      </div>
+
+      <h2>Support Icon</h2>
+      <p>VelarisUI mendukung dua icon pack berikut:</p>
+      <div class="code-block">
+        <code><span class="str">Lucide</span>, <span class="str">Solar</span></code>
+      </div>
+
+      <div class="page-nav">
+        <div></div>
+        <button class="pnav-btn right" onclick="show('window', getSL('window'))">Next → <strong>Window</strong></button>
+      </div>
+    </div>
+
+    <!-- ══ WINDOW ══ -->
+    <div id="page-window" class="page">
+      <div class="page-title">Window</div>
+      <div class="page-subtitle">Membuat window utama VelarisUI</div>
+
+      <h2>Create Window</h2>
+      <div class="code-block">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <code><span class="kw">local</span> <span class="var">Window</span> <span class="op">=</span> <span class="var">VelarisUI</span>:<span class="fn">Window</span>({
+    <span class="var">Title</span>         <span class="op">=</span> <span class="str">"Velaris UI"</span>,       <span class="cm">-- Main title di atas window</span>
+    <span class="var">Footer</span>        <span class="op">=</span> <span class="str">"By Nexa"</span>,         <span class="cm">-- Footer text di bawah</span>
+    <span class="var">Content</span>       <span class="op">=</span> <span class="str">"Content"</span>,
+    <span class="var">Color</span>         <span class="op">=</span> <span class="str">"Default"</span>,         <span class="cm">-- Tema warna UI</span>
+    <span class="var">Version</span>       <span class="op">=</span> <span class="num">1.0</span>,
+    [<span class="str">"Tab Width"</span>]  <span class="op">=</span> <span class="num">120</span>,              <span class="cm">-- Lebar section tab</span>
+    <span class="var">Image</span>         <span class="op">=</span> <span class="str">"101833678008843"</span>, <span class="cm">-- Asset ID icon window</span>
+    <span class="var">Configname</span>    <span class="op">=</span> <span class="str">"Vilaris_Ui"</span>,      <span class="cm">-- Nama file konfigurasi</span>
+    <span class="var">Uitransparent</span> <span class="op">=</span> <span class="num">0.15</span>,             <span class="cm">-- Transparansi UI (0=solid)</span>
+    <span class="var">ShowUser</span>      <span class="op">=</span> <span class="kw">true</span>,
+    <span class="var">Search</span>        <span class="op">=</span> <span class="kw">true</span>,
+    <span class="var">Config</span> <span class="op">=</span> {
+        <span class="var">AutoSave</span> <span class="op">=</span> <span class="kw">true</span>,              <span class="cm">-- Auto simpan settings</span>
+        <span class="var">AutoLoad</span> <span class="op">=</span> <span class="kw">true</span>,              <span class="cm">-- Auto load settings</span>
+    },
+})</code>
+      </div>
+
+      <h3>Properties</h3>
+      <table>
+        <thead><tr><th>Property</th><th>Type</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td>Title</td><td>string</td><td>Judul utama di atas window.</td></tr>
+          <tr><td>Footer</td><td>string</td><td>Teks footer di bagian bawah.</td></tr>
+          <tr><td>Color</td><td>string</td><td>Tema warna UI. Default: <code class="il">"Default"</code>.</td></tr>
+          <tr><td>Version</td><td>number</td><td>Versi script yang ditampilkan.</td></tr>
+          <tr><td>Tab Width</td><td>number</td><td>Lebar section tab (default: 120).</td></tr>
+          <tr><td>Image</td><td>string</td><td>Asset ID untuk icon window.</td></tr>
+          <tr><td>Configname</td><td>string</td><td>Nama file untuk menyimpan config.</td></tr>
+          <tr><td>Uitransparent</td><td>number</td><td>Transparansi UI. 0 = solid, 1 = transparan penuh.</td></tr>
+          <tr><td>ShowUser</td><td>boolean</td><td>Tampilkan nama user.</td></tr>
+          <tr><td>Search</td><td>boolean</td><td>Aktifkan fitur search.</td></tr>
+          <tr><td>Config.AutoSave</td><td>boolean</td><td>Auto-simpan settings.</td></tr>
+          <tr><td>Config.AutoLoad</td><td>boolean</td><td>Auto-load settings saat start.</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Key System</h2>
+      <p>Tambahkan key system ke dalam konfigurasi Window.</p>
+      <div class="code-block">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <code><span class="var">KeySystem</span> <span class="op">=</span> {
+    <span class="var">Title</span>       <span class="op">=</span> <span class="str">"My Super Hub"</span>,
+    <span class="var">Icon</span>        <span class="op">=</span> <span class="str">"lucide:bird"</span>,
+    <span class="var">Note</span>        <span class="op">=</span> <span class="str">"Example Key System."</span>,
+    <span class="var">Placeholder</span> <span class="op">=</span> <span class="str">"Enter Key"</span>,
+    <span class="var">Default</span>     <span class="op">=</span> <span class="str">""</span>,
+    <span class="var">Buttons</span> <span class="op">=</span> {
+        { <span class="var">Name</span> <span class="op">=</span> <span class="str">"Exit"</span>, <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">key</span>) <span class="kw">end</span> },
+        { <span class="var">Name</span> <span class="op">=</span> <span class="str">"Get key"</span>, <span class="var">Icon</span> <span class="op">=</span> <span class="str">"lucide:link"</span>, <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">key</span>) <span class="kw">end</span> },
+        {
+            <span class="var">Name</span> <span class="op">=</span> <span class="str">"Submit"</span>,
+            <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">key</span>)
+                <span class="kw">if</span> <span class="var">key</span> <span class="op">==</span> <span class="str">"mykey123"</span> <span class="kw">then</span>
+                    <span class="kw">return</span> <span class="kw">true</span>
+                <span class="kw">end</span>
+                <span class="kw">return</span> <span class="kw">false</span>
+            <span class="kw">end</span>,
+        },
+    },
+},</code>
+      </div>
+
+      <div class="page-nav">
+        <button class="pnav-btn" onclick="show('loadstring', getSL('loadstring'))">← Previous <strong>Loadstring</strong></button>
+        <button class="pnav-btn right" onclick="show('tags', getSL('tags'))">Next → <strong>Tags</strong></button>
+      </div>
+    </div>
+
+    <!-- ══ TAGS ══ -->
+    <div id="page-tags" class="page">
+      <div class="page-title">Tags</div>
+      <div class="page-subtitle">Tambahkan label berwarna pada window</div>
+
+      <div class="code-block">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <code><span class="var">Window</span>:<span class="fn">Tag</span>({
+    <span class="var">Title</span> <span class="op">=</span> <span class="str">"v1.6.41"</span>,
+    <span class="var">Color</span> <span class="op">=</span> <span class="var">Color3</span>.<span class="fn">fromRGB</span>(<span class="num">245</span>, <span class="num">167</span>, <span class="num">35</span>), <span class="cm">-- kuning</span>
+})
+
+<span class="var">Window</span>:<span class="fn">Tag</span>({
+    <span class="var">Title</span> <span class="op">=</span> <span class="str">"UI Library"</span>,
+    <span class="var">Color</span> <span class="op">=</span> <span class="var">Color3</span>.<span class="fn">fromRGB</span>(<span class="num">48</span>, <span class="num">255</span>, <span class="num">106</span>), <span class="cm">-- hijau</span>
+})</code>
+      </div>
+
+      <div class="page-nav">
+        <button class="pnav-btn" onclick="show('window', getSL('window'))">← Previous <strong>Window</strong></button>
+        <button class="pnav-btn right" onclick="show('tabs', getSL('tabs'))">Next → <strong>Tabs</strong></button>
+      </div>
+    </div>
+
+    <!-- ══ TABS ══ -->
+    <div id="page-tabs" class="page">
+      <div class="page-title">Tabs</div>
+      <div class="page-subtitle">Membuat tab untuk mengorganisir konten UI</div>
+
+      <div class="subtabs">
+        <div class="stab active" onclick="stab(this,'tabs-default')">Default Icon</div>
+        <div class="stab" onclick="stab(this,'tabs-lucide')">Lucide Icon</div>
+        <div class="stab" onclick="stab(this,'tabs-solar')">Solar Icon</div>
+      </div>
+
+      <div id="tabs-default" class="stab-content active">
+        <div class="code-block">
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <code><span class="kw">local</span> <span class="var">Tabs</span> <span class="op">=</span> {
+    <span class="var">Tabs1</span> <span class="op">=</span> <span class="var">Window</span>:<span class="fn">AddTab</span>({
+        <span class="var">Name</span> <span class="op">=</span> <span class="str">"Tabs 1"</span>,
+        <span class="var">Icon</span> <span class="op">=</span> <span class="str">"home"</span>,
+    }),
+    <span class="var">Tabs2</span> <span class="op">=</span> <span class="var">Window</span>:<span class="fn">AddTab</span>({
+        <span class="var">Name</span> <span class="op">=</span> <span class="str">"Tabs 2"</span>,
+        <span class="var">Icon</span> <span class="op">=</span> <span class="str">"gamepad"</span>,
+    }),
+}</code>
+        </div>
+      </div>
+
+      <div id="tabs-lucide" class="stab-content">
+        <div class="code-block">
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <code><span class="kw">local</span> <span class="var">Tabs</span> <span class="op">=</span> {
+    <span class="var">Tabs1</span> <span class="op">=</span> <span class="var">Window</span>:<span class="fn">AddTab</span>({
+        <span class="var">Name</span> <span class="op">=</span> <span class="str">"Tabs 1"</span>,
+        <span class="var">Icon</span> <span class="op">=</span> <span class="str">"lucide:house"</span>,
+    }),
+    <span class="var">Tabs2</span> <span class="op">=</span> <span class="var">Window</span>:<span class="fn">AddTab</span>({
+        <span class="var">Name</span> <span class="op">=</span> <span class="str">"Tabs 2"</span>,
+        <span class="var">Icon</span> <span class="op">=</span> <span class="str">"lucide:sword"</span>,
+    }),
+}</code>
+        </div>
+      </div>
+
+      <div id="tabs-solar" class="stab-content">
+        <div class="code-block">
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <code><span class="kw">local</span> <span class="var">Tabs</span> <span class="op">=</span> {
+    <span class="var">Tabs1</span> <span class="op">=</span> <span class="var">Window</span>:<span class="fn">AddTab</span>({
+        <span class="var">Name</span> <span class="op">=</span> <span class="str">"Tabs 1"</span>,
+        <span class="var">Icon</span> <span class="op">=</span> <span class="str">"solar:home"</span>,
+    }),
+    <span class="var">Tabs2</span> <span class="op">=</span> <span class="var">Window</span>:<span class="fn">AddTab</span>({
+        <span class="var">Name</span> <span class="op">=</span> <span class="str">"Tabs 2"</span>,
+        <span class="var">Icon</span> <span class="op">=</span> <span class="str">"solar:gamepad"</span>,
+    }),
+}</code>
+        </div>
+      </div>
+
+      <div class="page-nav">
+        <button class="pnav-btn" onclick="show('tags', getSL('tags'))">← Previous <strong>Tags</strong></button>
+        <button class="pnav-btn right" onclick="show('section', getSL('section'))">Next → <strong>Section</strong></button>
+      </div>
+    </div>
+
+    <!-- ══ SECTION ══ -->
+    <div id="page-section" class="page">
+      <div class="page-title">Section</div>
+      <div class="page-subtitle">Container untuk mengelompokkan elemen UI</div>
+
+      <p>Section adalah container utama untuk button, toggle, slider, dan elemen lainnya.</p>
+
+      <div class="subtabs">
+        <div class="stab active" onclick="stab(this,'sec-local')">Frugal Local</div>
+        <div class="stab" onclick="stab(this,'sec-basic')">Basic</div>
+        <div class="stab" onclick="stab(this,'sec-full')">Full</div>
+      </div>
+
+      <div id="sec-local" class="stab-content active">
+        <div class="code-block">
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <code><span class="kw">local</span> <span class="var">Sec</span> <span class="op">=</span> {}
+<span class="var">Sec</span>.<span class="var">Player</span> <span class="op">=</span> <span class="var">Tabs</span>.<span class="var">Main</span>:<span class="fn">AddSection</span>({
+    <span class="var">Title</span> <span class="op">=</span> <span class="str">"Player"</span>,
+    <span class="var">Icon</span>  <span class="op">=</span> <span class="str">"lucide:user"</span>,
+    <span class="var">Open</span>  <span class="op">=</span> <span class="kw">true</span>
+})
+
+<span class="var">Sec</span>.<span class="var">Weapon</span> <span class="op">=</span> <span class="var">Tabs</span>.<span class="var">Main</span>:<span class="fn">AddSection</span>({
+    <span class="var">Title</span> <span class="op">=</span> <span class="str">"Weapons"</span>,
+    <span class="var">Icon</span>  <span class="op">=</span> <span class="str">"solar:home"</span>,
+    <span class="var">Open</span>  <span class="op">=</span> <span class="kw">false</span>
+})</code>
+        </div>
+      </div>
+
+      <div id="sec-basic" class="stab-content">
+        <div class="code-block">
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <code><span class="var">Tabs</span>.<span class="var">Main</span>:<span class="fn">AddSection</span>({
+    <span class="var">Title</span> <span class="op">=</span> <span class="str">"Player"</span>,
+    <span class="var">Icon</span>  <span class="op">=</span> <span class="str">"lucide:user"</span>,
+    <span class="var">Open</span>  <span class="op">=</span> <span class="kw">true</span>
+})
+
+<span class="var">Tabs</span>.<span class="var">Main</span>:<span class="fn">AddSection</span>({
+    <span class="var">Title</span> <span class="op">=</span> <span class="str">"Weapons"</span>,
+    <span class="var">Icon</span>  <span class="op">=</span> <span class="str">"solar:home"</span>,
+    <span class="var">Open</span>  <span class="op">=</span> <span class="kw">false</span>
+})</code>
+        </div>
+      </div>
+
+      <div id="sec-full" class="stab-content">
+        <div class="code-block">
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <code><span class="var">Tabs</span>.<span class="var">Main</span>:<span class="fn">AddSection</span>({
+    <span class="var">Title</span>          <span class="op">=</span> <span class="str">"Player"</span>,
+    <span class="var">TextXAlignment</span> <span class="op">=</span> <span class="str">"Left"</span>,  <span class="cm">-- "Left", "Center", "Right". optional</span>
+    <span class="var">Icon</span>           <span class="op">=</span> <span class="str">"lucide:user"</span>,
+    <span class="var">Open</span>           <span class="op">=</span> <span class="kw">true</span>
+})</code>
+        </div>
+      </div>
+
+      <div class="page-nav">
+        <button class="pnav-btn" onclick="show('tabs', getSL('tabs'))">← Previous <strong>Tabs</strong></button>
+        <button class="pnav-btn right" onclick="show('button', getSL('button'))">Next → <strong>Button</strong></button>
+      </div>
+    </div>
+
+    <!-- ══ BUTTON ══ -->
+    <div id="page-button" class="page">
+      <div class="page-title">Button</div>
+      <div class="page-subtitle">Tambahkan tombol interaktif ke section</div>
+
+      <div class="subtabs">
+        <div class="stab active" onclick="stab(this,'btn-single')">Single</div>
+        <div class="stab" onclick="stab(this,'btn-dual')">Dual</div>
+        <div class="stab" onclick="stab(this,'btn-v2')">Button V2</div>
+        <div class="stab" onclick="stab(this,'btn-fn')">Functions</div>
+      </div>
+
+      <div id="btn-single" class="stab-content active">
+        <div class="code-block">
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <code><span class="var">Sec</span>.<span class="var">Botton</span>:<span class="fn">AddButton</span>({
+    <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Example"</span>,
+    <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>()
+        <span class="fn">print</span>(<span class="str">"This is an example button"</span>)
+        <span class="fn">Notify</span>(<span class="str">"Example clicked!"</span>, <span class="num">2</span>)
+    <span class="kw">end</span>
+})</code>
+        </div>
+      </div>
+
+      <div id="btn-dual" class="stab-content">
+        <div class="code-block">
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <code><span class="var">Sec</span>.<span class="var">Botton</span>:<span class="fn">AddButton</span>({
+    <span class="var">Title</span>       <span class="op">=</span> <span class="str">"Example"</span>,
+    <span class="var">Callback</span>    <span class="op">=</span> <span class="kw">function</span>()
+        <span class="fn">print</span>(<span class="str">"Example ON"</span>)
+        <span class="fn">Notify</span>(<span class="str">"Example enabled!"</span>, <span class="num">2</span>)
+    <span class="kw">end</span>,
+    <span class="var">SubTitle</span>    <span class="op">=</span> <span class="str">"Example Off"</span>,
+    <span class="var">SubCallback</span> <span class="op">=</span> <span class="kw">function</span>()
+        <span class="fn">print</span>(<span class="str">"Example OFF"</span>)
+        <span class="fn">Notify</span>(<span class="str">"Example disabled!"</span>, <span class="num">2</span>)
+    <span class="kw">end</span>
+})</code>
+        </div>
+      </div>
+
+      <div id="btn-v2" class="stab-content">
+        <div class="code-block">
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <code><span class="var">Sec</span>.<span class="var">Button</span>:<span class="fn">AddButton</span>({
+    <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Example Button V2 (Icon)"</span>,
+    <span class="var">Version</span>  <span class="op">=</span> <span class="str">"V2"</span>,
+    <span class="var">Icon</span>     <span class="op">=</span> <span class="str">"rbxassetid://79715859717613"</span>,
+    <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>()
+        <span class="fn">print</span>(<span class="str">"This is an example button"</span>)
+        <span class="fn">Nt</span>(<span class="str">"Example clicked!"</span>, <span class="num">2</span>)
+    <span class="kw">end</span>
+})</code>
+        </div>
+      </div>
+
+      <div id="btn-fn" class="stab-content">
+        <h3>V1</h3>
+        <table>
+          <thead><tr><th>Method</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td>:Fire()</td><td>Trigger callback utama</td></tr>
+            <tr><td>:FireSub()</td><td>Trigger callback sub button</td></tr>
+            <tr><td>:SetTitle(text)</td><td>Ubah teks button utama</td></tr>
+            <tr><td>:SetSubTitle(text)</td><td>Ubah teks sub button</td></tr>
+            <tr><td>:SetCallback(fn)</td><td>Ganti callback utama</td></tr>
+            <tr><td>:SetSubCallback(fn)</td><td>Ganti callback sub button</td></tr>
+            <tr><td>:SetLocked(state)</td><td>Kunci/buka elemen</td></tr>
+            <tr><td>:GetLocked()</td><td>Cek status kunci</td></tr>
+          </tbody>
+        </table>
+        <h3>V2</h3>
+        <table>
+          <thead><tr><th>Method</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td>:Fire()</td><td>Trigger callback</td></tr>
+            <tr><td>:SetTitle(text)</td><td>Ubah judul</td></tr>
+            <tr><td>:SetContent(text)</td><td>Ubah content</td></tr>
+            <tr><td>:SetCallback(fn)</td><td>Ganti callback</td></tr>
+            <tr><td>:SetLocked(state)</td><td>Kunci/buka elemen</td></tr>
+            <tr><td>:GetLocked()</td><td>Cek status kunci</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="page-nav">
+        <button class="pnav-btn" onclick="show('section', getSL('section'))">← Previous <strong>Section</strong></button>
+        <button class="pnav-btn right" onclick="show('toggle', getSL('toggle'))">Next → <strong>Toggle</strong></button>
+      </div>
+    </div>
+
+    <!-- ══ TOGGLE ══ -->
+    <div id="page-toggle" class="page">
+      <div class="page-title">Toggle</div>
+      <div class="page-subtitle">Switch on/off boolean</div>
+
+      <div class="subtabs">
+        <div class="stab active" onclick="stab(this,'tog-basic')">Basic</div>
+        <div class="stab" onclick="stab(this,'tog-title2')">With Title2</div>
+        <div class="stab" onclick="stab(this,'tog-content')">With Content</div>
+        <div class="stab" onclick="stab(this,'tog-fn')">Functions</div>
+      </div>
+
+      <div id="tog-basic" class="stab-content active">
+        <div class="code-block">
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <code><span class="var">Sec</span>.<span class="var">Toggle</span>:<span class="fn">AddToggle</span>({
+    <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Example"</span>,
+    <span class="var">Default</span>  <span class="op">=</span> <span class="kw">false</span>,
+    <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">value</span>)
+        <span class="fn">print</span>(<span class="str">"Example toggle:"</span>, <span class="var">value</span>)
+        <span class="kw">if</span> <span class="var">value</span> <span class="kw">then</span>
+            <span class="cm">-- Code saat ON</span>
+        <span class="kw">else</span>
+            <span class="cm">-- Code saat OFF</span>
+        <span class="kw">end</span>
+    <span class="kw">end</span>
+})</code>
+        </div>
+      </div>
+
+      <div id="tog-title2" class="stab-content">
+        <div class="code-block">
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <code><span class="var">Sec</span>.<span class="var">Toggle</span>:<span class="fn">AddToggle</span>({
+    <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Example"</span>,
+    <span class="var">Title2</span>   <span class="op">=</span> <span class="str">"Example Sub Title"</span>,
+    <span class="var">Default</span>  <span class="op">=</span> <span class="kw">false</span>,
+    <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">value</span>)
+        <span class="kw">if</span> <span class="var">value</span> <span class="kw">then</span>
+            <span class="fn">Notify</span>(<span class="str">"Example enabled!"</span>, <span class="num">2</span>)
+        <span class="kw">else</span>
+            <span class="fn">Notify</span>(<span class="str">"Example disabled!"</span>, <span class="num">2</span>)
+        <span class="kw">end</span>
+    <span class="kw">end</span>
+})</code>
+        </div>
+      </div>
+
+      <div id="tog-content" class="stab-content">
+        <div class="code-block">
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <code><span class="var">Sec</span>.<span class="var">Toggle</span>:<span class="fn">AddToggle</span>({
+    <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Example"</span>,
+    <span class="var">Content</span>  <span class="op">=</span> <span class="str">"This is an example toggle description"</span>,
+    <span class="var">Default</span>  <span class="op">=</span> <span class="kw">false</span>,
+    <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">value</span>)
+        <span class="kw">if</span> <span class="var">value</span> <span class="kw">then</span>
+            <span class="fn">Notify</span>(<span class="str">"Example enabled!"</span>, <span class="num">2</span>)
+        <span class="kw">else</span>
+            <span class="fn">Notify</span>(<span class="str">"Example disabled!"</span>, <span class="num">2</span>)
+        <span class="kw">end</span>
+    <span class="kw">end</span>
+})</code>
+        </div>
+      </div>
+
+      <div id="tog-fn" class="stab-content">
+        <table>
+          <thead><tr><th>Method / Property</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td>.Value</td><td>Status toggle saat ini (boolean)</td></tr>
+            <tr><td>:Set(value)</td><td>Set toggle true/false</td></tr>
+            <tr><td>:GetValue()</td><td>Ambil nilai toggle</td></tr>
+            <tr><td>:SetLocked(state)</td><td>Kunci/buka elemen</td></tr>
+            <tr><td>:GetLocked()</td><td>Cek status kunci</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="page-nav">
+        <button class="pnav-btn" onclick="show('button', getSL('button'))">← Previous <strong>Button</strong></button>
+        <button class="pnav-btn right" onclick="show('slider', getSL('slider'))">Next → <strong>Slider</strong></button>
+      </div>
+    </div>
+
+    <!-- ══ SLIDER ══ -->
+    <div id="page-slider" class="page">
+      <div class="page-title">Slider</div>
+      <div class="page-subtitle">Input nilai numerik dengan range</div>
+
+      <div class="subtabs">
+        <div class="stab active" onclick="stab(this,'sl-basic')">Basic</div>
+        <div class="stab" onclick="stab(this,'sl-alt')">Alternative</div>
+        <div class="stab" onclick="stab(this,'sl-fn')">Functions</div>
+      </div>
+
+      <div id="sl-basic" class="stab-content active">
+        <div class="code-block">
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <code><span class="var">Sec</span>.<span class="var">Slider</span>:<span class="fn">AddSlider</span>({
+    <span class="var">Title</span>     <span class="op">=</span> <span class="str">"Example"</span>,
+    <span class="var">Content</span>   <span class="op">=</span> <span class="str">"Example slider description"</span>,
+    <span class="var">Min</span>       <span class="op">=</span> <span class="num">0</span>,
+    <span class="var">Max</span>       <span class="op">=</span> <span class="num">100</span>,
+    <span class="var">Default</span>   <span class="op">=</span> <span class="num">50</span>,
+    <span class="var">Increment</span> <span class="op">=</span> <span class="num">1</span>,
+    <span class="var">Callback</span>  <span class="op">=</span> <span class="kw">function</span>(<span class="var">value</span>)
+        <span class="fn">print</span>(<span class="str">"Example slider value:"</span>, <span class="var">value</span>)
+    <span class="kw">end</span>
+})</code>
+        </div>
+      </div>
+
+      <div id="sl-alt" class="stab-content">
+        <div class="code-block">
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <code><span class="var">Sec</span>.<span class="var">Slider</span>:<span class="fn">AddSlider</span>({
+    <span class="var">Title</span>     <span class="op">=</span> <span class="str">"Example"</span>,
+    <span class="var">Content</span>   <span class="op">=</span> <span class="str">"Another example slider"</span>,
+    <span class="var">Min</span>       <span class="op">=</span> <span class="num">0</span>,
+    <span class="var">Max</span>       <span class="op">=</span> <span class="num">100</span>,
+    <span class="var">Default</span>   <span class="op">=</span> <span class="num">70</span>,
+    <span class="var">Increment</span> <span class="op">=</span> <span class="num">5</span>,
+    <span class="var">Callback</span>  <span class="op">=</span> <span class="kw">function</span>(<span class="var">value</span>)
+        <span class="fn">print</span>(<span class="str">"Example value:"</span>, <span class="var">value</span>)
+    <span class="kw">end</span>
+})</code>
+        </div>
+      </div>
+
+      <div id="sl-fn" class="stab-content">
+        <table>
+          <thead><tr><th>Method / Property</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td>.Value</td><td>Nilai slider saat ini</td></tr>
+            <tr><td>:Set(value)</td><td>Set nilai slider</td></tr>
+            <tr><td>:GetValue()</td><td>Ambil nilai slider</td></tr>
+            <tr><td>:SetMin(min)</td><td>Ubah nilai minimum</td></tr>
+            <tr><td>:SetMax(max)</td><td>Ubah nilai maximum</td></tr>
+            <tr><td>:SetLocked(state)</td><td>Kunci/buka elemen</td></tr>
+            <tr><td>:GetLocked()</td><td>Cek status kunci</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="page-nav">
+        <button class="pnav-btn" onclick="show('toggle', getSL('toggle'))">← Previous <strong>Toggle</strong></button>
+        <button class="pnav-btn right" onclick="show('dropdown', getSL('dropdown'))">Next → <strong>Dropdown</strong></button>
+      </div>
+    </div>
+
+    <!-- ══ DROPDOWN ══ -->
+    <div id="page-dropdown" class="page">
+      <div class="page-title">Dropdown</div>
+      <div class="page-subtitle">Pilih satu atau banyak opsi dari daftar</div>
+
+      <div class="subtabs">
+        <div class="stab active" onclick="stab(this,'dd-single')">Single</div>
+        <div class="stab" onclick="stab(this,'dd-multi')">Multi</div>
+        <div class="stab" onclick="stab(this,'dd-label')">Label + Value</div>
+        <div class="stab" onclick="stab(this,'dd-fn')">Functions</div>
+      </div>
+
+      <div id="dd-single" class="stab-content active">
+        <div class="code-block">
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <code><span class="var">Sec</span>.<span class="var">Dropdwon</span>:<span class="fn">AddDropdown</span>({
+    <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Example"</span>,
+    <span class="var">Content</span>  <span class="op">=</span> <span class="str">"Example dropdown description"</span>,
+    <span class="var">Options</span>  <span class="op">=</span> { <span class="str">"Option A"</span>, <span class="str">"Option B"</span>, <span class="str">"Option C"</span>, <span class="str">"Option D"</span> },
+    <span class="var">Multi</span>    <span class="op">=</span> <span class="kw">false</span>,
+    <span class="var">Default</span>  <span class="op">=</span> <span class="str">"Option A"</span>,
+    <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">value</span>)
+        <span class="fn">print</span>(<span class="str">"Example selected:"</span>, <span class="var">value</span>)
+    <span class="kw">end</span>
+})</code>
+        </div>
+      </div>
+
+      <div id="dd-multi" class="stab-content">
+        <div class="code-block">
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <code><span class="var">Sec</span>.<span class="var">Dropdwon</span>:<span class="fn">AddDropdown</span>({
+    <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Example"</span>,
+    <span class="var">Content</span>  <span class="op">=</span> <span class="str">"Example multi dropdown description"</span>,
+    <span class="var">Options</span>  <span class="op">=</span> { <span class="str">"Option 1"</span>, <span class="str">"Option 2"</span>, <span class="str">"Option 3"</span>, <span class="str">"Option 4"</span> },
+    <span class="var">Multi</span>    <span class="op">=</span> <span class="kw">true</span>,
+    <span class="var">Default</span>  <span class="op">=</span> { <span class="str">"Option 1"</span>, <span class="str">"Option 2"</span> },
+    <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">selectedTable</span>)
+        <span class="kw">for</span> <span class="var">_</span>, <span class="var">v</span> <span class="kw">in</span> <span class="fn">ipairs</span>(<span class="var">selectedTable</span>) <span class="kw">do</span>
+            <span class="fn">print</span>(<span class="str">"- "</span> <span class="op">..</span> <span class="var">v</span>)
+        <span class="kw">end</span>
+    <span class="kw">end</span>
+})</code>
+        </div>
+      </div>
+
+      <div id="dd-label" class="stab-content">
+        <div class="code-block">
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <code><span class="var">Sec</span>.<span class="var">Dropdwon</span>:<span class="fn">AddDropdown</span>({
+    <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Example"</span>,
+    <span class="var">Content</span>  <span class="op">=</span> <span class="str">"Example value dropdown description"</span>,
+    <span class="var">Options</span>  <span class="op">=</span> {
+        { <span class="var">Label</span> <span class="op">=</span> <span class="str">"Option 1"</span>, <span class="var">Value</span> <span class="op">=</span> <span class="str">"value_1"</span> },
+        { <span class="var">Label</span> <span class="op">=</span> <span class="str">"Option 2"</span>, <span class="var">Value</span> <span class="op">=</span> <span class="str">"value_2"</span> },
+        { <span class="var">Label</span> <span class="op">=</span> <span class="str">"Option 3"</span>, <span class="var">Value</span> <span class="op">=</span> <span class="str">"value_3"</span> },
+    },
+    <span class="var">Multi</span>    <span class="op">=</span> <span class="kw">false</span>,
+    <span class="var">Default</span>  <span class="op">=</span> <span class="str">"value_1"</span>,
+    <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">value</span>)
+        <span class="fn">print</span>(<span class="str">"Example value selected:"</span>, <span class="var">value</span>)
+    <span class="kw">end</span>
+})</code>
+        </div>
+      </div>
+
+      <div id="dd-fn" class="stab-content">
+        <table>
+          <thead><tr><th>Method / Property</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td>.Value</td><td>Nilai/opsi terpilih</td></tr>
+            <tr><td>.Options</td><td>List semua opsi</td></tr>
+            <tr><td>:Set(value)</td><td>Set pilihan</td></tr>
+            <tr><td>:SetValue(val)</td><td>Alias dari :Set()</td></tr>
+            <tr><td>:GetValue()</td><td>Ambil nilai terpilih</td></tr>
+            <tr><td>:AddOption(option)</td><td>Tambah satu opsi</td></tr>
+            <tr><td>:Clear()</td><td>Hapus semua opsi & reset</td></tr>
+            <tr><td>:SetValues(list, sel)</td><td>Reset & isi ulang semua opsi</td></tr>
+            <tr><td>:SetLocked(state)</td><td>Kunci/buka elemen</td></tr>
+            <tr><td>:GetLocked()</td><td>Cek status kunci</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="page-nav">
+        <button class="pnav-btn" onclick="show('slider', getSL('slider'))">← Previous <strong>Slider</strong></button>
+        <button class="pnav-btn right" onclick="show('input', getSL('input'))">Next → <strong>Input</strong></button>
+      </div>
+    </div>
+
+    <!-- ══ INPUT ══ -->
+    <div id="page-input" class="page">
+      <div class="page-title">Input</div>
+      <div class="page-subtitle">Field input teks untuk user</div>
+
+      <div class="subtabs">
+        <div class="stab active" onclick="stab(this,'inp-ex')">Examples</div>
+        <div class="stab" onclick="stab(this,'inp-fn')">Functions</div>
+      </div>
+
+      <div id="inp-ex" class="stab-content active">
+        <div class="code-block">
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <code><span class="var">Sec</span>.<span class="var">Input</span>:<span class="fn">AddInput</span>({
+    <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Username"</span>,
+    <span class="var">Content</span>  <span class="op">=</span> <span class="str">"Enter your username"</span>,
+    <span class="var">Default</span>  <span class="op">=</span> <span class="var">game</span>.<span class="var">Players</span>.<span class="var">LocalPlayer</span>.<span class="var">Name</span>,
+    <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">value</span>)
+        <span class="fn">print</span>(<span class="str">"Username set to:"</span>, <span class="var">value</span>)
+    <span class="kw">end</span>
+})
+
+<span class="var">Sec</span>.<span class="var">Input</span>:<span class="fn">AddInput</span>({
+    <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Search Item"</span>,
+    <span class="var">Content</span>  <span class="op">=</span> <span class="str">"Type item name to search"</span>,
+    <span class="var">Default</span>  <span class="op">=</span> <span class="str">""</span>,
+    <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">value</span>)
+        <span class="kw">if</span> <span class="var">value</span> <span class="op">~=</span> <span class="str">""</span> <span class="kw">then</span>
+            <span class="fn">print</span>(<span class="str">"Searching for:"</span>, <span class="var">value</span>)
+        <span class="kw">end</span>
+    <span class="kw">end</span>
+})
+
+<span class="var">Sec</span>.<span class="var">Input</span>:<span class="fn">AddInput</span>({
+    <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Add Coins"</span>,
+    <span class="var">Content</span>  <span class="op">=</span> <span class="str">"Enter amount to add"</span>,
+    <span class="var">Default</span>  <span class="op">=</span> <span class="str">"1000"</span>,
+    <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">value</span>)
+        <span class="kw">local</span> <span class="var">amount</span> <span class="op">=</span> <span class="fn">tonumber</span>(<span class="var">value</span>)
+        <span class="kw">if</span> <span class="var">amount</span> <span class="kw">and</span> <span class="var">amount</span> <span class="op">></span> <span class="num">0</span> <span class="kw">then</span>
+            <span class="fn">print</span>(<span class="str">"Adding"</span>, <span class="var">amount</span>, <span class="str">"coins"</span>)
+        <span class="kw">else</span>
+            <span class="fn">Notify</span>(<span class="str">"Invalid amount!"</span>, <span class="num">3</span>)
+        <span class="kw">end</span>
+    <span class="kw">end</span>
+})</code>
+        </div>
+      </div>
+
+      <div id="inp-fn" class="stab-content">
+        <table>
+          <thead><tr><th>Method / Property</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td>.Value</td><td>Nilai input saat ini</td></tr>
+            <tr><td>:Set(value)</td><td>Set nilai input</td></tr>
+            <tr><td>:GetValue()</td><td>Ambil nilai input</td></tr>
+            <tr><td>:Clear()</td><td>Kosongkan input</td></tr>
+            <tr><td>:SetLocked(state)</td><td>Kunci/buka elemen</td></tr>
+            <tr><td>:GetLocked()</td><td>Cek status kunci</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="page-nav">
+        <button class="pnav-btn" onclick="show('dropdown', getSL('dropdown'))">← Previous <strong>Dropdown</strong></button>
+        <button class="pnav-btn right" onclick="show('panel', getSL('panel'))">Next → <strong>Panel</strong></button>
+      </div>
+    </div>
+
+    <!-- ══ PANEL ══ -->
+    <div id="page-panel" class="page">
+      <div class="page-title">Panel</div>
+      <div class="page-subtitle">Input dengan tombol aksi terintegrasi</div>
+
+      <div class="subtabs">
+        <div class="stab active" onclick="stab(this,'pan-single')">Single Button</div>
+        <div class="stab" onclick="stab(this,'pan-dual')">Dual Button</div>
+        <div class="stab" onclick="stab(this,'pan-fn')">Functions</div>
+      </div>
+
+      <div id="pan-single" class="stab-content active">
+        <div class="code-block">
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <code><span class="var">Sec</span>.<span class="var">Panel</span>:<span class="fn">AddPanel</span>({
+    <span class="var">Title</span>          <span class="op">=</span> <span class="str">"Example"</span>,
+    <span class="var">Content</span>        <span class="op">=</span> <span class="str">"Example panel description"</span>,
+    <span class="var">Placeholder</span>    <span class="op">=</span> <span class="str">"Example_Name"</span>,
+    <span class="var">Default</span>        <span class="op">=</span> <span class="str">"ExampleDefault"</span>,
+    <span class="var">ButtonText</span>     <span class="op">=</span> <span class="str">"Example Action"</span>,
+    <span class="var">ButtonCallback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">value</span>)
+        <span class="fn">print</span>(<span class="str">"Example value:"</span>, <span class="var">value</span>)
+        <span class="fn">Notify</span>(<span class="str">"Example action executed!"</span>, <span class="num">2</span>)
+    <span class="kw">end</span>
+})</code>
+        </div>
+      </div>
+
+      <div id="pan-dual" class="stab-content">
+        <div class="code-block">
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <code><span class="var">Sec</span>.<span class="var">Panel</span>:<span class="fn">AddPanel</span>({
+    <span class="var">Title</span>             <span class="op">=</span> <span class="str">"Example"</span>,
+    <span class="var">Content</span>           <span class="op">=</span> <span class="str">"Example panel with two actions"</span>,
+    <span class="var">Placeholder</span>       <span class="op">=</span> <span class="str">"Example_Name"</span>,
+    <span class="var">Default</span>           <span class="op">=</span> <span class="str">""</span>,
+    <span class="var">ButtonText</span>        <span class="op">=</span> <span class="str">"Example Save"</span>,
+    <span class="var">ButtonCallback</span>    <span class="op">=</span> <span class="kw">function</span>(<span class="var">value</span>)
+        <span class="kw">if</span> <span class="var">value</span> <span class="op">~=</span> <span class="str">""</span> <span class="kw">then</span>
+            <span class="fn">Notify</span>(<span class="str">"Example saved!"</span>, <span class="num">2</span>)
+        <span class="kw">end</span>
+    <span class="kw">end</span>,
+    <span class="var">SubButtonText</span>     <span class="op">=</span> <span class="str">"Example Load"</span>,
+    <span class="var">SubButtonCallback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">value</span>)
+        <span class="kw">if</span> <span class="var">value</span> <span class="op">~=</span> <span class="str">""</span> <span class="kw">then</span>
+            <span class="fn">Notify</span>(<span class="str">"Example loaded!"</span>, <span class="num">2</span>)
+        <span class="kw">end</span>
+    <span class="kw">end</span>
+})</code>
+        </div>
+      </div>
+
+      <div id="pan-fn" class="stab-content">
+        <table>
+          <thead><tr><th>Method / Property</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td>.Value</td><td>Nilai input saat ini</td></tr>
+            <tr><td>:GetInput()</td><td>Ambil teks dari InputBox</td></tr>
+            <tr><td>:GetValue()</td><td>Ambil value tersimpan</td></tr>
+            <tr><td>:SetContent(text)</td><td>Ubah teks content</td></tr>
+            <tr><td>:SetTitle(text)</td><td>Ubah teks judul</td></tr>
+            <tr><td>:SetLocked(state)</td><td>Kunci/buka elemen</td></tr>
+            <tr><td>:GetLocked()</td><td>Cek status kunci</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="page-nav">
+        <button class="pnav-btn" onclick="show('input', getSL('input'))">← Previous <strong>Input</strong></button>
+        <button class="pnav-btn right" onclick="show('paragraph', getSL('paragraph'))">Next → <strong>Paragraph</strong></button>
+      </div>
+    </div>
+
+    <!-- ══ PARAGRAPH ══ -->
+    <div id="page-paragraph" class="page">
+      <div class="page-title">Paragraph</div>
+      <div class="page-subtitle">Teks statis informatif di dalam section</div>
+
+      <div class="code-block">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <code><span class="cm">-- Simple</span>
+<span class="var">Sec</span>.<span class="var">Paragraph</span>:<span class="fn">AddParagraph</span>({
+    <span class="var">Title</span>   <span class="op">=</span> <span class="str">"Example"</span>,
+    <span class="var">Content</span> <span class="op">=</span> <span class="str">"This is an example paragraph.\nUse \\n for new lines."</span>
+})
+
+<span class="cm">-- With Icon</span>
+<span class="var">Sec</span>.<span class="var">Paragraph</span>:<span class="fn">AddParagraph</span>({
+    <span class="var">Title</span>   <span class="op">=</span> <span class="str">"Example"</span>,
+    <span class="var">Content</span> <span class="op">=</span> <span class="str">"Example information paragraph with an icon."</span>,
+    <span class="var">Icon</span>    <span class="op">=</span> <span class="str">"example_icon"</span>
+})
+
+<span class="cm">-- With Button</span>
+<span class="var">Sec</span>.<span class="var">Paragraph</span>:<span class="fn">AddParagraph</span>({
+    <span class="var">Title</span>          <span class="op">=</span> <span class="str">"Example"</span>,
+    <span class="var">Content</span>        <span class="op">=</span> <span class="str">"Example paragraph with action button."</span>,
+    <span class="var">Icon</span>           <span class="op">=</span> <span class="str">"example_action_icon"</span>,
+    <span class="var">ButtonText</span>     <span class="op">=</span> <span class="str">"Get Help"</span>,
+    <span class="var">ButtonCallback</span> <span class="op">=</span> <span class="kw">function</span>()
+        <span class="fn">print</span>(<span class="str">"Support action triggered"</span>)
+    <span class="kw">end</span>
+})</code>
+      </div>
+
+      <h3>Functions</h3>
+      <table>
+        <thead><tr><th>Method</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td>:SetContent(content)</td><td>Ubah teks content/isi paragraph</td></tr>
+          <tr><td>:GetContent()</td><td>Ambil teks content saat ini</td></tr>
+          <tr><td>:SetTitle(title)</td><td>Ubah teks judul paragraph</td></tr>
+          <tr><td>:GetTitle()</td><td>Ambil teks judul saat ini</td></tr>
+          <tr><td>:SetLocked(state)</td><td>Kunci/buka elemen (true/false)</td></tr>
+          <tr><td>:GetLocked()</td><td>Cek apakah elemen sedang terkunci</td></tr>
+        </tbody>
+      </table>
+
+      <div class="page-nav">
+        <button class="pnav-btn" onclick="show('panel', getSL('panel'))">← Previous <strong>Panel</strong></button>
+        <button class="pnav-btn right" onclick="show('keybind', getSL('keybind'))">Next → <strong>Keybind</strong></button>
+      </div>
+    </div>
+
+    <!-- ══ KEYBIND ══ -->
+    <div id="page-keybind" class="page">
+      <div class="page-title">Keybind</div>
+      <div class="page-subtitle">Capture input keyboard shortcut</div>
+
+      <div class="code-block">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <code><span class="kw">local</span> <span class="var">MyKeybind</span> <span class="op">=</span> <span class="var">Section</span>:<span class="fn">AddKeybind</span>({
+    <span class="var">Title</span>   <span class="op">=</span> <span class="str">"Toggle ESP"</span>,
+    <span class="var">Content</span> <span class="op">=</span> <span class="str">"Tekan untuk toggle"</span>,
+    <span class="var">Value</span>   <span class="op">=</span> <span class="str">"RightShift"</span>,
+    <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">key</span>)
+    <span class="kw">end</span>
+})</code>
+      </div>
+
+      <div class="page-nav">
+        <button class="pnav-btn" onclick="show('paragraph', getSL('paragraph'))">← Previous <strong>Paragraph</strong></button>
+        <button class="pnav-btn right" onclick="show('divider', getSL('divider'))">Next → <strong>Divider</strong></button>
+      </div>
+    </div>
+
+    <!-- ══ DIVIDER & SUBSECTION ══ -->
+    <div id="page-divider" class="page">
+      <div class="page-title">Divider & SubSection</div>
+      <div class="page-subtitle">Pemisah visual dan sub-label dalam section</div>
+
+      <div class="code-block">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <code><span class="var">Sec</span>.<span class="var">Other</span> <span class="op">=</span> <span class="var">Tabs</span>.<span class="var">Main</span>:<span class="fn">AddSection</span>(<span class="str">"SubSection & Divider"</span>)
+
+<span class="var">Sec</span>.<span class="var">Other</span>:<span class="fn">AddDivider</span>()
+<span class="var">Sec</span>.<span class="var">Other</span>:<span class="fn">AddSubSection</span>(<span class="str">"Example Sub Section"</span>)</code>
+      </div>
+
+      <div class="page-nav">
+        <button class="pnav-btn" onclick="show('keybind', getSL('keybind'))">← Previous <strong>Keybind</strong></button>
+        <button class="pnav-btn right" onclick="show('notification', getSL('notification'))">Next → <strong>Notification</strong></button>
+      </div>
+    </div>
+
+    <!-- ══ NOTIFICATION ══ -->
+    <div id="page-notification" class="page">
+      <div class="page-title">Notification</div>
+      <div class="page-subtitle">Tampilkan toast notification ke user</div>
+
+      <h3>Basic</h3>
+      <div class="code-block">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <code><span class="fn">Notify</span>(<span class="str">"Ini isi pesan"</span>)</code>
+      </div>
+
+      <h3>Lengkap</h3>
+      <div class="code-block">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <code><span class="fn">Notify</span>(
+    <span class="str">"Script berhasil diload!"</span>,  <span class="cm">-- Content</span>
+    <span class="num">5</span>,                           <span class="cm">-- Delay (detik)</span>
+    <span class="str">"Default"</span>,                   <span class="cm">-- Color</span>
+    <span class="str">"My Script"</span>,                 <span class="cm">-- Title</span>
+    <span class="str">"Success"</span>,                   <span class="cm">-- Description</span>
+    <span class="str">""</span>                           <span class="cm">-- Icon (opsional)</span>
+)</code>
+      </div>
+
+      <h3>MakeNotify</h3>
+      <div class="code-block">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <code><span class="var">Chloex</span>:<span class="fn">MakeNotify</span>({ <span class="cm">-- VelarisUI Or Chloex</span>
+    <span class="var">Title</span>       <span class="op">=</span> <span class="str">"My Script"</span>,
+    <span class="var">Description</span> <span class="op">=</span> <span class="str">"Success"</span>,
+    <span class="var">Content</span>     <span class="op">=</span> <span class="str">"Script telah diload dengan sukses!"</span>,
+    <span class="var">Color</span>       <span class="op">=</span> <span class="str">"Default"</span>,
+    <span class="var">Time</span>        <span class="op">=</span> <span class="num">0.5</span>,
+    <span class="var">Delay</span>       <span class="op">=</span> <span class="num">5</span>,
+    <span class="var">Icon</span>        <span class="op">=</span> <span class="str">""</span>
+})</code>
+      </div>
+
+      <div class="page-nav">
+        <button class="pnav-btn" onclick="show('divider', getSL('divider'))">← Previous <strong>Divider</strong></button>
+        <button class="pnav-btn right" onclick="show('dialog', getSL('dialog'))">Next → <strong>Dialog</strong></button>
+      </div>
+    </div>
+
+    <!-- ══ DIALOG ══ -->
+    <div id="page-dialog" class="page">
+      <div class="page-title">Dialog</div>
+      <div class="page-subtitle">Modal konfirmasi dengan tombol pilihan</div>
+
+      <div class="code-block">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <code><span class="var">Chloex</span>:<span class="fn">Dialog</span>({
+    <span class="var">Title</span>   <span class="op">=</span> <span class="str">"Confirmation"</span>,
+    <span class="var">Content</span> <span class="op">=</span> <span class="str">"Are you sure you want to continue?"</span>,
+    <span class="var">Buttons</span> <span class="op">=</span> {
+        {
+            <span class="var">Name</span>     <span class="op">=</span> <span class="str">"Yes"</span>,
+            <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>()
+                <span class="fn">print</span>(<span class="str">"User selected Yes"</span>)
+            <span class="kw">end</span>
+        },
+        {
+            <span class="var">Name</span>     <span class="op">=</span> <span class="str">"No"</span>,
+            <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>()
+                <span class="fn">print</span>(<span class="str">"User selected No"</span>)
+            <span class="kw">end</span>
+        }
+    }
+})</code>
+      </div>
+
+      <div class="page-nav">
+        <button class="pnav-btn" onclick="show('notification', getSL('notification'))">← Previous <strong>Notification</strong></button>
+        <button class="pnav-btn right" onclick="show('fullexample', getSL('fullexample'))">Next → <strong>Full Example</strong></button>
+      </div>
+    </div>
+
+    <!-- ══ FULL EXAMPLE ══ -->
+    <div id="page-fullexample" class="page">
+      <div class="page-title">Full Example</div>
+      <div class="page-subtitle">Jalankan contoh lengkap VelarisUI</div>
+
+      <p>Load file example secara langsung menggunakan loadstring berikut:</p>
+      <div class="code-block">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <code><span class="fn">loadstring</span>(<span class="var">game</span>:<span class="fn">HttpGet</span>(<span class="str">"https://raw.githubusercontent.com/Gato290/ui/refs/heads/main/Example.lua"</span>))()</code>
+      </div>
+
+      <div class="info-box">
+        💬 Butuh bantuan? Join Discord: <code class="il">discord.gg/ECxQFc97F5</code>
+      </div>
+
+      <div class="page-nav">
+        <button class="pnav-btn" onclick="show('dialog', getSL('dialog'))">← Previous <strong>Dialog</strong></button>
+        <div></div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+  function show(id, linkEl) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    const page = document.getElementById('page-' + id);
+    if (page) page.classList.add('active');
+    document.querySelectorAll('.nav-item').forEach(l => l.classList.remove('active'));
+    if (linkEl) linkEl.classList.add('active');
+    document.querySelector('main').scrollTop = 0;
+  }
+
+  function getSL(id) {
+    return document.querySelector(`.nav-item[onclick*="'${id}'"]`);
+  }
+
+  function stab(tabEl, contentId) {
+    const parent = tabEl.closest('.page');
+    parent.querySelectorAll('.stab').forEach(t => t.classList.remove('active'));
+    parent.querySelectorAll('.stab-content').forEach(c => c.classList.remove('active'));
+    tabEl.classList.add('active');
+    document.getElementById(contentId).classList.add('active');
+  }
+
+  function copyCode(btn) {
+    const text = btn.nextElementSibling.innerText;
+    navigator.clipboard.writeText(text).then(() => {
+      btn.textContent = 'Copied!';
+      setTimeout(() => btn.textContent = 'Copy', 2000);
+    });
+  }
+</script>
+</body>
+</html>
