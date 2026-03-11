@@ -330,6 +330,9 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
 .sb-new    {background:rgba(96,165,250,0.1);color:#60a5fa;border:1px solid rgba(96,165,250,0.2)}
 .sb-warning{background:rgba(251,191,36,0.1);color:#fbbf24;border:1px solid rgba(251,191,36,0.2)}
 .sb-fixed  {background:rgba(74,222,128,0.1);color:#4ade80;border:1px solid rgba(74,222,128,0.2)}
+.sb-beta   {background:rgba(140,80,255,0.1);color:#a78bfa;border:1px solid rgba(140,80,255,0.2)}
+.sb-hot    {background:rgba(255,80,80,0.1);color:#f87171;border:1px solid rgba(255,80,80,0.2)}
+.sb-soon   {background:rgba(100,160,255,0.1);color:#93c5fd;border:1px solid rgba(100,160,255,0.2)}
 
 </style>
 </head>
@@ -392,6 +395,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
       <a class="nav-link" onclick="show('input',this)">Input</a>
       <a class="nav-link" onclick="show('panel',this)">Panel</a>
       <a class="nav-link" onclick="show('paragraph',this)">Paragraph</a>
+      <a class="nav-link" onclick="show('editparagraph',this)">EditableParagraph</a>
       <a class="nav-link" onclick="show('keybind',this)">Keybind</a>
       <a class="nav-link" onclick="show('divider',this)">Divider & SubSection</a>
     </div>
@@ -747,6 +751,9 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
             <tr><td>"New"</td><td><span class="status-badge sb-new">New</span></td><td>Menandai fitur yang baru ditambahkan</td></tr>
             <tr><td>"Warning"</td><td><span class="status-badge sb-warning">Warning</span></td><td>Menandai fitur yang perlu perhatian</td></tr>
             <tr><td>"Fixed"</td><td><span class="status-badge sb-fixed">Fixed</span></td><td>Menandai fitur yang sudah diperbaiki</td></tr>
+            <tr><td>"Beta"</td><td><span class="status-badge sb-beta">Beta</span></td><td>Menandai fitur dalam tahap percobaan</td></tr>
+            <tr><td>"Hot"</td><td><span class="status-badge sb-hot">Hot</span></td><td>Menandai fitur yang sedang populer</td></tr>
+            <tr><td>"Soon"</td><td><span class="status-badge sb-soon">Soon</span></td><td>Menandai fitur yang akan segera hadir</td></tr>
           </tbody>
         </table></div>
 
@@ -1129,6 +1136,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
           <div class="stab active" onclick="stab(this,'tog-basic')">Basic</div>
           <div class="stab" onclick="stab(this,'tog-title2')">With Title2</div>
           <div class="stab" onclick="stab(this,'tog-content')">With Content</div>
+          <div class="stab" onclick="stab(this,'tog-checkbox')">Checkbox</div>
           <div class="stab" onclick="stab(this,'tog-locked')">Locked</div>
           <div class="stab" onclick="stab(this,'tog-fn')">Functions</div>
         </div>
@@ -1168,6 +1176,25 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
     <span class="kw">end</span>
 })</code></div>
         </div>
+        <div id="tog-checkbox" class="stab-content">
+          <p>Gunakan <code class="il">Type = "Checkbox"</code> untuk tampilan kotak centang (✓) alih-alih slider toggle biasa.</p>
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <code><span class="var">Sec</span>.<span class="var">Toggle</span>:<span class="fn">AddToggle</span>({
+    <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Enable Feature"</span>,
+    <span class="var">Type</span>     <span class="op">=</span> <span class="str">"Checkbox"</span>,   <span class="cm">-- tampilan checkbox</span>
+    <span class="var">Default</span>  <span class="op">=</span> <span class="kw">false</span>,
+    <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">value</span>)
+        <span class="fn">print</span>(<span class="str">"Checked:"</span>, <span class="var">value</span>)
+    <span class="kw">end</span>
+})</code></div>
+          <div class="table-wrap"><table>
+            <thead><tr><th>Type</th><th>Tampilan</th></tr></thead>
+            <tbody>
+              <tr><td><code class="il">"Toggle"</code> (default)</td><td>Slider pill kiri-kanan</td></tr>
+              <tr><td><code class="il">"Checkbox"</code></td><td>Kotak centang ✓</td></tr>
+            </tbody>
+          </table></div>
+        </div>
         <div id="tog-locked" class="stab-content">
           <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
             <code><span class="var">Sec</span>.<span class="var">Toggle</span>:<span class="fn">AddToggle</span>({
@@ -1188,6 +1215,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
               <tr><td>:GetValue()</td><td>Ambil nilai toggle</td></tr>
               <tr><td>:SetLocked(state)</td><td>Kunci/buka elemen</td></tr>
               <tr><td>:GetLocked()</td><td>Cek status kunci</td></tr>
+              <tr><td>:SetLockMessage(text)</td><td>Ubah teks pesan di overlay kunci</td></tr>
             </tbody>
           </table></div>
         </div>
@@ -1241,6 +1269,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
               <tr><td>:SetMax(max)</td><td>Ubah nilai maximum</td></tr>
               <tr><td>:SetLocked(state)</td><td>Kunci/buka elemen</td></tr>
               <tr><td>:GetLocked()</td><td>Cek status kunci</td></tr>
+              <tr><td>:SetLockMessage(text)</td><td>Ubah teks pesan di overlay kunci</td></tr>
             </tbody>
           </table></div>
         </div>
@@ -1303,11 +1332,14 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
               <tr><td>.Value</td><td>Nilai/opsi terpilih</td></tr>
               <tr><td>.Options</td><td>List semua opsi</td></tr>
               <tr><td>:Set(value)</td><td>Set pilihan</td></tr>
+              <tr><td>:SetValue(value)</td><td>Alias dari :Set()</td></tr>
               <tr><td>:GetValue()</td><td>Ambil nilai terpilih</td></tr>
               <tr><td>:AddOption(option)</td><td>Tambah satu opsi</td></tr>
               <tr><td>:Clear()</td><td>Hapus semua opsi & reset</td></tr>
               <tr><td>:SetValues(list, sel)</td><td>Reset & isi ulang semua opsi</td></tr>
               <tr><td>:SetLocked(state)</td><td>Kunci/buka elemen</td></tr>
+              <tr><td>:GetLocked()</td><td>Cek status kunci</td></tr>
+              <tr><td>:SetLockMessage(text)</td><td>Ubah teks pesan di overlay kunci</td></tr>
             </tbody>
           </table></div>
         </div>
@@ -1381,6 +1413,8 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
             <tbody>
               <tr><td>Type</td><td>string</td><td><code class="il">"Textarea"</code> untuk input multi-baris</td></tr>
               <tr><td>InputIcon</td><td>string</td><td>Icon di dalam field, misal <code class="il">"lucide:bird"</code></td></tr>
+              <tr><td>TextHeight</td><td>number</td><td>Tinggi awal textarea dalam piksel (default: 60). Hanya berlaku untuk <code class="il">Type = "Textarea"</code></td></tr>
+              <tr><td>Flag</td><td>string</td><td>Override config key untuk penyimpanan, e.g. <code class="il">Flag = "my_input_key"</code></td></tr>
             </tbody>
           </table></div>
         </div>
@@ -1392,7 +1426,11 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
               <tr><td>:Set(value)</td><td>Set nilai input</td></tr>
               <tr><td>:GetValue()</td><td>Ambil nilai input</td></tr>
               <tr><td>:Clear()</td><td>Kosongkan input</td></tr>
+              <tr><td>:SetTitle(text)</td><td>Ubah teks judul</td></tr>
+              <tr><td>:GetTitle()</td><td>Ambil teks judul</td></tr>
               <tr><td>:SetLocked(state)</td><td>Kunci/buka elemen</td></tr>
+              <tr><td>:GetLocked()</td><td>Cek status kunci</td></tr>
+              <tr><td>:SetLockMessage(text)</td><td>Ubah teks pesan di overlay kunci</td></tr>
             </tbody>
           </table></div>
         </div>
@@ -1445,6 +1483,8 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
               <tr><td>:SetContent(text)</td><td>Ubah teks content</td></tr>
               <tr><td>:SetTitle(text)</td><td>Ubah teks judul</td></tr>
               <tr><td>:SetLocked(state)</td><td>Kunci/buka elemen</td></tr>
+              <tr><td>:GetLocked()</td><td>Cek status kunci</td></tr>
+              <tr><td>:SetLockMessage(text)</td><td>Ubah teks pesan di overlay kunci</td></tr>
             </tbody>
           </table></div>
         </div>
@@ -1463,6 +1503,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
         <div class="subtabs">
           <div class="stab active" onclick="stab(this,'par-basic')">Basic</div>
           <div class="stab" onclick="stab(this,'par-color')">Color Card</div>
+          <div class="stab" onclick="stab(this,'par-media')">Media</div>
           <div class="stab" onclick="stab(this,'par-badge')">Badge</div>
           <div class="stab" onclick="stab(this,'par-fn')">Functions</div>
         </div>
@@ -1545,13 +1586,54 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
           </table></div>
         </div>
 
+        <div id="par-media" class="stab-content">
+          <p>Tambahkan gambar atau video ke dalam paragraph dengan property <code class="il">MediaType</code>.</p>
+          <h3>Image</h3>
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <code><span class="var">Sec</span>.<span class="var">Paragraph</span>:<span class="fn">AddParagraph</span>({
+    <span class="var">Title</span>       <span class="op">=</span> <span class="str">"Preview"</span>,
+    <span class="var">Content</span>     <span class="op">=</span> <span class="str">"Gambar preview item."</span>,
+    <span class="var">MediaType</span>   <span class="op">=</span> <span class="str">"Image"</span>,
+    <span class="var">MediaId</span>     <span class="op">=</span> <span class="str">"rbxassetid://1234567890"</span>,
+    <span class="var">MediaWidth</span>  <span class="op">=</span> <span class="num">80</span>,   <span class="cm">-- lebar gambar (px), default 80</span>
+    <span class="var">MediaHeight</span> <span class="op">=</span> <span class="num">60</span>,   <span class="cm">-- tinggi gambar (px), default 60</span>
+})</code></div>
+          <h3>Video</h3>
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <code><span class="kw">local</span> <span class="var">Para</span> <span class="op">=</span> <span class="var">Sec</span>.<span class="var">Paragraph</span>:<span class="fn">AddParagraph</span>({
+    <span class="var">Title</span>       <span class="op">=</span> <span class="str">"Tutorial"</span>,
+    <span class="var">Content</span>     <span class="op">=</span> <span class="str">"Klik play untuk memutar video."</span>,
+    <span class="var">MediaType</span>   <span class="op">=</span> <span class="str">"Video"</span>,
+    <span class="var">MediaId</span>     <span class="op">=</span> <span class="str">"rbxassetid://THUMBNAIL_ID"</span>,  <span class="cm">-- thumbnail sebelum play</span>
+    <span class="var">VideoId</span>     <span class="op">=</span> <span class="str">"rbxassetid://VIDEO_ID"</span>,
+    <span class="var">MediaWidth</span>  <span class="op">=</span> <span class="num">120</span>,
+    <span class="var">MediaHeight</span> <span class="op">=</span> <span class="num">80</span>,
+    <span class="var">AutoPlay</span>    <span class="op">=</span> <span class="kw">false</span>,  <span class="cm">-- true = langsung play saat elemen dibuat</span>
+})
+
+<span class="cm">-- kontrol video secara manual</span>
+<span class="var">Para</span>:<span class="fn">StartVideo</span>()
+<span class="var">Para</span>:<span class="fn">StopVideo</span>()</code></div>
+          <div class="table-wrap"><table>
+            <thead><tr><th>Property</th><th>Type</th><th>Description</th></tr></thead>
+            <tbody>
+              <tr><td>MediaType</td><td>string</td><td><code class="il">"Image"</code> atau <code class="il">"Video"</code></td></tr>
+              <tr><td>MediaId</td><td>string</td><td>rbxassetid gambar / thumbnail</td></tr>
+              <tr><td>VideoId</td><td>string</td><td>rbxassetid video (khusus Video)</td></tr>
+              <tr><td>MediaWidth</td><td>number</td><td>Lebar media dalam piksel (default: 80)</td></tr>
+              <tr><td>MediaHeight</td><td>number</td><td>Tinggi media dalam piksel (default: 60)</td></tr>
+              <tr><td>AutoPlay</td><td>bool</td><td>Auto-play video saat dibuat (default: false)</td></tr>
+            </tbody>
+          </table></div>
+        </div>
+
         <div id="par-badge" class="stab-content">
           <p>Gunakan property <code class="il">Badge</code> untuk menampilkan label status. Lihat halaman <a href="#" onclick="show('badge',getSL('badge'));return false" style="color:var(--info-text)">Badge</a> untuk detail lengkap.</p>
           <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
             <code><span class="var">Sec</span>.<span class="var">Paragraph</span>:<span class="fn">AddParagraph</span>({
     <span class="var">Title</span>   <span class="op">=</span> <span class="str">"Example Badge Bug"</span>,
     <span class="var">Content</span> <span class="op">=</span> <span class="str">"This is Bug paragraph."</span>,
-    <span class="var">Badge</span>   <span class="op">=</span> <span class="str">"Bug"</span>,     <span class="cm">-- "Bug" | "New" | "Warning" | "Fixed"</span>
+    <span class="var">Badge</span>   <span class="op">=</span> <span class="str">"Bug"</span>,     <span class="cm">-- "Bug" | "New" | "Warning" | "Fixed" | "Beta" | "Hot" | "Soon"</span>
 })</code></div>
         </div>
 
@@ -1563,13 +1645,100 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
             <tr><td>:GetContent()</td><td>Ambil teks content saat ini</td></tr>
             <tr><td>:SetTitle(title)</td><td>Ubah teks judul paragraph</td></tr>
             <tr><td>:GetTitle()</td><td>Ambil teks judul saat ini</td></tr>
+            <tr><td>:StartVideo()</td><td>Mulai putar video (khusus MediaType = "Video")</td></tr>
+            <tr><td>:StopVideo()</td><td>Hentikan / pause video</td></tr>
+            <tr><td>:SetMedia(type, mediaId, videoId)</td><td>Ganti media yang ditampilkan secara dinamis</td></tr>
+            <tr><td>:IsVideoPlaying()</td><td>Cek apakah video sedang diputar (boolean)</td></tr>
             <tr><td>:SetLocked(state)</td><td>Kunci/buka elemen (true/false)</td></tr>
             <tr><td>:GetLocked()</td><td>Cek apakah elemen sedang terkunci</td></tr>
+            <tr><td>:SetLockMessage(text)</td><td>Ubah teks pesan di overlay kunci</td></tr>
           </tbody>
         </table></div>
         </div>
         <div class="page-nav">
           <button class="pnav-btn" onclick="show('panel',getSL('panel'))"><span class="pnav-btn-label">← Previous</span><span class="pnav-btn-name">Panel</span></button>
+          <button class="pnav-btn right" onclick="show('editparagraph',getSL('editparagraph'))"><span class="pnav-btn-label">Next →</span><span class="pnav-btn-name">EditableParagraph</span></button>
+        </div>
+      </div>
+
+      <!-- ══ EDITABLEPARAGRAPH ══ -->
+      <div id="page-editparagraph" class="page">
+        <div class="page-header">
+          <div class="page-title">EditableParagraph</div>
+          <div class="page-subtitle">Paragraph dengan TextBox multi-baris yang bisa diedit user</div>
+        </div>
+
+        <div class="info-box">
+          ℹ️ <strong>EditableParagraph</strong> berbeda dengan <strong>Paragraph</strong> biasa — elemen ini menampilkan TextBox yang bisa diketik langsung oleh user, bukan teks statis. Nilainya disimpan otomatis ke config.
+        </div>
+
+        <div class="subtabs">
+          <div class="stab active" onclick="stab(this,'ep-basic')">Basic</div>
+          <div class="stab" onclick="stab(this,'ep-button')">With Button</div>
+          <div class="stab" onclick="stab(this,'ep-fn')">Functions</div>
+        </div>
+
+        <div id="ep-basic" class="stab-content active">
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <code><span class="kw">local</span> <span class="var">EP</span> <span class="op">=</span> <span class="var">Sec</span>.<span class="var">Paragraph</span>:<span class="fn">AddEditableParagraph</span>({
+    <span class="var">Title</span>       <span class="op">=</span> <span class="str">"Notes"</span>,
+    <span class="var">Placeholder</span> <span class="op">=</span> <span class="str">"Type your notes here..."</span>,
+    <span class="var">Default</span>     <span class="op">=</span> <span class="str">""</span>,
+    <span class="var">Callback</span>    <span class="op">=</span> <span class="kw">function</span>(<span class="var">value</span>)
+        <span class="fn">print</span>(<span class="str">"Text changed:"</span>, <span class="var">value</span>)
+    <span class="kw">end</span>
+})</code></div>
+        </div>
+
+        <div id="ep-button" class="stab-content">
+          <p>Tambahkan tombol aksi di bawah TextBox menggunakan <code class="il">ButtonText</code> dan <code class="il">ButtonCallback</code>.</p>
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <code><span class="kw">local</span> <span class="var">EP</span> <span class="op">=</span> <span class="var">Sec</span>.<span class="var">Paragraph</span>:<span class="fn">AddEditableParagraph</span>({
+    <span class="var">Title</span>          <span class="op">=</span> <span class="str">"Custom Script"</span>,
+    <span class="var">Placeholder</span>    <span class="op">=</span> <span class="str">"Masukkan script..."</span>,
+    <span class="var">Default</span>        <span class="op">=</span> <span class="str">""</span>,
+    <span class="var">ButtonText</span>     <span class="op">=</span> <span class="str">"Execute"</span>,
+    <span class="var">ButtonCallback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">text</span>)
+        <span class="fn">print</span>(<span class="str">"Executing:"</span>, <span class="var">text</span>)
+    <span class="kw">end</span>,
+    <span class="var">Callback</span>       <span class="op">=</span> <span class="kw">function</span>(<span class="var">value</span>) <span class="kw">end</span>
+})</code></div>
+          <h3>Properties</h3>
+          <div class="table-wrap"><table>
+            <thead><tr><th>Property</th><th>Type</th><th>Description</th></tr></thead>
+            <tbody>
+              <tr><td>Title</td><td>string</td><td>Judul di atas TextBox</td></tr>
+              <tr><td>Placeholder</td><td>string</td><td>Teks placeholder saat kosong</td></tr>
+              <tr><td>Default</td><td>string</td><td>Nilai awal TextBox</td></tr>
+              <tr><td>Callback</td><td>function</td><td>Dipanggil setiap kali teks berubah</td></tr>
+              <tr><td>ButtonText</td><td>string</td><td>(opsional) Teks tombol aksi</td></tr>
+              <tr><td>ButtonCallback</td><td>function</td><td>Dipanggil saat tombol ditekan, menerima teks</td></tr>
+              <tr><td>Badge</td><td>string</td><td>Badge label (lihat halaman Badge)</td></tr>
+              <tr><td>Locked</td><td>bool</td><td>Nonaktifkan interaksi user</td></tr>
+              <tr><td>Flag</td><td>string</td><td>Override config key untuk penyimpanan</td></tr>
+              <tr><td>Icon</td><td>string</td><td>Icon di samping judul</td></tr>
+            </tbody>
+          </table></div>
+        </div>
+
+        <div id="ep-fn" class="stab-content">
+          <div class="table-wrap"><table>
+            <thead><tr><th>Method / Property</th><th>Description</th></tr></thead>
+            <tbody>
+              <tr><td>.Value</td><td>Teks saat ini</td></tr>
+              <tr><td>:SetContent(text)</td><td>Set isi TextBox secara programatik</td></tr>
+              <tr><td>:GetContent()</td><td>Ambil isi TextBox saat ini</td></tr>
+              <tr><td>:SetTitle(text)</td><td>Ubah teks judul</td></tr>
+              <tr><td>:GetTitle()</td><td>Ambil teks judul</td></tr>
+              <tr><td>:SetLocked(state)</td><td>Kunci/buka elemen</td></tr>
+              <tr><td>:GetLocked()</td><td>Cek status kunci</td></tr>
+              <tr><td>:SetLockMessage(text)</td><td>Ubah teks pesan di overlay kunci</td></tr>
+            </tbody>
+          </table></div>
+        </div>
+
+        <div class="page-nav">
+          <button class="pnav-btn" onclick="show('paragraph',getSL('paragraph'))"><span class="pnav-btn-label">← Previous</span><span class="pnav-btn-name">Paragraph</span></button>
           <button class="pnav-btn right" onclick="show('keybind',getSL('keybind'))"><span class="pnav-btn-label">Next →</span><span class="pnav-btn-name">Keybind</span></button>
         </div>
       </div>
@@ -1590,7 +1759,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
 })</code>
         </div>
         <div class="page-nav">
-          <button class="pnav-btn" onclick="show('paragraph',getSL('paragraph'))"><span class="pnav-btn-label">← Previous</span><span class="pnav-btn-name">Paragraph</span></button>
+          <button class="pnav-btn" onclick="show('editparagraph',getSL('editparagraph'))"><span class="pnav-btn-label">← Previous</span><span class="pnav-btn-name">EditableParagraph</span></button>
           <button class="pnav-btn right" onclick="show('divider',getSL('divider'))"><span class="pnav-btn-label">Next →</span><span class="pnav-btn-name">Divider</span></button>
         </div>
       </div>
