@@ -535,16 +535,21 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
           <div class="page-title">Tags</div>
           <div class="page-subtitle">Tambahkan label berwarna pada window</div>
         </div>
+        <div class="info-box">
+          💡 Property <code class="il">Color</code> bisa pakai <strong>nama tema</strong> (string) atau <strong>Color3.fromRGB</strong>. Lihat <a href="#" onclick="show('themes',getSL('themes'));return false" style="color:var(--info-text)">Themes</a> untuk daftar nama.
+        </div>
         <div class="code-block">
           <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-          <code><span class="var">Window</span>:<span class="fn">Tag</span>({
-    <span class="var">Title</span> <span class="op">=</span> <span class="str">"v1.6.41"</span>,
-    <span class="var">Color</span> <span class="op">=</span> <span class="var">Color3</span>.<span class="fn">fromRGB</span>(<span class="num">245</span>, <span class="num">167</span>, <span class="num">35</span>),
+          <code><span class="cm">-- Menggunakan nama tema</span>
+<span class="var">Window</span>:<span class="fn">Tag</span>({
+    <span class="var">Title</span> <span class="op">=</span> <span class="str">"v0.0.2"</span>,
+    <span class="var">Color</span> <span class="op">=</span> <span class="str">"Amber"</span>,  <span class="cm">-- nama tema</span>
 })
 
+<span class="cm">-- Menggunakan Color3.fromRGB</span>
 <span class="var">Window</span>:<span class="fn">Tag</span>({
     <span class="var">Title</span> <span class="op">=</span> <span class="str">"UI Library"</span>,
-    <span class="var">Color</span> <span class="op">=</span> <span class="var">Color3</span>.<span class="fn">fromRGB</span>(<span class="num">48</span>, <span class="num">255</span>, <span class="num">106</span>),
+    <span class="var">Color</span> <span class="op">=</span> <span class="var">Color3</span>.<span class="fn">fromRGB</span>(<span class="num">48</span>, <span class="num">255</span>, <span class="num">106</span>),  <span class="cm">-- Color3</span>
 })</code>
         </div>
         <div class="page-nav">
@@ -1427,53 +1432,54 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
         </div>
 
         <div id="par-color" class="stab-content">
-          <p>Gunakan property <code class="il">Color</code> untuk membuat kartu dengan warna latar kustom. Mendukung 1 tombol maupun 2 tombol (dengan <code class="il">SubButtonText</code>).</p>
+          <p>Gunakan property <code class="il">Color</code> untuk membuat kartu dengan warna latar kustom. Nilai <code class="il">Color</code> bisa pakai <strong>nama tema</strong> (string) atau <strong>Color3.fromRGB</strong>.</p>
 
-          <h3>Preview</h3>
-          <div class="para-card" style="background:rgba(70,130,220,0.1);border-color:rgba(70,130,220,0.25)">
-            <div class="para-card-header"><span class="para-card-title">Velaris Official Discord</span></div>
-            <div class="para-card-content">Velaris UI Library best</div>
-            <div class="para-card-buttons"><button class="para-card-btn">Copy Discord</button></div>
-          </div>
-          <div class="para-card" style="background:rgba(220,100,90,0.1);border-color:rgba(220,100,90,0.25)">
-            <div class="para-card-header"><span class="para-card-title">Velaris UI</span></div>
-            <div class="para-card-content">Stable, Smooth - Powered by Velaris UI Library</div>
-            <div class="para-card-buttons">
-              <button class="para-card-btn">Discord Velaris</button>
-              <button class="para-card-btn">Link Velaris</button>
-            </div>
+          <div class="info-box">
+            💡 Semua nama tema yang valid bisa dilihat di halaman <a href="#" onclick="show('themes',getSL('themes'));return false" style="color:var(--info-text)">Themes</a>. Contoh: <code class="il">"Sky"</code>, <code class="il">"Rose"</code>, <code class="il">"Emerald"</code>, <code class="il">"Default"</code>, dll.
           </div>
 
-          <h3>Single Button (Color Card)</h3>
+          <h3>Menggunakan Nama Tema</h3>
           <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
             <code><span class="var">Sec</span>.<span class="var">Paragraph</span>:<span class="fn">AddParagraph</span>({
     <span class="var">Title</span>          <span class="op">=</span> <span class="str">"Velaris Official Discord"</span>,
     <span class="var">Content</span>        <span class="op">=</span> <span class="str">"Velaris UI Library best"</span>,
-    <span class="var">Icon</span>           <span class="op">=</span> <span class="str">"rbxassetid://ICON_ID"</span>,
-    <span class="var">Color</span>          <span class="op">=</span> <span class="var">Color3</span>.<span class="fn">fromRGB</span>(<span class="num">70</span>, <span class="num">130</span>, <span class="num">220</span>),
+    <span class="var">Color</span>          <span class="op">=</span> <span class="str">"Sky"</span>,  <span class="cm">-- nama tema dari halaman Themes</span>
     <span class="var">ButtonText</span>     <span class="op">=</span> <span class="str">"Copy Discord"</span>,
     <span class="var">ButtonCallback</span> <span class="op">=</span> <span class="kw">function</span>()
         <span class="fn">setclipboard</span>(<span class="str">"discord.gg/ECxQFc97F5"</span>)
-        <span class="fn">print</span>(<span class="str">"Discord copied to clipboard!"</span>)
     <span class="kw">end</span>,
-})</code></div>
+})
 
-          <h3>Dual Button (Color Card)</h3>
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <code><span class="var">Sec</span>.<span class="var">Paragraph</span>:<span class="fn">AddParagraph</span>({
+<span class="var">Sec</span>.<span class="var">Paragraph</span>:<span class="fn">AddParagraph</span>({
     <span class="var">Title</span>             <span class="op">=</span> <span class="str">"Velaris UI"</span>,
-    <span class="var">Content</span>           <span class="op">=</span> <span class="str">"Stable, Smooth - Powered by Velaris UI Library"</span>,
-    <span class="var">Icon</span>              <span class="op">=</span> <span class="str">"rbxassetid://ICON_ID"</span>,
-    <span class="var">Color</span>             <span class="op">=</span> <span class="var">Color3</span>.<span class="fn">fromRGB</span>(<span class="num">220</span>, <span class="num">100</span>, <span class="num">90</span>),
-    <span class="var">ButtonText</span>        <span class="op">=</span> <span class="str">"Discord Velaris"</span>,
+    <span class="var">Content</span>           <span class="op">=</span> <span class="str">"Powered by Velaris UI Library"</span>,
+    <span class="var">Color</span>             <span class="op">=</span> <span class="str">"Rose"</span>,  <span class="cm">-- nama tema dari halaman Themes</span>
+    <span class="var">ButtonText</span>        <span class="op">=</span> <span class="str">"Discord"</span>,
     <span class="var">ButtonCallback</span>    <span class="op">=</span> <span class="kw">function</span>()
         <span class="fn">setclipboard</span>(<span class="str">"discord.gg/ECxQFc97F5"</span>)
     <span class="kw">end</span>,
-    <span class="var">SubButtonText</span>     <span class="op">=</span> <span class="str">"Link Velaris"</span>,
-    <span class="var">SubButtonCallback</span> <span class="op">=</span> <span class="kw">function</span>()
-        <span class="fn">print</span>(<span class="str">"SubButton clicked!"</span>)
-    <span class="kw">end</span>,
+    <span class="var">SubButtonText</span>     <span class="op">=</span> <span class="str">"Link"</span>,
+    <span class="var">SubButtonCallback</span> <span class="op">=</span> <span class="kw">function</span>() <span class="kw">end</span>,
 })</code></div>
+
+          <h3>Menggunakan Color3.fromRGB</h3>
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <code><span class="var">Sec</span>.<span class="var">Paragraph</span>:<span class="fn">AddParagraph</span>({
+    <span class="var">Title</span>          <span class="op">=</span> <span class="str">"Custom Color"</span>,
+    <span class="var">Content</span>        <span class="op">=</span> <span class="str">"Warna kustom dengan Color3"</span>,
+    <span class="var">Color</span>          <span class="op">=</span> <span class="var">Color3</span>.<span class="fn">fromRGB</span>(<span class="num">70</span>, <span class="num">130</span>, <span class="num">220</span>),
+    <span class="var">ButtonText</span>     <span class="op">=</span> <span class="str">"Action"</span>,
+    <span class="var">ButtonCallback</span> <span class="op">=</span> <span class="kw">function</span>() <span class="kw">end</span>,
+})</code></div>
+
+          <h3>Color Value Types</h3>
+          <div class="table-wrap"><table>
+            <thead><tr><th>Tipe</th><th>Contoh</th><th>Keterangan</th></tr></thead>
+            <tbody>
+              <tr><td>string (nama tema)</td><td><code class="il">"Sky"</code>, <code class="il">"Rose"</code>, <code class="il">"Emerald"</code></td><td>Nama dari halaman Themes</td></tr>
+              <tr><td>Color3</td><td><code class="il">Color3.fromRGB(70, 130, 220)</code></td><td>Warna RGB kustom</td></tr>
+            </tbody>
+          </table></div>
         </div>
 
         <div id="par-badge" class="stab-content">
