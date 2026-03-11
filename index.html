@@ -284,7 +284,27 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
 .pnav-btn-name{font-size:13px;color:var(--text);font-weight:500}
 .pnav-btn.right{text-align:right;align-items:flex-end}
 
-/* PARAGRAPH COLOR CARD */
+/* THEME GRID */
+.theme-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:14px 0}
+.theme-btn{
+  padding:12px 10px;border-radius:50px;border:none;cursor:pointer;
+  font-family:var(--font);font-size:13px;font-weight:600;
+  color:#fff;text-align:center;transition:transform .1s,opacity .15s;
+  text-shadow:0 1px 3px rgba(0,0,0,0.35);
+}
+.theme-btn:hover{transform:scale(1.03)}
+.theme-btn:active{transform:scale(.97)}
+.theme-btn.light-text{color:#111;text-shadow:none}
+#theme-copied{
+  position:fixed;bottom:28px;left:50%;transform:translateX(-50%);
+  background:var(--bg-card);border:1px solid var(--border-strong);
+  color:var(--text);padding:8px 20px;border-radius:8px;
+  font-size:13px;font-weight:500;font-family:var(--font);
+  pointer-events:none;opacity:0;transition:opacity .2s;z-index:9999;
+  white-space:nowrap;
+}
+#theme-copied.show{opacity:1}
+
 .para-card {
   border-radius:var(--radius);border:1px solid var(--border);
   padding:14px 16px;margin:10px 0;display:flex;flex-direction:column;gap:6px;
@@ -531,16 +551,6 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
           <button class="pnav-btn" onclick="show('window',getSL('window'))">
             <span class="pnav-btn-label">← Previous</span><span class="pnav-btn-name">Window</span>
           </button>
-          <button class="pnav-btn right" onclick="show('tabs',getSL('tabs'))">
-            <span class="pnav-btn-label">Next →</span><span class="pnav-btn-name">Tabs</span>
-          </button>
-        </div>
-      </div>
-
-        <div class="page-nav">
-          <button class="pnav-btn" onclick="show('window',getSL('window'))">
-            <span class="pnav-btn-label">← Previous</span><span class="pnav-btn-name">Window</span>
-          </button>
           <button class="pnav-btn right" onclick="show('themes',getSL('themes'))">
             <span class="pnav-btn-label">Next →</span><span class="pnav-btn-name">Themes</span>
           </button>
@@ -565,153 +575,8 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
 
         <h2>All Themes <span style="font-size:11px;font-weight:500;color:var(--text-muted);background:var(--bg-secondary);border:1px solid var(--border);padding:2px 8px;border-radius:20px;vertical-align:middle">Clickable</span></h2>
 
-        <style>
-          .theme-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:14px 0}
-          .theme-btn{
-            padding:12px 10px;border-radius:50px;border:none;cursor:pointer;
-            font-family:var(--font);font-size:13px;font-weight:600;
-            color:#fff;text-align:center;transition:transform .1s,opacity .15s;
-            text-shadow:0 1px 3px rgba(0,0,0,0.4);
-            position:relative;overflow:hidden;
-          }
-          .theme-btn:hover{transform:scale(1.03);opacity:.92}
-          .theme-btn:active{transform:scale(.97)}
-          .theme-btn.light-text{color:#111;text-shadow:none}
-          #theme-copied{
-            position:fixed;bottom:28px;left:50%;transform:translateX(-50%);
-            background:var(--bg-card);border:1px solid var(--border);
-            color:var(--text);padding:8px 18px;border-radius:8px;
-            font-size:13px;font-weight:500;font-family:var(--font);
-            pointer-events:none;opacity:0;transition:opacity .2s;z-index:9999;
-          }
-          #theme-copied.show{opacity:1}
-        </style>
-
         <div id="theme-copied">Copied!</div>
-
         <div class="theme-grid" id="themeGrid"></div>
-
-        <script>
-        (function(){
-          var colors = [
-            ["Default","rgb(0,170,210)"],
-            ["Light","rgb(230,230,230)"],
-            ["White","rgb(255,255,255)"],["Black","rgb(0,0,0)"],["Gray","rgb(128,128,128)"],
-            ["Silver","rgb(192,192,192)"],["Charcoal","rgb(54,69,79)"],["Ash","rgb(178,190,181)"],
-            ["Smoke","rgb(115,130,118)"],["Ivory","rgb(255,255,240)"],["Pearl","rgb(234,224,200)"],
-            ["Platinum","rgb(229,228,226)"],["Graphite","rgb(71,71,71)"],["Slate","rgb(112,128,144)"],
-            ["Dim Gray","rgb(105,105,105)"],
-            ["Rose","rgb(199,21,133)"],["Red","rgb(183,28,28)"],["Crimson","rgb(220,20,60)"],
-            ["Scarlet","rgb(255,36,0)"],["Burgundy","rgb(128,0,32)"],["Pink","rgb(255,192,203)"],
-            ["Hot Pink","rgb(255,105,180)"],["Magenta","rgb(255,0,255)"],["Raspberry","rgb(227,11,93)"],
-            ["Cherry","rgb(222,49,99)"],["Salmon","rgb(250,128,114)"],["Maroon","rgb(128,0,0)"],
-            ["Brick Red","rgb(203,65,84)"],["Coral","rgb(255,127,80)"],["Light Pink","rgb(255,182,193)"],
-            ["Deep Pink","rgb(255,20,147)"],["Flamingo","rgb(252,142,172)"],["Blush","rgb(222,93,131)"],
-            ["Ruby","rgb(155,17,30)"],["Garnet","rgb(115,54,53)"],["Candy Red","rgb(255,0,51)"],
-            ["Rose Gold","rgb(183,110,121)"],["Strawberry","rgb(252,90,141)"],["Watermelon","rgb(252,108,133)"],
-            ["Tomato","rgb(255,99,71)"],
-            ["Amber","rgb(255,140,0)"],["Orange","rgb(255,165,0)"],["Tangerine","rgb(242,133,0)"],
-            ["Gold","rgb(255,215,0)"],["Yellow","rgb(255,255,0)"],["Lemon","rgb(253,233,16)"],
-            ["Mustard","rgb(255,219,88)"],["Peach","rgb(255,218,185)"],["Apricot","rgb(251,206,177)"],
-            ["Pumpkin","rgb(255,117,24)"],["Burnt Orange","rgb(204,85,0)"],["Sunflower","rgb(255,218,3)"],
-            ["Saffron","rgb(244,196,48)"],["Goldenrod","rgb(218,165,32)"],["Marigold","rgb(252,192,6)"],
-            ["Canary","rgb(255,239,0)"],["Butter","rgb(255,243,176)"],["Papaya","rgb(255,155,85)"],
-            ["Mango","rgb(255,130,67)"],["Ochre","rgb(204,119,34)"],["Honey","rgb(236,172,70)"],
-            ["Carrot","rgb(237,145,33)"],["Cinnamon","rgb(210,105,30)"],["Champagne","rgb(247,231,206)"],
-            ["Plant","rgb(34,139,34)"],["Emerald","rgb(0,150,100)"],["Green","rgb(0,200,0)"],
-            ["Lime","rgb(50,205,50)"],["Forest","rgb(34,139,34)"],["Mint","rgb(152,251,152)"],
-            ["Sea Green","rgb(46,139,87)"],["Olive","rgb(128,128,0)"],["Sage","rgb(156,179,127)"],
-            ["Teal","rgb(0,128,128)"],["Jade","rgb(0,168,107)"],["Chartreuse","rgb(127,255,0)"],
-            ["Fern","rgb(79,121,66)"],["Moss","rgb(138,154,91)"],["Avocado","rgb(86,130,3)"],
-            ["Jungle","rgb(41,171,135)"],["Pistachio","rgb(147,197,114)"],["Pear","rgb(209,226,49)"],
-            ["Neon Green","rgb(57,255,20)"],["Spring Green","rgb(0,255,127)"],["Hunter Green","rgb(53,94,59)"],
-            ["Kelly Green","rgb(76,187,23)"],["Grass","rgb(124,185,36)"],["Bottle Green","rgb(0,106,78)"],
-            ["Spearmint","rgb(0,175,143)"],["Cucumber","rgb(119,168,72)"],
-            ["Indigo","rgb(63,81,181)"],["Sky","rgb(0,191,255)"],["Midnight","rgb(25,42,86)"],
-            ["Blue","rgb(0,0,255)"],["Navy","rgb(0,0,128)"],["Royal Blue","rgb(65,105,225)"],
-            ["Cornflower","rgb(100,149,237)"],["Azure","rgb(0,127,255)"],["Cyan","rgb(0,255,255)"],
-            ["Turquoise","rgb(64,224,208)"],["Aqua","rgb(0,200,200)"],["Baby Blue","rgb(137,207,240)"],
-            ["Steel Blue","rgb(70,130,180)"],["Denim","rgb(21,96,189)"],["Cobalt","rgb(0,71,171)"],
-            ["Sapphire","rgb(15,82,186)"],["Ice Blue","rgb(153,214,234)"],["Powder Blue","rgb(176,224,230)"],
-            ["Periwinkle","rgb(204,204,255)"],["Cerulean","rgb(0,123,167)"],["Ocean","rgb(0,119,190)"],
-            ["Deep Blue","rgb(0,0,139)"],["Electric Blue","rgb(125,249,255)"],["Dodger Blue","rgb(30,144,255)"],
-            ["Cadet Blue","rgb(95,158,160)"],["Slate Blue","rgb(106,90,205)"],["Aquamarine","rgb(127,255,212)"],
-            ["Glacier","rgb(128,183,200)"],
-            ["Violet","rgb(138,43,226)"],["Purple","rgb(128,0,128)"],["Lavender","rgb(230,230,250)"],
-            ["Plum","rgb(221,160,221)"],["Orchid","rgb(218,112,214)"],["Mauve","rgb(224,176,255)"],
-            ["Lilac","rgb(200,162,200)"],["Grape","rgb(111,45,168)"],["Eggplant","rgb(97,64,81)"],
-            ["Amethyst","rgb(153,102,204)"],["Mulberry","rgb(197,75,140)"],["Thistle","rgb(216,191,216)"],
-            ["Wisteria","rgb(201,160,220)"],["Heliotrope","rgb(223,115,255)"],["Byzantine","rgb(189,51,164)"],
-            ["Deep Purple","rgb(69,39,160)"],["Neon Purple","rgb(188,19,254)"],["Periwinkle Purple","rgb(142,130,254)"],
-            ["Boysenberry","rgb(135,50,96)"],["Iris","rgb(90,79,207)"],["Fuchsia","rgb(255,0,143)"],
-            ["Byzantium","rgb(112,41,99)"],
-            ["Brown","rgb(165,42,42)"],["Tan","rgb(210,180,140)"],["Beige","rgb(245,245,220)"],
-            ["Cream","rgb(255,253,208)"],["Chocolate","rgb(123,63,0)"],["Coffee","rgb(111,78,55)"],
-            ["Sand","rgb(194,178,128)"],["Camel","rgb(193,154,107)"],["Sienna","rgb(160,82,45)"],
-            ["Umber","rgb(99,81,71)"],["Walnut","rgb(120,80,60)"],["Mahogany","rgb(192,64,0)"],
-            ["Russet","rgb(128,70,27)"],["Copper","rgb(184,115,51)"],["Bronze","rgb(205,127,50)"],
-            ["Clay","rgb(163,99,67)"],["Terracotta","rgb(226,114,91)"],["Mocha","rgb(150,105,85)"],
-            ["Toffee","rgb(189,139,68)"],["Hazel","rgb(142,118,72)"],["Chestnut","rgb(149,69,53)"],
-            ["Khaki","rgb(195,176,145)"],["Wheat","rgb(245,222,179)"],["Linen","rgb(250,240,230)"],
-            ["Parchment","rgb(240,225,196)"],
-            ["Monokai Pro","rgb(255,143,96)"],["Cotton Candy","rgb(255,105,180)"],["Mellow","rgb(90,70,50)"],
-            ["Neon","rgb(57,255,20)"],["Pastel","rgb(209,224,224)"],["Sepia","rgb(112,66,20)"],
-            ["Lavender Blush","rgb(255,240,245)"],["Mint Cream","rgb(245,255,250)"],["Honeydew","rgb(240,255,240)"],
-            ["Ghost White","rgb(248,248,255)"],["Neon Pink","rgb(255,16,240)"],["Neon Blue","rgb(4,217,255)"],
-            ["Neon Yellow","rgb(255,255,51)"],["Neon Orange","rgb(255,95,31)"],["Electric Violet","rgb(143,0,255)"],
-            ["Holographic","rgb(190,220,255)"],["Retro Red","rgb(210,43,43)"],["Retro Blue","rgb(50,100,168)"],
-            ["Retrowave","rgb(255,0,128)"],["Cyberpunk","rgb(255,243,0)"],["Synthwave","rgb(114,9,183)"],
-            ["Vaporwave","rgb(255,113,206)"],["Glitch","rgb(0,255,159)"],["Matrix","rgb(0,255,65)"],
-            ["Hacker","rgb(0,200,0)"],["Pixel","rgb(255,85,0)"],["Arctic","rgb(168,218,220)"],
-            ["Aurora","rgb(0,255,200)"],["Galaxy","rgb(86,11,173)"],["Nebula","rgb(97,0,178)"],
-            ["Stardust","rgb(255,215,140)"],["Cosmic","rgb(46,0,79)"],["Twilight","rgb(78,52,130)"],
-            ["Dusk","rgb(184,134,157)"],["Dawn","rgb(255,189,150)"],["Sunset","rgb(253,94,83)"],
-            ["Sunrise","rgb(255,160,50)"],["Moonlight","rgb(174,185,212)"],["Starlight","rgb(240,232,196)"],
-            ["Shadow","rgb(52,52,52)"],["Obsidian","rgb(11,11,11)"],["Onyx","rgb(53,56,57)"],
-            ["Void","rgb(8,8,20)"],["Abyss","rgb(3,3,15)"],["Lava","rgb(207,16,32)"],
-            ["Magma","rgb(255,69,0)"],["Ash Gray","rgb(178,190,181)"],["Storm","rgb(79,99,120)"],
-            ["Thunder","rgb(51,68,92)"],["Ice","rgb(210,236,255)"],["Snow","rgb(255,250,250)"],
-            ["Frost","rgb(214,234,248)"],["Blizzard","rgb(185,210,235)"],["Spring","rgb(160,231,129)"],
-            ["Summer","rgb(255,200,87)"],["Autumn","rgb(210,105,30)"],["Winter","rgb(104,157,187)"],
-            ["Tropical","rgb(0,209,178)"],["Lagoon","rgb(38,166,154)"],["Reef","rgb(0,204,153)"],
-            ["Seafoam","rgb(120,214,175)"],["Deep Sea","rgb(0,50,98)"],["Coral Reef","rgb(255,127,80)"],
-            ["Poison","rgb(100,255,50)"],["Toxic","rgb(173,255,47)"],["Slime","rgb(125,200,0)"],
-            ["Radioactive","rgb(105,246,0)"],["Blood","rgb(138,3,3)"],["Rust","rgb(183,65,14)"],
-            ["Patina","rgb(82,172,139)"],["Verdigris","rgb(67,179,174)"],["Champagne Gold","rgb(250,214,165)"],
-            ["Rose Quartz","rgb(247,183,196)"],["Serenity","rgb(146,168,209)"],["Ultraviolet","rgb(95,75,139)"],
-            ["Living Coral","rgb(255,111,97)"],["Classic Blue","rgb(15,76,129)"],["Illuminating","rgb(245,223,77)"],
-            ["Very Peri","rgb(102,103,171)"],["Viva Magenta","rgb(187,38,73)"],["Peach Fuzz","rgb(255,190,152)"],
-            ["Mocha Mousse","rgb(169,126,105)"]
-          ];
-
-          // brightness check for light text
-          function isLight(rgb){
-            var m=rgb.match(/\d+/g);
-            if(!m||m.length<3)return false;
-            var r=+m[0],g=+m[1],b=+m[2];
-            return (r*299+g*587+b*114)/1000>155;
-          }
-
-          var grid=document.getElementById('themeGrid');
-          var toast=document.getElementById('theme-copied');
-          var toastTimer;
-
-          colors.forEach(function(c){
-            var btn=document.createElement('button');
-            btn.className='theme-btn'+(isLight(c[1])?' light-text':'');
-            btn.style.background=c[1];
-            btn.textContent=c[0];
-            btn.onclick=function(){
-              navigator.clipboard&&navigator.clipboard.writeText(c[0]);
-              toast.textContent='"'+c[0]+'" copied!';
-              toast.classList.add('show');
-              clearTimeout(toastTimer);
-              toastTimer=setTimeout(function(){toast.classList.remove('show')},1800);
-            };
-            grid.appendChild(btn);
-          });
-        })();
-        </script>
 
         <div class="page-nav">
           <button class="pnav-btn" onclick="show('tags',getSL('tags'))"><span class="pnav-btn-label">← Previous</span><span class="pnav-btn-name">Tags</span></button>
@@ -1770,6 +1635,122 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
 </div>
 
 <script>
+// ── THEME GRID ──
+(function(){
+  var colors = [
+    ["Default","rgb(0,170,210)"],["Light","rgb(230,230,230)"],
+    ["White","rgb(255,255,255)"],["Black","rgb(0,0,0)"],["Gray","rgb(128,128,128)"],
+    ["Silver","rgb(192,192,192)"],["Charcoal","rgb(54,69,79)"],["Ash","rgb(178,190,181)"],
+    ["Smoke","rgb(115,130,118)"],["Ivory","rgb(255,255,240)"],["Pearl","rgb(234,224,200)"],
+    ["Platinum","rgb(229,228,226)"],["Graphite","rgb(71,71,71)"],["Slate","rgb(112,128,144)"],
+    ["Dim Gray","rgb(105,105,105)"],
+    ["Rose","rgb(199,21,133)"],["Red","rgb(183,28,28)"],["Crimson","rgb(220,20,60)"],
+    ["Scarlet","rgb(255,36,0)"],["Burgundy","rgb(128,0,32)"],["Pink","rgb(255,192,203)"],
+    ["Hot Pink","rgb(255,105,180)"],["Magenta","rgb(255,0,255)"],["Raspberry","rgb(227,11,93)"],
+    ["Cherry","rgb(222,49,99)"],["Salmon","rgb(250,128,114)"],["Maroon","rgb(128,0,0)"],
+    ["Brick Red","rgb(203,65,84)"],["Coral","rgb(255,127,80)"],["Light Pink","rgb(255,182,193)"],
+    ["Deep Pink","rgb(255,20,147)"],["Flamingo","rgb(252,142,172)"],["Blush","rgb(222,93,131)"],
+    ["Ruby","rgb(155,17,30)"],["Garnet","rgb(115,54,53)"],["Candy Red","rgb(255,0,51)"],
+    ["Rose Gold","rgb(183,110,121)"],["Strawberry","rgb(252,90,141)"],["Watermelon","rgb(252,108,133)"],
+    ["Tomato","rgb(255,99,71)"],
+    ["Amber","rgb(255,140,0)"],["Orange","rgb(255,165,0)"],["Tangerine","rgb(242,133,0)"],
+    ["Gold","rgb(255,215,0)"],["Yellow","rgb(255,255,0)"],["Lemon","rgb(253,233,16)"],
+    ["Mustard","rgb(255,219,88)"],["Peach","rgb(255,218,185)"],["Apricot","rgb(251,206,177)"],
+    ["Pumpkin","rgb(255,117,24)"],["Burnt Orange","rgb(204,85,0)"],["Sunflower","rgb(255,218,3)"],
+    ["Saffron","rgb(244,196,48)"],["Goldenrod","rgb(218,165,32)"],["Marigold","rgb(252,192,6)"],
+    ["Canary","rgb(255,239,0)"],["Butter","rgb(255,243,176)"],["Papaya","rgb(255,155,85)"],
+    ["Mango","rgb(255,130,67)"],["Ochre","rgb(204,119,34)"],["Honey","rgb(236,172,70)"],
+    ["Carrot","rgb(237,145,33)"],["Cinnamon","rgb(210,105,30)"],["Champagne","rgb(247,231,206)"],
+    ["Plant","rgb(34,139,34)"],["Emerald","rgb(0,150,100)"],["Green","rgb(0,200,0)"],
+    ["Lime","rgb(50,205,50)"],["Forest","rgb(34,139,34)"],["Mint","rgb(152,251,152)"],
+    ["Sea Green","rgb(46,139,87)"],["Olive","rgb(128,128,0)"],["Sage","rgb(156,179,127)"],
+    ["Teal","rgb(0,128,128)"],["Jade","rgb(0,168,107)"],["Chartreuse","rgb(127,255,0)"],
+    ["Fern","rgb(79,121,66)"],["Moss","rgb(138,154,91)"],["Avocado","rgb(86,130,3)"],
+    ["Jungle","rgb(41,171,135)"],["Pistachio","rgb(147,197,114)"],["Pear","rgb(209,226,49)"],
+    ["Neon Green","rgb(57,255,20)"],["Spring Green","rgb(0,255,127)"],["Hunter Green","rgb(53,94,59)"],
+    ["Kelly Green","rgb(76,187,23)"],["Grass","rgb(124,185,36)"],["Bottle Green","rgb(0,106,78)"],
+    ["Spearmint","rgb(0,175,143)"],["Cucumber","rgb(119,168,72)"],
+    ["Indigo","rgb(63,81,181)"],["Sky","rgb(0,191,255)"],["Midnight","rgb(25,42,86)"],
+    ["Blue","rgb(0,0,255)"],["Navy","rgb(0,0,128)"],["Royal Blue","rgb(65,105,225)"],
+    ["Cornflower","rgb(100,149,237)"],["Azure","rgb(0,127,255)"],["Cyan","rgb(0,255,255)"],
+    ["Turquoise","rgb(64,224,208)"],["Aqua","rgb(0,200,200)"],["Baby Blue","rgb(137,207,240)"],
+    ["Steel Blue","rgb(70,130,180)"],["Denim","rgb(21,96,189)"],["Cobalt","rgb(0,71,171)"],
+    ["Sapphire","rgb(15,82,186)"],["Ice Blue","rgb(153,214,234)"],["Powder Blue","rgb(176,224,230)"],
+    ["Periwinkle","rgb(204,204,255)"],["Cerulean","rgb(0,123,167)"],["Ocean","rgb(0,119,190)"],
+    ["Deep Blue","rgb(0,0,139)"],["Electric Blue","rgb(125,249,255)"],["Dodger Blue","rgb(30,144,255)"],
+    ["Cadet Blue","rgb(95,158,160)"],["Slate Blue","rgb(106,90,205)"],["Aquamarine","rgb(127,255,212)"],
+    ["Glacier","rgb(128,183,200)"],
+    ["Violet","rgb(138,43,226)"],["Purple","rgb(128,0,128)"],["Lavender","rgb(230,230,250)"],
+    ["Plum","rgb(221,160,221)"],["Orchid","rgb(218,112,214)"],["Mauve","rgb(224,176,255)"],
+    ["Lilac","rgb(200,162,200)"],["Grape","rgb(111,45,168)"],["Eggplant","rgb(97,64,81)"],
+    ["Amethyst","rgb(153,102,204)"],["Mulberry","rgb(197,75,140)"],["Thistle","rgb(216,191,216)"],
+    ["Wisteria","rgb(201,160,220)"],["Heliotrope","rgb(223,115,255)"],["Byzantine","rgb(189,51,164)"],
+    ["Deep Purple","rgb(69,39,160)"],["Neon Purple","rgb(188,19,254)"],["Periwinkle Purple","rgb(142,130,254)"],
+    ["Boysenberry","rgb(135,50,96)"],["Iris","rgb(90,79,207)"],["Fuchsia","rgb(255,0,143)"],
+    ["Byzantium","rgb(112,41,99)"],
+    ["Brown","rgb(165,42,42)"],["Tan","rgb(210,180,140)"],["Beige","rgb(245,245,220)"],
+    ["Cream","rgb(255,253,208)"],["Chocolate","rgb(123,63,0)"],["Coffee","rgb(111,78,55)"],
+    ["Sand","rgb(194,178,128)"],["Camel","rgb(193,154,107)"],["Sienna","rgb(160,82,45)"],
+    ["Umber","rgb(99,81,71)"],["Walnut","rgb(120,80,60)"],["Mahogany","rgb(192,64,0)"],
+    ["Russet","rgb(128,70,27)"],["Copper","rgb(184,115,51)"],["Bronze","rgb(205,127,50)"],
+    ["Clay","rgb(163,99,67)"],["Terracotta","rgb(226,114,91)"],["Mocha","rgb(150,105,85)"],
+    ["Toffee","rgb(189,139,68)"],["Hazel","rgb(142,118,72)"],["Chestnut","rgb(149,69,53)"],
+    ["Khaki","rgb(195,176,145)"],["Wheat","rgb(245,222,179)"],["Linen","rgb(250,240,230)"],
+    ["Parchment","rgb(240,225,196)"],
+    ["Monokai Pro","rgb(255,143,96)"],["Cotton Candy","rgb(255,105,180)"],["Mellow","rgb(90,70,50)"],
+    ["Neon","rgb(57,255,20)"],["Pastel","rgb(209,224,224)"],["Sepia","rgb(112,66,20)"],
+    ["Lavender Blush","rgb(255,240,245)"],["Mint Cream","rgb(245,255,250)"],["Honeydew","rgb(240,255,240)"],
+    ["Ghost White","rgb(248,248,255)"],["Neon Pink","rgb(255,16,240)"],["Neon Blue","rgb(4,217,255)"],
+    ["Neon Yellow","rgb(255,255,51)"],["Neon Orange","rgb(255,95,31)"],["Electric Violet","rgb(143,0,255)"],
+    ["Holographic","rgb(190,220,255)"],["Retro Red","rgb(210,43,43)"],["Retro Blue","rgb(50,100,168)"],
+    ["Retrowave","rgb(255,0,128)"],["Cyberpunk","rgb(255,243,0)"],["Synthwave","rgb(114,9,183)"],
+    ["Vaporwave","rgb(255,113,206)"],["Glitch","rgb(0,255,159)"],["Matrix","rgb(0,255,65)"],
+    ["Hacker","rgb(0,200,0)"],["Pixel","rgb(255,85,0)"],["Arctic","rgb(168,218,220)"],
+    ["Aurora","rgb(0,255,200)"],["Galaxy","rgb(86,11,173)"],["Nebula","rgb(97,0,178)"],
+    ["Stardust","rgb(255,215,140)"],["Cosmic","rgb(46,0,79)"],["Twilight","rgb(78,52,130)"],
+    ["Dusk","rgb(184,134,157)"],["Dawn","rgb(255,189,150)"],["Sunset","rgb(253,94,83)"],
+    ["Sunrise","rgb(255,160,50)"],["Moonlight","rgb(174,185,212)"],["Starlight","rgb(240,232,196)"],
+    ["Shadow","rgb(52,52,52)"],["Obsidian","rgb(11,11,11)"],["Onyx","rgb(53,56,57)"],
+    ["Void","rgb(8,8,20)"],["Abyss","rgb(3,3,15)"],["Lava","rgb(207,16,32)"],
+    ["Magma","rgb(255,69,0)"],["Ash Gray","rgb(178,190,181)"],["Storm","rgb(79,99,120)"],
+    ["Thunder","rgb(51,68,92)"],["Ice","rgb(210,236,255)"],["Snow","rgb(255,250,250)"],
+    ["Frost","rgb(214,234,248)"],["Blizzard","rgb(185,210,235)"],["Spring","rgb(160,231,129)"],
+    ["Summer","rgb(255,200,87)"],["Autumn","rgb(210,105,30)"],["Winter","rgb(104,157,187)"],
+    ["Tropical","rgb(0,209,178)"],["Lagoon","rgb(38,166,154)"],["Reef","rgb(0,204,153)"],
+    ["Seafoam","rgb(120,214,175)"],["Deep Sea","rgb(0,50,98)"],["Coral Reef","rgb(255,127,80)"],
+    ["Poison","rgb(100,255,50)"],["Toxic","rgb(173,255,47)"],["Slime","rgb(125,200,0)"],
+    ["Radioactive","rgb(105,246,0)"],["Blood","rgb(138,3,3)"],["Rust","rgb(183,65,14)"],
+    ["Patina","rgb(82,172,139)"],["Verdigris","rgb(67,179,174)"],["Champagne Gold","rgb(250,214,165)"],
+    ["Rose Quartz","rgb(247,183,196)"],["Serenity","rgb(146,168,209)"],["Ultraviolet","rgb(95,75,139)"],
+    ["Living Coral","rgb(255,111,97)"],["Classic Blue","rgb(15,76,129)"],["Illuminating","rgb(245,223,77)"],
+    ["Very Peri","rgb(102,103,171)"],["Viva Magenta","rgb(187,38,73)"],["Peach Fuzz","rgb(255,190,152)"],
+    ["Mocha Mousse","rgb(169,126,105)"]
+  ];
+  function isLight(rgb){
+    var m=rgb.match(/\d+/g);
+    if(!m||m.length<3)return false;
+    return (+m[0]*299 + +m[1]*587 + +m[2]*114)/1000 > 155;
+  }
+  var grid = document.getElementById('themeGrid');
+  var toast = document.getElementById('theme-copied');
+  var toastTimer;
+  if(!grid) return;
+  colors.forEach(function(c){
+    var btn = document.createElement('button');
+    btn.className = 'theme-btn' + (isLight(c[1]) ? ' light-text' : '');
+    btn.style.background = c[1];
+    btn.textContent = c[0];
+    btn.onclick = function(){
+      navigator.clipboard && navigator.clipboard.writeText(c[0]);
+      toast.textContent = '"' + c[0] + '" copied!';
+      toast.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(function(){ toast.classList.remove('show'); }, 1800);
+    };
+    grid.appendChild(btn);
+  });
+})();
+
 function show(id, linkEl) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   const pg = document.getElementById('page-' + id);
