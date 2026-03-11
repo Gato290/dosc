@@ -252,7 +252,7 @@ tbody tr:last-child td{border-bottom:none}
 tbody td:first-child{color:var(--text);font-family:var(--font-mono);font-size:12px}
 
 /* SUBTABS */
-.subtabs{display:flex;gap:0;border-bottom:1px solid var(--border);margin:16px 0 0}
+.stab-row,.subtabs{display:flex;gap:0;border-bottom:1px solid var(--border);margin:16px 0 0}
 .stab{
   font-size:12.5px;padding:8px 14px;cursor:pointer;
   color:var(--text-muted);border-bottom:2px solid transparent;
@@ -449,46 +449,92 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
         </div>
 
         <h2>Create Window</h2>
-        <div class="code-block">
-          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-          <code><span class="kw">local</span> <span class="var">Window</span> <span class="op">=</span> <span class="var">VelarisUI</span>:<span class="fn">Window</span>({
-    <span class="var">Title</span>         <span class="op">=</span> <span class="str">"Velaris UI"</span>,       <span class="cm">-- Main title di atas window</span>
-    <span class="var">Footer</span>        <span class="op">=</span> <span class="str">"By Nexa"</span>,         <span class="cm">-- Footer text di bawah</span>
-    <span class="var">Content</span>       <span class="op">=</span> <span class="str">"Content"</span>,
-    <span class="var">Color</span>         <span class="op">=</span> <span class="str">"Default"</span>,         <span class="cm">-- Tema warna UI</span>
-    <span class="var">Version</span>       <span class="op">=</span> <span class="num">1.0</span>,
-    [<span class="str">"Tab Width"</span>]  <span class="op">=</span> <span class="num">120</span>,              <span class="cm">-- Lebar section tab</span>
-    <span class="var">Image</span>         <span class="op">=</span> <span class="str">"101833678008843"</span>, <span class="cm">-- Asset ID icon window</span>
-    <span class="var">Configname</span>    <span class="op">=</span> <span class="str">"Vilaris_Ui"</span>,      <span class="cm">-- Nama file konfigurasi</span>
-    <span class="var">Uitransparent</span> <span class="op">=</span> <span class="num">0.15</span>,             <span class="cm">-- Transparansi UI (0=solid)</span>
-    <span class="var">ShowUser</span>      <span class="op">=</span> <span class="kw">true</span>,
-    <span class="var">Search</span>        <span class="op">=</span> <span class="kw">true</span>,
+
+        <div class="stab-row">
+          <div class="stab active" onclick="stab(this,'win-simple')">Simple</div>
+          <div class="stab" onclick="stab(this,'win-full')">Full</div>
+        </div>
+
+        <div id="win-simple" class="stab-content active">
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <code><span class="kw">local</span> <span class="var">Window</span> <span class="op">=</span> <span class="var">VelarisUI</span>:<span class="fn">Window</span>({
+    <span class="var">Title</span>      <span class="op">=</span> <span class="str">"Velaris UI"</span>,
+    <span class="var">Footer</span>     <span class="op">=</span> <span class="str">"By Nexa"</span>,
+    <span class="var">Color</span>      <span class="op">=</span> <span class="str">"Default"</span>,
+    <span class="var">Configname</span> <span class="op">=</span> <span class="str">"Velaris_Ui"</span>,
+})</code>
+          </div>
+        </div>
+
+        <div id="win-full" class="stab-content">
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <code><span class="kw">local</span> <span class="var">Window</span> <span class="op">=</span> <span class="var">VelarisUI</span>:<span class="fn">Window</span>({
+    <span class="var">Title</span>             <span class="op">=</span> <span class="str">"Velaris UI"</span>,
+    <span class="var">Footer</span>            <span class="op">=</span> <span class="str">"By Nexa"</span>,
+    <span class="var">Content</span>           <span class="op">=</span> <span class="str">"v1.0.0"</span>,             <span class="cm">-- Teks kecil di bawah topbar</span>
+    <span class="var">Color</span>             <span class="op">=</span> <span class="str">"Default"</span>,            <span class="cm">-- string | Color3</span>
+    <span class="var">Version</span>           <span class="op">=</span> <span class="num">1</span>,
+    [<span class="str">"Tab Width"</span>]      <span class="op">=</span> <span class="num">120</span>,
+    <span class="var">Image</span>             <span class="op">=</span> <span class="str">"101833678008843"</span>,    <span class="cm">-- Asset ID icon window</span>
+    <span class="var">Configname</span>        <span class="op">=</span> <span class="str">"Velaris_Ui"</span>,
+    <span class="var">Uitransparent</span>     <span class="op">=</span> <span class="num">0.15</span>,                 <span class="cm">-- 0 = solid, 1 = transparan</span>
+    <span class="var">Size</span>              <span class="op">=</span> <span class="var">UDim2</span>.<span class="fn">fromOffset</span>(<span class="num">640</span>, <span class="num">400</span>),
+    <span class="var">Keybind</span>           <span class="op">=</span> <span class="var">Enum</span>.<span class="var">KeyCode</span>.<span class="var">RightShift</span>, <span class="cm">-- Tombol toggle UI</span>
+    <span class="var">Theme</span>             <span class="op">=</span> <span class="str">"ASSET_ID"</span>,           <span class="cm">-- (opsional) ID gambar background</span>
+    <span class="var">ThemeTransparency</span> <span class="op">=</span> <span class="num">0.15</span>,                 <span class="cm">-- Transparansi gambar Theme</span>
+    <span class="var">ShowUser</span>          <span class="op">=</span> <span class="kw">true</span>,                  <span class="cm">-- Tampilkan nama & avatar user</span>
+    <span class="var">Search</span>            <span class="op">=</span> <span class="kw">true</span>,                  <span class="cm">-- Aktifkan search bar di tab</span>
     <span class="var">Config</span> <span class="op">=</span> {
         <span class="var">AutoSave</span> <span class="op">=</span> <span class="kw">true</span>,
         <span class="var">AutoLoad</span> <span class="op">=</span> <span class="kw">true</span>,
     },
 })</code>
+          </div>
         </div>
 
         <h3>Properties</h3>
         <div class="table-wrap">
           <table>
-            <thead><tr><th>Property</th><th>Type</th><th>Description</th></tr></thead>
+            <thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
             <tbody>
-              <tr><td>Title</td><td>string</td><td>Judul utama di atas window.</td></tr>
-              <tr><td>Footer</td><td>string</td><td>Teks footer di bagian bawah.</td></tr>
-              <tr><td>Color</td><td>string</td><td>Tema warna UI. Default: <code class="il">"Default"</code>.</td></tr>
-              <tr><td>Version</td><td>number</td><td>Versi script yang ditampilkan.</td></tr>
-              <tr><td>Tab Width</td><td>number</td><td>Lebar section tab (default: 120).</td></tr>
-              <tr><td>Image</td><td>string</td><td>Asset ID untuk icon window.</td></tr>
-              <tr><td>Configname</td><td>string</td><td>Nama file untuk menyimpan config.</td></tr>
-              <tr><td>Uitransparent</td><td>number</td><td>Transparansi UI. 0 = solid, 1 = transparan penuh.</td></tr>
-              <tr><td>ShowUser</td><td>boolean</td><td>Tampilkan nama user.</td></tr>
-              <tr><td>Search</td><td>boolean</td><td>Aktifkan fitur search.</td></tr>
-              <tr><td>Config.AutoSave</td><td>boolean</td><td>Auto-simpan settings.</td></tr>
-              <tr><td>Config.AutoLoad</td><td>boolean</td><td>Auto-load settings saat start.</td></tr>
+              <tr><td>Title</td><td>string</td><td><code class="il">"Chloe X"</code></td><td>Judul utama di topbar window.</td></tr>
+              <tr><td>Footer</td><td>string</td><td><code class="il">"Chloee :3"</code></td><td>Teks footer di samping title.</td></tr>
+              <tr><td>Content</td><td>string</td><td><code class="il">""</code></td><td>Teks kecil di bawah topbar (opsional).</td></tr>
+              <tr><td>Color</td><td>string | Color3</td><td><code class="il">"Default"</code></td><td>Tema warna UI. Bisa nama tema atau Color3.</td></tr>
+              <tr><td>Version</td><td>number</td><td><code class="il">1</code></td><td>Versi config — jika berubah, config lama di-reset.</td></tr>
+              <tr><td>Tab Width</td><td>number</td><td><code class="il">120</code></td><td>Lebar panel tab di sisi kiri.</td></tr>
+              <tr><td>Image</td><td>string</td><td>—</td><td>Asset ID (tanpa prefix) untuk icon window & toggle button.</td></tr>
+              <tr><td>Configname</td><td>string</td><td><code class="il">"Velaris UI"</code></td><td>Nama folder config yang disimpan.</td></tr>
+              <tr><td>Uitransparent</td><td>number</td><td><code class="il">0.15</code></td><td>Transparansi background UI. 0 = solid.</td></tr>
+              <tr><td>Size</td><td>UDim2</td><td><code class="il">UDim2.fromOffset(640,400)</code></td><td>Ukuran window.</td></tr>
+              <tr><td>Keybind</td><td>Enum.KeyCode</td><td><code class="il">RightShift</code></td><td>Tombol keyboard untuk toggle UI.</td></tr>
+              <tr><td>Theme</td><td>string</td><td><code class="il">nil</code></td><td>Asset ID gambar background window (opsional).</td></tr>
+              <tr><td>ThemeTransparency</td><td>number</td><td><code class="il">0.15</code></td><td>Transparansi gambar Theme.</td></tr>
+              <tr><td>ShowUser</td><td>boolean</td><td><code class="il">false</code></td><td>Tampilkan avatar & nama user di bawah tab.</td></tr>
+              <tr><td>Search</td><td>boolean</td><td><code class="il">false</code></td><td>Aktifkan search bar di atas daftar tab.</td></tr>
+              <tr><td>Config.AutoSave</td><td>boolean</td><td><code class="il">true</code></td><td>Otomatis simpan settings ke file.</td></tr>
+              <tr><td>Config.AutoLoad</td><td>boolean</td><td><code class="il">true</code></td><td>Otomatis load settings saat start.</td></tr>
             </tbody>
           </table>
+        </div>
+
+        <h3>Methods</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Method</th><th>Description</th></tr></thead>
+            <tbody>
+              <tr><td>:AddTab(config)</td><td>Tambah tab baru ke window</td></tr>
+              <tr><td>:Tag(config)</td><td>Tambah label berwarna di topbar</td></tr>
+              <tr><td>:SetToggleKey(keyCode)</td><td>Ganti tombol toggle UI secara runtime</td></tr>
+              <tr><td>:DestroyGui()</td><td>Hapus seluruh UI dari CoreGui</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>SetToggleKey</h3>
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <code><span class="cm">-- Ganti toggle key setelah window dibuat</span>
+<span class="var">Window</span>:<span class="fn">SetToggleKey</span>(<span class="var">Enum</span>.<span class="var">KeyCode</span>.<span class="var">RightControl</span>)</code>
         </div>
 
         <h2>Key System</h2>
@@ -536,22 +582,39 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
           <div class="page-subtitle">Tambahkan label berwarna pada window</div>
         </div>
         <div class="info-box">
-          💡 Property <code class="il">Color</code> bisa pakai <strong>nama tema</strong> (string) atau <strong>Color3.fromRGB</strong>. Lihat <a href="#" onclick="show('themes',getSL('themes'));return false" style="color:var(--info-text)">Themes</a> untuk daftar nama.
+          💡 Property <code class="il">Color</code> mendukung 3 format: <strong>nama tema</strong>, <strong>hex string</strong>, atau <strong>Color3</strong>.
         </div>
         <div class="code-block">
           <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-          <code><span class="cm">-- Menggunakan nama tema</span>
+          <code><span class="cm">-- Nama tema (dari halaman Themes)</span>
 <span class="var">Window</span>:<span class="fn">Tag</span>({
     <span class="var">Title</span> <span class="op">=</span> <span class="str">"v0.0.2"</span>,
-    <span class="var">Color</span> <span class="op">=</span> <span class="str">"Amber"</span>,  <span class="cm">-- nama tema</span>
+    <span class="var">Icon</span>  <span class="op">=</span> <span class="str">"lucide:tag"</span>,  <span class="cm">-- opsional</span>
+    <span class="var">Color</span> <span class="op">=</span> <span class="str">"Amber"</span>,
 })
 
-<span class="cm">-- Menggunakan Color3.fromRGB</span>
+<span class="cm">-- Hex color</span>
+<span class="var">Window</span>:<span class="fn">Tag</span>({
+    <span class="var">Title</span> <span class="op">=</span> <span class="str">"Beta"</span>,
+    <span class="var">Color</span> <span class="op">=</span> <span class="str">"#FF5500"</span>,
+})
+
+<span class="cm">-- Color3.fromRGB</span>
 <span class="var">Window</span>:<span class="fn">Tag</span>({
     <span class="var">Title</span> <span class="op">=</span> <span class="str">"UI Library"</span>,
-    <span class="var">Color</span> <span class="op">=</span> <span class="var">Color3</span>.<span class="fn">fromRGB</span>(<span class="num">48</span>, <span class="num">255</span>, <span class="num">106</span>),  <span class="cm">-- Color3</span>
+    <span class="var">Color</span> <span class="op">=</span> <span class="var">Color3</span>.<span class="fn">fromRGB</span>(<span class="num">48</span>, <span class="num">255</span>, <span class="num">106</span>),
 })</code>
         </div>
+
+        <h3>Properties</h3>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Property</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td>Title</td><td>string</td><td>Teks yang ditampilkan di dalam tag</td></tr>
+            <tr><td>Color</td><td>string | hex | Color3</td><td>Warna tag. Bisa nama tema, <code class="il">"#RRGGBB"</code>, atau Color3</td></tr>
+            <tr><td>Icon</td><td>string</td><td>Icon di dalam tag (rbxassetid, lucide:name, solar:name)</td></tr>
+          </tbody>
+        </table></div>
         <div class="page-nav">
           <button class="pnav-btn" onclick="show('window',getSL('window'))">
             <span class="pnav-btn-label">← Previous</span><span class="pnav-btn-name">Window</span>
