@@ -397,7 +397,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
       <a class="nav-link" onclick="show('paragraph',this)">Paragraph</a>
       <a class="nav-link" onclick="show('editparagraph',this)">EditableParagraph</a>
       <a class="nav-link" onclick="show('keybind',this)">Keybind</a>
-      <a class="nav-link" onclick="show('divider',this)">Divider & SubSection</a>
+      <a class="nav-link" onclick="show('divider',this)">Divider &amp; SubSection</a>
     </div>
 
     <div class="nav-group">
@@ -417,6 +417,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
     <div class="content-wrapper">
 
       <!-- ══ LOADSTRING ══ -->
+      <!-- ORDER: 1 of 21 -->
       <div id="page-loadstring" class="page active">
         <div class="page-header">
           <div class="page-title">Loadstring</div>
@@ -446,6 +447,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
       </div>
 
       <!-- ══ WINDOW ══ -->
+      <!-- ORDER: 2 of 21 | prev: loadstring | next: tags -->
       <div id="page-window" class="page">
         <div class="page-header">
           <div class="page-title">Window</div>
@@ -486,7 +488,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
     <span class="var">Keybind</span>           <span class="op">=</span> <span class="var">Enum</span>.<span class="var">KeyCode</span>.<span class="var">RightShift</span>, <span class="cm">-- Tombol toggle UI</span>
     <span class="var">Theme</span>             <span class="op">=</span> <span class="str">"ASSET_ID"</span>,           <span class="cm">-- (opsional) ID gambar background</span>
     <span class="var">ThemeTransparency</span> <span class="op">=</span> <span class="num">0.15</span>,                 <span class="cm">-- Transparansi gambar Theme</span>
-    <span class="var">ShowUser</span>          <span class="op">=</span> <span class="kw">true</span>,                  <span class="cm">-- Tampilkan nama & avatar user</span>
+    <span class="var">ShowUser</span>          <span class="op">=</span> <span class="kw">true</span>,                  <span class="cm">-- Tampilkan nama &amp; avatar user</span>
     <span class="var">Search</span>            <span class="op">=</span> <span class="kw">true</span>,                  <span class="cm">-- Aktifkan search bar di tab</span>
     <span class="var">Config</span> <span class="op">=</span> {
         <span class="var">AutoSave</span> <span class="op">=</span> <span class="kw">true</span>,
@@ -507,14 +509,14 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
               <tr><td>Color</td><td>string | Color3</td><td><code class="il">"Default"</code></td><td>Tema warna UI. Bisa nama tema atau Color3.</td></tr>
               <tr><td>Version</td><td>number</td><td><code class="il">1</code></td><td>Versi config — jika berubah, config lama di-reset.</td></tr>
               <tr><td>Tab Width</td><td>number</td><td><code class="il">120</code></td><td>Lebar panel tab di sisi kiri.</td></tr>
-              <tr><td>Image</td><td>string</td><td>—</td><td>Asset ID (tanpa prefix) untuk icon window & toggle button.</td></tr>
+              <tr><td>Image</td><td>string</td><td>—</td><td>Asset ID (tanpa prefix) untuk icon window &amp; toggle button.</td></tr>
               <tr><td>Configname</td><td>string</td><td><code class="il">"Velaris UI"</code></td><td>Nama folder config yang disimpan.</td></tr>
               <tr><td>Uitransparent</td><td>number</td><td><code class="il">0.15</code></td><td>Transparansi background UI. 0 = solid.</td></tr>
               <tr><td>Size</td><td>UDim2</td><td><code class="il">UDim2.fromOffset(640,400)</code></td><td>Ukuran window.</td></tr>
               <tr><td>Keybind</td><td>Enum.KeyCode</td><td><code class="il">RightShift</code></td><td>Tombol keyboard untuk toggle UI.</td></tr>
               <tr><td>Theme</td><td>string</td><td><code class="il">nil</code></td><td>Asset ID gambar background window (opsional).</td></tr>
               <tr><td>ThemeTransparency</td><td>number</td><td><code class="il">0.15</code></td><td>Transparansi gambar Theme.</td></tr>
-              <tr><td>ShowUser</td><td>boolean</td><td><code class="il">false</code></td><td>Tampilkan avatar & nama user di bawah tab.</td></tr>
+              <tr><td>ShowUser</td><td>boolean</td><td><code class="il">false</code></td><td>Tampilkan avatar &amp; nama user di bawah tab.</td></tr>
               <tr><td>Search</td><td>boolean</td><td><code class="il">false</code></td><td>Aktifkan search bar di atas daftar tab.</td></tr>
               <tr><td>Config.AutoSave</td><td>boolean</td><td><code class="il">true</code></td><td>Otomatis simpan settings ke file.</td></tr>
               <tr><td>Config.AutoLoad</td><td>boolean</td><td><code class="il">true</code></td><td>Otomatis load settings saat start.</td></tr>
@@ -580,6 +582,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
       </div>
 
       <!-- ══ TAGS ══ -->
+      <!-- ORDER: 3 of 21 | prev: window | next: themes -->
       <div id="page-tags" class="page">
         <div class="page-header">
           <div class="page-title">Tags</div>
@@ -630,6 +633,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
       </div>
 
       <!-- ══ THEMES ══ -->
+      <!-- ORDER: 4 of 21 | prev: tags | next: tabs -->
       <div id="page-themes" class="page">
         <div class="page-header">
           <div class="page-title">Themes</div>
@@ -657,6 +661,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
       </div>
 
       <!-- ══ TABS ══ -->
+      <!-- ORDER: 5 of 21 | prev: themes | next: section -->
       <div id="page-tabs" class="page">
         <div class="page-header">
           <div class="page-title">Tabs</div>
@@ -689,12 +694,13 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
 }</code></div>
         </div>
         <div class="page-nav">
-          <button class="pnav-btn" onclick="show('tags',getSL('tags'))"><span class="pnav-btn-label">← Previous</span><span class="pnav-btn-name">Tags</span></button>
+          <button class="pnav-btn" onclick="show('themes',getSL('themes'))"><span class="pnav-btn-label">← Previous</span><span class="pnav-btn-name">Themes</span></button>
           <button class="pnav-btn right" onclick="show('section',getSL('section'))"><span class="pnav-btn-label">Next →</span><span class="pnav-btn-name">Section</span></button>
         </div>
       </div>
 
       <!-- ══ SECTION ══ -->
+      <!-- ORDER: 6 of 21 | prev: tabs | next: notification -->
       <div id="page-section" class="page">
         <div class="page-header">
           <div class="page-title">Section</div>
@@ -728,265 +734,81 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
         </div>
         <div class="page-nav">
           <button class="pnav-btn" onclick="show('tabs',getSL('tabs'))"><span class="pnav-btn-label">← Previous</span><span class="pnav-btn-name">Tabs</span></button>
-          <button class="pnav-btn right" onclick="show('badge',getSL('badge'))"><span class="pnav-btn-label">Next →</span><span class="pnav-btn-name">Badge</span></button>
-        </div>
-      </div>
-
-      <!-- ══ BADGE ══ -->
-      <div id="page-badge" class="page">
-        <div class="page-header">
-          <div class="page-title">Badge</div>
-          <div class="page-subtitle">Property universal — bisa dipakai di semua elemen</div>
-        </div>
-
-        <div class="info-box">
-          ℹ️ <strong>Badge</strong> adalah universal property. Dapat ditambahkan ke <strong>semua elemen</strong>: Button, Toggle, Slider, Dropdown, Input, Panel, Paragraph, dan Keybind.
-        </div>
-
-        <h2>Badge Types</h2>
-        <div class="table-wrap"><table>
-          <thead><tr><th>Value</th><th>Preview</th><th>Penggunaan</th></tr></thead>
-          <tbody>
-            <tr><td>"Bug"</td><td><span class="status-badge sb-bug">Bug</span></td><td>Menandai fitur yang bermasalah</td></tr>
-            <tr><td>"New"</td><td><span class="status-badge sb-new">New</span></td><td>Menandai fitur yang baru ditambahkan</td></tr>
-            <tr><td>"Warning"</td><td><span class="status-badge sb-warning">Warning</span></td><td>Menandai fitur yang perlu perhatian</td></tr>
-            <tr><td>"Fixed"</td><td><span class="status-badge sb-fixed">Fixed</span></td><td>Menandai fitur yang sudah diperbaiki</td></tr>
-            <tr><td>"Beta"</td><td><span class="status-badge sb-beta">Beta</span></td><td>Menandai fitur dalam tahap percobaan</td></tr>
-            <tr><td>"Hot"</td><td><span class="status-badge sb-hot">Hot</span></td><td>Menandai fitur yang sedang populer</td></tr>
-            <tr><td>"Soon"</td><td><span class="status-badge sb-soon">Soon</span></td><td>Menandai fitur yang akan segera hadir</td></tr>
-          </tbody>
-        </table></div>
-
-        <h2>Penggunaan di Semua Elemen</h2>
-        <p>Cukup tambahkan <code class="il">Badge = "..."</code> ke property elemen manapun.</p>
-
-        <h3>Button</h3>
-        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-          <code><span class="var">Sec</span>:<span class="fn">AddButton</span>({
-    <span class="var">Title</span>    <span class="op">=</span> <span class="str">"New Feature"</span>,
-    <span class="var">Badge</span>    <span class="op">=</span> <span class="str">"New"</span>,
-    <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>() <span class="kw">end</span>
-})</code>
-        </div>
-
-        <h3>Toggle</h3>
-        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-          <code><span class="var">Sec</span>:<span class="fn">AddToggle</span>({
-    <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Buggy Toggle"</span>,
-    <span class="var">Badge</span>    <span class="op">=</span> <span class="str">"Bug"</span>,
-    <span class="var">Default</span>  <span class="op">=</span> <span class="kw">false</span>,
-    <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">v</span>) <span class="kw">end</span>
-})</code>
-        </div>
-
-        <h3>Slider</h3>
-        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-          <code><span class="var">Sec</span>:<span class="fn">AddSlider</span>({
-    <span class="var">Title</span>     <span class="op">=</span> <span class="str">"Speed"</span>,
-    <span class="var">Badge</span>     <span class="op">=</span> <span class="str">"Fixed"</span>,
-    <span class="var">Min</span>       <span class="op">=</span> <span class="num">0</span>, <span class="var">Max</span> <span class="op">=</span> <span class="num">100</span>, <span class="var">Default</span> <span class="op">=</span> <span class="num">50</span>,
-    <span class="var">Callback</span>  <span class="op">=</span> <span class="kw">function</span>(<span class="var">v</span>) <span class="kw">end</span>
-})</code>
-        </div>
-
-        <h3>Dropdown</h3>
-        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-          <code><span class="var">Sec</span>:<span class="fn">AddDropdown</span>({
-    <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Select Mode"</span>,
-    <span class="var">Badge</span>    <span class="op">=</span> <span class="str">"Warning"</span>,
-    <span class="var">Options</span>  <span class="op">=</span> { <span class="str">"A"</span>, <span class="str">"B"</span>, <span class="str">"C"</span> },
-    <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">v</span>) <span class="kw">end</span>
-})</code>
-        </div>
-
-        <h3>Input</h3>
-        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-          <code><span class="var">Sec</span>:<span class="fn">AddInput</span>({
-    <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Username"</span>,
-    <span class="var">Badge</span>    <span class="op">=</span> <span class="str">"New"</span>,
-    <span class="var">Default</span>  <span class="op">=</span> <span class="str">""</span>,
-    <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">v</span>) <span class="kw">end</span>
-})</code>
-        </div>
-
-        <h3>Panel</h3>
-        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-          <code><span class="var">Sec</span>:<span class="fn">AddPanel</span>({
-    <span class="var">Title</span>          <span class="op">=</span> <span class="str">"Action Panel"</span>,
-    <span class="var">Badge</span>          <span class="op">=</span> <span class="str">"Bug"</span>,
-    <span class="var">ButtonText</span>     <span class="op">=</span> <span class="str">"Execute"</span>,
-    <span class="var">ButtonCallback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">v</span>) <span class="kw">end</span>
-})</code>
-        </div>
-
-        <h3>Paragraph</h3>
-        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-          <code><span class="var">Sec</span>:<span class="fn">AddParagraph</span>({
-    <span class="var">Title</span>   <span class="op">=</span> <span class="str">"Changelog"</span>,
-    <span class="var">Content</span> <span class="op">=</span> <span class="str">"Fixed crash issue on load."</span>,
-    <span class="var">Badge</span>   <span class="op">=</span> <span class="str">"Fixed"</span>,
-})</code>
-        </div>
-
-        <h3>Keybind</h3>
-        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-          <code><span class="var">Sec</span>:<span class="fn">AddKeybind</span>({
-    <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Toggle ESP"</span>,
-    <span class="var">Badge</span>    <span class="op">=</span> <span class="str">"Warning"</span>,
-    <span class="var">Value</span>    <span class="op">=</span> <span class="str">"RightShift"</span>,
-    <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">key</span>) <span class="kw">end</span>
-})</code>
-        </div>
-
-        <div class="page-nav">
-          <button class="pnav-btn" onclick="show('divider',getSL('divider'))"><span class="pnav-btn-label">← Previous</span><span class="pnav-btn-name">Divider</span></button>
-          <button class="pnav-btn right" onclick="show('locked',getSL('locked'))"><span class="pnav-btn-label">Next →</span><span class="pnav-btn-name">Locked</span></button>
-        </div>
-      </div>
-
-      <!-- ══ LOCKED ══ -->
-      <div id="page-locked" class="page">
-        <div class="page-header">
-          <div class="page-title">Locked</div>
-          <div class="page-subtitle">Property universal — disable elemen di semua tipe</div>
-        </div>
-
-        <div class="info-box">
-          ℹ️ <strong>Locked</strong> adalah universal property. Dapat dipakai di <strong>semua elemen</strong> untuk menonaktifkan interaksi user. Bisa di-set saat deklarasi maupun dinamis dengan <code class="il">:SetLocked(state)</code>.
-        </div>
-
-        <h2>Cara Pakai</h2>
-        <p>Tambahkan <code class="il">Locked = true</code> pada property elemen manapun. Bisa juga dikombinasikan dengan <code class="il">Badge</code>.</p>
-
-        <h3>Button</h3>
-        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-          <code><span class="var">Sec</span>:<span class="fn">AddButton</span>({
-    <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Locked Button"</span>,
-    <span class="var">Locked</span>   <span class="op">=</span> <span class="kw">true</span>,
-    <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>() <span class="kw">end</span>
-})</code>
-        </div>
-
-        <h3>Toggle</h3>
-        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-          <code><span class="var">Sec</span>:<span class="fn">AddToggle</span>({
-    <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Locked Toggle"</span>,
-    <span class="var">Locked</span>   <span class="op">=</span> <span class="kw">true</span>,
-    <span class="var">Default</span>  <span class="op">=</span> <span class="kw">false</span>,
-    <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">v</span>) <span class="kw">end</span>
-})</code>
-        </div>
-
-        <h3>Slider</h3>
-        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-          <code><span class="var">Sec</span>:<span class="fn">AddSlider</span>({
-    <span class="var">Title</span>     <span class="op">=</span> <span class="str">"Locked Slider"</span>,
-    <span class="var">Locked</span>    <span class="op">=</span> <span class="kw">true</span>,
-    <span class="var">Min</span>       <span class="op">=</span> <span class="num">0</span>, <span class="var">Max</span> <span class="op">=</span> <span class="num">100</span>, <span class="var">Default</span> <span class="op">=</span> <span class="num">50</span>,
-    <span class="var">Callback</span>  <span class="op">=</span> <span class="kw">function</span>(<span class="var">v</span>) <span class="kw">end</span>
-})</code>
-        </div>
-
-        <h3>Dropdown</h3>
-        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-          <code><span class="var">Sec</span>:<span class="fn">AddDropdown</span>({
-    <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Locked Dropdown"</span>,
-    <span class="var">Locked</span>   <span class="op">=</span> <span class="kw">true</span>,
-    <span class="var">Options</span>  <span class="op">=</span> { <span class="str">"A"</span>, <span class="str">"B"</span>, <span class="str">"C"</span> },
-    <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">v</span>) <span class="kw">end</span>
-})</code>
-        </div>
-
-        <h3>Input</h3>
-        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-          <code><span class="var">Sec</span>:<span class="fn">AddInput</span>({
-    <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Locked Input"</span>,
-    <span class="var">Locked</span>   <span class="op">=</span> <span class="kw">true</span>,
-    <span class="var">Default</span>  <span class="op">=</span> <span class="str">""</span>,
-    <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">v</span>) <span class="kw">end</span>
-})</code>
-        </div>
-
-        <h3>Panel</h3>
-        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-          <code><span class="var">Sec</span>:<span class="fn">AddPanel</span>({
-    <span class="var">Title</span>          <span class="op">=</span> <span class="str">"Locked Panel"</span>,
-    <span class="var">Locked</span>         <span class="op">=</span> <span class="kw">true</span>,
-    <span class="var">ButtonText</span>     <span class="op">=</span> <span class="str">"Action"</span>,
-    <span class="var">ButtonCallback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">v</span>) <span class="kw">end</span>
-})</code>
-        </div>
-
-        <h3>Paragraph</h3>
-        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-          <code><span class="var">Sec</span>:<span class="fn">AddParagraph</span>({
-    <span class="var">Title</span>   <span class="op">=</span> <span class="str">"Locked Info"</span>,
-    <span class="var">Content</span> <span class="op">=</span> <span class="str">"This element is locked."</span>,
-    <span class="var">Locked</span>  <span class="op">=</span> <span class="kw">true</span>,
-})</code>
-        </div>
-
-        <h3>Keybind</h3>
-        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-          <code><span class="var">Sec</span>:<span class="fn">AddKeybind</span>({
-    <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Locked Keybind"</span>,
-    <span class="var">Locked</span>   <span class="op">=</span> <span class="kw">true</span>,
-    <span class="var">Value</span>    <span class="op">=</span> <span class="str">"RightShift"</span>,
-    <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">key</span>) <span class="kw">end</span>
-})</code>
-        </div>
-
-        <h2>Dynamic Lock — SetLocked</h2>
-        <p>Semua elemen mendukung method <code class="il">:SetLocked(state)</code> dan <code class="il">:GetLocked()</code> untuk mengunci/membuka secara dinamis.</p>
-        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-          <code><span class="cm">-- Contoh pada Toggle (berlaku sama untuk semua elemen)</span>
-<span class="kw">local</span> <span class="var">MyToggle</span> <span class="op">=</span> <span class="var">Sec</span>:<span class="fn">AddToggle</span>({
-    <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Dynamic Lock"</span>,
-    <span class="var">Default</span>  <span class="op">=</span> <span class="kw">false</span>,
-    <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">v</span>) <span class="kw">end</span>
-})
-
-<span class="var">MyToggle</span>:<span class="fn">SetLocked</span>(<span class="kw">true</span>)    <span class="cm">-- kunci elemen</span>
-<span class="var">MyToggle</span>:<span class="fn">SetLocked</span>(<span class="kw">false</span>)   <span class="cm">-- buka elemen</span>
-<span class="fn">print</span>(<span class="var">MyToggle</span>:<span class="fn">GetLocked</span>())  <span class="cm">-- true / false</span></code>
-        </div>
-
-        <h2>Kombinasi Badge + Locked</h2>
-        <p>Kedua property bisa dipakai bersamaan pada elemen apapun.</p>
-        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-          <code><span class="var">Sec</span>:<span class="fn">AddButton</span>({
-    <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Coming Soon"</span>,
-    <span class="var">Badge</span>    <span class="op">=</span> <span class="str">"New"</span>,
-    <span class="var">Locked</span>   <span class="op">=</span> <span class="kw">true</span>,
-    <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>() <span class="kw">end</span>
-})
-
-<span class="var">Sec</span>:<span class="fn">AddToggle</span>({
-    <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Broken Feature"</span>,
-    <span class="var">Badge</span>    <span class="op">=</span> <span class="str">"Bug"</span>,
-    <span class="var">Locked</span>   <span class="op">=</span> <span class="kw">true</span>,
-    <span class="var">Default</span>  <span class="op">=</span> <span class="kw">false</span>,
-    <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">v</span>) <span class="kw">end</span>
-})</code>
-        </div>
-
-        <h2>Universal Functions</h2>
-        <div class="table-wrap"><table>
-          <thead><tr><th>Method</th><th>Type</th><th>Description</th></tr></thead>
-          <tbody>
-            <tr><td>Locked</td><td>boolean</td><td>Property awal, set saat deklarasi elemen</td></tr>
-            <tr><td>:SetLocked(state)</td><td>boolean</td><td>Kunci (<code class="il">true</code>) atau buka (<code class="il">false</code>) elemen secara dinamis</td></tr>
-            <tr><td>:GetLocked()</td><td>→ boolean</td><td>Mengembalikan status kunci elemen saat ini</td></tr>
-          </tbody>
-        </table></div>
-
-        <div class="page-nav">
-          <button class="pnav-btn" onclick="show('badge',getSL('badge'))"><span class="pnav-btn-label">← Previous</span><span class="pnav-btn-name">Badge</span></button>
           <button class="pnav-btn right" onclick="show('notification',getSL('notification'))"><span class="pnav-btn-label">Next →</span><span class="pnav-btn-name">Notification</span></button>
         </div>
       </div>
 
+      <!-- ══ NOTIFICATION ══ -->
+      <!-- ORDER: 7 of 21 | prev: section | next: dialog -->
+      <div id="page-notification" class="page">
+        <div class="page-header">
+          <div class="page-title">Notification</div>
+          <div class="page-subtitle">Tampilkan toast notification ke user</div>
+        </div>
+        <h3>Basic</h3>
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <code><span class="fn">Notify</span>(<span class="str">"Ini isi pesan"</span>)</code>
+        </div>
+        <h3>Lengkap</h3>
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <code><span class="fn">Notify</span>(
+    <span class="str">"Script berhasil diload!"</span>,  <span class="cm">-- Content</span>
+    <span class="num">5</span>,                           <span class="cm">-- Delay (detik)</span>
+    <span class="str">"Default"</span>,                   <span class="cm">-- Color</span>
+    <span class="str">"My Script"</span>,                 <span class="cm">-- Title</span>
+    <span class="str">"Success"</span>,                   <span class="cm">-- Description</span>
+    <span class="str">""</span>                           <span class="cm">-- Icon (opsional)</span>
+)</code>
+        </div>
+        <h3>MakeNotify</h3>
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <code><span class="var">Chloex</span>:<span class="fn">MakeNotify</span>({
+    <span class="var">Title</span>       <span class="op">=</span> <span class="str">"My Script"</span>,
+    <span class="var">Description</span> <span class="op">=</span> <span class="str">"Success"</span>,
+    <span class="var">Content</span>     <span class="op">=</span> <span class="str">"Script telah diload dengan sukses!"</span>,
+    <span class="var">Color</span>       <span class="op">=</span> <span class="str">"Default"</span>,
+    <span class="var">Time</span>        <span class="op">=</span> <span class="num">0.5</span>,
+    <span class="var">Delay</span>       <span class="op">=</span> <span class="num">5</span>,
+    <span class="var">Icon</span>        <span class="op">=</span> <span class="str">""</span>
+})</code>
+        </div>
+        <div class="page-nav">
+          <button class="pnav-btn" onclick="show('section',getSL('section'))"><span class="pnav-btn-label">← Previous</span><span class="pnav-btn-name">Section</span></button>
+          <button class="pnav-btn right" onclick="show('dialog',getSL('dialog'))"><span class="pnav-btn-label">Next →</span><span class="pnav-btn-name">Dialog</span></button>
+        </div>
+      </div>
+
+      <!-- ══ DIALOG ══ -->
+      <!-- ORDER: 8 of 21 | prev: notification | next: button -->
+      <div id="page-dialog" class="page">
+        <div class="page-header">
+          <div class="page-title">Dialog</div>
+          <div class="page-subtitle">Modal konfirmasi dengan tombol pilihan</div>
+        </div>
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <code><span class="var">Chloex</span>:<span class="fn">Dialog</span>({
+    <span class="var">Title</span>   <span class="op">=</span> <span class="str">"Confirmation"</span>,
+    <span class="var">Content</span> <span class="op">=</span> <span class="str">"Are you sure you want to continue?"</span>,
+    <span class="var">Buttons</span> <span class="op">=</span> {
+        {
+            <span class="var">Name</span>     <span class="op">=</span> <span class="str">"Yes"</span>,
+            <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>() <span class="fn">print</span>(<span class="str">"User selected Yes"</span>) <span class="kw">end</span>
+        },
+        {
+            <span class="var">Name</span>     <span class="op">=</span> <span class="str">"No"</span>,
+            <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>() <span class="fn">print</span>(<span class="str">"User selected No"</span>) <span class="kw">end</span>
+        }
+    }
+})</code>
+        </div>
+        <div class="page-nav">
+          <button class="pnav-btn" onclick="show('notification',getSL('notification'))"><span class="pnav-btn-label">← Previous</span><span class="pnav-btn-name">Notification</span></button>
+          <button class="pnav-btn right" onclick="show('button',getSL('button'))"><span class="pnav-btn-label">Next →</span><span class="pnav-btn-name">Button</span></button>
+        </div>
+      </div>
+
       <!-- ══ BUTTON ══ -->
+      <!-- ORDER: 9 of 21 | prev: dialog | next: toggle -->
       <div id="page-button" class="page">
         <div class="page-header">
           <div class="page-title">Button</div>
@@ -1121,12 +943,13 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
           </table></div>
         </div>
         <div class="page-nav">
-          <button class="pnav-btn" onclick="show('section',getSL('section'))"><span class="pnav-btn-label">← Previous</span><span class="pnav-btn-name">Section</span></button>
+          <button class="pnav-btn" onclick="show('dialog',getSL('dialog'))"><span class="pnav-btn-label">← Previous</span><span class="pnav-btn-name">Dialog</span></button>
           <button class="pnav-btn right" onclick="show('toggle',getSL('toggle'))"><span class="pnav-btn-label">Next →</span><span class="pnav-btn-name">Toggle</span></button>
         </div>
       </div>
 
       <!-- ══ TOGGLE ══ -->
+      <!-- ORDER: 10 of 21 | prev: button | next: slider -->
       <div id="page-toggle" class="page">
         <div class="page-header">
           <div class="page-title">Toggle</div>
@@ -1226,6 +1049,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
       </div>
 
       <!-- ══ SLIDER ══ -->
+      <!-- ORDER: 11 of 21 | prev: toggle | next: dropdown -->
       <div id="page-slider" class="page">
         <div class="page-header">
           <div class="page-title">Slider</div>
@@ -1280,6 +1104,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
       </div>
 
       <!-- ══ DROPDOWN ══ -->
+      <!-- ORDER: 12 of 21 | prev: slider | next: input -->
       <div id="page-dropdown" class="page">
         <div class="page-header">
           <div class="page-title">Dropdown</div>
@@ -1335,8 +1160,8 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
               <tr><td>:SetValue(value)</td><td>Alias dari :Set()</td></tr>
               <tr><td>:GetValue()</td><td>Ambil nilai terpilih</td></tr>
               <tr><td>:AddOption(option)</td><td>Tambah satu opsi</td></tr>
-              <tr><td>:Clear()</td><td>Hapus semua opsi & reset</td></tr>
-              <tr><td>:SetValues(list, sel)</td><td>Reset & isi ulang semua opsi</td></tr>
+              <tr><td>:Clear()</td><td>Hapus semua opsi &amp; reset</td></tr>
+              <tr><td>:SetValues(list, sel)</td><td>Reset &amp; isi ulang semua opsi</td></tr>
               <tr><td>:SetLocked(state)</td><td>Kunci/buka elemen</td></tr>
               <tr><td>:GetLocked()</td><td>Cek status kunci</td></tr>
               <tr><td>:SetLockMessage(text)</td><td>Ubah teks pesan di overlay kunci</td></tr>
@@ -1350,6 +1175,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
       </div>
 
       <!-- ══ INPUT ══ -->
+      <!-- ORDER: 13 of 21 | prev: dropdown | next: panel -->
       <div id="page-input" class="page">
         <div class="page-header">
           <div class="page-title">Input</div>
@@ -1374,7 +1200,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
     <span class="var">Default</span>  <span class="op">=</span> <span class="str">"1000"</span>,
     <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">value</span>)
         <span class="kw">local</span> <span class="var">amount</span> <span class="op">=</span> <span class="fn">tonumber</span>(<span class="var">value</span>)
-        <span class="kw">if</span> <span class="var">amount</span> <span class="kw">and</span> <span class="var">amount</span> <span class="op">></span> <span class="num">0</span> <span class="kw">then</span>
+        <span class="kw">if</span> <span class="var">amount</span> <span class="kw">and</span> <span class="var">amount</span> <span class="op">&gt;</span> <span class="num">0</span> <span class="kw">then</span>
             <span class="fn">print</span>(<span class="str">"Adding"</span>, <span class="var">amount</span>, <span class="str">"coins"</span>)
         <span class="kw">else</span>
             <span class="fn">Notify</span>(<span class="str">"Invalid amount!"</span>, <span class="num">3</span>)
@@ -1441,6 +1267,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
       </div>
 
       <!-- ══ PANEL ══ -->
+      <!-- ORDER: 14 of 21 | prev: input | next: paragraph -->
       <div id="page-panel" class="page">
         <div class="page-header">
           <div class="page-title">Panel</div>
@@ -1495,6 +1322,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
       </div>
 
       <!-- ══ PARAGRAPH ══ -->
+      <!-- ORDER: 15 of 21 | prev: panel | next: editparagraph -->
       <div id="page-paragraph" class="page">
         <div class="page-header">
           <div class="page-title">Paragraph</div>
@@ -1662,6 +1490,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
       </div>
 
       <!-- ══ EDITABLEPARAGRAPH ══ -->
+      <!-- ORDER: 16 of 21 | prev: paragraph | next: keybind -->
       <div id="page-editparagraph" class="page">
         <div class="page-header">
           <div class="page-title">EditableParagraph</div>
@@ -1744,6 +1573,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
       </div>
 
       <!-- ══ KEYBIND ══ -->
+      <!-- ORDER: 17 of 21 | prev: editparagraph | next: divider -->
       <div id="page-keybind" class="page">
         <div class="page-header">
           <div class="page-title">Keybind</div>
@@ -1760,96 +1590,287 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
         </div>
         <div class="page-nav">
           <button class="pnav-btn" onclick="show('editparagraph',getSL('editparagraph'))"><span class="pnav-btn-label">← Previous</span><span class="pnav-btn-name">EditableParagraph</span></button>
-          <button class="pnav-btn right" onclick="show('divider',getSL('divider'))"><span class="pnav-btn-label">Next →</span><span class="pnav-btn-name">Divider</span></button>
+          <button class="pnav-btn right" onclick="show('divider',getSL('divider'))"><span class="pnav-btn-label">Next →</span><span class="pnav-btn-name">Divider &amp; SubSection</span></button>
         </div>
       </div>
 
       <!-- ══ DIVIDER ══ -->
+      <!-- ORDER: 18 of 21 | prev: keybind | next: badge -->
       <div id="page-divider" class="page">
         <div class="page-header">
-          <div class="page-title">Divider & SubSection</div>
+          <div class="page-title">Divider &amp; SubSection</div>
           <div class="page-subtitle">Pemisah visual dan sub-label dalam section</div>
         </div>
         <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-          <code><span class="var">Sec</span>.<span class="var">Other</span> <span class="op">=</span> <span class="var">Tabs</span>.<span class="var">Main</span>:<span class="fn">AddSection</span>(<span class="str">"SubSection & Divider"</span>)
+          <code><span class="var">Sec</span>.<span class="var">Other</span> <span class="op">=</span> <span class="var">Tabs</span>.<span class="var">Main</span>:<span class="fn">AddSection</span>(<span class="str">"SubSection &amp; Divider"</span>)
 
 <span class="var">Sec</span>.<span class="var">Other</span>:<span class="fn">AddDivider</span>()
 <span class="var">Sec</span>.<span class="var">Other</span>:<span class="fn">AddSubSection</span>(<span class="str">"Example Sub Section"</span>)</code>
         </div>
         <div class="page-nav">
           <button class="pnav-btn" onclick="show('keybind',getSL('keybind'))"><span class="pnav-btn-label">← Previous</span><span class="pnav-btn-name">Keybind</span></button>
-          <button class="pnav-btn right" onclick="show('notification',getSL('notification'))"><span class="pnav-btn-label">Next →</span><span class="pnav-btn-name">Notification</span></button>
+          <button class="pnav-btn right" onclick="show('badge',getSL('badge'))"><span class="pnav-btn-label">Next →</span><span class="pnav-btn-name">Badge</span></button>
         </div>
       </div>
 
-      <!-- ══ NOTIFICATION ══ -->
-      <div id="page-notification" class="page">
+      <!-- ══ BADGE ══ -->
+      <!-- ORDER: 19 of 21 | prev: divider | next: locked -->
+      <div id="page-badge" class="page">
         <div class="page-header">
-          <div class="page-title">Notification</div>
-          <div class="page-subtitle">Tampilkan toast notification ke user</div>
+          <div class="page-title">Badge</div>
+          <div class="page-subtitle">Property universal — bisa dipakai di semua elemen</div>
         </div>
-        <h3>Basic</h3>
-        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-          <code><span class="fn">Notify</span>(<span class="str">"Ini isi pesan"</span>)</code>
+
+        <div class="info-box">
+          ℹ️ <strong>Badge</strong> adalah universal property. Dapat ditambahkan ke <strong>semua elemen</strong>: Button, Toggle, Slider, Dropdown, Input, Panel, Paragraph, dan Keybind.
         </div>
-        <h3>Lengkap</h3>
+
+        <h2>Badge Types</h2>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Value</th><th>Preview</th><th>Penggunaan</th></tr></thead>
+          <tbody>
+            <tr><td>"Bug"</td><td><span class="status-badge sb-bug">Bug</span></td><td>Menandai fitur yang bermasalah</td></tr>
+            <tr><td>"New"</td><td><span class="status-badge sb-new">New</span></td><td>Menandai fitur yang baru ditambahkan</td></tr>
+            <tr><td>"Warning"</td><td><span class="status-badge sb-warning">Warning</span></td><td>Menandai fitur yang perlu perhatian</td></tr>
+            <tr><td>"Fixed"</td><td><span class="status-badge sb-fixed">Fixed</span></td><td>Menandai fitur yang sudah diperbaiki</td></tr>
+            <tr><td>"Beta"</td><td><span class="status-badge sb-beta">Beta</span></td><td>Menandai fitur dalam tahap percobaan</td></tr>
+            <tr><td>"Hot"</td><td><span class="status-badge sb-hot">Hot</span></td><td>Menandai fitur yang sedang populer</td></tr>
+            <tr><td>"Soon"</td><td><span class="status-badge sb-soon">Soon</span></td><td>Menandai fitur yang akan segera hadir</td></tr>
+          </tbody>
+        </table></div>
+
+        <h2>Penggunaan di Semua Elemen</h2>
+        <p>Cukup tambahkan <code class="il">Badge = "..."</code> ke property elemen manapun.</p>
+
+        <h3>Button</h3>
         <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-          <code><span class="fn">Notify</span>(
-    <span class="str">"Script berhasil diload!"</span>,  <span class="cm">-- Content</span>
-    <span class="num">5</span>,                           <span class="cm">-- Delay (detik)</span>
-    <span class="str">"Default"</span>,                   <span class="cm">-- Color</span>
-    <span class="str">"My Script"</span>,                 <span class="cm">-- Title</span>
-    <span class="str">"Success"</span>,                   <span class="cm">-- Description</span>
-    <span class="str">""</span>                           <span class="cm">-- Icon (opsional)</span>
-)</code>
-        </div>
-        <h3>MakeNotify</h3>
-        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-          <code><span class="var">Chloex</span>:<span class="fn">MakeNotify</span>({
-    <span class="var">Title</span>       <span class="op">=</span> <span class="str">"My Script"</span>,
-    <span class="var">Description</span> <span class="op">=</span> <span class="str">"Success"</span>,
-    <span class="var">Content</span>     <span class="op">=</span> <span class="str">"Script telah diload dengan sukses!"</span>,
-    <span class="var">Color</span>       <span class="op">=</span> <span class="str">"Default"</span>,
-    <span class="var">Time</span>        <span class="op">=</span> <span class="num">0.5</span>,
-    <span class="var">Delay</span>       <span class="op">=</span> <span class="num">5</span>,
-    <span class="var">Icon</span>        <span class="op">=</span> <span class="str">""</span>
+          <code><span class="var">Sec</span>:<span class="fn">AddButton</span>({
+    <span class="var">Title</span>    <span class="op">=</span> <span class="str">"New Feature"</span>,
+    <span class="var">Badge</span>    <span class="op">=</span> <span class="str">"New"</span>,
+    <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>() <span class="kw">end</span>
 })</code>
         </div>
+
+        <h3>Toggle</h3>
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <code><span class="var">Sec</span>:<span class="fn">AddToggle</span>({
+    <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Buggy Toggle"</span>,
+    <span class="var">Badge</span>    <span class="op">=</span> <span class="str">"Bug"</span>,
+    <span class="var">Default</span>  <span class="op">=</span> <span class="kw">false</span>,
+    <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">v</span>) <span class="kw">end</span>
+})</code>
+        </div>
+
+        <h3>Slider</h3>
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <code><span class="var">Sec</span>:<span class="fn">AddSlider</span>({
+    <span class="var">Title</span>     <span class="op">=</span> <span class="str">"Speed"</span>,
+    <span class="var">Badge</span>     <span class="op">=</span> <span class="str">"Fixed"</span>,
+    <span class="var">Min</span>       <span class="op">=</span> <span class="num">0</span>, <span class="var">Max</span> <span class="op">=</span> <span class="num">100</span>, <span class="var">Default</span> <span class="op">=</span> <span class="num">50</span>,
+    <span class="var">Callback</span>  <span class="op">=</span> <span class="kw">function</span>(<span class="var">v</span>) <span class="kw">end</span>
+})</code>
+        </div>
+
+        <h3>Dropdown</h3>
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <code><span class="var">Sec</span>:<span class="fn">AddDropdown</span>({
+    <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Select Mode"</span>,
+    <span class="var">Badge</span>    <span class="op">=</span> <span class="str">"Warning"</span>,
+    <span class="var">Options</span>  <span class="op">=</span> { <span class="str">"A"</span>, <span class="str">"B"</span>, <span class="str">"C"</span> },
+    <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">v</span>) <span class="kw">end</span>
+})</code>
+        </div>
+
+        <h3>Input</h3>
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <code><span class="var">Sec</span>:<span class="fn">AddInput</span>({
+    <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Username"</span>,
+    <span class="var">Badge</span>    <span class="op">=</span> <span class="str">"New"</span>,
+    <span class="var">Default</span>  <span class="op">=</span> <span class="str">""</span>,
+    <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">v</span>) <span class="kw">end</span>
+})</code>
+        </div>
+
+        <h3>Panel</h3>
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <code><span class="var">Sec</span>:<span class="fn">AddPanel</span>({
+    <span class="var">Title</span>          <span class="op">=</span> <span class="str">"Action Panel"</span>,
+    <span class="var">Badge</span>          <span class="op">=</span> <span class="str">"Bug"</span>,
+    <span class="var">ButtonText</span>     <span class="op">=</span> <span class="str">"Execute"</span>,
+    <span class="var">ButtonCallback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">v</span>) <span class="kw">end</span>
+})</code>
+        </div>
+
+        <h3>Paragraph</h3>
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <code><span class="var">Sec</span>:<span class="fn">AddParagraph</span>({
+    <span class="var">Title</span>   <span class="op">=</span> <span class="str">"Changelog"</span>,
+    <span class="var">Content</span> <span class="op">=</span> <span class="str">"Fixed crash issue on load."</span>,
+    <span class="var">Badge</span>   <span class="op">=</span> <span class="str">"Fixed"</span>,
+})</code>
+        </div>
+
+        <h3>Keybind</h3>
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <code><span class="var">Sec</span>:<span class="fn">AddKeybind</span>({
+    <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Toggle ESP"</span>,
+    <span class="var">Badge</span>    <span class="op">=</span> <span class="str">"Warning"</span>,
+    <span class="var">Value</span>    <span class="op">=</span> <span class="str">"RightShift"</span>,
+    <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">key</span>) <span class="kw">end</span>
+})</code>
+        </div>
+
         <div class="page-nav">
-          <button class="pnav-btn" onclick="show('divider',getSL('divider'))"><span class="pnav-btn-label">← Previous</span><span class="pnav-btn-name">Divider</span></button>
-          <button class="pnav-btn right" onclick="show('dialog',getSL('dialog'))"><span class="pnav-btn-label">Next →</span><span class="pnav-btn-name">Dialog</span></button>
+          <button class="pnav-btn" onclick="show('divider',getSL('divider'))"><span class="pnav-btn-label">← Previous</span><span class="pnav-btn-name">Divider &amp; SubSection</span></button>
+          <button class="pnav-btn right" onclick="show('locked',getSL('locked'))"><span class="pnav-btn-label">Next →</span><span class="pnav-btn-name">Locked</span></button>
         </div>
       </div>
 
-      <!-- ══ DIALOG ══ -->
-      <div id="page-dialog" class="page">
+      <!-- ══ LOCKED ══ -->
+      <!-- ORDER: 20 of 21 | prev: badge | next: fullexample -->
+      <div id="page-locked" class="page">
         <div class="page-header">
-          <div class="page-title">Dialog</div>
-          <div class="page-subtitle">Modal konfirmasi dengan tombol pilihan</div>
+          <div class="page-title">Locked</div>
+          <div class="page-subtitle">Property universal — disable elemen di semua tipe</div>
         </div>
+
+        <div class="info-box">
+          ℹ️ <strong>Locked</strong> adalah universal property. Dapat dipakai di <strong>semua elemen</strong> untuk menonaktifkan interaksi user. Bisa di-set saat deklarasi maupun dinamis dengan <code class="il">:SetLocked(state)</code>.
+        </div>
+
+        <h2>Cara Pakai</h2>
+        <p>Tambahkan <code class="il">Locked = true</code> pada property elemen manapun. Bisa juga dikombinasikan dengan <code class="il">Badge</code>.</p>
+
+        <h3>Button</h3>
         <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-          <code><span class="var">Chloex</span>:<span class="fn">Dialog</span>({
-    <span class="var">Title</span>   <span class="op">=</span> <span class="str">"Confirmation"</span>,
-    <span class="var">Content</span> <span class="op">=</span> <span class="str">"Are you sure you want to continue?"</span>,
-    <span class="var">Buttons</span> <span class="op">=</span> {
-        {
-            <span class="var">Name</span>     <span class="op">=</span> <span class="str">"Yes"</span>,
-            <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>() <span class="fn">print</span>(<span class="str">"User selected Yes"</span>) <span class="kw">end</span>
-        },
-        {
-            <span class="var">Name</span>     <span class="op">=</span> <span class="str">"No"</span>,
-            <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>() <span class="fn">print</span>(<span class="str">"User selected No"</span>) <span class="kw">end</span>
-        }
-    }
+          <code><span class="var">Sec</span>:<span class="fn">AddButton</span>({
+    <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Locked Button"</span>,
+    <span class="var">Locked</span>   <span class="op">=</span> <span class="kw">true</span>,
+    <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>() <span class="kw">end</span>
 })</code>
         </div>
+
+        <h3>Toggle</h3>
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <code><span class="var">Sec</span>:<span class="fn">AddToggle</span>({
+    <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Locked Toggle"</span>,
+    <span class="var">Locked</span>   <span class="op">=</span> <span class="kw">true</span>,
+    <span class="var">Default</span>  <span class="op">=</span> <span class="kw">false</span>,
+    <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">v</span>) <span class="kw">end</span>
+})</code>
+        </div>
+
+        <h3>Slider</h3>
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <code><span class="var">Sec</span>:<span class="fn">AddSlider</span>({
+    <span class="var">Title</span>     <span class="op">=</span> <span class="str">"Locked Slider"</span>,
+    <span class="var">Locked</span>    <span class="op">=</span> <span class="kw">true</span>,
+    <span class="var">Min</span>       <span class="op">=</span> <span class="num">0</span>, <span class="var">Max</span> <span class="op">=</span> <span class="num">100</span>, <span class="var">Default</span> <span class="op">=</span> <span class="num">50</span>,
+    <span class="var">Callback</span>  <span class="op">=</span> <span class="kw">function</span>(<span class="var">v</span>) <span class="kw">end</span>
+})</code>
+        </div>
+
+        <h3>Dropdown</h3>
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <code><span class="var">Sec</span>:<span class="fn">AddDropdown</span>({
+    <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Locked Dropdown"</span>,
+    <span class="var">Locked</span>   <span class="op">=</span> <span class="kw">true</span>,
+    <span class="var">Options</span>  <span class="op">=</span> { <span class="str">"A"</span>, <span class="str">"B"</span>, <span class="str">"C"</span> },
+    <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">v</span>) <span class="kw">end</span>
+})</code>
+        </div>
+
+        <h3>Input</h3>
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <code><span class="var">Sec</span>:<span class="fn">AddInput</span>({
+    <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Locked Input"</span>,
+    <span class="var">Locked</span>   <span class="op">=</span> <span class="kw">true</span>,
+    <span class="var">Default</span>  <span class="op">=</span> <span class="str">""</span>,
+    <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">v</span>) <span class="kw">end</span>
+})</code>
+        </div>
+
+        <h3>Panel</h3>
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <code><span class="var">Sec</span>:<span class="fn">AddPanel</span>({
+    <span class="var">Title</span>          <span class="op">=</span> <span class="str">"Locked Panel"</span>,
+    <span class="var">Locked</span>         <span class="op">=</span> <span class="kw">true</span>,
+    <span class="var">ButtonText</span>     <span class="op">=</span> <span class="str">"Action"</span>,
+    <span class="var">ButtonCallback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">v</span>) <span class="kw">end</span>
+})</code>
+        </div>
+
+        <h3>Paragraph</h3>
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <code><span class="var">Sec</span>:<span class="fn">AddParagraph</span>({
+    <span class="var">Title</span>   <span class="op">=</span> <span class="str">"Locked Info"</span>,
+    <span class="var">Content</span> <span class="op">=</span> <span class="str">"This element is locked."</span>,
+    <span class="var">Locked</span>  <span class="op">=</span> <span class="kw">true</span>,
+})</code>
+        </div>
+
+        <h3>Keybind</h3>
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <code><span class="var">Sec</span>:<span class="fn">AddKeybind</span>({
+    <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Locked Keybind"</span>,
+    <span class="var">Locked</span>   <span class="op">=</span> <span class="kw">true</span>,
+    <span class="var">Value</span>    <span class="op">=</span> <span class="str">"RightShift"</span>,
+    <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">key</span>) <span class="kw">end</span>
+})</code>
+        </div>
+
+        <h2>Dynamic Lock — SetLocked</h2>
+        <p>Semua elemen mendukung method <code class="il">:SetLocked(state)</code> dan <code class="il">:GetLocked()</code> untuk mengunci/membuka secara dinamis.</p>
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <code><span class="cm">-- Contoh pada Toggle (berlaku sama untuk semua elemen)</span>
+<span class="kw">local</span> <span class="var">MyToggle</span> <span class="op">=</span> <span class="var">Sec</span>:<span class="fn">AddToggle</span>({
+    <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Dynamic Lock"</span>,
+    <span class="var">Default</span>  <span class="op">=</span> <span class="kw">false</span>,
+    <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">v</span>) <span class="kw">end</span>
+})
+
+<span class="var">MyToggle</span>:<span class="fn">SetLocked</span>(<span class="kw">true</span>)    <span class="cm">-- kunci elemen</span>
+<span class="var">MyToggle</span>:<span class="fn">SetLocked</span>(<span class="kw">false</span>)   <span class="cm">-- buka elemen</span>
+<span class="fn">print</span>(<span class="var">MyToggle</span>:<span class="fn">GetLocked</span>())  <span class="cm">-- true / false</span></code>
+        </div>
+
+        <h2>Kombinasi Badge + Locked</h2>
+        <p>Kedua property bisa dipakai bersamaan pada elemen apapun.</p>
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <code><span class="var">Sec</span>:<span class="fn">AddButton</span>({
+    <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Coming Soon"</span>,
+    <span class="var">Badge</span>    <span class="op">=</span> <span class="str">"New"</span>,
+    <span class="var">Locked</span>   <span class="op">=</span> <span class="kw">true</span>,
+    <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>() <span class="kw">end</span>
+})
+
+<span class="var">Sec</span>:<span class="fn">AddToggle</span>({
+    <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Broken Feature"</span>,
+    <span class="var">Badge</span>    <span class="op">=</span> <span class="str">"Bug"</span>,
+    <span class="var">Locked</span>   <span class="op">=</span> <span class="kw">true</span>,
+    <span class="var">Default</span>  <span class="op">=</span> <span class="kw">false</span>,
+    <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">v</span>) <span class="kw">end</span>
+})</code>
+        </div>
+
+        <h2>Universal Functions</h2>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Method</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td>Locked</td><td>boolean</td><td>Property awal, set saat deklarasi elemen</td></tr>
+            <tr><td>:SetLocked(state)</td><td>boolean</td><td>Kunci (<code class="il">true</code>) atau buka (<code class="il">false</code>) elemen secara dinamis</td></tr>
+            <tr><td>:GetLocked()</td><td>→ boolean</td><td>Mengembalikan status kunci elemen saat ini</td></tr>
+          </tbody>
+        </table></div>
+
         <div class="page-nav">
-          <button class="pnav-btn" onclick="show('notification',getSL('notification'))"><span class="pnav-btn-label">← Previous</span><span class="pnav-btn-name">Notification</span></button>
+          <button class="pnav-btn" onclick="show('badge',getSL('badge'))"><span class="pnav-btn-label">← Previous</span><span class="pnav-btn-name">Badge</span></button>
           <button class="pnav-btn right" onclick="show('fullexample',getSL('fullexample'))"><span class="pnav-btn-label">Next →</span><span class="pnav-btn-name">Full Example</span></button>
         </div>
       </div>
 
       <!-- ══ FULL EXAMPLE ══ -->
+      <!-- ORDER: 21 of 21 | prev: locked | next: (end) -->
       <div id="page-fullexample" class="page">
         <div class="page-header">
           <div class="page-title">Full Example</div>
@@ -1863,7 +1884,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
           💬 Butuh bantuan? Join Discord: <code class="il">discord.gg/ECxQFc97F5</code>
         </div>
         <div class="page-nav">
-          <button class="pnav-btn" onclick="show('dialog',getSL('dialog'))"><span class="pnav-btn-label">← Previous</span><span class="pnav-btn-name">Dialog</span></button>
+          <button class="pnav-btn" onclick="show('locked',getSL('locked'))"><span class="pnav-btn-label">← Previous</span><span class="pnav-btn-name">Locked</span></button>
           <div></div>
         </div>
       </div>
