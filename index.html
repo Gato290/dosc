@@ -671,6 +671,8 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
           <div class="stab active" onclick="stab(this,'tabs-default')">Default Icon</div>
           <div class="stab" onclick="stab(this,'tabs-lucide')">Lucide Icon</div>
           <div class="stab" onclick="stab(this,'tabs-solar')">Solar Icon</div>
+          <div class="stab" onclick="stab(this,'tabs-locked')">Locked</div>
+          <div class="stab" onclick="stab(this,'tabs-fn')">Functions</div>
         </div>
         <div id="tabs-default" class="stab-content active">
           <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
@@ -693,6 +695,58 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
     <span class="var">Tabs2</span> <span class="op">=</span> <span class="var">Window</span>:<span class="fn">AddTab</span>({ <span class="var">Name</span> <span class="op">=</span> <span class="str">"Tabs 2"</span>, <span class="var">Icon</span> <span class="op">=</span> <span class="str">"solar:gamepad"</span> }),
 }</code></div>
         </div>
+
+        <div id="tabs-locked" class="stab-content">
+          <div class="info-box">
+            🔒 <strong>Locked</strong> pada Tab akan menampilkan overlay kunci di atas seluruh konten tab tersebut. Gunakan <code class="il">LockMessage</code> untuk menampilkan pesan kustom (misal: <em>"VIP Only"</em>, <em>"Coming Soon"</em>).
+          </div>
+
+          <h3>Deklarasi dengan Locked</h3>
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <code><span class="cm">-- Tab terkunci saat dibuat</span>
+<span class="kw">local</span> <span class="var">MyTab</span> <span class="op">=</span> <span class="var">Window</span>:<span class="fn">AddTab</span>({
+    <span class="var">Name</span>        <span class="op">=</span> <span class="str">"Combat"</span>,
+    <span class="var">Icon</span>        <span class="op">=</span> <span class="str">"lucide:sword"</span>,
+    <span class="var">Locked</span>      <span class="op">=</span> <span class="kw">true</span>,
+    <span class="var">LockMessage</span> <span class="op">=</span> <span class="str">"VIP Only"</span>,
+})</code>
+          </div>
+
+          <h3>Dynamic Lock</h3>
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <code><span class="cm">-- Buka kunci tab secara dinamis</span>
+<span class="var">MyTab</span>:<span class="fn">SetLocked</span>(<span class="kw">false</span>)
+
+<span class="cm">-- Kunci kembali dengan pesan berbeda</span>
+<span class="var">MyTab</span>:<span class="fn">SetLocked</span>(<span class="kw">true</span>)
+<span class="var">MyTab</span>:<span class="fn">SetLockMessage</span>(<span class="str">"Premium Only"</span>)
+
+<span class="cm">-- Cek status kunci</span>
+<span class="fn">print</span>(<span class="var">MyTab</span>:<span class="fn">GetLocked</span>())  <span class="cm">-- true / false</span></code>
+          </div>
+
+          <h3>Properties</h3>
+          <div class="table-wrap"><table>
+            <thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+            <tbody>
+              <tr><td>Locked</td><td>boolean</td><td><code class="il">false</code></td><td>Kunci tab saat pertama kali dibuat</td></tr>
+              <tr><td>LockMessage</td><td>string</td><td><code class="il">""</code></td><td>Pesan yang ditampilkan di overlay kunci tab</td></tr>
+            </tbody>
+          </table></div>
+        </div>
+
+        <div id="tabs-fn" class="stab-content">
+          <div class="table-wrap"><table>
+            <thead><tr><th>Method</th><th>Return</th><th>Description</th></tr></thead>
+            <tbody>
+              <tr><td>:AddSection(config)</td><td>Section</td><td>Tambah section baru ke dalam tab</td></tr>
+              <tr><td>:SetLocked(state)</td><td>—</td><td>Kunci (<code class="il">true</code>) atau buka (<code class="il">false</code>) tab</td></tr>
+              <tr><td>:SetLockMessage(text)</td><td>—</td><td>Ubah pesan overlay kunci tab</td></tr>
+              <tr><td>:GetLocked()</td><td>boolean</td><td>Cek status kunci tab saat ini</td></tr>
+            </tbody>
+          </table></div>
+        </div>
+
         <div class="page-nav">
           <button class="pnav-btn" onclick="show('themes',getSL('themes'))"><span class="pnav-btn-label">← Previous</span><span class="pnav-btn-name">Themes</span></button>
           <button class="pnav-btn right" onclick="show('section',getSL('section'))"><span class="pnav-btn-label">Next →</span><span class="pnav-btn-name">Section</span></button>
@@ -711,6 +765,8 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
           <div class="stab active" onclick="stab(this,'sec-local')">Frugal Local</div>
           <div class="stab" onclick="stab(this,'sec-basic')">Basic</div>
           <div class="stab" onclick="stab(this,'sec-full')">Full</div>
+          <div class="stab" onclick="stab(this,'sec-locked')">Locked</div>
+          <div class="stab" onclick="stab(this,'sec-fn')">Functions</div>
         </div>
         <div id="sec-local" class="stab-content active">
           <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
@@ -732,6 +788,92 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
     <span class="var">Open</span>           <span class="op">=</span> <span class="kw">true</span>
 })</code></div>
         </div>
+
+        <div id="sec-locked" class="stab-content">
+          <div class="info-box">
+            🔒 <strong>Locked</strong> pada Section akan menampilkan overlay kunci di atas seluruh elemen di dalam section tersebut. Gunakan <code class="il">LockMessage</code> untuk pesan kustom (misal: <em>"Coming Soon"</em>, <em>"Premium Only"</em>).
+          </div>
+
+          <h3>Deklarasi dengan Locked</h3>
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <code><span class="cm">-- Section terkunci saat dibuat</span>
+<span class="kw">local</span> <span class="var">MySection</span> <span class="op">=</span> <span class="var">MyTab</span>:<span class="fn">AddSection</span>({
+    <span class="var">Title</span>       <span class="op">=</span> <span class="str">"Aimbot"</span>,
+    <span class="var">Icon</span>        <span class="op">=</span> <span class="str">"lucide:crosshair"</span>,
+    <span class="var">Open</span>        <span class="op">=</span> <span class="kw">true</span>,
+    <span class="var">Locked</span>      <span class="op">=</span> <span class="kw">true</span>,
+    <span class="var">LockMessage</span> <span class="op">=</span> <span class="str">"Coming Soon"</span>,
+})</code>
+          </div>
+
+          <h3>Dynamic Lock</h3>
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <code><span class="cm">-- Buka kunci section secara dinamis</span>
+<span class="var">MySection</span>:<span class="fn">SetLocked</span>(<span class="kw">false</span>)
+
+<span class="cm">-- Kunci kembali dengan pesan berbeda</span>
+<span class="var">MySection</span>:<span class="fn">SetLocked</span>(<span class="kw">true</span>)
+<span class="var">MySection</span>:<span class="fn">SetLockMessage</span>(<span class="str">"Updated!"</span>)
+
+<span class="cm">-- Cek status kunci</span>
+<span class="fn">print</span>(<span class="var">MySection</span>:<span class="fn">GetLocked</span>())  <span class="cm">-- true / false</span></code>
+          </div>
+
+          <h3>Contoh Use Case</h3>
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <code><span class="cm">-- Tab VIP: terkunci by default</span>
+<span class="kw">local</span> <span class="var">TabVIP</span> <span class="op">=</span> <span class="var">Window</span>:<span class="fn">AddTab</span>({
+    <span class="var">Name</span>        <span class="op">=</span> <span class="str">"VIP"</span>,
+    <span class="var">Icon</span>        <span class="op">=</span> <span class="str">"lucide:crown"</span>,
+    <span class="var">Locked</span>      <span class="op">=</span> <span class="kw">true</span>,
+    <span class="var">LockMessage</span> <span class="op">=</span> <span class="str">"VIP Only"</span>,
+})
+
+<span class="cm">-- Section di dalam tab (terkunci terpisah)</span>
+<span class="kw">local</span> <span class="var">SecAimbot</span> <span class="op">=</span> <span class="var">TabVIP</span>:<span class="fn">AddSection</span>({
+    <span class="var">Title</span>       <span class="op">=</span> <span class="str">"Aimbot"</span>,
+    <span class="var">Locked</span>      <span class="op">=</span> <span class="kw">true</span>,
+    <span class="var">LockMessage</span> <span class="op">=</span> <span class="str">"Coming Soon"</span>,
+})
+
+<span class="cm">-- Unlock jika user terverifikasi</span>
+<span class="kw">if</span> <span class="var">isVIP</span> <span class="kw">then</span>
+    <span class="var">TabVIP</span>:<span class="fn">SetLocked</span>(<span class="kw">false</span>)
+    <span class="var">SecAimbot</span>:<span class="fn">SetLocked</span>(<span class="kw">false</span>)
+<span class="kw">end</span></code>
+          </div>
+
+          <h3>Properties</h3>
+          <div class="table-wrap"><table>
+            <thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+            <tbody>
+              <tr><td>Locked</td><td>boolean</td><td><code class="il">false</code></td><td>Kunci section saat pertama kali dibuat</td></tr>
+              <tr><td>LockMessage</td><td>string</td><td><code class="il">""</code></td><td>Pesan yang ditampilkan di overlay kunci section</td></tr>
+            </tbody>
+          </table></div>
+        </div>
+
+        <div id="sec-fn" class="stab-content">
+          <div class="table-wrap"><table>
+            <thead><tr><th>Method</th><th>Return</th><th>Description</th></tr></thead>
+            <tbody>
+              <tr><td>:AddButton(config)</td><td>Button</td><td>Tambah button ke section</td></tr>
+              <tr><td>:AddToggle(config)</td><td>Toggle</td><td>Tambah toggle ke section</td></tr>
+              <tr><td>:AddSlider(config)</td><td>Slider</td><td>Tambah slider ke section</td></tr>
+              <tr><td>:AddDropdown(config)</td><td>Dropdown</td><td>Tambah dropdown ke section</td></tr>
+              <tr><td>:AddInput(config)</td><td>Input</td><td>Tambah input ke section</td></tr>
+              <tr><td>:AddPanel(config)</td><td>Panel</td><td>Tambah panel ke section</td></tr>
+              <tr><td>:AddParagraph(config)</td><td>Paragraph</td><td>Tambah paragraph ke section</td></tr>
+              <tr><td>:AddKeybind(config)</td><td>Keybind</td><td>Tambah keybind ke section</td></tr>
+              <tr><td>:AddDivider()</td><td>—</td><td>Tambah garis pemisah</td></tr>
+              <tr><td>:AddSubSection(text)</td><td>—</td><td>Tambah sub-label teks</td></tr>
+              <tr><td>:SetLocked(state)</td><td>—</td><td>Kunci (<code class="il">true</code>) atau buka (<code class="il">false</code>) section</td></tr>
+              <tr><td>:SetLockMessage(text)</td><td>—</td><td>Ubah pesan overlay kunci section</td></tr>
+              <tr><td>:GetLocked()</td><td>boolean</td><td>Cek status kunci section saat ini</td></tr>
+            </tbody>
+          </table></div>
+        </div>
+
         <div class="page-nav">
           <button class="pnav-btn" onclick="show('tabs',getSL('tabs'))"><span class="pnav-btn-label">← Previous</span><span class="pnav-btn-name">Tabs</span></button>
           <button class="pnav-btn right" onclick="show('notification',getSL('notification'))"><span class="pnav-btn-label">Next →</span><span class="pnav-btn-name">Notification</span></button>
