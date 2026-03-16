@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>VelarisUI — Documentation</title>
 <link rel="icon" href="https://i.imgur.com/0o1FfI0.gif" type="image/gif"/>
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
@@ -333,167 +333,9 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
 .sb-beta   {background:rgba(140,80,255,0.1);color:#a78bfa;border:1px solid rgba(140,80,255,0.2)}
 .sb-hot    {background:rgba(255,80,80,0.1);color:#f87171;border:1px solid rgba(255,80,80,0.2)}
 .sb-soon   {background:rgba(100,160,255,0.1);color:#93c5fd;border:1px solid rgba(100,160,255,0.2)}
-/* PLAYGROUND */
-.playground {
-  border:1px solid var(--border);
-  border-radius:var(--radius);
-  overflow:hidden;
-  margin:0 0 28px;
-}
-.playground-header {
-  display:flex;align-items:center;justify-content:space-between;
-  padding:10px 14px;
-  background:var(--bg-secondary);
-  border-bottom:1px solid var(--border);
-}
-.playground-label {
-  font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;
-  color:var(--text-subtle);
-}
-.playground-preview {
-  background:var(--bg-card);
-  padding:24px 20px;
-  min-height:80px;
-  display:flex;flex-direction:column;gap:10px;
-  align-items:stretch;
-}
-.playground-controls {
-  display:flex;flex-wrap:wrap;gap:10px;
-  padding:14px 16px;
-  border-top:1px solid var(--border);
-  background:var(--bg);
-}
-.pg-ctrl {
-  display:flex;flex-direction:column;gap:4px;
-  flex:1;min-width:120px;max-width:220px;
-}
-.pg-ctrl-label {
-  font-size:11px;font-weight:600;color:var(--text-subtle);
-  text-transform:uppercase;letter-spacing:.6px;
-}
-.pg-ctrl input[type="text"],
-.pg-ctrl input[type="number"],
-.pg-ctrl select {
-  background:var(--bg-secondary);
-  border:1px solid var(--border);
-  border-radius:6px;
-  color:var(--text);
-  font-family:var(--font);
-  font-size:12px;
-  padding:5px 8px;
-  outline:none;
-  transition:border-color .15s;
-  width:100%;
-}
-.pg-ctrl input:focus,
-.pg-ctrl select:focus {
-  border-color:var(--border-strong);
-}
-.pg-ctrl-toggle {
-  display:flex;align-items:center;gap:8px;
-  height:28px;
-}
-/* ── Mock UI Elements ── */
-.mock-row {
-  background:rgba(255,255,255,0.055);
-  border-radius:6px;
-  padding:10px 14px;
-  display:flex;align-items:center;justify-content:space-between;
-  gap:12px;
-  transition:background .15s;
-  position:relative;
-  overflow:hidden;
-}
-.mock-row:hover { background:rgba(255,255,255,0.075); }
-[data-theme="light"] .mock-row { background:rgba(0,0,0,0.04); }
-[data-theme="light"] .mock-row:hover { background:rgba(0,0,0,0.065); }
-.mock-label-wrap { display:flex;flex-direction:column;gap:2px;flex:1;min-width:0; }
-.mock-title { font-size:13px;font-weight:600;color:var(--text); }
-.mock-subtitle { font-size:11.5px;color:var(--text-muted); }
-/* button */
-.mock-btn {
-  background:rgba(255,255,255,0.08);
-  border:1px solid var(--border);
-  border-radius:5px;
-  color:var(--text);
-  font-size:12px;font-weight:600;font-family:var(--font);
-  padding:5px 16px;cursor:pointer;transition:all .12s;
-  white-space:nowrap;
-}
-.mock-btn:hover { background:rgba(255,255,255,0.14); border-color:var(--border-strong); }
-.mock-btn:active { transform:scale(.96); }
-[data-theme="light"] .mock-btn { background:rgba(0,0,0,0.05);color:#111; }
-/* toggle pill */
-.mock-toggle {
-  width:36px;height:20px;border-radius:99px;
-  border:none;cursor:pointer;
-  background:rgba(255,255,255,0.12);
-  position:relative;transition:background .2s;flex-shrink:0;
-}
-.mock-toggle.on { background:#4ade80; }
-.mock-toggle::after {
-  content:'';position:absolute;top:3px;left:3px;
-  width:14px;height:14px;border-radius:50%;
-  background:#fff;transition:transform .2s;
-}
-.mock-toggle.on::after { transform:translateX(16px); }
-/* slider */
-.mock-slider-wrap { display:flex;align-items:center;gap:8px;width:140px; }
-.mock-slider {
-  flex:1;-webkit-appearance:none;appearance:none;
-  height:4px;border-radius:99px;
-  background:rgba(255,255,255,0.12);
-  outline:none;cursor:pointer;
-}
-.mock-slider::-webkit-slider-thumb {
-  -webkit-appearance:none;
-  width:12px;height:12px;border-radius:50%;
-  background:var(--text);cursor:pointer;
-}
-.mock-slider-val {
-  font-size:11px;font-weight:700;color:var(--text-muted);
-  min-width:26px;text-align:right;
-}
-/* dropdown */
-.mock-dropdown {
-  background:rgba(255,255,255,0.07);
-  border:1px solid var(--border);
-  border-radius:5px;
-  color:var(--text);font-size:12px;font-weight:600;font-family:var(--font);
-  padding:5px 10px;cursor:pointer;
-  appearance:none;-webkit-appearance:none;
-  padding-right:26px;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23888' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
-  background-repeat:no-repeat;
-  background-position:right 8px center;
-  background-size:10px;
-  min-width:110px;
-}
-/* input */
-.mock-input {
-  flex:1;background:rgba(255,255,255,0.07);
-  border:1px solid var(--border);border-radius:5px;
-  color:var(--text);font-size:12px;font-family:var(--font);
-  padding:5px 9px;outline:none;transition:border-color .15s;
-}
-.mock-input:focus { border-color:var(--border-strong); }
-/* color swatch */
-.mock-swatch {
-  width:30px;height:18px;border-radius:4px;
-  border:1.5px solid rgba(255,255,255,0.15);
-  cursor:pointer;flex-shrink:0;
-}
-/* log line */
-.pg-log {
-  font-size:11.5px;font-family:var(--font-mono);
-  color:#4ade80;padding:6px 12px;
-  background:rgba(74,222,128,0.05);
-  border-radius:5px;border:1px solid rgba(74,222,128,0.12);
-  min-height:28px;word-break:break-all;
-  transition:all .2s;
-}
 
-
+</style>
+</head>
 <body>
 
 <!-- NAV -->
@@ -989,38 +831,6 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
           <div class="page-title">Button</div>
           <div class="page-subtitle">Tambahkan tombol interaktif ke section</div>
         </div>
-
-        <h2>Playground</h2>
-        <div class="playground">
-          <div class="playground-header">
-            <span class="playground-label">Preview</span>
-          </div>
-          <div class="playground-preview" id="pg-btn-preview">
-            <!-- rendered by JS -->
-          </div>
-          <div class="playground-controls">
-            <div class="pg-ctrl">
-              <span class="pg-ctrl-label">Button text</span>
-              <input type="text" id="pgb-title" value="Button" oninput="renderBtnPG()"/>
-            </div>
-            <div class="pg-ctrl">
-              <span class="pg-ctrl-label">Sub button text</span>
-              <input type="text" id="pgb-sub" placeholder="Sub button" oninput="renderBtnPG()"/>
-            </div>
-            <div class="pg-ctrl">
-              <span class="pg-ctrl-label">Sub button</span>
-              <div class="pg-ctrl-toggle">
-                <button class="mock-toggle" id="pgb-sub-toggle" onclick="this.classList.toggle('on');renderBtnPG()"></button>
-                <span style="font-size:12px;color:var(--text-muted)" id="pgb-sub-label">Off</span>
-              </div>
-            </div>
-            <div class="pg-ctrl" style="flex:2;max-width:100%">
-              <span class="pg-ctrl-label">Output</span>
-              <div class="pg-log" id="pgb-log">Klik button untuk melihat output...</div>
-            </div>
-          </div>
-        </div>
-
         <div class="subtabs">
           <div class="stab active" onclick="stab(this,'btn-single')">Single</div>
           <div class="stab" onclick="stab(this,'btn-dual')">Dual</div>
@@ -1087,40 +897,6 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
           <div class="page-title">Toggle</div>
           <div class="page-subtitle">Switch on/off boolean</div>
         </div>
-
-        <h2>Playground</h2>
-        <div class="playground">
-          <div class="playground-header"><span class="playground-label">Preview</span></div>
-          <div class="playground-preview" id="pg-tog-preview"></div>
-          <div class="playground-controls">
-            <div class="pg-ctrl">
-              <span class="pg-ctrl-label">Title</span>
-              <input type="text" id="pgt-title" value="Example Toggle" oninput="renderTogPG()"/>
-            </div>
-            <div class="pg-ctrl">
-              <span class="pg-ctrl-label">Subtitle</span>
-              <input type="text" id="pgt-sub" placeholder="Subtitle (opsional)" oninput="renderTogPG()"/>
-            </div>
-            <div class="pg-ctrl">
-              <span class="pg-ctrl-label">Type</span>
-              <select id="pgt-type" onchange="renderTogPG()">
-                <option value="toggle">Toggle</option>
-                <option value="checkbox">Checkbox</option>
-              </select>
-            </div>
-            <div class="pg-ctrl">
-              <span class="pg-ctrl-label">Default</span>
-              <div class="pg-ctrl-toggle">
-                <button class="mock-toggle" id="pgt-def" onclick="this.classList.toggle('on');renderTogPG()"></button>
-              </div>
-            </div>
-            <div class="pg-ctrl" style="flex:2;max-width:100%">
-              <span class="pg-ctrl-label">Output</span>
-              <div class="pg-log" id="pgt-log">Klik toggle untuk melihat output...</div>
-            </div>
-          </div>
-        </div>
-
         <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
           <code><span class="var">Sec</span>.<span class="var">Toggle</span>:<span class="fn">AddToggle</span>({
     <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Example"</span>,
@@ -1146,35 +922,6 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
           <div class="page-title">Slider</div>
           <div class="page-subtitle">Input nilai numerik dengan range</div>
         </div>
-
-        <h2>Playground</h2>
-        <div class="playground">
-          <div class="playground-header"><span class="playground-label">Preview</span></div>
-          <div class="playground-preview" id="pg-sl-preview"></div>
-          <div class="playground-controls">
-            <div class="pg-ctrl">
-              <span class="pg-ctrl-label">Title</span>
-              <input type="text" id="pgsl-title" value="Speed" oninput="renderSlPG()"/>
-            </div>
-            <div class="pg-ctrl">
-              <span class="pg-ctrl-label">Min</span>
-              <input type="number" id="pgsl-min" value="0" oninput="renderSlPG()"/>
-            </div>
-            <div class="pg-ctrl">
-              <span class="pg-ctrl-label">Max</span>
-              <input type="number" id="pgsl-max" value="100" oninput="renderSlPG()"/>
-            </div>
-            <div class="pg-ctrl">
-              <span class="pg-ctrl-label">Default</span>
-              <input type="number" id="pgsl-def" value="50" oninput="renderSlPG()"/>
-            </div>
-            <div class="pg-ctrl" style="flex:2;max-width:100%">
-              <span class="pg-ctrl-label">Output</span>
-              <div class="pg-log" id="pgsl-log">Geser slider untuk melihat output...</div>
-            </div>
-          </div>
-        </div>
-
         <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
           <code><span class="var">Sec</span>.<span class="var">Slider</span>:<span class="fn">AddSlider</span>({
     <span class="var">Title</span>     <span class="op">=</span> <span class="str">"Example"</span>,
@@ -1199,27 +946,6 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
           <div class="page-title">Dropdown</div>
           <div class="page-subtitle">Pilih satu atau banyak opsi dari daftar</div>
         </div>
-
-        <h2>Playground</h2>
-        <div class="playground">
-          <div class="playground-header"><span class="playground-label">Preview</span></div>
-          <div class="playground-preview" id="pg-dd-preview"></div>
-          <div class="playground-controls">
-            <div class="pg-ctrl">
-              <span class="pg-ctrl-label">Title</span>
-              <input type="text" id="pgdd-title" value="Select Mode" oninput="renderDdPG()"/>
-            </div>
-            <div class="pg-ctrl" style="flex:2">
-              <span class="pg-ctrl-label">Options (pisah koma)</span>
-              <input type="text" id="pgdd-opts" value="Option A, Option B, Option C" oninput="renderDdPG()"/>
-            </div>
-            <div class="pg-ctrl" style="flex:2;max-width:100%">
-              <span class="pg-ctrl-label">Output</span>
-              <div class="pg-log" id="pgdd-log">Pilih opsi untuk melihat output...</div>
-            </div>
-          </div>
-        </div>
-
         <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
           <code><span class="var">Sec</span>.<span class="var">Dropdwon</span>:<span class="fn">AddDropdown</span>({
     <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Example"</span>,
@@ -1241,27 +967,6 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
           <div class="page-title">Input</div>
           <div class="page-subtitle">Field input teks untuk user</div>
         </div>
-
-        <h2>Playground</h2>
-        <div class="playground">
-          <div class="playground-header"><span class="playground-label">Preview</span></div>
-          <div class="playground-preview" id="pg-inp-preview"></div>
-          <div class="playground-controls">
-            <div class="pg-ctrl">
-              <span class="pg-ctrl-label">Title</span>
-              <input type="text" id="pginp-title" value="Username" oninput="renderInpPG()"/>
-            </div>
-            <div class="pg-ctrl">
-              <span class="pg-ctrl-label">Placeholder</span>
-              <input type="text" id="pginp-ph" value="Enter your username..." oninput="renderInpPG()"/>
-            </div>
-            <div class="pg-ctrl" style="flex:2;max-width:100%">
-              <span class="pg-ctrl-label">Output</span>
-              <div class="pg-log" id="pginp-log">Ketik di input untuk melihat output...</div>
-            </div>
-          </div>
-        </div>
-
         <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
           <code><span class="var">Sec</span>.<span class="var">Input</span>:<span class="fn">AddInput</span>({
     <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Username"</span>,
@@ -1367,31 +1072,6 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
         <div class="info-box">
           ℹ️ ColorPicker dibuat lewat <code class="il">:AddColorpicker(cfg)</code> pada Section. Panel picker muncul sebagai floating window yang bisa di-drag, lengkap dengan Saturation Map, Hue Bar, Alpha Bar, dan Hex / RGB input.
         </div>
-
-        <h2>Playground</h2>
-        <div class="playground">
-          <div class="playground-header"><span class="playground-label">Preview</span></div>
-          <div class="playground-preview" id="pg-cp-preview"></div>
-          <div class="playground-controls">
-            <div class="pg-ctrl">
-              <span class="pg-ctrl-label">Title</span>
-              <input type="text" id="pgcp-title" value="Background Color" oninput="renderCpPG()"/>
-            </div>
-            <div class="pg-ctrl">
-              <span class="pg-ctrl-label">Content</span>
-              <input type="text" id="pgcp-content" placeholder="Deskripsi opsional..." oninput="renderCpPG()"/>
-            </div>
-            <div class="pg-ctrl">
-              <span class="pg-ctrl-label">Default Color</span>
-              <input type="color" id="pgcp-color" value="#00d0ff" style="height:30px;padding:2px 4px;border-radius:6px;border:1px solid var(--border);background:var(--bg-secondary);cursor:pointer;width:100%" oninput="renderCpPG()"/>
-            </div>
-            <div class="pg-ctrl" style="flex:2;max-width:100%">
-              <span class="pg-ctrl-label">Output</span>
-              <div class="pg-log" id="pgcp-log">Klik swatch untuk simulasi open picker...</div>
-            </div>
-          </div>
-        </div>
-
 
         <div class="subtabs">
           <div class="stab active" onclick="stab(this,'cp-basic')">Basic</div>
@@ -1610,166 +1290,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
 </div>
 
 <script>
-// ══ PLAYGROUND RENDERERS ══
-
-// ── Button ──
-function renderBtnPG() {
-  const title    = document.getElementById('pgb-title')?.value || 'Button';
-  const subInput = document.getElementById('pgb-sub')?.value || '';
-  const subOn    = document.getElementById('pgb-sub-toggle')?.classList.contains('on');
-  const lbl      = document.getElementById('pgb-sub-label');
-  if (lbl) lbl.textContent = subOn ? 'On' : 'Off';
-  const preview  = document.getElementById('pg-btn-preview');
-  if (!preview) return;
-
-  const hasSub = subOn && subInput.trim() !== '';
-  preview.innerHTML = `
-    <div class="mock-row">
-      <div class="mock-label-wrap"><span class="mock-title">${escHtml(title)}</span></div>
-      <div style="display:flex;gap:6px;flex-shrink:0">
-        ${hasSub ? `<button class="mock-btn" style="background:rgba(255,255,255,0.05);color:var(--text-muted)" onclick="pgBtnLog('${escJs(subInput)}')">${escHtml(subInput)}</button>` : ''}
-        <button class="mock-btn" onclick="pgBtnLog('${escJs(title)}')">${escHtml(title)}</button>
-      </div>
-    </div>`;
-}
-function pgBtnLog(t) {
-  const el = document.getElementById('pgb-log');
-  if (el) { el.textContent = `Callback fired: "${t}"`; flash(el); }
-}
-
-// ── Toggle ──
-let togState = false;
-function renderTogPG() {
-  const title = document.getElementById('pgt-title')?.value || 'Toggle';
-  const sub   = document.getElementById('pgt-sub')?.value || '';
-  const type  = document.getElementById('pgt-type')?.value || 'toggle';
-  const defOn = document.getElementById('pgt-def')?.classList.contains('on');
-  togState = defOn;
-  const preview = document.getElementById('pg-tog-preview');
-  if (!preview) return;
-  const ctrl = type === 'checkbox'
-    ? `<div id="pg-tog-ctrl" onclick="togglePG()" style="width:18px;height:18px;border-radius:4px;border:1.5px solid ${togState?'#4ade80':'rgba(255,255,255,0.25)'};background:${togState?'#4ade80':'transparent'};cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;flex-shrink:0">${togState?'<svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#111" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>':''}</div>`
-    : `<button id="pg-tog-ctrl" class="mock-toggle ${togState?'on':''}" onclick="togglePG()"></button>`;
-  preview.innerHTML = `
-    <div class="mock-row">
-      <div class="mock-label-wrap">
-        <span class="mock-title">${escHtml(title)}</span>
-        ${sub ? `<span class="mock-subtitle">${escHtml(sub)}</span>` : ''}
-      </div>
-      ${ctrl}
-    </div>`;
-}
-function togglePG() {
-  togState = !togState;
-  const log = document.getElementById('pgt-log');
-  if (log) { log.textContent = `Callback(value = ${togState})`; flash(log); }
-  renderTogPG();
-}
-
-// ── Slider ──
-function renderSlPG() {
-  const title = document.getElementById('pgsl-title')?.value || 'Speed';
-  const min   = parseFloat(document.getElementById('pgsl-min')?.value) || 0;
-  const max   = parseFloat(document.getElementById('pgsl-max')?.value) || 100;
-  const def   = Math.min(max, Math.max(min, parseFloat(document.getElementById('pgsl-def')?.value) || 50));
-  const preview = document.getElementById('pg-sl-preview');
-  if (!preview) return;
-  preview.innerHTML = `
-    <div class="mock-row">
-      <div class="mock-label-wrap"><span class="mock-title">${escHtml(title)}</span></div>
-      <div class="mock-slider-wrap">
-        <input class="mock-slider" type="range" min="${min}" max="${max}" value="${def}"
-          oninput="pgSlLog(this.value);document.getElementById('pg-sl-val').textContent=this.value"
-          style="background:linear-gradient(to right, var(--text) 0%, var(--text) ${((def-min)/(max-min))*100}%, rgba(255,255,255,0.12) ${((def-min)/(max-min))*100}%, rgba(255,255,255,0.12) 100%)"
-        />
-        <span class="mock-slider-val" id="pg-sl-val">${def}</span>
-      </div>
-    </div>`;
-  // re-wire dynamic bg
-  const sl = preview.querySelector('.mock-slider');
-  if (sl) sl.addEventListener('input', function() {
-    const pct = ((this.value - min) / (max - min)) * 100;
-    this.style.background = `linear-gradient(to right, var(--text) 0%, var(--text) ${pct}%, rgba(255,255,255,0.12) ${pct}%, rgba(255,255,255,0.12) 100%)`;
-  });
-}
-function pgSlLog(v) {
-  const el = document.getElementById('pgsl-log');
-  if (el) { el.textContent = `Callback(value = ${v})`; flash(el); }
-}
-
-// ── Dropdown ──
-function renderDdPG() {
-  const title = document.getElementById('pgdd-title')?.value || 'Select';
-  const raw   = document.getElementById('pgdd-opts')?.value || '';
-  const opts  = raw.split(',').map(s => s.trim()).filter(Boolean);
-  const preview = document.getElementById('pg-dd-preview');
-  if (!preview) return;
-  const optHtml = opts.map(o => `<option value="${escHtml(o)}">${escHtml(o)}</option>`).join('');
-  preview.innerHTML = `
-    <div class="mock-row">
-      <div class="mock-label-wrap"><span class="mock-title">${escHtml(title)}</span></div>
-      <select class="mock-dropdown" onchange="pgDdLog(this.value)">${optHtml}</select>
-    </div>`;
-}
-function pgDdLog(v) {
-  const el = document.getElementById('pgdd-log');
-  if (el) { el.textContent = `Callback(value = "${v}")`; flash(el); }
-}
-
-// ── Input ──
-function renderInpPG() {
-  const title = document.getElementById('pginp-title')?.value || 'Input';
-  const ph    = document.getElementById('pginp-ph')?.value || '';
-  const preview = document.getElementById('pg-inp-preview');
-  if (!preview) return;
-  preview.innerHTML = `
-    <div class="mock-row">
-      <div class="mock-label-wrap"><span class="mock-title">${escHtml(title)}</span></div>
-      <input class="mock-input" placeholder="${escHtml(ph)}" oninput="pgInpLog(this.value)" style="max-width:200px"/>
-    </div>`;
-}
-function pgInpLog(v) {
-  const el = document.getElementById('pginp-log');
-  if (el) { el.textContent = `Callback(value = "${v}")`; flash(el); }
-}
-
-// ── ColorPicker ──
-function renderCpPG() {
-  const title   = document.getElementById('pgcp-title')?.value || 'Color';
-  const content = document.getElementById('pgcp-content')?.value || '';
-  const color   = document.getElementById('pgcp-color')?.value || '#00d0ff';
-  const preview = document.getElementById('pg-cp-preview');
-  if (!preview) return;
-  preview.innerHTML = `
-    <div class="mock-row">
-      <div class="mock-label-wrap">
-        <span class="mock-title">${escHtml(title)}</span>
-        ${content ? `<span class="mock-subtitle">${escHtml(content)}</span>` : ''}
-      </div>
-      <div class="mock-swatch" style="background:${color}" onclick="pgCpLog('${color}')" title="Klik untuk simulasi open picker"></div>
-    </div>`;
-}
-function pgCpLog(c) {
-  const el = document.getElementById('pgcp-log');
-  if (el) { el.textContent = `Panel terbuka — warna aktif: ${c}`; flash(el); }
-}
-
-// ── utils ──
-function escHtml(s) {
-  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-}
-function escJs(s) { return String(s).replace(/'/g,"\\'"); }
-function flash(el) {
-  el.style.borderColor = 'rgba(74,222,128,0.5)';
-  setTimeout(() => { el.style.borderColor = ''; }, 600);
-}
-
-// init all playgrounds when page first shown
-(function initPG() {
-  renderBtnPG(); renderTogPG(); renderSlPG(); renderDdPG(); renderInpPG(); renderCpPG();
-})();
-
-
+// ── THEME GRID ──
 (function(){
   var colors = [
     ["Default","rgb(0,170,210)"],["Light","rgb(230,230,230)"],
