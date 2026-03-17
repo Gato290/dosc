@@ -607,6 +607,51 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
           </tbody>
         </table></div>
 
+        <h2>Key System — Mode Luarmor</h2>
+        <p>Integrasi dengan <strong>Luarmor</strong> key system. Tambahkan property <code class="il">Luarmor = {}</code> di dalam <code class="il">KeySystem</code>. VelarisUI akan mendelegasikan verifikasi ke modul Luarmor secara otomatis.</p>
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <code><span class="var">KeySystem</span> <span class="op">=</span> {
+    <span class="var">Title</span>       <span class="op">=</span> <span class="str">"My Hub"</span>,
+    <span class="var">Icon</span>        <span class="op">=</span> <span class="str">"lucide:key"</span>,
+    <span class="var">Note</span>        <span class="op">=</span> <span class="str">"Enter your Luarmor key."</span>,
+    <span class="var">Placeholder</span> <span class="op">=</span> <span class="str">"Enter Key"</span>,
+    <span class="var">Luarmor</span>     <span class="op">=</span> {
+        <span class="cm">-- config Luarmor (project id, dsb.) diteruskan ke modul</span>
+    },
+},</code>
+        </div>
+        <div class="info-box">
+          💡 Saat <code class="il">Luarmor</code> diisi, mode manual (<code class="il">Buttons</code> &amp; <code class="il">Callback</code>) diabaikan. Verifikasi sepenuhnya dihandle oleh <code class="il">_G.LuarmorModule</code> yang dimuat dari <code class="il">src/elements/KeySystem/Luarmor.lua</code>.
+        </div>
+
+        <h2>Key System — Mode PandaDeveloper</h2>
+        <p>Integrasi dengan <strong>PandaDeveloper</strong> key system. Sama seperti Luarmor, cukup tambahkan property <code class="il">PandaDeveloper = {}</code> di dalam <code class="il">KeySystem</code>.</p>
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <code><span class="var">KeySystem</span> <span class="op">=</span> {
+    <span class="var">Title</span>       <span class="op">=</span> <span class="str">"My Hub"</span>,
+    <span class="var">Icon</span>        <span class="op">=</span> <span class="str">"lucide:key"</span>,
+    <span class="var">Note</span>        <span class="op">=</span> <span class="str">"Enter your PandaDeveloper key."</span>,
+    <span class="var">Placeholder</span> <span class="op">=</span> <span class="str">"Enter Key"</span>,
+    <span class="var">PandaDeveloper</span> <span class="op">=</span> {
+        <span class="cm">-- config PandaDeveloper diteruskan ke modul</span>
+    },
+},</code>
+        </div>
+        <div class="info-box">
+          💡 Saat <code class="il">PandaDeveloper</code> diisi, mode manual diabaikan. Verifikasi dihandle oleh <code class="il">_G.PandaDeveloperModule</code> dari <code class="il">src/elements/KeySystem/PandaDeveloper.lua</code>.
+        </div>
+
+        <h3>Perbandingan 3 Mode KeySystem</h3>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Mode</th><th>Property</th><th>Keterangan</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Manual</strong></td><td>—</td><td>Default. Gunakan <code class="il">Buttons</code> &amp; <code class="il">Callback</code>. Verifikasi ditangani sendiri oleh developer</td></tr>
+            <tr><td><strong>Luarmor</strong></td><td><code class="il">Luarmor = {}</code></td><td>Delegasi ke modul Luarmor. Mode manual diabaikan</td></tr>
+            <tr><td><strong>PandaDeveloper</strong></td><td><code class="il">PandaDeveloper = {}</code></td><td>Delegasi ke modul PandaDeveloper. Mode manual diabaikan</td></tr>
+          </tbody>
+        </table></div>
+        <p>Prioritas pengecekan: <code class="il">Luarmor</code> dicek pertama, lalu <code class="il">PandaDeveloper</code>, lalu fallback ke mode manual.</p>
+
         <div class="page-nav">
           <button class="pnav-btn" onclick="show('loadstring',getSL('loadstring'))">
             <span class="pnav-btn-label">← Previous</span>
