@@ -608,7 +608,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
         </table></div>
 
         <h2>Key System — Mode API (Luarmor, PandaDeveloper, dll)</h2>
-        <p>Gunakan property <code class="il">API = {}</code> untuk mengintegrasikan key system pihak ketiga. VelarisUI akan otomatis mendeteksi dan mendelegasikan verifikasi ke service yang sesuai berdasarkan <code class="il">Type</code>.</p>
+        <p>Gunakan property <code class="il">API = {}</code> untuk mengintegrasikan key system pihak ketiga. Bisa pakai built-in service (Luarmor, PandaDeveloper) atau daftarkan service sendiri.</p>
 
         <h3>Luarmor</h3>
         <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
@@ -617,7 +617,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
     <span class="var">SaveKey</span> <span class="op">=</span> <span class="kw">true</span>,
     <span class="var">KeyFile</span> <span class="op">=</span> <span class="str">"MyKey"</span>,
     <span class="var">API</span> <span class="op">=</span> {
-        { <span class="var">Type</span> <span class="op">=</span> <span class="str">"luarmor"</span>, <span class="var">ScriptId</span> <span class="op">=</span> <span class="num">1234</span>, <span class="var">Discord</span> <span class="op">=</span> <span class="str">"discord.gg/xxx"</span> },
+        { <span class="var">Type</span> <span class="op">=</span> <span class="str">"luarmor"</span>, <span class="var">ScriptId</span> <span class="op">=</span> <span class="num">1234</span> },
     },
 },</code>
         </div>
@@ -634,50 +634,73 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
         </div>
 
         <h3>Custom Service</h3>
-        <p>Daftarkan service sendiri via <code class="il">VelarisUI.Services["nama"]</code> sebelum <code class="il">Window</code> dibuat, lalu panggil via <code class="il">Type</code>. Tidak perlu menunggu update VelarisUI.</p>
+        <p>Daftarkan service sendiri via <code class="il">VelarisUI.Services["nama"]</code> sebelum <code class="il">Window</code> dibuat. Service adalah sebuah object dengan field <code class="il">Name</code>, <code class="il">Icon</code>, <code class="il">Args</code>, dan <code class="il">New</code>.</p>
         <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
           <code><span class="kw">local</span> <span class="var">VelarisUI</span> <span class="op">=</span> <span class="fn">loadstring</span>(<span class="var">game</span>:<span class="fn">HttpGet</span>(<span class="str">"..."</span>))()
 
-<span class="cm">-- Daftarkan custom service</span>
-<span class="var">VelarisUI</span>.<span class="var">Services</span>[<span class="str">"myservice"</span>] <span class="op">=</span> <span class="kw">function</span>(<span class="var">ks</span>, <span class="var">GuiConfig</span>, <span class="var">CoreGui</span>, <span class="var">TweenService</span>, <span class="var">getIconId</span>, <span class="var">ConfigFolder</span>)
-    <span class="cm">-- ks berisi semua property dari KeySystem + API entry digabungkan</span>
-    <span class="cm">-- ks.ServiceId, ks.SuperId, dll tersedia dari API entry</span>
-    <span class="cm">-- return true  = key valid → window terbuka</span>
-    <span class="cm">-- return false = ditolak / cancel → window tidak terbuka</span>
-<span class="kw">end</span>
+<span class="var">VelarisUI</span>.<span class="var">Services</span>[<span class="str">"myservice"</span>] <span class="op">=</span> {
+    <span class="var">Name</span> <span class="op">=</span> <span class="str">"My Service"</span>,
+    <span class="var">Icon</span> <span class="op">=</span> <span class="str">"lucide:key"</span>,
+    <span class="var">Args</span> <span class="op">=</span> { <span class="str">"ServiceId"</span>, <span class="str">"Token"</span> },  <span class="cm">-- nama field yang diambil dari API entry</span>
+
+    <span class="var">New</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">ServiceId</span>, <span class="var">Token</span>)  <span class="cm">-- dipanggil dengan nilai Args secara berurutan</span>
+        <span class="kw">local function</span> <span class="fn">validateKey</span>(<span class="var">key</span>)
+            <span class="kw">if not</span> <span class="var">key</span> <span class="kw">then return</span> <span class="kw">false</span>, <span class="str">"Key invalid!"</span> <span class="kw">end</span>
+            <span class="kw">return</span> <span class="kw">true</span>, <span class="str">"Key valid!"</span>
+        <span class="kw">end</span>
+        <span class="kw">local function</span> <span class="fn">copyLink</span>()
+            <span class="fn">setclipboard</span>(<span class="str">"https://mysite.com/getkey"</span>)
+        <span class="kw">end</span>
+        <span class="kw">return</span> {
+            <span class="var">Verify</span> <span class="op">=</span> <span class="var">validateKey</span>,  <span class="cm">-- required</span>
+            <span class="var">Copy</span>   <span class="op">=</span> <span class="var">copyLink</span>,     <span class="cm">-- required</span>
+        }
+    <span class="kw">end</span>
+}
 
 <span class="cm">-- Pakai di Window</span>
 <span class="var">VelarisUI</span>:<span class="fn">Window</span>({
     <span class="var">KeySystem</span> <span class="op">=</span> {
+        <span class="var">Note</span>    <span class="op">=</span> <span class="str">"Get key at discord.gg/xxx"</span>,
+        <span class="var">SaveKey</span> <span class="op">=</span> <span class="kw">true</span>,
         <span class="var">API</span> <span class="op">=</span> {
-            { <span class="var">Type</span> <span class="op">=</span> <span class="str">"myservice"</span>, <span class="var">ServiceId</span> <span class="op">=</span> <span class="str">"abc123"</span> },
+            { <span class="var">Type</span> <span class="op">=</span> <span class="str">"myservice"</span>, <span class="var">ServiceId</span> <span class="op">=</span> <span class="str">"abc123"</span>, <span class="var">Token</span> <span class="op">=</span> <span class="str">"xyz"</span> },
         },
     },
 })</code>
         </div>
 
-        <h3>API Properties</h3>
+        <h3>Service Object Properties</h3>
         <div class="table-wrap"><table>
-          <thead><tr><th>Property</th><th>Type</th><th>Description</th></tr></thead>
+          <thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>
           <tbody>
-            <tr><td>API</td><td>table</td><td>List entry service. VelarisUI mencoba setiap entry berurutan, menggunakan yang pertama berhasil dimuat</td></tr>
-            <tr><td>SaveKey</td><td>boolean</td><td>Simpan key ke file lokal agar tidak perlu input ulang saat join berikutnya</td></tr>
-            <tr><td>KeyFile</td><td>string</td><td>Nama file tempat key disimpan (digunakan bersama <code class="il">SaveKey = true</code>)</td></tr>
-            <tr><td>Note</td><td>string</td><td>Teks kecil di atas input field, biasanya link untuk mendapatkan key</td></tr>
+            <tr><td>Name</td><td>string</td><td>Nama tampilan service (dipakai di UI)</td></tr>
+            <tr><td>Icon</td><td>string</td><td>Icon service (rbxassetid, lucide:, solar:)</td></tr>
+            <tr><td>Args</td><td>table</td><td>Daftar nama field yang diambil dari API entry dan diteruskan sebagai argumen ke <code class="il">New()</code></td></tr>
+            <tr><td>New</td><td>function(...)</td><td>Dipanggil dengan nilai dari <code class="il">Args</code> secara berurutan. Harus return object dengan <code class="il">Verify</code> dan <code class="il">Copy</code></td></tr>
           </tbody>
         </table></div>
+
+        <h3>Return Object dari New()</h3>
         <div class="table-wrap"><table>
-          <thead><tr><th>API Entry Property</th><th>Type</th><th>Description</th></tr></thead>
+          <thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>
           <tbody>
-            <tr><td>Type</td><td>string</td><td>Nama service (case-insensitive). Contoh: <code class="il">"luarmor"</code>, <code class="il">"pandadeveloper"</code>, atau nama custom</td></tr>
-            <tr><td>ScriptId</td><td>number</td><td>ID script — khusus Luarmor</td></tr>
-            <tr><td>Discord</td><td>string</td><td>Link Discord — khusus Luarmor</td></tr>
-            <tr><td>ServiceId</td><td>string</td><td>ID service — khusus PandaDeveloper (atau custom)</td></tr>
+            <tr><td>Verify</td><td>function(key)</td><td>Required. Dipanggil saat user submit key. Return <code class="il">bool, message</code> — <code class="il">true</code> = valid, <code class="il">false</code> = ditolak</td></tr>
+            <tr><td>Copy</td><td>function()</td><td>Required. Dipanggil saat user klik tombol "Get Key". Biasanya berisi <code class="il">setclipboard()</code> ke link key</td></tr>
           </tbody>
         </table></div>
-        <div class="info-box">
-          💡 Semua property di dalam entry API (selain <code class="il">Type</code>) digabungkan dengan config <code class="il">KeySystem</code> dan diteruskan ke function service sebagai parameter <code class="il">ks</code>. Jika tidak ada service yang cocok, window tidak akan terbuka.
-        </div>
+
+        <h3>API & KeySystem Properties</h3>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td>API</td><td>table</td><td>—</td><td>List entry service. VelarisUI mencoba setiap entry berurutan, menggunakan yang pertama berhasil dimuat</td></tr>
+            <tr><td>API[].Type</td><td>string</td><td>—</td><td>Nama service (case-insensitive). Cocokkan dengan key di <code class="il">VelarisUI.Services</code></td></tr>
+            <tr><td>SaveKey</td><td>boolean</td><td><code class="il">false</code></td><td>Simpan key ke file lokal agar tidak perlu input ulang saat join berikutnya</td></tr>
+            <tr><td>KeyFile</td><td>string</td><td>—</td><td>Nama file tempat key disimpan (digunakan bersama <code class="il">SaveKey = true</code>)</td></tr>
+            <tr><td>Note</td><td>string</td><td>—</td><td>Teks kecil di atas input field, biasanya berisi link untuk mendapatkan key</td></tr>
+          </tbody>
+        </table></div>
 
         <h3>Perbandingan 2 Mode KeySystem</h3>
         <div class="table-wrap"><table>
