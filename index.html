@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>VelarisUI — Documentation</title>
 <link rel="icon" href="https://i.imgur.com/0o1FfI0.gif" type="image/gif"/>
-/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
@@ -397,6 +397,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
       <a class="nav-link" onclick="show('paragraph',this)">Paragraph</a>
       <a class="nav-link" onclick="show('editparagraph',this)">EditableParagraph</a>
       <a class="nav-link" onclick="show('keybind',this)">Keybind</a>
+      <a class="nav-link" onclick="show('colorpicker',this)">ColorPicker</a>
       <a class="nav-link" onclick="show('divider',this)">Divider &amp; SubSection</a>
     </div>
 
@@ -417,7 +418,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
     <div class="content-wrapper">
 
       <!-- ══ LOADSTRING ══ -->
-      <!-- ORDER: 1 of 21 -->
+      <!-- ORDER: 1 of 22 -->
       <div id="page-loadstring" class="page active">
         <div class="page-header">
           <div class="page-title">Loadstring</div>
@@ -447,7 +448,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
       </div>
 
       <!-- ══ WINDOW ══ -->
-      <!-- ORDER: 2 of 21 | prev: loadstring | next: tags -->
+      <!-- ORDER: 2 of 22 | prev: loadstring | next: tags -->
       <div id="page-window" class="page">
         <div class="page-header">
           <div class="page-title">Window</div>
@@ -582,7 +583,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
       </div>
 
       <!-- ══ TAGS ══ -->
-      <!-- ORDER: 3 of 21 | prev: window | next: themes -->
+      <!-- ORDER: 3 of 22 | prev: window | next: themes -->
       <div id="page-tags" class="page">
         <div class="page-header">
           <div class="page-title">Tags</div>
@@ -633,7 +634,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
       </div>
 
       <!-- ══ THEMES ══ -->
-      <!-- ORDER: 4 of 21 | prev: tags | next: tabs -->
+      <!-- ORDER: 4 of 22 | prev: tags | next: tabs -->
       <div id="page-themes" class="page">
         <div class="page-header">
           <div class="page-title">Themes</div>
@@ -661,7 +662,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
       </div>
 
       <!-- ══ TABS ══ -->
-      <!-- ORDER: 5 of 21 | prev: themes | next: section -->
+      <!-- ORDER: 5 of 22 | prev: themes | next: section -->
       <div id="page-tabs" class="page">
         <div class="page-header">
           <div class="page-title">Tabs</div>
@@ -754,7 +755,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
       </div>
 
       <!-- ══ SECTION ══ -->
-      <!-- ORDER: 6 of 21 | prev: tabs | next: notification -->
+      <!-- ORDER: 6 of 22 | prev: tabs | next: notification -->
       <div id="page-section" class="page">
         <div class="page-header">
           <div class="page-title">Section</div>
@@ -765,6 +766,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
           <div class="stab active" onclick="stab(this,'sec-local')">Frugal Local</div>
           <div class="stab" onclick="stab(this,'sec-basic')">Basic</div>
           <div class="stab" onclick="stab(this,'sec-full')">Full</div>
+          <div class="stab" onclick="stab(this,'sec-tabbox')">Tabbox</div>
           <div class="stab" onclick="stab(this,'sec-locked')">Locked</div>
           <div class="stab" onclick="stab(this,'sec-fn')">Functions</div>
         </div>
@@ -788,6 +790,82 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
     <span class="var">Open</span>           <span class="op">=</span> <span class="kw">true</span>
 })</code></div>
         </div>
+
+        <!-- ══ TABBOX — FROM DOC 2 ══ -->
+        <div id="sec-tabbox" class="stab-content">
+          <p>Gunakan property <code class="il">Tabbox</code> untuk membagi section menjadi dua kolom berdampingan. Nilai <code class="il">"Left"</code> dan <code class="il">"Right"</code> akan berpasangan otomatis dalam satu baris di dalam Tab yang sama.</p>
+          <div class="info-box">
+            💡 Section dengan <code class="il">Tabbox = "Left"</code> dan <code class="il">Tabbox = "Right"</code> akan tampil berdampingan secara otomatis. Keduanya harus dibuat secara berurutan di dalam Tab yang sama.
+          </div>
+
+          <h3>Dengan Icon</h3>
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <code><span class="kw">local</span> <span class="var">BoxLeft</span> <span class="op">=</span> <span class="var">Tabs</span>.<span class="var">Main</span>:<span class="fn">AddSection</span>({
+    <span class="var">Title</span>  <span class="op">=</span> <span class="str">"Auto Farm"</span>,
+    <span class="var">Icon</span>   <span class="op">=</span> <span class="str">"lucide:cpu"</span>,
+    <span class="var">Tabbox</span> <span class="op">=</span> <span class="str">"Left"</span>,
+})
+<span class="kw">local</span> <span class="var">BoxRight</span> <span class="op">=</span> <span class="var">Tabs</span>.<span class="var">Main</span>:<span class="fn">AddSection</span>({
+    <span class="var">Title</span>  <span class="op">=</span> <span class="str">"Settings"</span>,
+    <span class="var">Icon</span>   <span class="op">=</span> <span class="str">"lucide:settings"</span>,
+    <span class="var">Tabbox</span> <span class="op">=</span> <span class="str">"Right"</span>,
+})</code>
+          </div>
+
+          <h3>Tanpa Icon (Text Saja)</h3>
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <code><span class="kw">local</span> <span class="var">BoxLeft</span> <span class="op">=</span> <span class="var">Tabs</span>.<span class="var">Main</span>:<span class="fn">AddSection</span>({
+    <span class="var">Title</span>  <span class="op">=</span> <span class="str">"Auto Farm"</span>,
+    <span class="var">Tabbox</span> <span class="op">=</span> <span class="str">"Left"</span>,
+})
+<span class="kw">local</span> <span class="var">BoxRight</span> <span class="op">=</span> <span class="var">Tabs</span>.<span class="var">Main</span>:<span class="fn">AddSection</span>({
+    <span class="var">Title</span>  <span class="op">=</span> <span class="str">"Settings"</span>,
+    <span class="var">Tabbox</span> <span class="op">=</span> <span class="str">"Right"</span>,
+})</code>
+          </div>
+
+          <h3>Contoh Lengkap dengan Elemen</h3>
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <code><span class="kw">local</span> <span class="var">BoxLeft</span> <span class="op">=</span> <span class="var">Tabs</span>.<span class="var">Main</span>:<span class="fn">AddSection</span>({
+    <span class="var">Title</span>  <span class="op">=</span> <span class="str">"Auto Farm"</span>,
+    <span class="var">Icon</span>   <span class="op">=</span> <span class="str">"lucide:cpu"</span>,
+    <span class="var">Open</span>   <span class="op">=</span> <span class="kw">true</span>,
+    <span class="var">Tabbox</span> <span class="op">=</span> <span class="str">"Left"</span>,
+})
+<span class="kw">local</span> <span class="var">BoxRight</span> <span class="op">=</span> <span class="var">Tabs</span>.<span class="var">Main</span>:<span class="fn">AddSection</span>({
+    <span class="var">Title</span>  <span class="op">=</span> <span class="str">"Settings"</span>,
+    <span class="var">Icon</span>   <span class="op">=</span> <span class="str">"lucide:settings"</span>,
+    <span class="var">Open</span>   <span class="op">=</span> <span class="kw">true</span>,
+    <span class="var">Tabbox</span> <span class="op">=</span> <span class="str">"Right"</span>,
+})
+
+<span class="cm">-- Tambahkan elemen seperti biasa ke masing-masing box</span>
+<span class="var">BoxLeft</span>:<span class="fn">AddToggle</span>({
+    <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Auto Collect"</span>,
+    <span class="var">Default</span>  <span class="op">=</span> <span class="kw">false</span>,
+    <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">v</span>) <span class="kw">end</span>
+})
+
+<span class="var">BoxRight</span>:<span class="fn">AddSlider</span>({
+    <span class="var">Title</span>     <span class="op">=</span> <span class="str">"Speed"</span>,
+    <span class="var">Min</span>       <span class="op">=</span> <span class="num">1</span>, <span class="var">Max</span> <span class="op">=</span> <span class="num">100</span>, <span class="var">Default</span> <span class="op">=</span> <span class="num">16</span>,
+    <span class="var">Callback</span>  <span class="op">=</span> <span class="kw">function</span>(<span class="var">v</span>) <span class="kw">end</span>
+})</code>
+          </div>
+
+          <h3>Properties</h3>
+          <div class="table-wrap"><table>
+            <thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+            <tbody>
+              <tr><td>Tabbox</td><td>string</td><td><code class="il">nil</code></td><td>Layout dua kolom. Gunakan <code class="il">"Left"</code> untuk kolom kiri dan <code class="il">"Right"</code> untuk kolom kanan.</td></tr>
+            </tbody>
+          </table></div>
+
+          <div class="info-box">
+            ⚠️ <strong>Catatan:</strong> Section <code class="il">Tabbox = "Left"</code> harus selalu dideklarasikan sebelum <code class="il">Tabbox = "Right"</code> agar layout terbentuk dengan benar.
+          </div>
+        </div>
+        <!-- ══ END TABBOX ══ -->
 
         <div id="sec-locked" class="stab-content">
           <div class="info-box">
@@ -865,6 +943,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
               <tr><td>:AddPanel(config)</td><td>Panel</td><td>Tambah panel ke section</td></tr>
               <tr><td>:AddParagraph(config)</td><td>Paragraph</td><td>Tambah paragraph ke section</td></tr>
               <tr><td>:AddKeybind(config)</td><td>Keybind</td><td>Tambah keybind ke section</td></tr>
+              <tr><td>:AddColorpicker(config)</td><td>ColorPicker</td><td>Tambah color picker ke section</td></tr>
               <tr><td>:AddDivider()</td><td>—</td><td>Tambah garis pemisah</td></tr>
               <tr><td>:AddSubSection(text)</td><td>—</td><td>Tambah sub-label teks</td></tr>
               <tr><td>:SetLocked(state)</td><td>—</td><td>Kunci (<code class="il">true</code>) atau buka (<code class="il">false</code>) section</td></tr>
@@ -881,7 +960,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
       </div>
 
       <!-- ══ NOTIFICATION ══ -->
-      <!-- ORDER: 7 of 21 | prev: section | next: dialog -->
+      <!-- ORDER: 7 of 22 | prev: section | next: dialog -->
       <div id="page-notification" class="page">
         <div class="page-header">
           <div class="page-title">Notification</div>
@@ -921,7 +1000,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
       </div>
 
       <!-- ══ DIALOG ══ -->
-      <!-- ORDER: 8 of 21 | prev: notification | next: button -->
+      <!-- ORDER: 8 of 22 | prev: notification | next: button -->
       <div id="page-dialog" class="page">
         <div class="page-header">
           <div class="page-title">Dialog</div>
@@ -950,7 +1029,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
       </div>
 
       <!-- ══ BUTTON ══ -->
-      <!-- ORDER: 9 of 21 | prev: dialog | next: toggle -->
+      <!-- ORDER: 9 of 22 | prev: dialog | next: toggle -->
       <div id="page-button" class="page">
         <div class="page-header">
           <div class="page-title">Button</div>
@@ -1091,7 +1170,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
       </div>
 
       <!-- ══ TOGGLE ══ -->
-      <!-- ORDER: 10 of 21 | prev: button | next: slider -->
+      <!-- ORDER: 10 of 22 | prev: button | next: slider -->
       <div id="page-toggle" class="page">
         <div class="page-header">
           <div class="page-title">Toggle</div>
@@ -1191,7 +1270,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
       </div>
 
       <!-- ══ SLIDER ══ -->
-      <!-- ORDER: 11 of 21 | prev: toggle | next: dropdown -->
+      <!-- ORDER: 11 of 22 | prev: toggle | next: dropdown -->
       <div id="page-slider" class="page">
         <div class="page-header">
           <div class="page-title">Slider</div>
@@ -1246,7 +1325,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
       </div>
 
       <!-- ══ DROPDOWN ══ -->
-      <!-- ORDER: 12 of 21 | prev: slider | next: input -->
+      <!-- ORDER: 12 of 22 | prev: slider | next: input -->
       <div id="page-dropdown" class="page">
         <div class="page-header">
           <div class="page-title">Dropdown</div>
@@ -1317,7 +1396,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
       </div>
 
       <!-- ══ INPUT ══ -->
-      <!-- ORDER: 13 of 21 | prev: dropdown | next: panel -->
+      <!-- ORDER: 13 of 22 | prev: dropdown | next: panel -->
       <div id="page-input" class="page">
         <div class="page-header">
           <div class="page-title">Input</div>
@@ -1409,7 +1488,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
       </div>
 
       <!-- ══ PANEL ══ -->
-      <!-- ORDER: 14 of 21 | prev: input | next: paragraph -->
+      <!-- ORDER: 14 of 22 | prev: input | next: paragraph -->
       <div id="page-panel" class="page">
         <div class="page-header">
           <div class="page-title">Panel</div>
@@ -1464,7 +1543,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
       </div>
 
       <!-- ══ PARAGRAPH ══ -->
-      <!-- ORDER: 15 of 21 | prev: panel | next: editparagraph -->
+      <!-- ORDER: 15 of 22 | prev: panel | next: editparagraph -->
       <div id="page-paragraph" class="page">
         <div class="page-header">
           <div class="page-title">Paragraph</div>
@@ -1517,7 +1596,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
             <code><span class="var">Sec</span>.<span class="var">Paragraph</span>:<span class="fn">AddParagraph</span>({
     <span class="var">Title</span>          <span class="op">=</span> <span class="str">"Velaris Official Discord"</span>,
     <span class="var">Content</span>        <span class="op">=</span> <span class="str">"Velaris UI Library best"</span>,
-    <span class="var">Color</span>          <span class="op">=</span> <span class="str">"Sky"</span>,  <span class="cm">-- nama tema dari halaman Themes</span>
+    <span class="var">Color</span>          <span class="op">=</span> <span class="str">"Sky"</span>,
     <span class="var">ButtonText</span>     <span class="op">=</span> <span class="str">"Copy Discord"</span>,
     <span class="var">ButtonCallback</span> <span class="op">=</span> <span class="kw">function</span>()
         <span class="fn">setclipboard</span>(<span class="str">"discord.gg/ECxQFc97F5"</span>)
@@ -1527,7 +1606,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
 <span class="var">Sec</span>.<span class="var">Paragraph</span>:<span class="fn">AddParagraph</span>({
     <span class="var">Title</span>             <span class="op">=</span> <span class="str">"Velaris UI"</span>,
     <span class="var">Content</span>           <span class="op">=</span> <span class="str">"Powered by Velaris UI Library"</span>,
-    <span class="var">Color</span>             <span class="op">=</span> <span class="str">"Rose"</span>,  <span class="cm">-- nama tema dari halaman Themes</span>
+    <span class="var">Color</span>             <span class="op">=</span> <span class="str">"Rose"</span>,
     <span class="var">ButtonText</span>        <span class="op">=</span> <span class="str">"Discord"</span>,
     <span class="var">ButtonCallback</span>    <span class="op">=</span> <span class="kw">function</span>()
         <span class="fn">setclipboard</span>(<span class="str">"discord.gg/ECxQFc97F5"</span>)
@@ -1565,8 +1644,8 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
     <span class="var">Content</span>     <span class="op">=</span> <span class="str">"Gambar preview item."</span>,
     <span class="var">MediaType</span>   <span class="op">=</span> <span class="str">"Image"</span>,
     <span class="var">MediaId</span>     <span class="op">=</span> <span class="str">"rbxassetid://1234567890"</span>,
-    <span class="var">MediaWidth</span>  <span class="op">=</span> <span class="num">80</span>,   <span class="cm">-- lebar gambar (px), default 80</span>
-    <span class="var">MediaHeight</span> <span class="op">=</span> <span class="num">60</span>,   <span class="cm">-- tinggi gambar (px), default 60</span>
+    <span class="var">MediaWidth</span>  <span class="op">=</span> <span class="num">80</span>,
+    <span class="var">MediaHeight</span> <span class="op">=</span> <span class="num">60</span>,
 })</code></div>
           <h3>Video</h3>
           <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
@@ -1574,14 +1653,13 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
     <span class="var">Title</span>       <span class="op">=</span> <span class="str">"Tutorial"</span>,
     <span class="var">Content</span>     <span class="op">=</span> <span class="str">"Klik play untuk memutar video."</span>,
     <span class="var">MediaType</span>   <span class="op">=</span> <span class="str">"Video"</span>,
-    <span class="var">MediaId</span>     <span class="op">=</span> <span class="str">"rbxassetid://THUMBNAIL_ID"</span>,  <span class="cm">-- thumbnail sebelum play</span>
+    <span class="var">MediaId</span>     <span class="op">=</span> <span class="str">"rbxassetid://THUMBNAIL_ID"</span>,
     <span class="var">VideoId</span>     <span class="op">=</span> <span class="str">"rbxassetid://VIDEO_ID"</span>,
     <span class="var">MediaWidth</span>  <span class="op">=</span> <span class="num">120</span>,
     <span class="var">MediaHeight</span> <span class="op">=</span> <span class="num">80</span>,
-    <span class="var">AutoPlay</span>    <span class="op">=</span> <span class="kw">false</span>,  <span class="cm">-- true = langsung play saat elemen dibuat</span>
+    <span class="var">AutoPlay</span>    <span class="op">=</span> <span class="kw">false</span>,
 })
 
-<span class="cm">-- kontrol video secara manual</span>
 <span class="var">Para</span>:<span class="fn">StartVideo</span>()
 <span class="var">Para</span>:<span class="fn">StopVideo</span>()</code></div>
           <div class="table-wrap"><table>
@@ -1632,7 +1710,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
       </div>
 
       <!-- ══ EDITABLEPARAGRAPH ══ -->
-      <!-- ORDER: 16 of 21 | prev: paragraph | next: keybind -->
+      <!-- ORDER: 16 of 22 | prev: paragraph | next: keybind -->
       <div id="page-editparagraph" class="page">
         <div class="page-header">
           <div class="page-title">EditableParagraph</div>
@@ -1715,7 +1793,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
       </div>
 
       <!-- ══ KEYBIND ══ -->
-      <!-- ORDER: 17 of 21 | prev: editparagraph | next: divider -->
+      <!-- ORDER: 17 of 22 | prev: editparagraph | next: colorpicker -->
       <div id="page-keybind" class="page">
         <div class="page-header">
           <div class="page-title">Keybind</div>
@@ -1732,12 +1810,148 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
         </div>
         <div class="page-nav">
           <button class="pnav-btn" onclick="show('editparagraph',getSL('editparagraph'))"><span class="pnav-btn-label">← Previous</span><span class="pnav-btn-name">EditableParagraph</span></button>
+          <button class="pnav-btn right" onclick="show('colorpicker',getSL('colorpicker'))"><span class="pnav-btn-label">Next →</span><span class="pnav-btn-name">ColorPicker</span></button>
+        </div>
+      </div>
+
+      <!-- ══ COLORPICKER ══ -->
+      <!-- ORDER: 18 of 22 | prev: keybind | next: divider -->
+      <div id="page-colorpicker" class="page">
+        <div class="page-header">
+          <div class="page-title">ColorPicker</div>
+          <div class="page-subtitle">Pilih warna dengan color picker panel interaktif</div>
+        </div>
+
+        <div class="info-box">
+          ℹ️ ColorPicker dibuat lewat <code class="il">:AddColorpicker(cfg)</code> pada Section. Panel picker muncul sebagai floating window yang bisa di-drag, lengkap dengan Saturation Map, Hue Bar, Alpha Bar, dan Hex / RGB input.
+        </div>
+
+        <div class="subtabs">
+          <div class="stab active" onclick="stab(this,'cp-basic')">Basic</div>
+          <div class="stab" onclick="stab(this,'cp-full')">Full</div>
+          <div class="stab" onclick="stab(this,'cp-locked')">Locked</div>
+          <div class="stab" onclick="stab(this,'cp-fn')">Functions</div>
+        </div>
+
+        <div id="cp-basic" class="stab-content active">
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <code><span class="kw">local</span> <span class="var">MyCP</span> <span class="op">=</span> <span class="var">Sec</span>.<span class="var">Color</span>:<span class="fn">AddColorpicker</span>({
+    <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Background Color"</span>,
+    <span class="var">Default</span>  <span class="op">=</span> <span class="var">Color3</span>.<span class="fn">fromRGB</span>(<span class="num">0</span>, <span class="num">208</span>, <span class="num">255</span>),
+    <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">color</span>, <span class="var">alpha</span>)
+        <span class="fn">print</span>(<span class="str">"Color:"</span>, <span class="var">color</span>)
+        <span class="fn">print</span>(<span class="str">"Alpha:"</span>, <span class="var">alpha</span>)
+    <span class="kw">end</span>
+})</code>
+          </div>
+        </div>
+
+        <div id="cp-full" class="stab-content">
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <code><span class="kw">local</span> <span class="var">MyCP</span> <span class="op">=</span> <span class="var">Sec</span>.<span class="var">Color</span>:<span class="fn">AddColorpicker</span>({
+    <span class="var">Title</span>       <span class="op">=</span> <span class="str">"ESP Color"</span>,
+    <span class="var">Content</span>     <span class="op">=</span> <span class="str">"Warna garis ESP pada player"</span>,  <span class="cm">-- deskripsi di bawah title</span>
+    <span class="var">Icon</span>        <span class="op">=</span> <span class="str">"lucide:palette"</span>,              <span class="cm">-- opsional</span>
+    <span class="var">Default</span>     <span class="op">=</span> <span class="var">Color3</span>.<span class="fn">fromRGB</span>(<span class="num">255</span>, <span class="num">80</span>, <span class="num">80</span>),
+    <span class="var">Flag</span>        <span class="op">=</span> <span class="str">"esp_color"</span>,                  <span class="cm">-- key untuk auto-save config</span>
+    <span class="var">Badge</span>       <span class="op">=</span> <span class="str">"New"</span>,                        <span class="cm">-- opsional</span>
+    <span class="var">Callback</span>    <span class="op">=</span> <span class="kw">function</span>(<span class="var">color</span>, <span class="var">alpha</span>)
+        <span class="cm">-- color = Color3, alpha = number (0–1)</span>
+        <span class="fn">print</span>(<span class="str">"Color picked:"</span>, <span class="var">color</span>)
+        <span class="fn">print</span>(<span class="str">"Alpha:"</span>, <span class="var">alpha</span>)
+    <span class="kw">end</span>
+})</code>
+          </div>
+
+          <h3>Properties</h3>
+          <div class="table-wrap"><table>
+            <thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+            <tbody>
+              <tr><td>Title</td><td>string</td><td><code class="il">"Color Picker"</code></td><td>Label elemen dan judul panel picker</td></tr>
+              <tr><td>Content</td><td>string</td><td><code class="il">""</code></td><td>Teks deskripsi kecil di bawah title</td></tr>
+              <tr><td>Icon</td><td>string</td><td><code class="il">nil</code></td><td>Icon di samping title (lucide:, solar:, atau rbxassetid)</td></tr>
+              <tr><td>Default</td><td>Color3</td><td><code class="il">Color3.fromRGB(0,208,255)</code></td><td>Warna default saat pertama kali dibuat</td></tr>
+              <tr><td>Flag</td><td>string</td><td><code class="il">Title</code></td><td>Key untuk menyimpan nilai ke config. Default pakai Title</td></tr>
+              <tr><td>Badge</td><td>string</td><td><code class="il">nil</code></td><td>Badge label (lihat halaman Badge)</td></tr>
+              <tr><td>Locked</td><td>boolean</td><td><code class="il">false</code></td><td>Nonaktifkan interaksi user</td></tr>
+              <tr><td>LockMessage</td><td>string</td><td><code class="il">nil</code></td><td>Pesan overlay kunci</td></tr>
+              <tr><td>Callback</td><td>function</td><td><code class="il">nil</code></td><td>Dipanggil saat warna diapply. Menerima <code class="il">(color: Color3, alpha: number)</code></td></tr>
+            </tbody>
+          </table></div>
+
+          <div class="info-box">
+            💡 <strong>Callback dipanggil saat user menekan "Confirm"</strong> di panel picker, bukan saat drag real-time. Alpha bernilai <code class="il">0–1</code> di mana <code class="il">1 = fully opaque</code>.
+          </div>
+        </div>
+
+        <div id="cp-locked" class="stab-content">
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <code><span class="cm">-- Locked saat deklarasi</span>
+<span class="kw">local</span> <span class="var">MyCP</span> <span class="op">=</span> <span class="var">Sec</span>.<span class="var">Color</span>:<span class="fn">AddColorpicker</span>({
+    <span class="var">Title</span>       <span class="op">=</span> <span class="str">"Team Color"</span>,
+    <span class="var">Default</span>     <span class="op">=</span> <span class="var">Color3</span>.<span class="fn">fromRGB</span>(<span class="num">255</span>, <span class="num">255</span>, <span class="num">255</span>),
+    <span class="var">Locked</span>      <span class="op">=</span> <span class="kw">true</span>,
+    <span class="var">LockMessage</span> <span class="op">=</span> <span class="str">"Premium Only"</span>,
+    <span class="var">Callback</span>    <span class="op">=</span> <span class="kw">function</span>(<span class="var">c</span>, <span class="var">a</span>) <span class="kw">end</span>
+})
+
+<span class="cm">-- Dynamic lock</span>
+<span class="var">MyCP</span>:<span class="fn">SetLocked</span>(<span class="kw">true</span>)
+<span class="var">MyCP</span>:<span class="fn">SetLocked</span>(<span class="kw">false</span>)
+<span class="fn">print</span>(<span class="var">MyCP</span>:<span class="fn">GetLocked</span>())   <span class="cm">-- true / false</span></code>
+          </div>
+        </div>
+
+        <div id="cp-fn" class="stab-content">
+          <div class="table-wrap"><table>
+            <thead><tr><th>Method / Property</th><th>Return</th><th>Description</th></tr></thead>
+            <tbody>
+              <tr><td>:Get()</td><td>Color3</td><td>Ambil warna yang sedang aktif</td></tr>
+              <tr><td>:GetAlpha()</td><td>number</td><td>Ambil nilai alpha saat ini (0–1)</td></tr>
+              <tr><td>:Set(color)</td><td>—</td><td>Set warna secara programatik (Color3)</td></tr>
+              <tr><td>:SetAlpha(alpha)</td><td>—</td><td>Set alpha secara programatik (0–1)</td></tr>
+              <tr><td>:SetTitle(text)</td><td>—</td><td>Ubah teks judul elemen</td></tr>
+              <tr><td>:SetContent(text)</td><td>—</td><td>Ubah teks deskripsi di bawah judul</td></tr>
+              <tr><td>:SetLocked(state)</td><td>—</td><td>Kunci (<code class="il">true</code>) atau buka (<code class="il">false</code>) elemen</td></tr>
+              <tr><td>:GetLocked()</td><td>boolean</td><td>Cek status kunci elemen</td></tr>
+              <tr><td>:SetLockMessage(text)</td><td>—</td><td>Ubah teks pesan di overlay kunci</td></tr>
+              <tr><td>:Destroy()</td><td>—</td><td>Hapus elemen dan tutup panel picker jika sedang terbuka</td></tr>
+            </tbody>
+          </table></div>
+
+          <h3>Contoh Penggunaan API</h3>
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <code><span class="kw">local</span> <span class="var">MyCP</span> <span class="op">=</span> <span class="var">Sec</span>.<span class="var">Color</span>:<span class="fn">AddColorpicker</span>({
+    <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Highlight"</span>,
+    <span class="var">Default</span>  <span class="op">=</span> <span class="var">Color3</span>.<span class="fn">fromRGB</span>(<span class="num">255</span>, <span class="num">165</span>, <span class="num">0</span>),
+    <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">c</span>, <span class="var">a</span>) <span class="kw">end</span>
+})
+
+<span class="cm">-- Baca nilai</span>
+<span class="fn">print</span>(<span class="var">MyCP</span>:<span class="fn">Get</span>())       <span class="cm">-- Color3</span>
+<span class="fn">print</span>(<span class="var">MyCP</span>:<span class="fn">GetAlpha</span>()) <span class="cm">-- number</span>
+
+<span class="cm">-- Set warna dari script</span>
+<span class="var">MyCP</span>:<span class="fn">Set</span>(<span class="var">Color3</span>.<span class="fn">fromRGB</span>(<span class="num">0</span>, <span class="num">255</span>, <span class="num">128</span>))
+<span class="var">MyCP</span>:<span class="fn">SetAlpha</span>(<span class="num">0.8</span>)
+
+<span class="cm">-- Ubah teks</span>
+<span class="var">MyCP</span>:<span class="fn">SetTitle</span>(<span class="str">"New Title"</span>)
+<span class="var">MyCP</span>:<span class="fn">SetContent</span>(<span class="str">"Updated description"</span>)
+
+<span class="cm">-- Hapus elemen</span>
+<span class="var">MyCP</span>:<span class="fn">Destroy</span>()</code>
+          </div>
+        </div>
+
+        <div class="page-nav">
+          <button class="pnav-btn" onclick="show('keybind',getSL('keybind'))"><span class="pnav-btn-label">← Previous</span><span class="pnav-btn-name">Keybind</span></button>
           <button class="pnav-btn right" onclick="show('divider',getSL('divider'))"><span class="pnav-btn-label">Next →</span><span class="pnav-btn-name">Divider &amp; SubSection</span></button>
         </div>
       </div>
 
       <!-- ══ DIVIDER ══ -->
-      <!-- ORDER: 18 of 21 | prev: keybind | next: badge -->
+      <!-- ORDER: 19 of 22 | prev: colorpicker | next: badge -->
       <div id="page-divider" class="page">
         <div class="page-header">
           <div class="page-title">Divider &amp; SubSection</div>
@@ -1750,13 +1964,13 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
 <span class="var">Sec</span>.<span class="var">Other</span>:<span class="fn">AddSubSection</span>(<span class="str">"Example Sub Section"</span>)</code>
         </div>
         <div class="page-nav">
-          <button class="pnav-btn" onclick="show('keybind',getSL('keybind'))"><span class="pnav-btn-label">← Previous</span><span class="pnav-btn-name">Keybind</span></button>
+          <button class="pnav-btn" onclick="show('colorpicker',getSL('colorpicker'))"><span class="pnav-btn-label">← Previous</span><span class="pnav-btn-name">ColorPicker</span></button>
           <button class="pnav-btn right" onclick="show('badge',getSL('badge'))"><span class="pnav-btn-label">Next →</span><span class="pnav-btn-name">Badge</span></button>
         </div>
       </div>
 
       <!-- ══ BADGE ══ -->
-      <!-- ORDER: 19 of 21 | prev: divider | next: locked -->
+      <!-- ORDER: 20 of 22 | prev: divider | next: locked -->
       <div id="page-badge" class="page">
         <div class="page-header">
           <div class="page-title">Badge</div>
@@ -1764,7 +1978,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
         </div>
 
         <div class="info-box">
-          ℹ️ <strong>Badge</strong> adalah universal property. Dapat ditambahkan ke <strong>semua elemen</strong>: Button, Toggle, Slider, Dropdown, Input, Panel, Paragraph, dan Keybind.
+          ℹ️ <strong>Badge</strong> adalah universal property. Dapat ditambahkan ke <strong>semua elemen</strong>: Button, Toggle, Slider, Dropdown, Input, Panel, Paragraph, Keybind, dan ColorPicker.
         </div>
 
         <h2>Badge Types</h2>
@@ -1862,6 +2076,16 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
 })</code>
         </div>
 
+        <h3>ColorPicker</h3>
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <code><span class="var">Sec</span>:<span class="fn">AddColorpicker</span>({
+    <span class="var">Title</span>    <span class="op">=</span> <span class="str">"ESP Color"</span>,
+    <span class="var">Badge</span>    <span class="op">=</span> <span class="str">"New"</span>,
+    <span class="var">Default</span>  <span class="op">=</span> <span class="var">Color3</span>.<span class="fn">fromRGB</span>(<span class="num">255</span>, <span class="num">80</span>, <span class="num">80</span>),
+    <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">c</span>, <span class="var">a</span>) <span class="kw">end</span>
+})</code>
+        </div>
+
         <div class="page-nav">
           <button class="pnav-btn" onclick="show('divider',getSL('divider'))"><span class="pnav-btn-label">← Previous</span><span class="pnav-btn-name">Divider &amp; SubSection</span></button>
           <button class="pnav-btn right" onclick="show('locked',getSL('locked'))"><span class="pnav-btn-label">Next →</span><span class="pnav-btn-name">Locked</span></button>
@@ -1869,7 +2093,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
       </div>
 
       <!-- ══ LOCKED ══ -->
-      <!-- ORDER: 20 of 21 | prev: badge | next: fullexample -->
+      <!-- ORDER: 21 of 22 | prev: badge | next: fullexample -->
       <div id="page-locked" class="page">
         <div class="page-header">
           <div class="page-title">Locked</div>
@@ -1961,6 +2185,17 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
 })</code>
         </div>
 
+        <h3>ColorPicker</h3>
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <code><span class="var">Sec</span>:<span class="fn">AddColorpicker</span>({
+    <span class="var">Title</span>       <span class="op">=</span> <span class="str">"Locked Color"</span>,
+    <span class="var">Locked</span>      <span class="op">=</span> <span class="kw">true</span>,
+    <span class="var">LockMessage</span> <span class="op">=</span> <span class="str">"Premium Only"</span>,
+    <span class="var">Default</span>     <span class="op">=</span> <span class="var">Color3</span>.<span class="fn">fromRGB</span>(<span class="num">255</span>, <span class="num">255</span>, <span class="num">255</span>),
+    <span class="var">Callback</span>    <span class="op">=</span> <span class="kw">function</span>(<span class="var">c</span>, <span class="var">a</span>) <span class="kw">end</span>
+})</code>
+        </div>
+
         <h2>Dynamic Lock — SetLocked</h2>
         <p>Semua elemen mendukung method <code class="il">:SetLocked(state)</code> dan <code class="il">:GetLocked()</code> untuk mengunci/membuka secara dinamis.</p>
         <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
@@ -2012,7 +2247,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
       </div>
 
       <!-- ══ FULL EXAMPLE ══ -->
-      <!-- ORDER: 21 of 21 | prev: locked | next: (end) -->
+      <!-- ORDER: 22 of 22 | prev: locked | next: (end) -->
       <div id="page-fullexample" class="page">
         <div class="page-header">
           <div class="page-title">Full Example</div>
