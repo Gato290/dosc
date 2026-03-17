@@ -607,50 +607,86 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
           </tbody>
         </table></div>
 
-        <h2>Key System — Mode Luarmor</h2>
-        <p>Integrasi dengan <strong>Luarmor</strong> key system. Tambahkan property <code class="il">Luarmor = {}</code> di dalam <code class="il">KeySystem</code>. VelarisUI akan mendelegasikan verifikasi ke modul Luarmor secara otomatis.</p>
+        <h2>Key System — Mode API (Luarmor, PandaDeveloper, dll)</h2>
+        <p>Gunakan property <code class="il">API = {}</code> untuk mengintegrasikan key system pihak ketiga. VelarisUI akan otomatis mendeteksi dan mendelegasikan verifikasi ke service yang sesuai berdasarkan <code class="il">Type</code>.</p>
+
+        <h3>Luarmor</h3>
         <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
           <code><span class="var">KeySystem</span> <span class="op">=</span> {
-    <span class="var">Title</span>       <span class="op">=</span> <span class="str">"My Hub"</span>,
-    <span class="var">Icon</span>        <span class="op">=</span> <span class="str">"lucide:key"</span>,
-    <span class="var">Note</span>        <span class="op">=</span> <span class="str">"Enter your Luarmor key."</span>,
-    <span class="var">Placeholder</span> <span class="op">=</span> <span class="str">"Enter Key"</span>,
-    <span class="var">Luarmor</span>     <span class="op">=</span> {
-        <span class="cm">-- config Luarmor (project id, dsb.) diteruskan ke modul</span>
+    <span class="var">Note</span>    <span class="op">=</span> <span class="str">"Get key at discord.gg/xxx"</span>,
+    <span class="var">SaveKey</span> <span class="op">=</span> <span class="kw">true</span>,
+    <span class="var">KeyFile</span> <span class="op">=</span> <span class="str">"MyKey"</span>,
+    <span class="var">API</span> <span class="op">=</span> {
+        { <span class="var">Type</span> <span class="op">=</span> <span class="str">"luarmor"</span>, <span class="var">ScriptId</span> <span class="op">=</span> <span class="num">1234</span>, <span class="var">Discord</span> <span class="op">=</span> <span class="str">"discord.gg/xxx"</span> },
     },
 },</code>
         </div>
-        <div class="info-box">
-          💡 Saat <code class="il">Luarmor</code> diisi, mode manual (<code class="il">Buttons</code> &amp; <code class="il">Callback</code>) diabaikan. Verifikasi sepenuhnya dihandle oleh modul Luarmor internal.
-        </div>
 
-        <h2>Key System — Mode PandaDeveloper</h2>
-        <p>Integrasi dengan <strong>PandaDeveloper</strong> key system. Sama seperti Luarmor, cukup tambahkan property <code class="il">PandaDeveloper = {}</code> di dalam <code class="il">KeySystem</code>.</p>
+        <h3>PandaDeveloper</h3>
         <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
           <code><span class="var">KeySystem</span> <span class="op">=</span> {
-    <span class="var">Title</span>       <span class="op">=</span> <span class="str">"My Hub"</span>,
-    <span class="var">Icon</span>        <span class="op">=</span> <span class="str">"lucide:key"</span>,
-    <span class="var">Note</span>        <span class="op">=</span> <span class="str">"Enter your PandaDeveloper key."</span>,
-    <span class="var">Placeholder</span> <span class="op">=</span> <span class="str">"Enter Key"</span>,
-    <span class="var">PandaDeveloper</span> <span class="op">=</span> {
-        <span class="cm">-- config PandaDeveloper diteruskan ke modul</span>
+    <span class="var">Note</span>    <span class="op">=</span> <span class="str">"Get key at discord.gg/xxx"</span>,
+    <span class="var">SaveKey</span> <span class="op">=</span> <span class="kw">true</span>,
+    <span class="var">API</span> <span class="op">=</span> {
+        { <span class="var">Type</span> <span class="op">=</span> <span class="str">"pandadeveloper"</span>, <span class="var">ServiceId</span> <span class="op">=</span> <span class="str">"myServiceId"</span> },
     },
 },</code>
         </div>
-        <div class="info-box">
-          💡 Saat <code class="il">PandaDeveloper</code> diisi, mode manual diabaikan. Verifikasi dihandle oleh modul PandaDeveloper internal.
+
+        <h3>Custom Service</h3>
+        <p>Daftarkan service sendiri via <code class="il">VelarisUI.Services["nama"]</code> sebelum <code class="il">Window</code> dibuat, lalu panggil via <code class="il">Type</code>. Tidak perlu menunggu update VelarisUI.</p>
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <code><span class="kw">local</span> <span class="var">VelarisUI</span> <span class="op">=</span> <span class="fn">loadstring</span>(<span class="var">game</span>:<span class="fn">HttpGet</span>(<span class="str">"..."</span>))()
+
+<span class="cm">-- Daftarkan custom service</span>
+<span class="var">VelarisUI</span>.<span class="var">Services</span>[<span class="str">"myservice"</span>] <span class="op">=</span> <span class="kw">function</span>(<span class="var">ks</span>, <span class="var">GuiConfig</span>, <span class="var">CoreGui</span>, <span class="var">TweenService</span>, <span class="var">getIconId</span>, <span class="var">ConfigFolder</span>)
+    <span class="cm">-- ks berisi semua property dari KeySystem + API entry digabungkan</span>
+    <span class="cm">-- ks.ServiceId, ks.SuperId, dll tersedia dari API entry</span>
+    <span class="cm">-- return true  = key valid → window terbuka</span>
+    <span class="cm">-- return false = ditolak / cancel → window tidak terbuka</span>
+<span class="kw">end</span>
+
+<span class="cm">-- Pakai di Window</span>
+<span class="var">VelarisUI</span>:<span class="fn">Window</span>({
+    <span class="var">KeySystem</span> <span class="op">=</span> {
+        <span class="var">API</span> <span class="op">=</span> {
+            { <span class="var">Type</span> <span class="op">=</span> <span class="str">"myservice"</span>, <span class="var">ServiceId</span> <span class="op">=</span> <span class="str">"abc123"</span> },
+        },
+    },
+})</code>
         </div>
 
-        <h3>Perbandingan 3 Mode KeySystem</h3>
+        <h3>API Properties</h3>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Property</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td>API</td><td>table</td><td>List entry service. VelarisUI mencoba setiap entry berurutan, menggunakan yang pertama berhasil dimuat</td></tr>
+            <tr><td>SaveKey</td><td>boolean</td><td>Simpan key ke file lokal agar tidak perlu input ulang saat join berikutnya</td></tr>
+            <tr><td>KeyFile</td><td>string</td><td>Nama file tempat key disimpan (digunakan bersama <code class="il">SaveKey = true</code>)</td></tr>
+            <tr><td>Note</td><td>string</td><td>Teks kecil di atas input field, biasanya link untuk mendapatkan key</td></tr>
+          </tbody>
+        </table></div>
+        <div class="table-wrap"><table>
+          <thead><tr><th>API Entry Property</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td>Type</td><td>string</td><td>Nama service (case-insensitive). Contoh: <code class="il">"luarmor"</code>, <code class="il">"pandadeveloper"</code>, atau nama custom</td></tr>
+            <tr><td>ScriptId</td><td>number</td><td>ID script — khusus Luarmor</td></tr>
+            <tr><td>Discord</td><td>string</td><td>Link Discord — khusus Luarmor</td></tr>
+            <tr><td>ServiceId</td><td>string</td><td>ID service — khusus PandaDeveloper (atau custom)</td></tr>
+          </tbody>
+        </table></div>
+        <div class="info-box">
+          💡 Semua property di dalam entry API (selain <code class="il">Type</code>) digabungkan dengan config <code class="il">KeySystem</code> dan diteruskan ke function service sebagai parameter <code class="il">ks</code>. Jika tidak ada service yang cocok, window tidak akan terbuka.
+        </div>
+
+        <h3>Perbandingan 2 Mode KeySystem</h3>
         <div class="table-wrap"><table>
           <thead><tr><th>Mode</th><th>Property</th><th>Keterangan</th></tr></thead>
           <tbody>
             <tr><td><strong>Manual</strong></td><td>—</td><td>Default. Gunakan <code class="il">Buttons</code> &amp; <code class="il">Callback</code>. Verifikasi ditangani sendiri oleh developer</td></tr>
-            <tr><td><strong>Luarmor</strong></td><td><code class="il">Luarmor = {}</code></td><td>Delegasi ke modul Luarmor. Mode manual diabaikan</td></tr>
-            <tr><td><strong>PandaDeveloper</strong></td><td><code class="il">PandaDeveloper = {}</code></td><td>Delegasi ke modul PandaDeveloper. Mode manual diabaikan</td></tr>
+            <tr><td><strong>API</strong></td><td><code class="il">API = {{ Type = "..." }}</code></td><td>Delegasi ke service built-in atau custom. Mode manual diabaikan</td></tr>
           </tbody>
         </table></div>
-        <p>Prioritas pengecekan: <code class="il">Luarmor</code> dicek pertama, lalu <code class="il">PandaDeveloper</code>, lalu fallback ke mode manual.</p>
 
         <div class="page-nav">
           <button class="pnav-btn" onclick="show('loadstring',getSL('loadstring'))">
@@ -1083,33 +1119,66 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
           <div class="page-title">Notification</div>
           <div class="page-subtitle">Tampilkan toast notification ke user</div>
         </div>
-        <h3>Basic</h3>
+
+        <h3>Notify() — Shorthand</h3>
         <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-          <code><span class="fn">Notify</span>(<span class="str">"Ini isi pesan"</span>)</code>
-        </div>
-        <h3>Lengkap</h3>
-        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-          <code><span class="fn">Notify</span>(
+          <code><span class="cm">-- Minimal</span>
+<span class="fn">Notify</span>(<span class="str">"Script berhasil diload!"</span>)
+
+<span class="cm">-- Lengkap</span>
+<span class="fn">Notify</span>(
     <span class="str">"Script berhasil diload!"</span>,  <span class="cm">-- Content</span>
     <span class="num">5</span>,                           <span class="cm">-- Delay (detik)</span>
     <span class="str">"Default"</span>,                   <span class="cm">-- Color</span>
     <span class="str">"My Script"</span>,                 <span class="cm">-- Title</span>
-    <span class="str">"Success"</span>,                   <span class="cm">-- Description</span>
-    <span class="str">""</span>                           <span class="cm">-- Icon (opsional)</span>
+    <span class="str">"Success"</span>                    <span class="cm">-- Description</span>
 )</code>
         </div>
-        <h3>MakeNotify</h3>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Parameter</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td>msg</td><td>string</td><td><code class="il">"Content"</code></td><td>Isi teks notifikasi (Content)</td></tr>
+            <tr><td>delay</td><td>number</td><td><code class="il">4</code></td><td>Durasi tampil dalam detik sebelum auto-close</td></tr>
+            <tr><td>color</td><td>string | Color3</td><td><code class="il">Color3 (cyan)</code></td><td>Warna teks Description</td></tr>
+            <tr><td>title</td><td>string</td><td><code class="il">Configname</code></td><td>Judul notifikasi</td></tr>
+            <tr><td>desc</td><td>string</td><td><code class="il">"Notification"</code></td><td>Teks kecil berwarna di samping judul</td></tr>
+          </tbody>
+        </table></div>
+
+        <h3>MakeNotify() — Full Config</h3>
         <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-          <code><span class="var">Chloex</span>:<span class="fn">MakeNotify</span>({
+          <code><span class="kw">local</span> <span class="var">Notif</span> <span class="op">=</span> <span class="var">VelarisUI</span>:<span class="fn">MakeNotify</span>({
     <span class="var">Title</span>       <span class="op">=</span> <span class="str">"My Script"</span>,
     <span class="var">Description</span> <span class="op">=</span> <span class="str">"Success"</span>,
     <span class="var">Content</span>     <span class="op">=</span> <span class="str">"Script telah diload dengan sukses!"</span>,
     <span class="var">Color</span>       <span class="op">=</span> <span class="str">"Default"</span>,
     <span class="var">Time</span>        <span class="op">=</span> <span class="num">0.5</span>,
     <span class="var">Delay</span>       <span class="op">=</span> <span class="num">5</span>,
-    <span class="var">Icon</span>        <span class="op">=</span> <span class="str">""</span>
-})</code>
+    <span class="var">Icon</span>        <span class="op">=</span> <span class="str">"lucide:check"</span>  <span class="cm">-- opsional, tampil di panel kiri</span>
+})
+
+<span class="cm">-- Tutup manual sebelum waktunya</span>
+<span class="var">Notif</span>:<span class="fn">Close</span>()</code>
         </div>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td>Title</td><td>string</td><td><code class="il">"Velaris UI"</code></td><td>Judul notifikasi</td></tr>
+            <tr><td>Description</td><td>string</td><td><code class="il">"Notification"</code></td><td>Teks berwarna kecil di samping judul</td></tr>
+            <tr><td>Content</td><td>string</td><td><code class="il">"Content"</code></td><td>Isi teks utama notifikasi</td></tr>
+            <tr><td>Color</td><td>string | Color3</td><td><code class="il">Color3 (cyan)</code></td><td>Warna teks Description</td></tr>
+            <tr><td>Time</td><td>number</td><td><code class="il">0.5</code></td><td>Durasi animasi slide-in/out (detik)</td></tr>
+            <tr><td>Delay</td><td>number</td><td><code class="il">5</code></td><td>Durasi tampil sebelum auto-close (detik)</td></tr>
+            <tr><td>Icon</td><td>string</td><td><code class="il">""</code></td><td>Icon di panel kiri notifikasi (rbxassetid, lucide:, solar:). Opsional</td></tr>
+          </tbody>
+        </table></div>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Method</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td>:Close()</td><td>Tutup notifikasi secara manual sebelum Delay habis. Return <code class="il">false</code> jika sudah pernah dipanggil</td></tr>
+          </tbody>
+        </table></div>
+
         <div class="page-nav">
           <button class="pnav-btn" onclick="show('section',getSL('section'))"><span class="pnav-btn-label">← Previous</span><span class="pnav-btn-name">Section</span></button>
           <button class="pnav-btn right" onclick="show('dialog',getSL('dialog'))"><span class="pnav-btn-label">Next →</span><span class="pnav-btn-name">Dialog</span></button>
@@ -1124,7 +1193,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
           <div class="page-subtitle">Modal konfirmasi dengan tombol pilihan</div>
         </div>
         <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-          <code><span class="var">Chloex</span>:<span class="fn">Dialog</span>({
+          <code><span class="var">VelarisUI</span>:<span class="fn">Dialog</span>({
     <span class="var">Title</span>   <span class="op">=</span> <span class="str">"Confirmation"</span>,
     <span class="var">Content</span> <span class="op">=</span> <span class="str">"Are you sure you want to continue?"</span>,
     <span class="var">Buttons</span> <span class="op">=</span> {
@@ -1133,12 +1202,20 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
             <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>() <span class="fn">print</span>(<span class="str">"User selected Yes"</span>) <span class="kw">end</span>
         },
         {
-            <span class="var">Name</span>     <span class="op">=</span> <span class="str">"No"</span>,
-            <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>() <span class="fn">print</span>(<span class="str">"User selected No"</span>) <span class="kw">end</span>
+            <span class="var">Name</span>     <span class="op">=</span> <span class="str">"Cancel"</span>,
+            <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>() <span class="kw">end</span>
         }
     }
 })</code>
         </div>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Property</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td>Title</td><td>string</td><td>Judul dialog</td></tr>
+            <tr><td>Content</td><td>string</td><td>Teks isi dialog. Mendukung <code class="il">\n</code> untuk baris baru</td></tr>
+            <tr><td>Buttons</td><td>table</td><td>Daftar tombol. Setiap entry berisi <code class="il">Name</code> dan <code class="il">Callback</code></td></tr>
+          </tbody>
+        </table></div>
         <div class="page-nav">
           <button class="pnav-btn" onclick="show('notification',getSL('notification'))"><span class="pnav-btn-label">← Previous</span><span class="pnav-btn-name">Notification</span></button>
           <button class="pnav-btn right" onclick="show('button',getSL('button'))"><span class="pnav-btn-label">Next →</span><span class="pnav-btn-name">Button</span></button>
