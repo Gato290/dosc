@@ -511,6 +511,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
               <tr><td>Version</td><td>number</td><td><code class="il">1</code></td><td>Versi config — jika berubah, config lama di-reset.</td></tr>
               <tr><td>Tab Width</td><td>number</td><td><code class="il">120</code></td><td>Lebar panel tab di sisi kiri.</td></tr>
               <tr><td>Image</td><td>string</td><td>—</td><td>Asset ID (tanpa prefix) untuk icon window &amp; toggle button.</td></tr>
+              <tr><td>Icon</td><td>string</td><td>—</td><td>rbxassetid:// untuk icon kecil di sisi kiri topbar (di sebelah Title).</td></tr>
               <tr><td>Configname</td><td>string</td><td><code class="il">"Velaris UI"</code></td><td>Nama folder config yang disimpan.</td></tr>
               <tr><td>Uitransparent</td><td>number</td><td><code class="il">0.15</code></td><td>Transparansi background UI. 0 = solid.</td></tr>
               <tr><td>Size</td><td>UDim2</td><td><code class="il">UDim2.fromOffset(640,400)</code></td><td>Ukuran window.</td></tr>
@@ -545,7 +546,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
         </div>
 
         <h2>Key System</h2>
-        <p>Tambahkan key system ke dalam konfigurasi Window.</p>
+        <p>Tambahkan key system ke dalam konfigurasi Window. UI akan menunggu verifikasi key sebelum window utama muncul.</p>
         <div class="code-block">
           <button class="copy-btn" onclick="copyCode(this)">Copy</button>
           <code><span class="var">KeySystem</span> <span class="op">=</span> {
@@ -555,20 +556,56 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
     <span class="var">Placeholder</span> <span class="op">=</span> <span class="str">"Enter Key"</span>,
     <span class="var">Default</span>     <span class="op">=</span> <span class="str">""</span>,
     <span class="var">Buttons</span> <span class="op">=</span> {
-        { <span class="var">Name</span> <span class="op">=</span> <span class="str">"Exit"</span>, <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">key</span>) <span class="kw">end</span> },
-        { <span class="var">Name</span> <span class="op">=</span> <span class="str">"Get key"</span>, <span class="var">Icon</span> <span class="op">=</span> <span class="str">"lucide:link"</span>, <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">key</span>) <span class="kw">end</span> },
+        {
+            <span class="var">Name</span>     <span class="op">=</span> <span class="str">"Exit"</span>,
+            <span class="var">Close</span>    <span class="op">=</span> <span class="kw">true</span>,    <span class="cm">-- tutup dialog tanpa verifikasi</span>
+            <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">key</span>) <span class="kw">end</span>
+        },
+        {
+            <span class="var">Name</span>     <span class="op">=</span> <span class="str">"Get Key"</span>,
+            <span class="var">Icon</span>     <span class="op">=</span> <span class="str">"lucide:link"</span>,
+            <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">key</span>)
+                <span class="cm">-- tidak return true/false → tidak menutup dialog</span>
+            <span class="kw">end</span>
+        },
         {
             <span class="var">Name</span>     <span class="op">=</span> <span class="str">"Submit"</span>,
+            <span class="var">Style</span>    <span class="op">=</span> <span class="str">"primary"</span>,  <span class="cm">-- tampil lebih terang</span>
             <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">key</span>)
                 <span class="kw">if</span> <span class="var">key</span> <span class="op">==</span> <span class="str">"mykey123"</span> <span class="kw">then</span>
-                    <span class="kw">return</span> <span class="kw">true</span>
+                    <span class="kw">return</span> <span class="kw">true</span>   <span class="cm">-- ✓ key valid → buka window</span>
                 <span class="kw">end</span>
-                <span class="kw">return</span> <span class="kw">false</span>
+                <span class="kw">return</span> <span class="kw">false</span>   <span class="cm">-- ✗ key salah → shake + highlight merah</span>
             <span class="kw">end</span>,
         },
     },
 },</code>
         </div>
+
+        <h3>KeySystem Properties</h3>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Property</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td>Title</td><td>string</td><td>Judul dialog key system</td></tr>
+            <tr><td>Icon</td><td>string</td><td>Icon kecil di pojok kiri atas dialog (rbxassetid, lucide:, solar:)</td></tr>
+            <tr><td>Note</td><td>string</td><td>Teks kecil di atas input field</td></tr>
+            <tr><td>Placeholder</td><td>string</td><td>Placeholder teks input field</td></tr>
+            <tr><td>Default</td><td>string</td><td>Teks awal di input field</td></tr>
+            <tr><td>Buttons</td><td>table</td><td>Daftar tombol di bagian bawah dialog</td></tr>
+          </tbody>
+        </table></div>
+
+        <h3>Button Properties</h3>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Property</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td>Name</td><td>string</td><td>Teks label tombol</td></tr>
+            <tr><td>Icon</td><td>string</td><td>Icon opsional di sebelah kiri teks tombol</td></tr>
+            <tr><td>Style</td><td>string</td><td><code class="il">"primary"</code> — tombol tampil lebih terang (highlight). Tombol terakhir di list otomatis primary</td></tr>
+            <tr><td>Close</td><td>boolean</td><td><code class="il">true</code> — tutup dialog tanpa verifikasi (untuk tombol Exit / Cancel)</td></tr>
+            <tr><td>Callback</td><td>function(key)</td><td>Dipanggil saat diklik, menerima teks key. Return <code class="il">true</code> → buka window. Return <code class="il">false</code> → shake &amp; highlight input merah. Return tanpa nilai → tidak menutup (berguna untuk "Get Key")</td></tr>
+          </tbody>
+        </table></div>
 
         <div class="page-nav">
           <button class="pnav-btn" onclick="show('loadstring',getSL('loadstring'))">
@@ -623,6 +660,41 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
             <tr><td>Icon</td><td>string</td><td>Icon di dalam tag (rbxassetid, lucide:name, solar:name)</td></tr>
           </tbody>
         </table></div>
+
+        <h3>Tag API</h3>
+        <p><code class="il">Window:Tag()</code> mengembalikan sebuah objek API yang bisa digunakan untuk mengubah tag secara dinamis setelah dibuat.</p>
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <code><span class="kw">local</span> <span class="var">MyTag</span> <span class="op">=</span> <span class="var">Window</span>:<span class="fn">Tag</span>({
+    <span class="var">Title</span> <span class="op">=</span> <span class="str">"v0.0.1"</span>,
+    <span class="var">Icon</span>  <span class="op">=</span> <span class="str">"lucide:tag"</span>,
+    <span class="var">Color</span> <span class="op">=</span> <span class="str">"Amber"</span>,
+})
+
+<span class="cm">-- Update teks tag</span>
+<span class="var">MyTag</span>:<span class="fn">SetTitle</span>(<span class="str">"v0.0.2"</span>)
+
+<span class="cm">-- Ganti icon</span>
+<span class="var">MyTag</span>:<span class="fn">SetIcon</span>(<span class="str">"lucide:star"</span>)
+<span class="var">MyTag</span>:<span class="fn">SetIcon</span>(<span class="str">""</span>)  <span class="cm">-- sembunyikan icon</span>
+
+<span class="cm">-- Ganti warna (nama tema / hex / Color3)</span>
+<span class="var">MyTag</span>:<span class="fn">SetColor</span>(<span class="str">"Rose"</span>)
+<span class="var">MyTag</span>:<span class="fn">SetColor</span>(<span class="str">"#FF5500"</span>)
+<span class="var">MyTag</span>:<span class="fn">SetColor</span>(<span class="var">Color3</span>.<span class="fn">fromRGB</span>(<span class="num">48</span>, <span class="num">255</span>, <span class="num">106</span>))
+
+<span class="cm">-- Hapus tag dari topbar</span>
+<span class="var">MyTag</span>:<span class="fn">Destroy</span>()</code>
+        </div>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Method</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td>:SetTitle(text)</td><td>Ubah teks label tag</td></tr>
+            <tr><td>:SetIcon(iconName)</td><td>Ubah icon tag. Kirim <code class="il">""</code> atau <code class="il">nil</code> untuk menyembunyikan icon</td></tr>
+            <tr><td>:SetColor(colorInput)</td><td>Ubah warna tag (nama tema, hex <code class="il">"#RRGGBB"</code>, atau Color3). Animasi tween otomatis</td></tr>
+            <tr><td>:Destroy()</td><td>Hapus tag dari topbar sepenuhnya</td></tr>
+          </tbody>
+        </table></div>
+
         <div class="page-nav">
           <button class="pnav-btn" onclick="show('window',getSL('window'))">
             <span class="pnav-btn-label">← Previous</span><span class="pnav-btn-name">Window</span>
@@ -1062,34 +1134,36 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
 })</code></div>
         </div>
         <div id="btn-v2" class="stab-content">
-          <p>Button V2 menampilkan layout lebih besar dengan dukungan ikon. Property <code class="il">Icon</code> mendukung 4 format berbeda:</p>
+          <p>Button V2 menampilkan layout lebih besar dengan dukungan <code class="il">Content</code> (subtitle) dan ikon. Jika <code class="il">Icon</code> tidak diisi, V2 secara otomatis menampilkan chevron <code class="il">›</code> di sisi kanan dan memberikan efek hover warna aksen pada judul.</p>
           <div class="table-wrap"><table>
-            <thead><tr><th>Format</th><th>Contoh</th><th>Keterangan</th></tr></thead>
+            <thead><tr><th>Format Icon</th><th>Contoh</th><th>Keterangan</th></tr></thead>
             <tbody>
               <tr><td>rbxassetid://</td><td><code class="il">rbxassetid://79715859717613</code></td><td>Asset ID dengan prefix lengkap</td></tr>
               <tr><td>ID saja</td><td><code class="il">79715859717613</code></td><td>Asset ID angka tanpa prefix</td></tr>
               <tr><td>lucide:</td><td><code class="il">lucide:bird</code></td><td>Icon dari Lucide icon pack</td></tr>
               <tr><td>solar:</td><td><code class="il">solar:home-bold</code></td><td>Icon dari Solar icon pack</td></tr>
+              <tr><td><em>(kosong)</em></td><td>—</td><td>Otomatis tampilkan chevron › dengan hover effect</td></tr>
             </tbody>
           </table></div>
           <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <code><span class="cm">-- rbxassetid:// (prefix lengkap)</span>
+            <code><span class="cm">-- Dengan ikon rbxassetid</span>
 <span class="var">Sec</span>.<span class="var">Button</span>:<span class="fn">AddButton</span>({
-    <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Button V2"</span>,
+    <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Open Inventory"</span>,
+    <span class="var">Content</span>  <span class="op">=</span> <span class="str">"Manage your items"</span>,
     <span class="var">Version</span>  <span class="op">=</span> <span class="str">"V2"</span>,
     <span class="var">Icon</span>     <span class="op">=</span> <span class="str">"rbxassetid://79715859717613"</span>,
     <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>() <span class="kw">end</span>
 })
 
-<span class="cm">-- ID saja (tanpa prefix)</span>
+<span class="cm">-- Tanpa ikon — otomatis chevron + hover effect</span>
 <span class="var">Sec</span>.<span class="var">Button</span>:<span class="fn">AddButton</span>({
-    <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Button V2"</span>,
+    <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Go to Settings"</span>,
+    <span class="var">Content</span>  <span class="op">=</span> <span class="str">"Configure your preferences"</span>,
     <span class="var">Version</span>  <span class="op">=</span> <span class="str">"V2"</span>,
-    <span class="var">Icon</span>     <span class="op">=</span> <span class="str">"79715859717613"</span>,
     <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>() <span class="kw">end</span>
 })
 
-<span class="cm">-- Lucide icon pack</span>
+<span class="cm">-- Dengan lucide icon pack</span>
 <span class="var">Sec</span>.<span class="var">Button</span>:<span class="fn">AddButton</span>({
     <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Button V2"</span>,
     <span class="var">Version</span>  <span class="op">=</span> <span class="str">"V2"</span>,
@@ -1097,13 +1171,24 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
     <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>() <span class="kw">end</span>
 })
 
-<span class="cm">-- Solar icon pack</span>
+<span class="cm">-- Dengan solar icon pack</span>
 <span class="var">Sec</span>.<span class="var">Button</span>:<span class="fn">AddButton</span>({
     <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Button V2"</span>,
     <span class="var">Version</span>  <span class="op">=</span> <span class="str">"V2"</span>,
     <span class="var">Icon</span>     <span class="op">=</span> <span class="str">"solar:home-bold"</span>,
     <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>() <span class="kw">end</span>
 })</code></div>
+          <div class="table-wrap"><table>
+            <thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+            <tbody>
+              <tr><td>Title</td><td>string</td><td><code class="il">"Confirm"</code></td><td>Judul utama button</td></tr>
+              <tr><td>Content</td><td>string</td><td><code class="il">""</code></td><td>Teks subtitle di bawah judul (opsional, mendukung RichText)</td></tr>
+              <tr><td>Version</td><td>string</td><td><code class="il">"V1"</code></td><td>Set ke <code class="il">"V2"</code> untuk layout besar dengan ikon/chevron</td></tr>
+              <tr><td>Icon</td><td>string</td><td><code class="il">nil</code></td><td>Ikon kanan. Jika tidak diisi, tampil chevron › otomatis</td></tr>
+              <tr><td>Callback</td><td>function</td><td>—</td><td>Fungsi yang dipanggil saat diklik</td></tr>
+              <tr><td>Locked</td><td>bool</td><td><code class="il">false</code></td><td>Kunci elemen sejak awal</td></tr>
+            </tbody>
+          </table></div>
         </div>
         <div id="btn-locked" class="stab-content">
           <p>Gunakan property <code class="il">Locked = true</code> untuk menonaktifkan button. Berlaku untuk Button V1 maupun V2.</p>
@@ -1335,6 +1420,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
           <div class="stab active" onclick="stab(this,'dd-single')">Single</div>
           <div class="stab" onclick="stab(this,'dd-multi')">Multi</div>
           <div class="stab" onclick="stab(this,'dd-label')">Label + Value</div>
+          <div class="stab" onclick="stab(this,'dd-disabled')">Disabled</div>
           <div class="stab" onclick="stab(this,'dd-fn')">Functions</div>
         </div>
         <div id="dd-single" class="stab-content active">
@@ -1371,6 +1457,35 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
     <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">value</span>) <span class="fn">print</span>(<span class="str">"Value:"</span>, <span class="var">value</span>) <span class="kw">end</span>
 })</code></div>
         </div>
+        <div id="dd-disabled" class="stab-content">
+          <p>Gunakan property <code class="il">DisabledValues</code> untuk menonaktifkan opsi tertentu saat dropdown dibuat. Opsi yang dinonaktifkan tampil redup dan tidak bisa dipilih. Gunakan <code class="il">:SetDisabledValues()</code> untuk mengubahnya secara dinamis.</p>
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <code><span class="cm">-- Nonaktifkan opsi tertentu saat deklarasi</span>
+<span class="var">Sec</span>.<span class="var">Dropdown</span>:<span class="fn">AddDropdown</span>({
+    <span class="var">Title</span>          <span class="op">=</span> <span class="str">"Rarity"</span>,
+    <span class="var">Options</span>        <span class="op">=</span> { <span class="str">"Common"</span>, <span class="str">"Rare"</span>, <span class="str">"Epic"</span>, <span class="str">"Legendary"</span> },
+    <span class="var">DisabledValues</span> <span class="op">=</span> { <span class="str">"Legendary"</span> },  <span class="cm">-- Legendary tidak bisa dipilih</span>
+    <span class="var">Callback</span>       <span class="op">=</span> <span class="kw">function</span>(<span class="var">value</span>) <span class="fn">print</span>(<span class="str">"Picked:"</span>, <span class="var">value</span>) <span class="kw">end</span>
+})
+
+<span class="cm">-- Update disabled values secara dinamis</span>
+<span class="kw">local</span> <span class="var">MyDrop</span> <span class="op">=</span> <span class="var">Sec</span>.<span class="var">Dropdown</span>:<span class="fn">AddDropdown</span>({
+    <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Items"</span>,
+    <span class="var">Options</span>  <span class="op">=</span> { <span class="str">"Sword"</span>, <span class="str">"Shield"</span>, <span class="str">"Bow"</span>, <span class="str">"Staff"</span> },
+    <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">value</span>) <span class="fn">print</span>(<span class="var">value</span>) <span class="kw">end</span>
+})
+
+<span class="var">MyDrop</span>:<span class="fn">SetDisabledValues</span>({ <span class="str">"Bow"</span>, <span class="str">"Staff"</span> })  <span class="cm">-- kunci Bow &amp; Staff</span>
+<span class="var">MyDrop</span>:<span class="fn">SetDisabledValues</span>({})               <span class="cm">-- buka semua kembali</span></code></div>
+          <div class="table-wrap"><table>
+            <thead><tr><th>Property / Method</th><th>Type</th><th>Description</th></tr></thead>
+            <tbody>
+              <tr><td>DisabledValues</td><td>table</td><td>Daftar nilai opsi yang dinonaktifkan sejak awal (tidak bisa dipilih, tampil redup)</td></tr>
+              <tr><td>:SetDisabledValues(list)</td><td>—</td><td>Update daftar opsi yang dinonaktifkan secara dinamis. Pass <code class="il">{}</code> untuk mengaktifkan semua kembali</td></tr>
+            </tbody>
+          </table></div>
+          <p>⚠️ <code class="il">DisabledValues</code> menggunakan <strong>Value</strong>, bukan Label. Jika opsi menggunakan format <code class="il">{ Label = "...", Value = "..." }</code>, isi <code class="il">DisabledValues</code> dengan Value-nya.</p>
+        </div>
         <div id="dd-fn" class="stab-content">
           <div class="table-wrap"><table>
             <thead><tr><th>Method / Property</th><th>Description</th></tr></thead>
@@ -1383,6 +1498,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
               <tr><td>:AddOption(option)</td><td>Tambah satu opsi</td></tr>
               <tr><td>:Clear()</td><td>Hapus semua opsi &amp; reset</td></tr>
               <tr><td>:SetValues(list, sel)</td><td>Reset &amp; isi ulang semua opsi</td></tr>
+              <tr><td>:SetDisabledValues(list)</td><td>Update opsi yang dinonaktifkan (tidak bisa dipilih)</td></tr>
               <tr><td>:SetLocked(state)</td><td>Kunci/buka elemen</td></tr>
               <tr><td>:GetLocked()</td><td>Cek status kunci</td></tr>
               <tr><td>:SetLockMessage(text)</td><td>Ubah teks pesan di overlay kunci</td></tr>
