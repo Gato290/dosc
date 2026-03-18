@@ -151,11 +151,12 @@ html,body{height:100%;font-family:var(--font);background:var(--bg);color:var(--t
 }
 
 /* MAIN */
-.main{margin-left:var(--sidebar-w);flex:1;min-height:calc(100vh - var(--nav-h))}
+.main{margin-left:var(--sidebar-w);flex:1;min-height:calc(100vh - var(--nav-h));overflow-x:hidden;min-width:0}
 
 .content-wrapper {
   margin:0 auto;max-width:820px;
   padding:40px 48px 80px;
+  overflow-x:hidden;
 }
 
 /* PAGE HEADER */
@@ -2609,219 +2610,11 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
       <div id="page-fullexample" class="page">
         <div class="page-header">
           <div class="page-title">Full Example</div>
-          <div class="page-subtitle">Contoh lengkap penggunaan VelarisUI</div>
+          <div class="page-subtitle">Jalankan contoh lengkap VelarisUI</div>
         </div>
+        <p>Load file example secara langsung menggunakan loadstring berikut:</p>
         <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-          <code><span class="kw">local</span> <span class="var">VelarisUI</span> <span class="op">=</span> <span class="fn">loadstring</span>(<span class="var">game</span>:<span class="fn">HttpGet</span>(<span class="str">"https://fitri324.pythonanywhere.com/VilarisUi.lua/raw"</span>))()
-
-<span class="kw">local</span> <span class="var">Window</span> <span class="op">=</span> <span class="var">VelarisUI</span>:<span class="fn">Window</span>({
-    <span class="var">Title</span>         <span class="op">=</span> <span class="str">"Velaris UI"</span>,
-    <span class="var">Footer</span>        <span class="op">=</span> <span class="str">"By Nexa"</span>,
-    <span class="var">Content</span>       <span class="op">=</span> <span class="str">"Content"</span>,
-    <span class="var">Color</span>         <span class="op">=</span> <span class="str">"Default"</span>,
-    <span class="var">Version</span>       <span class="op">=</span> <span class="num">1.0</span>,
-    [<span class="str">"Tab Width"</span>]  <span class="op">=</span> <span class="num">120</span>,
-    <span class="var">Image</span>         <span class="op">=</span> <span class="str">"101833678008843"</span>,
-    <span class="var">Configname</span>    <span class="op">=</span> <span class="str">"Vilaris_Ui"</span>,
-    <span class="var">Uitransparent</span> <span class="op">=</span> <span class="num">0.15</span>,
-    <span class="var">ShowUser</span>      <span class="op">=</span> <span class="kw">true</span>,
-    <span class="var">Search</span>        <span class="op">=</span> <span class="kw">true</span>,
-    <span class="var">Config</span> <span class="op">=</span> {
-        <span class="var">AutoSave</span> <span class="op">=</span> <span class="kw">true</span>,
-        <span class="var">AutoLoad</span> <span class="op">=</span> <span class="kw">true</span>,
-    },
-    <span class="var">KeySystem</span> <span class="op">=</span> {
-        <span class="var">Title</span>       <span class="op">=</span> <span class="str">"My Super Hub"</span>,
-        <span class="var">Icon</span>        <span class="op">=</span> <span class="str">"lucide:bird"</span>,
-        <span class="var">Note</span>        <span class="op">=</span> <span class="str">"Example Key System. Key: mykey123"</span>,
-        <span class="var">Placeholder</span> <span class="op">=</span> <span class="str">"Enter Key"</span>,
-        <span class="var">Default</span>     <span class="op">=</span> <span class="str">"mykey123"</span>,
-        <span class="var">Buttons</span> <span class="op">=</span> {
-            { <span class="var">Name</span> <span class="op">=</span> <span class="str">"Exit"</span>,    <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">key</span>) <span class="kw">end</span> },
-            { <span class="var">Name</span> <span class="op">=</span> <span class="str">"Get key"</span>, <span class="var">Icon</span> <span class="op">=</span> <span class="str">"lucide:link"</span>, <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">key</span>) <span class="kw">end</span> },
-            {
-                <span class="var">Name</span> <span class="op">=</span> <span class="str">"Submit"</span>,
-                <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">key</span>)
-                    <span class="kw">if</span> <span class="var">key</span> <span class="op">==</span> <span class="str">"mykey123"</span> <span class="kw">then return</span> <span class="kw">true</span> <span class="kw">end</span>
-                    <span class="kw">return</span> <span class="kw">false</span>
-                <span class="kw">end</span>,
-            },
-        },
-    },
-})
-
-<span class="var">Window</span>:<span class="fn">Tag</span>({
-    <span class="var">Title</span> <span class="op">=</span> <span class="str">"v0.0.2"</span>,
-    <span class="var">Color</span> <span class="op">=</span> <span class="var">Color3</span>.<span class="fn">fromRGB</span>(<span class="num">245</span>, <span class="num">167</span>, <span class="num">35</span>),
-})
-
-<span class="kw">local</span> <span class="var">Tabs</span> <span class="op">=</span> {
-    <span class="var">Section</span>     <span class="op">=</span> <span class="var">Window</span>:<span class="fn">AddTab</span>({ <span class="var">Name</span> <span class="op">=</span> <span class="str">"Section"</span>,     <span class="var">Icon</span> <span class="op">=</span> <span class="str">"lucide:table-of-contents"</span> }),
-    <span class="var">Badge</span>       <span class="op">=</span> <span class="var">Window</span>:<span class="fn">AddTab</span>({ <span class="var">Name</span> <span class="op">=</span> <span class="str">"Badge"</span>,       <span class="var">Icon</span> <span class="op">=</span> <span class="str">"lucide:badge-check"</span> }),
-    <span class="var">Button</span>      <span class="op">=</span> <span class="var">Window</span>:<span class="fn">AddTab</span>({ <span class="var">Name</span> <span class="op">=</span> <span class="str">"Button"</span>,      <span class="var">Icon</span> <span class="op">=</span> <span class="str">"lucide:mouse"</span> }),
-    <span class="var">Toggle</span>      <span class="op">=</span> <span class="var">Window</span>:<span class="fn">AddTab</span>({ <span class="var">Name</span> <span class="op">=</span> <span class="str">"Toggle"</span>,      <span class="var">Icon</span> <span class="op">=</span> <span class="str">"lucide:toggle-right"</span> }),
-    <span class="var">Dropdown</span>    <span class="op">=</span> <span class="var">Window</span>:<span class="fn">AddTab</span>({ <span class="var">Name</span> <span class="op">=</span> <span class="str">"Dropdwon"</span>,    <span class="var">Icon</span> <span class="op">=</span> <span class="str">"lucide:menu"</span> }),
-    <span class="var">Input</span>       <span class="op">=</span> <span class="var">Window</span>:<span class="fn">AddTab</span>({ <span class="var">Name</span> <span class="op">=</span> <span class="str">"Input"</span>,       <span class="var">Icon</span> <span class="op">=</span> <span class="str">"lucide:chevrons-left-right-ellipsis"</span> }),
-    <span class="var">Panel</span>       <span class="op">=</span> <span class="var">Window</span>:<span class="fn">AddTab</span>({ <span class="var">Name</span> <span class="op">=</span> <span class="str">"Panel"</span>,       <span class="var">Icon</span> <span class="op">=</span> <span class="str">"lucide:panel-bottom"</span> }),
-    <span class="var">Keybind</span>     <span class="op">=</span> <span class="var">Window</span>:<span class="fn">AddTab</span>({ <span class="var">Name</span> <span class="op">=</span> <span class="str">"Keybind"</span>,     <span class="var">Icon</span> <span class="op">=</span> <span class="str">"lucide:key"</span> }),
-    <span class="var">Slider</span>      <span class="op">=</span> <span class="var">Window</span>:<span class="fn">AddTab</span>({ <span class="var">Name</span> <span class="op">=</span> <span class="str">"Slider"</span>,      <span class="var">Icon</span> <span class="op">=</span> <span class="str">"lucide:settings-2"</span> }),
-    <span class="var">Paragraph</span>   <span class="op">=</span> <span class="var">Window</span>:<span class="fn">AddTab</span>({ <span class="var">Name</span> <span class="op">=</span> <span class="str">"Paragraph"</span>,   <span class="var">Icon</span> <span class="op">=</span> <span class="str">"lucide:rows-2"</span> }),
-    <span class="var">Colorpicker</span> <span class="op">=</span> <span class="var">Window</span>:<span class="fn">AddTab</span>({ <span class="var">Name</span> <span class="op">=</span> <span class="str">"Colorpicker"</span>, <span class="var">Icon</span> <span class="op">=</span> <span class="str">"lucide:palette"</span> }),
-    <span class="var">Config</span>      <span class="op">=</span> <span class="var">Window</span>:<span class="fn">AddTab</span>({ <span class="var">Name</span> <span class="op">=</span> <span class="str">"Config"</span>,      <span class="var">Icon</span> <span class="op">=</span> <span class="str">"lucide:folder"</span> }),
-}
-
-<span class="kw">local</span> <span class="var">Sec</span> <span class="op">=</span> {}
-
-<span class="cm">-- ── Section ──────────────────────────────────────────────────────────</span>
-<span class="var">Sec</span>.<span class="var">Section</span> <span class="op">=</span> <span class="var">Tabs</span>.<span class="var">Section</span>:<span class="fn">AddSection</span>({ <span class="var">Title</span> <span class="op">=</span> <span class="str">"Normal Section"</span> })
-<span class="var">Sec</span>.<span class="var">Section</span>:<span class="fn">AddToggle</span>({
-    <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Auto Farm Event"</span>,
-    <span class="var">Default</span>  <span class="op">=</span> <span class="kw">false</span>,
-    <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">value</span>) <span class="kw">end</span>
-})
-
-<span class="var">Sec</span>.<span class="var">SectionLeft</span> <span class="op">=</span> <span class="var">Tabs</span>.<span class="var">Section</span>:<span class="fn">AddSection</span>({ <span class="var">Title</span> <span class="op">=</span> <span class="str">"Left Section"</span>, <span class="var">Tabbox</span> <span class="op">=</span> <span class="str">"Left"</span> })
-<span class="var">Sec</span>.<span class="var">SectionLeft</span>:<span class="fn">AddToggle</span>({
-    <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Auto Farm"</span>,
-    <span class="var">Default</span>  <span class="op">=</span> <span class="kw">false</span>,
-    <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">value</span>) <span class="kw">end</span>
-})
-
-<span class="var">Sec</span>.<span class="var">SectionRight</span> <span class="op">=</span> <span class="var">Tabs</span>.<span class="var">Section</span>:<span class="fn">AddSection</span>({ <span class="var">Title</span> <span class="op">=</span> <span class="str">"Right Section"</span>, <span class="var">Tabbox</span> <span class="op">=</span> <span class="str">"Right"</span> })
-<span class="var">Sec</span>.<span class="var">SectionRight</span>:<span class="fn">AddDropdown</span>({
-    <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Example"</span>,
-    <span class="var">Options</span>  <span class="op">=</span> { <span class="str">"Option A"</span>, <span class="str">"Option B"</span>, <span class="str">"Option C"</span> },
-    <span class="var">Multi</span>    <span class="op">=</span> <span class="kw">false</span>,
-    <span class="var">Default</span>  <span class="op">=</span> <span class="str">"Option A"</span>,
-    <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">value</span>) <span class="fn">print</span>(<span class="str">"Selected:"</span>, <span class="var">value</span>) <span class="kw">end</span>
-})
-<span class="var">Sec</span>.<span class="var">SectionRight</span>:<span class="fn">AddButton</span>({
-    <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Button Test"</span>,
-    <span class="var">Version</span>  <span class="op">=</span> <span class="str">"V2"</span>,
-    <span class="var">Icon</span>     <span class="op">=</span> <span class="str">"lucide:bird"</span>,
-    <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>() <span class="kw">end</span>
-})
-
-<span class="cm">-- ── Badge ─────────────────────────────────────────────────────────────</span>
-<span class="var">Sec</span>.<span class="var">Badge</span> <span class="op">=</span> <span class="var">Tabs</span>.<span class="var">Badge</span>:<span class="fn">AddSection</span>({ <span class="var">Title</span> <span class="op">=</span> <span class="str">"Badge Section"</span>, <span class="var">Open</span> <span class="op">=</span> <span class="kw">true</span> })
-<span class="var">Sec</span>.<span class="var">Badge</span>:<span class="fn">AddParagraph</span>({ <span class="var">Title</span> <span class="op">=</span> <span class="str">"Example Badge Bug"</span>,     <span class="var">Content</span> <span class="op">=</span> <span class="str">"This is Bug paragraph."</span>,     <span class="var">Badge</span> <span class="op">=</span> <span class="str">"Bug"</span> })
-<span class="var">Sec</span>.<span class="var">Badge</span>:<span class="fn">AddParagraph</span>({ <span class="var">Title</span> <span class="op">=</span> <span class="str">"Example Badge New"</span>,     <span class="var">Content</span> <span class="op">=</span> <span class="str">"This is New paragraph."</span>,     <span class="var">Badge</span> <span class="op">=</span> <span class="str">"New"</span> })
-<span class="var">Sec</span>.<span class="var">Badge</span>:<span class="fn">AddParagraph</span>({ <span class="var">Title</span> <span class="op">=</span> <span class="str">"Example Badge Warning"</span>, <span class="var">Content</span> <span class="op">=</span> <span class="str">"This is Warning paragraph."</span>, <span class="var">Badge</span> <span class="op">=</span> <span class="str">"Warning"</span> })
-<span class="var">Sec</span>.<span class="var">Badge</span>:<span class="fn">AddParagraph</span>({ <span class="var">Title</span> <span class="op">=</span> <span class="str">"Example Badge Fixed"</span>,   <span class="var">Content</span> <span class="op">=</span> <span class="str">"This is Fixed paragraph."</span>,   <span class="var">Badge</span> <span class="op">=</span> <span class="str">"Fixed"</span> })
-
-<span class="cm">-- ── Button ────────────────────────────────────────────────────────────</span>
-<span class="var">Sec</span>.<span class="var">Button</span> <span class="op">=</span> <span class="var">Tabs</span>.<span class="var">Button</span>:<span class="fn">AddSection</span>({ <span class="var">Title</span> <span class="op">=</span> <span class="str">"Button Section"</span>, <span class="var">Open</span> <span class="op">=</span> <span class="kw">true</span> })
-<span class="var">Sec</span>.<span class="var">Button</span>:<span class="fn">AddButton</span>({ <span class="var">Title</span> <span class="op">=</span> <span class="str">"Example Single"</span>, <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>() <span class="fn">Nt</span>(<span class="str">"Example clicked!"</span>, <span class="num">2</span>) <span class="kw">end</span> })
-<span class="var">Sec</span>.<span class="var">Button</span>:<span class="fn">AddButton</span>({
-    <span class="var">Title</span>       <span class="op">=</span> <span class="str">"Example"</span>,      <span class="var">Callback</span>    <span class="op">=</span> <span class="kw">function</span>() <span class="fn">Nt</span>(<span class="str">"Example enabled!"</span>, <span class="num">2</span>) <span class="kw">end</span>,
-    <span class="var">SubTitle</span>    <span class="op">=</span> <span class="str">"Example Off"</span>, <span class="var">SubCallback</span> <span class="op">=</span> <span class="kw">function</span>() <span class="fn">Nt</span>(<span class="str">"Example disabled!"</span>, <span class="num">2</span>) <span class="kw">end</span>,
-})
-<span class="var">Sec</span>.<span class="var">Button</span>:<span class="fn">AddButton</span>({ <span class="var">Title</span> <span class="op">=</span> <span class="str">"Example Button V2"</span>,        <span class="var">Version</span> <span class="op">=</span> <span class="str">"V2"</span>, <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>() <span class="fn">Nt</span>(<span class="str">"Example clicked!"</span>, <span class="num">2</span>) <span class="kw">end</span> })
-<span class="var">Sec</span>.<span class="var">Button</span>:<span class="fn">AddButton</span>({ <span class="var">Title</span> <span class="op">=</span> <span class="str">"Example Button V2 (Icon)"</span>, <span class="var">Version</span> <span class="op">=</span> <span class="str">"V2"</span>, <span class="var">Icon</span> <span class="op">=</span> <span class="str">"rbxassetid://79715859717613"</span>, <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>() <span class="fn">Nt</span>(<span class="str">"Example clicked!"</span>, <span class="num">2</span>) <span class="kw">end</span> })
-<span class="var">Sec</span>.<span class="var">Button</span>:<span class="fn">AddButton</span>({ <span class="var">Title</span> <span class="op">=</span> <span class="str">"Locked"</span>,          <span class="var">Locked</span> <span class="op">=</span> <span class="kw">true</span>, <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>() <span class="kw">end</span> })
-<span class="var">Sec</span>.<span class="var">Button</span>:<span class="fn">AddButton</span>({ <span class="var">Title</span> <span class="op">=</span> <span class="str">"Button V2 Locked"</span>, <span class="var">Locked</span> <span class="op">=</span> <span class="kw">true</span>, <span class="var">Version</span> <span class="op">=</span> <span class="str">"V2"</span>, <span class="var">Icon</span> <span class="op">=</span> <span class="str">"rbxassetid://79715859717613"</span>, <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>() <span class="kw">end</span> })
-
-<span class="cm">-- ── Toggle ────────────────────────────────────────────────────────────</span>
-<span class="var">Sec</span>.<span class="var">Toggle</span> <span class="op">=</span> <span class="var">Tabs</span>.<span class="var">Toggle</span>:<span class="fn">AddSection</span>({ <span class="var">Title</span> <span class="op">=</span> <span class="str">"Toggle Section"</span>, <span class="var">Open</span> <span class="op">=</span> <span class="kw">true</span> })
-<span class="var">Sec</span>.<span class="var">Toggle</span>:<span class="fn">AddToggle</span>({ <span class="var">Title</span> <span class="op">=</span> <span class="str">"Example Basic"</span>,   <span class="var">Default</span> <span class="op">=</span> <span class="kw">false</span>, <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">v</span>) <span class="fn">Nt</span>(<span class="var">v</span> <span class="kw">and</span> <span class="str">"Enabled!"</span> <span class="kw">or</span> <span class="str">"Disabled!"</span>, <span class="num">2</span>) <span class="kw">end</span> })
-<span class="var">Sec</span>.<span class="var">Toggle</span>:<span class="fn">AddToggle</span>({ <span class="var">Title</span> <span class="op">=</span> <span class="str">"Example Title2"</span>, <span class="var">Title2</span> <span class="op">=</span> <span class="str">"Example Sub Title"</span>, <span class="var">Default</span> <span class="op">=</span> <span class="kw">false</span>, <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">v</span>) <span class="kw">end</span> })
-<span class="var">Sec</span>.<span class="var">Toggle</span>:<span class="fn">AddToggle</span>({ <span class="var">Title</span> <span class="op">=</span> <span class="str">"Example Content"</span>, <span class="var">Content</span> <span class="op">=</span> <span class="str">"This is an example toggle description"</span>, <span class="var">Default</span> <span class="op">=</span> <span class="kw">false</span>, <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">v</span>) <span class="kw">end</span> })
-<span class="var">Sec</span>.<span class="var">Toggle</span>:<span class="fn">AddToggle</span>({ <span class="var">Title</span> <span class="op">=</span> <span class="str">"Toggle Locked"</span>,  <span class="var">Locked</span> <span class="op">=</span> <span class="kw">true</span>, <span class="var">Default</span> <span class="op">=</span> <span class="kw">false</span>, <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">v</span>) <span class="kw">end</span> })
-
-<span class="cm">-- ── Dropdown ──────────────────────────────────────────────────────────</span>
-<span class="var">Sec</span>.<span class="var">Dropdown</span> <span class="op">=</span> <span class="var">Tabs</span>.<span class="var">Dropdown</span>:<span class="fn">AddSection</span>({ <span class="var">Title</span> <span class="op">=</span> <span class="str">"Dropdown Section"</span>, <span class="var">Open</span> <span class="op">=</span> <span class="kw">true</span> })
-<span class="var">Sec</span>.<span class="var">Dropdown</span>:<span class="fn">AddDropdown</span>({
-    <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Example Single"</span>,
-    <span class="var">Content</span>  <span class="op">=</span> <span class="str">"Example dropdown description"</span>,
-    <span class="var">Options</span>  <span class="op">=</span> { <span class="str">"Option A"</span>, <span class="str">"Option B"</span>, <span class="str">"Option C"</span>, <span class="str">"Option D"</span> },
-    <span class="var">Multi</span>    <span class="op">=</span> <span class="kw">false</span>,
-    <span class="var">Default</span>  <span class="op">=</span> <span class="str">"Option A"</span>,
-    <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">value</span>) <span class="fn">print</span>(<span class="str">"Selected:"</span>, <span class="var">value</span>) <span class="kw">end</span>
-})
-<span class="var">Sec</span>.<span class="var">Dropdown</span>:<span class="fn">AddDropdown</span>({
-    <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Example Multi"</span>,
-    <span class="var">Content</span>  <span class="op">=</span> <span class="str">"Example multi dropdown description"</span>,
-    <span class="var">Options</span>  <span class="op">=</span> { <span class="str">"Option 1"</span>, <span class="str">"Option 2"</span>, <span class="str">"Option 3"</span>, <span class="str">"Option 4"</span> },
-    <span class="var">Multi</span>    <span class="op">=</span> <span class="kw">true</span>,
-    <span class="var">Default</span>  <span class="op">=</span> { <span class="str">"Option 1"</span>, <span class="str">"Option 2"</span> },
-    <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">t</span>) <span class="kw">for</span> <span class="var">_</span>, <span class="var">v</span> <span class="kw">in</span> <span class="fn">ipairs</span>(<span class="var">t</span>) <span class="kw">do</span> <span class="fn">print</span>(<span class="str">"- "</span> <span class="op">..</span> <span class="var">v</span>) <span class="kw">end</span> <span class="kw">end</span>
-})
-
-<span class="cm">-- ── Input ─────────────────────────────────────────────────────────────</span>
-<span class="var">Sec</span>.<span class="var">Input</span> <span class="op">=</span> <span class="var">Tabs</span>.<span class="var">Input</span>:<span class="fn">AddSection</span>({ <span class="var">Title</span> <span class="op">=</span> <span class="str">"Input Section"</span>, <span class="var">Open</span> <span class="op">=</span> <span class="kw">true</span> })
-<span class="var">Sec</span>.<span class="var">Input</span>:<span class="fn">AddInput</span>({ <span class="var">Title</span> <span class="op">=</span> <span class="str">"Username"</span>,    <span class="var">Content</span> <span class="op">=</span> <span class="str">"Enter your username"</span>, <span class="var">Default</span> <span class="op">=</span> <span class="var">game</span>.<span class="var">Players</span>.<span class="var">LocalPlayer</span>.<span class="var">Name</span>, <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">v</span>) <span class="kw">end</span> })
-<span class="var">Sec</span>.<span class="var">Input</span>:<span class="fn">AddInput</span>({ <span class="var">Title</span> <span class="op">=</span> <span class="str">"Input Search"</span>, <span class="var">Content</span> <span class="op">=</span> <span class="str">"Type item name to search"</span>, <span class="var">Default</span> <span class="op">=</span> <span class="str">""</span>, <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">v</span>) <span class="kw">end</span> })
-<span class="var">Sec</span>.<span class="var">Input</span>:<span class="fn">AddInput</span>({ <span class="var">Title</span> <span class="op">=</span> <span class="str">"Type Textarea"</span>, <span class="var">Type</span> <span class="op">=</span> <span class="str">"Textarea"</span>, <span class="var">Content</span> <span class="op">=</span> <span class="str">"Enter your username"</span>, <span class="var">Default</span> <span class="op">=</span> <span class="str">""</span>, <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">v</span>) <span class="kw">end</span> })
-<span class="var">Sec</span>.<span class="var">Input</span>:<span class="fn">AddInput</span>({ <span class="var">Title</span> <span class="op">=</span> <span class="str">"Input Icon"</span>,    <span class="var">InputIcon</span> <span class="op">=</span> <span class="str">"lucide:bird"</span>, <span class="var">Content</span> <span class="op">=</span> <span class="str">"Enter your username"</span>, <span class="var">Default</span> <span class="op">=</span> <span class="str">""</span>, <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">v</span>) <span class="kw">end</span> })
-
-<span class="cm">-- ── Panel ─────────────────────────────────────────────────────────────</span>
-<span class="var">Sec</span>.<span class="var">Panel</span> <span class="op">=</span> <span class="var">Tabs</span>.<span class="var">Panel</span>:<span class="fn">AddSection</span>({ <span class="var">Title</span> <span class="op">=</span> <span class="str">"Panel Section"</span>, <span class="var">Open</span> <span class="op">=</span> <span class="kw">true</span> })
-<span class="var">Sec</span>.<span class="var">Panel</span>:<span class="fn">AddPanel</span>({
-    <span class="var">Title</span>          <span class="op">=</span> <span class="str">"Example (Single Button)"</span>,
-    <span class="var">Content</span>        <span class="op">=</span> <span class="str">"Example panel description"</span>,
-    <span class="var">Placeholder</span>    <span class="op">=</span> <span class="str">"Example_Name"</span>,
-    <span class="var">Default</span>        <span class="op">=</span> <span class="str">"ExampleDefault"</span>,
-    <span class="var">ButtonText</span>     <span class="op">=</span> <span class="str">"Example Action"</span>,
-    <span class="var">ButtonCallback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">value</span>) <span class="fn">Nt</span>(<span class="str">"Example action executed!"</span>, <span class="num">2</span>) <span class="kw">end</span>
-})
-<span class="var">Sec</span>.<span class="var">Panel</span>:<span class="fn">AddPanel</span>({
-    <span class="var">Title</span>             <span class="op">=</span> <span class="str">"Example (Dual Button)"</span>,
-    <span class="var">Content</span>           <span class="op">=</span> <span class="str">"Example panel with two actions"</span>,
-    <span class="var">Placeholder</span>       <span class="op">=</span> <span class="str">"Example_Name"</span>,
-    <span class="var">Default</span>           <span class="op">=</span> <span class="str">""</span>,
-    <span class="var">ButtonText</span>        <span class="op">=</span> <span class="str">"Example Save"</span>,
-    <span class="var">ButtonCallback</span>    <span class="op">=</span> <span class="kw">function</span>(<span class="var">v</span>) <span class="fn">Nt</span>(<span class="str">"Example saved!"</span>, <span class="num">2</span>) <span class="kw">end</span>,
-    <span class="var">SubButtonText</span>     <span class="op">=</span> <span class="str">"Example Load"</span>,
-    <span class="var">SubButtonCallback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">v</span>) <span class="fn">Nt</span>(<span class="str">"Example loaded!"</span>, <span class="num">2</span>) <span class="kw">end</span>,
-})
-
-<span class="cm">-- ── Keybind ───────────────────────────────────────────────────────────</span>
-<span class="var">Sec</span>.<span class="var">Keybind</span> <span class="op">=</span> <span class="var">Tabs</span>.<span class="var">Keybind</span>:<span class="fn">AddSection</span>({ <span class="var">Title</span> <span class="op">=</span> <span class="str">"Keybind Section"</span>, <span class="var">Open</span> <span class="op">=</span> <span class="kw">true</span> })
-<span class="var">Sec</span>.<span class="var">Keybind</span>:<span class="fn">AddKeybind</span>({
-    <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Toggle ESP"</span>,
-    <span class="var">Content</span>  <span class="op">=</span> <span class="str">"Tekan untuk toggle"</span>,
-    <span class="var">Value</span>    <span class="op">=</span> <span class="str">"RightShift"</span>,
-    <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">key</span>) <span class="kw">end</span>
-})
-
-<span class="cm">-- ── Slider ────────────────────────────────────────────────────────────</span>
-<span class="var">Sec</span>.<span class="var">Slider</span> <span class="op">=</span> <span class="var">Tabs</span>.<span class="var">Slider</span>:<span class="fn">AddSection</span>({ <span class="var">Title</span> <span class="op">=</span> <span class="str">"Slider Section"</span>, <span class="var">Open</span> <span class="op">=</span> <span class="kw">true</span> })
-<span class="var">Sec</span>.<span class="var">Slider</span>:<span class="fn">AddSlider</span>({ <span class="var">Title</span> <span class="op">=</span> <span class="str">"Example Basic"</span>,       <span class="var">Min</span> <span class="op">=</span> <span class="num">0</span>, <span class="var">Max</span> <span class="op">=</span> <span class="num">100</span>, <span class="var">Default</span> <span class="op">=</span> <span class="num">50</span>, <span class="var">Increment</span> <span class="op">=</span> <span class="num">1</span>, <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">v</span>) <span class="kw">end</span> })
-<span class="var">Sec</span>.<span class="var">Slider</span>:<span class="fn">AddSlider</span>({ <span class="var">Title</span> <span class="op">=</span> <span class="str">"Example Alternative"</span>, <span class="var">Min</span> <span class="op">=</span> <span class="num">0</span>, <span class="var">Max</span> <span class="op">=</span> <span class="num">100</span>, <span class="var">Default</span> <span class="op">=</span> <span class="num">70</span>, <span class="var">Increment</span> <span class="op">=</span> <span class="num">5</span>, <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">v</span>) <span class="kw">end</span> })
-
-<span class="cm">-- ── Paragraph ─────────────────────────────────────────────────────────</span>
-<span class="var">Sec</span>.<span class="var">Paragraph</span> <span class="op">=</span> <span class="var">Tabs</span>.<span class="var">Paragraph</span>:<span class="fn">AddSection</span>({ <span class="var">Title</span> <span class="op">=</span> <span class="str">"Paragraph Section"</span>, <span class="var">Open</span> <span class="op">=</span> <span class="kw">true</span> })
-<span class="var">Sec</span>.<span class="var">Paragraph</span>:<span class="fn">AddParagraph</span>({ <span class="var">Title</span> <span class="op">=</span> <span class="str">"Example"</span>, <span class="var">Content</span> <span class="op">=</span> <span class="str">"This is an example paragraph.\nUse \\n for new lines."</span> })
-<span class="var">Sec</span>.<span class="var">Paragraph</span>:<span class="fn">AddParagraph</span>({ <span class="var">Title</span> <span class="op">=</span> <span class="str">"Example"</span>, <span class="var">Content</span> <span class="op">=</span> <span class="str">"Example information paragraph with an icon."</span>, <span class="var">Icon</span> <span class="op">=</span> <span class="str">"example_icon"</span> })
-<span class="var">Sec</span>.<span class="var">Paragraph</span>:<span class="fn">AddParagraph</span>({
-    <span class="var">Title</span> <span class="op">=</span> <span class="str">"Example"</span>, <span class="var">Content</span> <span class="op">=</span> <span class="str">"Example paragraph with action button."</span>, <span class="var">Icon</span> <span class="op">=</span> <span class="str">"example_action_icon"</span>,
-    <span class="var">ButtonText</span> <span class="op">=</span> <span class="str">"Example Action"</span>, <span class="var">ButtonCallback</span> <span class="op">=</span> <span class="kw">function</span>() <span class="fn">print</span>(<span class="str">"Example button clicked"</span>) <span class="kw">end</span>
-})
-<span class="var">Sec</span>.<span class="var">Paragraph</span>:<span class="fn">AddParagraph</span>({
-    <span class="var">Title</span>          <span class="op">=</span> <span class="str">"Velaris Official Discord"</span>,
-    <span class="var">Content</span>        <span class="op">=</span> <span class="str">"Velaris UI Library best"</span>,
-    <span class="var">Color</span>          <span class="op">=</span> <span class="var">Color3</span>.<span class="fn">fromRGB</span>(<span class="num">70</span>, <span class="num">130</span>, <span class="num">220</span>),
-    <span class="var">ButtonText</span>     <span class="op">=</span> <span class="str">"Copy Discord"</span>,
-    <span class="var">ButtonCallback</span> <span class="op">=</span> <span class="kw">function</span>() <span class="fn">setclipboard</span>(<span class="str">"discord.gg/ECxQFc97F5"</span>) <span class="kw">end</span>,
-})
-<span class="var">Sec</span>.<span class="var">Paragraph</span>:<span class="fn">AddParagraph</span>({
-    <span class="var">Title</span>             <span class="op">=</span> <span class="str">"Velaris UI"</span>,
-    <span class="var">Content</span>           <span class="op">=</span> <span class="str">"Stable, Smooth - Powered by Velaris UI Library"</span>,
-    <span class="var">Color</span>             <span class="op">=</span> <span class="var">Color3</span>.<span class="fn">fromRGB</span>(<span class="num">220</span>, <span class="num">100</span>, <span class="num">90</span>),
-    <span class="var">ButtonText</span>        <span class="op">=</span> <span class="str">"Discord Velaris"</span>,
-    <span class="var">ButtonCallback</span>    <span class="op">=</span> <span class="kw">function</span>() <span class="fn">setclipboard</span>(<span class="str">"discord.gg/ECxQFc97F5"</span>) <span class="kw">end</span>,
-    <span class="var">SubButtonText</span>     <span class="op">=</span> <span class="str">"Link Velaris"</span>,
-    <span class="var">SubButtonCallback</span> <span class="op">=</span> <span class="kw">function</span>() <span class="fn">print</span>(<span class="str">"SubButton clicked!"</span>) <span class="kw">end</span>,
-})
-
-<span class="cm">-- ── Colorpicker ───────────────────────────────────────────────────────</span>
-<span class="var">Sec</span>.<span class="var">Colorpicker</span> <span class="op">=</span> <span class="var">Tabs</span>.<span class="var">Colorpicker</span>:<span class="fn">AddSection</span>({ <span class="var">Title</span> <span class="op">=</span> <span class="str">"Colorpicker Section"</span>, <span class="var">Open</span> <span class="op">=</span> <span class="kw">true</span> })
-<span class="var">Sec</span>.<span class="var">Colorpicker</span>:<span class="fn">AddColorpicker</span>({
-    <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Select Color"</span>,
-    <span class="var">Default</span>  <span class="op">=</span> <span class="var">Color3</span>.<span class="fn">fromRGB</span>(<span class="num">255</span>, <span class="num">100</span>, <span class="num">100</span>),
-    <span class="var">Flag</span>     <span class="op">=</span> <span class="str">"custom_color"</span>,
-    <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">color</span>) <span class="fn">print</span>(<span class="str">"Warna dipilih:"</span>, <span class="var">color</span>) <span class="kw">end</span>
-})</code>
+          <code><span class="fn">loadstring</span>(<span class="var">game</span>:<span class="fn">HttpGet</span>(<span class="str">"https://raw.githubusercontent.com/nhfudzfsrzggt/brigida/refs/heads/main/full_example.lua"</span>))()</code>
         </div>
         <div class="info-box">
           💬 Butuh bantuan? Join Discord: <code class="il">discord.gg/ECxQFc97F5</code>
@@ -2984,7 +2777,11 @@ window.addEventListener('popstate', function(e) {
   document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
   if (linkEl) linkEl.classList.add('active');
   document.querySelector('.main').scrollTo(0, 0);
+  window.scrollTo(0, 0);
 });
+
+// Prevent browser from auto-scrolling to hash anchor
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 
 // Load from hash on page open
 (function() {
@@ -2998,6 +2795,18 @@ window.addEventListener('popstate', function(e) {
     document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
     if (linkEl) linkEl.classList.add('active');
     history.replaceState({ page: id }, '', '#' + hash.charAt(0).toUpperCase() + hash.slice(1));
+  }
+  // Always reset scroll after hash load
+  window.scrollTo(0, 0);
+  const main = document.querySelector('.main');
+  if (main) main.scrollTo(0, 0);
+  // Scroll sidebar to show active nav-link
+  const sidebar = document.querySelector('.sidebar');
+  const activeLink = document.querySelector('.nav-link.active');
+  if (sidebar && activeLink) {
+    const linkTop = activeLink.offsetTop;
+    const sidebarH = sidebar.clientHeight;
+    if (linkTop > sidebarH * 0.6) sidebar.scrollTo(0, linkTop - sidebarH * 0.3);
   }
 })();
 
