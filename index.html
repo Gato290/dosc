@@ -415,6 +415,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
 
     <div class="nav-group">
       <div class="nav-group-label">More</div>
+      <a class="nav-link" onclick="show('configsection',this)">ConfigSection</a>
       <a class="nav-link" onclick="show('fullexample',this)">Full Example</a>
     </div>
   </aside>
@@ -605,113 +606,6 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
             <tr><td>Style</td><td>string</td><td><code class="il">"primary"</code> — tombol tampil lebih terang (highlight). Tombol terakhir di list otomatis primary</td></tr>
             <tr><td>Close</td><td>boolean</td><td><code class="il">true</code> — tutup dialog tanpa verifikasi (untuk tombol Exit / Cancel)</td></tr>
             <tr><td>Callback</td><td>function(key)</td><td>Dipanggil saat diklik, menerima teks key. Return <code class="il">true</code> → buka window. Return <code class="il">false</code> → shake &amp; highlight input merah. Return tanpa nilai → tidak menutup (berguna untuk "Get Key")</td></tr>
-          </tbody>
-        </table></div>
-
-        <h2>Key System — Mode API (Luarmor, PandaDeveloper, dll)</h2>
-        <p>Gunakan property <code class="il">API = {}</code> untuk mengintegrasikan key system pihak ketiga. VelarisUI akan otomatis mendeteksi service, mengumpulkan args, dan menampilkan UI verifikasi lengkap dengan feedback real-time.</p>
-
-        <h3>Luarmor</h3>
-        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="var">KeySystem</span> <span class="op">=</span> {
-    <span class="var">Note</span>    <span class="op">=</span> <span class="str">"Get key at discord.gg/xxx"</span>,
-    <span class="var">SaveKey</span> <span class="op">=</span> <span class="kw">true</span>,
-    <span class="var">KeyFile</span> <span class="op">=</span> <span class="str">"MyKey"</span>,
-    <span class="var">API</span> <span class="op">=</span> {
-        { <span class="var">Type</span> <span class="op">=</span> <span class="str">"luarmor"</span>, <span class="var">ScriptId</span> <span class="op">=</span> <span class="num">1234</span> },
-    },
-},</code></div>
-        </div>
-
-        <h3>PandaDeveloper</h3>
-        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="var">KeySystem</span> <span class="op">=</span> {
-    <span class="var">Note</span>    <span class="op">=</span> <span class="str">"Get key at discord.gg/xxx"</span>,
-    <span class="var">SaveKey</span> <span class="op">=</span> <span class="kw">true</span>,
-    <span class="var">API</span> <span class="op">=</span> {
-        { <span class="var">Type</span> <span class="op">=</span> <span class="str">"pandadeveloper"</span>, <span class="var">ServiceId</span> <span class="op">=</span> <span class="str">"myServiceId"</span> },
-    },
-},</code></div>
-        </div>
-
-        <h3>Custom Service</h3>
-        <p>Daftarkan service sendiri via <code class="il">VelarisUI.Services["nama"]</code> sebelum <code class="il">Window</code> dibuat. Service adalah object dengan field <code class="il">Name</code>, <code class="il">Icon</code>, <code class="il">Args</code>, dan <code class="il">New</code>.</p>
-        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="kw">local</span> <span class="var">VelarisUI</span> <span class="op">=</span> <span class="fn">loadstring</span>(<span class="var">game</span>:<span class="fn">HttpGet</span>(<span class="str">"..."</span>))()
-
-<span class="var">VelarisUI</span>.<span class="var">Services</span>[<span class="str">"myservice"</span>] <span class="op">=</span> {
-    <span class="var">Name</span> <span class="op">=</span> <span class="str">"My Service"</span>,
-    <span class="var">Icon</span> <span class="op">=</span> <span class="str">"lucide:key"</span>,
-    <span class="var">Args</span> <span class="op">=</span> { <span class="str">"ServiceId"</span>, <span class="str">"Token"</span> },  <span class="cm">-- nama field dari API entry</span>
-
-    <span class="var">New</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">ServiceId</span>, <span class="var">Token</span>)  <span class="cm">-- dipanggil dengan nilai Args berurutan</span>
-        <span class="kw">local function</span> <span class="fn">validateKey</span>(<span class="var">key</span>)
-            <span class="kw">if not</span> <span class="var">key</span> <span class="kw">then return</span> <span class="kw">false</span>, <span class="str">"Key invalid!"</span> <span class="kw">end</span>
-            <span class="kw">return</span> <span class="kw">true</span>, <span class="str">"Key valid!"</span>
-        <span class="kw">end</span>
-        <span class="kw">local function</span> <span class="fn">copyLink</span>()
-            <span class="fn">setclipboard</span>(<span class="str">"https://mysite.com/getkey"</span>)
-        <span class="kw">end</span>
-        <span class="kw">return</span> {
-            <span class="var">Verify</span> <span class="op">=</span> <span class="var">validateKey</span>,  <span class="cm">-- required</span>
-            <span class="var">Copy</span>   <span class="op">=</span> <span class="var">copyLink</span>,     <span class="cm">-- required</span>
-        }
-    <span class="kw">end</span>
-}
-
-<span class="var">VelarisUI</span>:<span class="fn">Window</span>({
-    <span class="var">KeySystem</span> <span class="op">=</span> {
-        <span class="var">Note</span>    <span class="op">=</span> <span class="str">"Get key at discord.gg/xxx"</span>,
-        <span class="var">SaveKey</span> <span class="op">=</span> <span class="kw">true</span>,
-        <span class="var">API</span> <span class="op">=</span> {
-            { <span class="var">Type</span> <span class="op">=</span> <span class="str">"myservice"</span>, <span class="var">ServiceId</span> <span class="op">=</span> <span class="str">"abc123"</span>, <span class="var">Token</span> <span class="op">=</span> <span class="str">"xyz"</span> },
-        },
-    },
-})</code></div>
-        </div>
-
-        <h3>Service Object Fields</h3>
-        <div class="table-wrap"><table>
-          <thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>
-          <tbody>
-            <tr><td>Name</td><td>string</td><td>Nama tampilan service — ditampilkan sebagai badge di pojok kanan atas card key system</td></tr>
-            <tr><td>Icon</td><td>string</td><td>Icon yang tampil di pojok kiri atas card (rbxassetid, lucide:, solar:)</td></tr>
-            <tr><td>Args</td><td>table</td><td>Daftar nama field yang diambil dari API entry dan diteruskan ke <code class="il">New()</code> secara berurutan</td></tr>
-            <tr><td>New</td><td>function(...)</td><td>Factory — dipanggil sekali dengan nilai dari <code class="il">Args</code>. Harus return object dengan <code class="il">Verify</code> dan <code class="il">Copy</code></td></tr>
-          </tbody>
-        </table></div>
-
-        <h3>Return Object dari New()</h3>
-        <div class="table-wrap"><table>
-          <thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>
-          <tbody>
-            <tr><td>Verify</td><td>function(key)</td><td>Required. Dipanggil async saat user submit. Return <code class="il">bool, message</code> — <code class="il">true</code> = valid (window terbuka), <code class="il">false</code> = ditolak (shake + highlight merah)</td></tr>
-            <tr><td>Copy</td><td>function()</td><td>Required. Dipanggil saat user klik tombol "Copy". Biasanya berisi <code class="il">setclipboard()</code> ke link get key. Tombol <strong>Copy hanya muncul</strong> jika field ini ada</td></tr>
-          </tbody>
-        </table></div>
-
-        <h3>KeySystem Properties (Mode API)</h3>
-        <div class="table-wrap"><table>
-          <thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
-          <tbody>
-            <tr><td>API</td><td>table</td><td>—</td><td>List entry service. VelarisUI coba setiap entry berurutan, pakai yang pertama berhasil dimuat</td></tr>
-            <tr><td>API[].Type</td><td>string</td><td>—</td><td>Nama service (case-insensitive). Cocokkan dengan key di <code class="il">VelarisUI.Services</code></td></tr>
-            <tr><td>API[].Title</td><td>string</td><td>—</td><td>Override judul card key system untuk entry ini</td></tr>
-            <tr><td>API[].Desc</td><td>string</td><td>—</td><td>Override teks Note untuk entry ini</td></tr>
-            <tr><td>SaveKey</td><td>boolean</td><td><code class="il">false</code></td><td>Simpan key valid ke file lokal. Saat join berikutnya key dicek otomatis — jika masih valid, window langsung terbuka tanpa UI</td></tr>
-            <tr><td>KeyFile</td><td>string</td><td><code class="il">"CHX_key"</code></td><td>Nama file penyimpanan key (tanpa ekstensi)</td></tr>
-            <tr><td>Note</td><td>string</td><td>—</td><td>Teks kecil di atas input field</td></tr>
-            <tr><td>Placeholder</td><td>string</td><td><code class="il">"Enter Key"</code></td><td>Placeholder di input field</td></tr>
-            <tr><td>Default</td><td>string</td><td><code class="il">""</code></td><td>Teks awal di input field</td></tr>
-          </tbody>
-        </table></div>
-        <div class="info-box">
-          💡 UI mode API menampilkan feedback real-time: <strong>"Checking key..."</strong> saat verifikasi berlangsung, <strong>"✓ Key valid!"</strong> saat berhasil, dan <strong>"✗ Key tidak valid"</strong> dengan shake + highlight merah saat gagal. User juga bisa tekan <strong>Enter</strong> di input field untuk submit langsung.
-        </div>
-
-        <h3>Perbandingan 2 Mode KeySystem</h3>
-        <div class="table-wrap"><table>
-          <thead><tr><th>Mode</th><th>Property</th><th>Keterangan</th></tr></thead>
-          <tbody>
-            <tr><td><strong>Manual</strong></td><td>—</td><td>Default. Gunakan <code class="il">Buttons</code> &amp; <code class="il">Callback</code>. Verifikasi ditangani sendiri oleh developer</td></tr>
-            <tr><td><strong>API</strong></td><td><code class="il">API = {{ Type = "..." }}</code></td><td>Delegasi ke service built-in atau custom. Mendukung SaveKey, feedback real-time, dan tombol Copy otomatis</td></tr>
           </tbody>
         </table></div>
 
@@ -2520,6 +2414,90 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
 
         <div class="page-nav">
           <button class="pnav-btn" onclick="show('badge',getSL('badge'))"><span class="pnav-btn-label">← Previous</span><span class="pnav-btn-name">Badge</span></button>
+          <button class="pnav-btn right" onclick="show('configsection',getSL('configsection'))"><span class="pnav-btn-label">Next →</span><span class="pnav-btn-name">ConfigSection</span></button>
+        </div>
+      </div>
+
+      <!-- ══ CONFIG SECTION ══ -->
+      <div id="page-configsection" class="page">
+        <div class="page-header">
+          <div class="page-title">ConfigSection</div>
+          <div class="page-subtitle">Sistem manajemen config siap pakai — save, load, delete, autoload</div>
+        </div>
+
+        <p><code class="il">VelarisUI:AddConfigSection(Tab, SectionConfig)</code> menambahkan section config lengkap ke Tab yang dipilih. Semua UI sudah disediakan otomatis: input nama, dropdown list, tombol Create/Load/Overwrite/Delete/Refresh, Set Autoload, dan label autoload aktif.</p>
+
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <code><span class="cm">-- Cara 1: tanpa argumen kedua (default name "Configuration")</span>
+<span class="var">VelarisUI</span>:<span class="fn">AddConfigSection</span>(<span class="var">Tabs</span>.<span class="var">Config</span>)
+
+<span class="cm">-- Cara 2: string langsung sebagai nama section</span>
+<span class="var">VelarisUI</span>:<span class="fn">AddConfigSection</span>(<span class="var">Tabs</span>.<span class="var">Config</span>, <span class="str">"My Config"</span>)
+
+<span class="cm">-- Cara 3: table dengan nama + icon</span>
+<span class="var">VelarisUI</span>:<span class="fn">AddConfigSection</span>(<span class="var">Tabs</span>.<span class="var">Config</span>, {
+    <span class="var">Name</span> <span class="op">=</span> <span class="str">"My Config"</span>,
+    <span class="var">Icon</span> <span class="op">=</span> <span class="str">"lucide:settings-2"</span>,
+})</code>
+        </div>
+
+        <h3>Parameters</h3>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Parameter</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td>Tab</td><td>Tab object</td><td>Tab yang dikembalikan dari <code class="il">Window:AddTab()</code></td></tr>
+            <tr><td>SectionConfig</td><td>string | table | nil</td><td>Nama section (string), atau table dengan <code class="il">Name</code> dan <code class="il">Icon</code>, atau biarkan kosong untuk default</td></tr>
+          </tbody>
+        </table></div>
+
+        <h3>Fitur yang disediakan otomatis</h3>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Elemen</th><th>Fungsi</th></tr></thead>
+          <tbody>
+            <tr><td>Input "Config name"</td><td>Ketik nama config baru sebelum Create</td></tr>
+            <tr><td>Button "Create config"</td><td>Buat file config baru dengan nama dari input. Nama di-sanitize otomatis</td></tr>
+            <tr><td>Dropdown "Config list"</td><td>Daftar semua file config yang tersimpan</td></tr>
+            <tr><td>Button "Load config"</td><td>Load config yang dipilih di dropdown ke semua elemen</td></tr>
+            <tr><td>Button "Overwrite config"</td><td>Simpan state elemen saat ini ke config yang dipilih (overwrite)</td></tr>
+            <tr><td>Button "Delete config"</td><td>Hapus config yang dipilih. Jika config adalah autoload, autoload ikut di-reset</td></tr>
+            <tr><td>Button "Refresh list"</td><td>Refresh dropdown list dari folder config</td></tr>
+            <tr><td>Button "Set as autoload"</td><td>Set config terpilih sebagai yang otomatis di-load saat script dijalankan</td></tr>
+            <tr><td>Button "Reset autoload"</td><td>Hapus autoload</td></tr>
+            <tr><td>Paragraph "Current autoload config"</td><td>Menampilkan nama config autoload aktif, atau "none"</td></tr>
+          </tbody>
+        </table></div>
+
+        <h3>Perilaku Autoload</h3>
+        <p>Jika ada config yang di-set sebagai autoload, config tersebut akan otomatis di-load saat <code class="il">AddConfigSection</code> dipanggil (dengan delay 0.5 detik). File autoload disimpan di <code class="il">Configname/autoload.txt</code>.</p>
+
+        <div class="info-box">
+          💡 Config disimpan di folder <code class="il">Configname/Config/NamaConfig.json</code>. Jika <code class="il">Version</code> config tidak cocok dengan versi script saat ini, load akan dibatalkan dan user diberitahu via notifikasi.
+        </div>
+
+        <h3>Contoh lengkap</h3>
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <code><span class="kw">local</span> <span class="var">Window</span> <span class="op">=</span> <span class="var">VelarisUI</span>:<span class="fn">Window</span>({
+    <span class="var">Title</span>      <span class="op">=</span> <span class="str">"My Hub"</span>,
+    <span class="var">Configname</span> <span class="op">=</span> <span class="str">"MyHub"</span>,
+    <span class="var">Version</span>    <span class="op">=</span> <span class="num">1</span>,
+})
+
+<span class="kw">local</span> <span class="var">Tabs</span> <span class="op">=</span> {
+    <span class="var">Main</span>   <span class="op">=</span> <span class="var">Window</span>:<span class="fn">AddTab</span>({ <span class="var">Name</span> <span class="op">=</span> <span class="str">"Main"</span>,   <span class="var">Icon</span> <span class="op">=</span> <span class="str">"lucide:home"</span> }),
+    <span class="var">Config</span> <span class="op">=</span> <span class="var">Window</span>:<span class="fn">AddTab</span>({ <span class="var">Name</span> <span class="op">=</span> <span class="str">"Config"</span>, <span class="var">Icon</span> <span class="op">=</span> <span class="str">"lucide:folder"</span> }),
+}
+
+<span class="cm">-- Tambah elemen di tab Main...</span>
+
+<span class="cm">-- Config section di tab Config</span>
+<span class="var">VelarisUI</span>:<span class="fn">AddConfigSection</span>(<span class="var">Tabs</span>.<span class="var">Config</span>, {
+    <span class="var">Name</span> <span class="op">=</span> <span class="str">"Configuration"</span>,
+    <span class="var">Icon</span> <span class="op">=</span> <span class="str">"lucide:settings-2"</span>,
+})</code>
+        </div>
+
+        <div class="page-nav">
+          <button class="pnav-btn" onclick="show('locked',getSL('locked'))"><span class="pnav-btn-label">← Previous</span><span class="pnav-btn-name">Locked</span></button>
           <button class="pnav-btn right" onclick="show('fullexample',getSL('fullexample'))"><span class="pnav-btn-label">Next →</span><span class="pnav-btn-name">Full Example</span></button>
         </div>
       </div>
@@ -2538,7 +2516,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
           💬 Butuh bantuan? Join Discord: <code class="il">discord.gg/ECxQFc97F5</code>
         </div>
         <div class="page-nav">
-          <button class="pnav-btn" onclick="show('locked',getSL('locked'))"><span class="pnav-btn-label">← Previous</span><span class="pnav-btn-name">Locked</span></button>
+          <button class="pnav-btn" onclick="show('configsection',getSL('configsection'))"><span class="pnav-btn-label">← Previous</span><span class="pnav-btn-name">ConfigSection</span></button>
           <div></div>
         </div>
       </div>
