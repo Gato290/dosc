@@ -196,7 +196,12 @@ p{color:var(--text-muted);font-size:13.5px;line-height:1.65;margin-bottom:12px}
   border:1px solid var(--code-border);
   border-radius:var(--radius);
   padding:16px 18px;margin:10px 0;
-  overflow-x:auto;position:relative;
+  position:relative;
+}
+.code-block-inner {
+  overflow-x:auto;
+  margin:-16px -18px;
+  padding:16px 18px;
 }
 .code-block code {
   font-family:var(--font-mono);font-size:12.5px;
@@ -222,7 +227,7 @@ p{color:var(--text-muted);font-size:13.5px;line-height:1.65;margin-bottom:12px}
   color:var(--text-muted);font-size:11px;padding:4px 10px;
   border-radius:var(--radius-sm);cursor:pointer;
   font-family:var(--font);font-weight:500;transition:all .15s;
-  opacity:0;
+  opacity:0;z-index:2;
 }
 .code-block:hover .copy-btn{opacity:1}
 .copy-btn:hover{color:var(--text);border-color:var(--border-strong)}
@@ -429,8 +434,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
         <h2>Load Methods</h2>
         <h3>Loadstring <span class="badge badge-green badge-dot">Recommended</span></h3>
         <div class="code-block">
-          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-          <code><span class="kw">local</span> <span class="var">VelarisUI</span> <span class="op">=</span> <span class="fn">loadstring</span>(<span class="var">game</span>:<span class="fn">HttpGet</span>(<span class="str">"https://raw.githubusercontent.com/nhfudzfsrzggt/brigida/refs/heads/main/dist/main.lua", true</span>))()</code>
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="kw">local</span> <span class="var">VelarisUI</span> <span class="op">=</span> <span class="fn">loadstring</span>(<span class="var">game</span>:<span class="fn">HttpGet</span>(<span class="str">"https://raw.githubusercontent.com/nhfudzfsrzggt/brigida/refs/heads/main/dist/main.lua", true</span>))()</code></div>
         </div>
 
         <h2>Support Icon</h2>
@@ -464,19 +468,17 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
         </div>
 
         <div id="win-simple" class="stab-content active">
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <code><span class="kw">local</span> <span class="var">Window</span> <span class="op">=</span> <span class="var">VelarisUI</span>:<span class="fn">Window</span>({
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="kw">local</span> <span class="var">Window</span> <span class="op">=</span> <span class="var">VelarisUI</span>:<span class="fn">Window</span>({
     <span class="var">Title</span>      <span class="op">=</span> <span class="str">"Velaris UI"</span>,
     <span class="var">Footer</span>     <span class="op">=</span> <span class="str">"By Nexa"</span>,
     <span class="var">Color</span>      <span class="op">=</span> <span class="str">"Default"</span>,
     <span class="var">Configname</span> <span class="op">=</span> <span class="str">"Velaris_Ui"</span>,
-})</code>
+})</code></div>
           </div>
         </div>
 
         <div id="win-full" class="stab-content">
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <code><span class="kw">local</span> <span class="var">Window</span> <span class="op">=</span> <span class="var">VelarisUI</span>:<span class="fn">Window</span>({
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="kw">local</span> <span class="var">Window</span> <span class="op">=</span> <span class="var">VelarisUI</span>:<span class="fn">Window</span>({
     <span class="var">Title</span>             <span class="op">=</span> <span class="str">"Velaris UI"</span>,
     <span class="var">Footer</span>            <span class="op">=</span> <span class="str">"By Nexa"</span>,
     <span class="var">Content</span>           <span class="op">=</span> <span class="str">"v1.0.0"</span>,             <span class="cm">-- Teks kecil di bawah topbar</span>
@@ -496,7 +498,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
         <span class="var">AutoSave</span> <span class="op">=</span> <span class="kw">true</span>,
         <span class="var">AutoLoad</span> <span class="op">=</span> <span class="kw">true</span>,
     },
-})</code>
+})</code></div>
           </div>
         </div>
 
@@ -541,16 +543,14 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
         </div>
 
         <h3>SetToggleKey</h3>
-        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-          <code><span class="cm">-- Ganti toggle key setelah window dibuat</span>
-<span class="var">Window</span>:<span class="fn">SetToggleKey</span>(<span class="var">Enum</span>.<span class="var">KeyCode</span>.<span class="var">RightControl</span>)</code>
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="cm">-- Ganti toggle key setelah window dibuat</span>
+<span class="var">Window</span>:<span class="fn">SetToggleKey</span>(<span class="var">Enum</span>.<span class="var">KeyCode</span>.<span class="var">RightControl</span>)</code></div>
         </div>
 
         <h2>Key System</h2>
         <p>Tambahkan key system ke dalam konfigurasi Window. UI akan menunggu verifikasi key sebelum window utama muncul.</p>
         <div class="code-block">
-          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-          <code><span class="var">KeySystem</span> <span class="op">=</span> {
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="var">KeySystem</span> <span class="op">=</span> {
     <span class="var">Title</span>       <span class="op">=</span> <span class="str">"My Super Hub"</span>,
     <span class="var">Icon</span>        <span class="op">=</span> <span class="str">"lucide:bird"</span>,
     <span class="var">Note</span>        <span class="op">=</span> <span class="str">"Example Key System."</span>,
@@ -580,7 +580,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
             <span class="kw">end</span>,
         },
     },
-},</code>
+},</code></div>
         </div>
 
         <h3>KeySystem Properties</h3>
@@ -612,32 +612,29 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
         <p>Gunakan property <code class="il">API = {}</code> untuk mengintegrasikan key system pihak ketiga. VelarisUI akan otomatis mendeteksi service, mengumpulkan args, dan menampilkan UI verifikasi lengkap dengan feedback real-time.</p>
 
         <h3>Luarmor</h3>
-        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-          <code><span class="var">KeySystem</span> <span class="op">=</span> {
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="var">KeySystem</span> <span class="op">=</span> {
     <span class="var">Note</span>    <span class="op">=</span> <span class="str">"Get key at discord.gg/xxx"</span>,
     <span class="var">SaveKey</span> <span class="op">=</span> <span class="kw">true</span>,
     <span class="var">KeyFile</span> <span class="op">=</span> <span class="str">"MyKey"</span>,
     <span class="var">API</span> <span class="op">=</span> {
         { <span class="var">Type</span> <span class="op">=</span> <span class="str">"luarmor"</span>, <span class="var">ScriptId</span> <span class="op">=</span> <span class="num">1234</span> },
     },
-},</code>
+},</code></div>
         </div>
 
         <h3>PandaDeveloper</h3>
-        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-          <code><span class="var">KeySystem</span> <span class="op">=</span> {
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="var">KeySystem</span> <span class="op">=</span> {
     <span class="var">Note</span>    <span class="op">=</span> <span class="str">"Get key at discord.gg/xxx"</span>,
     <span class="var">SaveKey</span> <span class="op">=</span> <span class="kw">true</span>,
     <span class="var">API</span> <span class="op">=</span> {
         { <span class="var">Type</span> <span class="op">=</span> <span class="str">"pandadeveloper"</span>, <span class="var">ServiceId</span> <span class="op">=</span> <span class="str">"myServiceId"</span> },
     },
-},</code>
+},</code></div>
         </div>
 
         <h3>Custom Service</h3>
         <p>Daftarkan service sendiri via <code class="il">VelarisUI.Services["nama"]</code> sebelum <code class="il">Window</code> dibuat. Service adalah object dengan field <code class="il">Name</code>, <code class="il">Icon</code>, <code class="il">Args</code>, dan <code class="il">New</code>.</p>
-        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-          <code><span class="kw">local</span> <span class="var">VelarisUI</span> <span class="op">=</span> <span class="fn">loadstring</span>(<span class="var">game</span>:<span class="fn">HttpGet</span>(<span class="str">"..."</span>))()
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="kw">local</span> <span class="var">VelarisUI</span> <span class="op">=</span> <span class="fn">loadstring</span>(<span class="var">game</span>:<span class="fn">HttpGet</span>(<span class="str">"..."</span>))()
 
 <span class="var">VelarisUI</span>.<span class="var">Services</span>[<span class="str">"myservice"</span>] <span class="op">=</span> {
     <span class="var">Name</span> <span class="op">=</span> <span class="str">"My Service"</span>,
@@ -667,7 +664,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
             { <span class="var">Type</span> <span class="op">=</span> <span class="str">"myservice"</span>, <span class="var">ServiceId</span> <span class="op">=</span> <span class="str">"abc123"</span>, <span class="var">Token</span> <span class="op">=</span> <span class="str">"xyz"</span> },
         },
     },
-})</code>
+})</code></div>
         </div>
 
         <h3>Service Object Fields</h3>
@@ -741,8 +738,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
           💡 Property <code class="il">Color</code> mendukung 3 format: <strong>nama tema</strong>, <strong>hex string</strong>, atau <strong>Color3</strong>.
         </div>
         <div class="code-block">
-          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-          <code><span class="cm">-- Nama tema (dari halaman Themes)</span>
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="cm">-- Nama tema (dari halaman Themes)</span>
 <span class="var">Window</span>:<span class="fn">Tag</span>({
     <span class="var">Title</span> <span class="op">=</span> <span class="str">"v0.0.2"</span>,
     <span class="var">Icon</span>  <span class="op">=</span> <span class="str">"lucide:tag"</span>,  <span class="cm">-- opsional</span>
@@ -759,7 +755,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
 <span class="var">Window</span>:<span class="fn">Tag</span>({
     <span class="var">Title</span> <span class="op">=</span> <span class="str">"UI Library"</span>,
     <span class="var">Color</span> <span class="op">=</span> <span class="var">Color3</span>.<span class="fn">fromRGB</span>(<span class="num">48</span>, <span class="num">255</span>, <span class="num">106</span>),
-})</code>
+})</code></div>
         </div>
 
         <h3>Properties</h3>
@@ -774,8 +770,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
 
         <h3>Tag API</h3>
         <p><code class="il">Window:Tag()</code> mengembalikan sebuah objek API yang bisa digunakan untuk mengubah tag secara dinamis setelah dibuat.</p>
-        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-          <code><span class="kw">local</span> <span class="var">MyTag</span> <span class="op">=</span> <span class="var">Window</span>:<span class="fn">Tag</span>({
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="kw">local</span> <span class="var">MyTag</span> <span class="op">=</span> <span class="var">Window</span>:<span class="fn">Tag</span>({
     <span class="var">Title</span> <span class="op">=</span> <span class="str">"v0.0.1"</span>,
     <span class="var">Icon</span>  <span class="op">=</span> <span class="str">"lucide:tag"</span>,
     <span class="var">Color</span> <span class="op">=</span> <span class="str">"Amber"</span>,
@@ -794,7 +789,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
 <span class="var">MyTag</span>:<span class="fn">SetColor</span>(<span class="var">Color3</span>.<span class="fn">fromRGB</span>(<span class="num">48</span>, <span class="num">255</span>, <span class="num">106</span>))
 
 <span class="cm">-- Hapus tag dari topbar</span>
-<span class="var">MyTag</span>:<span class="fn">Destroy</span>()</code>
+<span class="var">MyTag</span>:<span class="fn">Destroy</span>()</code></div>
         </div>
         <div class="table-wrap"><table>
           <thead><tr><th>Method</th><th>Description</th></tr></thead>
@@ -826,11 +821,10 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
 
         <p>Gunakan property <code class="il">Color</code> pada <code class="il">Window</code> untuk mengatur tema warna. Klik warna di bawah untuk melihat nama tema.</p>
 
-        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-          <code><span class="kw">local</span> <span class="var">Window</span> <span class="op">=</span> <span class="var">VelarisUI</span>:<span class="fn">Window</span>({
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="kw">local</span> <span class="var">Window</span> <span class="op">=</span> <span class="var">VelarisUI</span>:<span class="fn">Window</span>({
     <span class="var">Title</span> <span class="op">=</span> <span class="str">"My Hub"</span>,
     <span class="var">Color</span> <span class="op">=</span> <span class="str">"Default"</span>,  <span class="cm">-- ganti dengan nama tema di bawah</span>
-})</code>
+})</code></div>
         </div>
 
         <h2>All Themes <span style="font-size:11px;font-weight:500;color:var(--text-muted);background:var(--bg-secondary);border:1px solid var(--border);padding:2px 8px;border-radius:20px;vertical-align:middle">Clickable</span></h2>
@@ -859,25 +853,22 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
           <div class="stab" onclick="stab(this,'tabs-fn')">Functions</div>
         </div>
         <div id="tabs-default" class="stab-content active">
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <code><span class="kw">local</span> <span class="var">Tabs</span> <span class="op">=</span> {
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="kw">local</span> <span class="var">Tabs</span> <span class="op">=</span> {
     <span class="var">Tabs1</span> <span class="op">=</span> <span class="var">Window</span>:<span class="fn">AddTab</span>({ <span class="var">Name</span> <span class="op">=</span> <span class="str">"Tabs 1"</span>, <span class="var">Icon</span> <span class="op">=</span> <span class="str">"home"</span> }),
     <span class="var">Tabs2</span> <span class="op">=</span> <span class="var">Window</span>:<span class="fn">AddTab</span>({ <span class="var">Name</span> <span class="op">=</span> <span class="str">"Tabs 2"</span>, <span class="var">Icon</span> <span class="op">=</span> <span class="str">"gamepad"</span> }),
-}</code></div>
+}</code></div></div>
         </div>
         <div id="tabs-lucide" class="stab-content">
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <code><span class="kw">local</span> <span class="var">Tabs</span> <span class="op">=</span> {
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="kw">local</span> <span class="var">Tabs</span> <span class="op">=</span> {
     <span class="var">Tabs1</span> <span class="op">=</span> <span class="var">Window</span>:<span class="fn">AddTab</span>({ <span class="var">Name</span> <span class="op">=</span> <span class="str">"Tabs 1"</span>, <span class="var">Icon</span> <span class="op">=</span> <span class="str">"lucide:house"</span> }),
     <span class="var">Tabs2</span> <span class="op">=</span> <span class="var">Window</span>:<span class="fn">AddTab</span>({ <span class="var">Name</span> <span class="op">=</span> <span class="str">"Tabs 2"</span>, <span class="var">Icon</span> <span class="op">=</span> <span class="str">"lucide:sword"</span> }),
-}</code></div>
+}</code></div></div>
         </div>
         <div id="tabs-solar" class="stab-content">
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <code><span class="kw">local</span> <span class="var">Tabs</span> <span class="op">=</span> {
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="kw">local</span> <span class="var">Tabs</span> <span class="op">=</span> {
     <span class="var">Tabs1</span> <span class="op">=</span> <span class="var">Window</span>:<span class="fn">AddTab</span>({ <span class="var">Name</span> <span class="op">=</span> <span class="str">"Tabs 1"</span>, <span class="var">Icon</span> <span class="op">=</span> <span class="str">"solar:home"</span> }),
     <span class="var">Tabs2</span> <span class="op">=</span> <span class="var">Window</span>:<span class="fn">AddTab</span>({ <span class="var">Name</span> <span class="op">=</span> <span class="str">"Tabs 2"</span>, <span class="var">Icon</span> <span class="op">=</span> <span class="str">"solar:gamepad"</span> }),
-}</code></div>
+}</code></div></div>
         </div>
 
         <div id="tabs-locked" class="stab-content">
@@ -886,19 +877,17 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
           </div>
 
           <h3>Deklarasi dengan Locked</h3>
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <code><span class="cm">-- Tab terkunci saat dibuat</span>
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="cm">-- Tab terkunci saat dibuat</span>
 <span class="kw">local</span> <span class="var">MyTab</span> <span class="op">=</span> <span class="var">Window</span>:<span class="fn">AddTab</span>({
     <span class="var">Name</span>        <span class="op">=</span> <span class="str">"Combat"</span>,
     <span class="var">Icon</span>        <span class="op">=</span> <span class="str">"lucide:sword"</span>,
     <span class="var">Locked</span>      <span class="op">=</span> <span class="kw">true</span>,
     <span class="var">LockMessage</span> <span class="op">=</span> <span class="str">"VIP Only"</span>,
-})</code>
+})</code></div>
           </div>
 
           <h3>Dynamic Lock</h3>
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <code><span class="cm">-- Buka kunci tab secara dinamis</span>
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="cm">-- Buka kunci tab secara dinamis</span>
 <span class="var">MyTab</span>:<span class="fn">SetLocked</span>(<span class="kw">false</span>)
 
 <span class="cm">-- Kunci kembali dengan pesan berbeda</span>
@@ -906,7 +895,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
 <span class="var">MyTab</span>:<span class="fn">SetLockMessage</span>(<span class="str">"Premium Only"</span>)
 
 <span class="cm">-- Cek status kunci</span>
-<span class="fn">print</span>(<span class="var">MyTab</span>:<span class="fn">GetLocked</span>())  <span class="cm">-- true / false</span></code>
+<span class="fn">print</span>(<span class="var">MyTab</span>:<span class="fn">GetLocked</span>())  <span class="cm">-- true / false</span></code></div>
           </div>
 
           <h3>Properties</h3>
@@ -954,24 +943,21 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
           <div class="stab" onclick="stab(this,'sec-fn')">Functions</div>
         </div>
         <div id="sec-local" class="stab-content active">
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <code><span class="kw">local</span> <span class="var">Sec</span> <span class="op">=</span> {}
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="kw">local</span> <span class="var">Sec</span> <span class="op">=</span> {}
 <span class="var">Sec</span>.<span class="var">Player</span> <span class="op">=</span> <span class="var">Tabs</span>.<span class="var">Main</span>:<span class="fn">AddSection</span>({ <span class="var">Title</span> <span class="op">=</span> <span class="str">"Player"</span>, <span class="var">Icon</span> <span class="op">=</span> <span class="str">"lucide:user"</span>, <span class="var">Open</span> <span class="op">=</span> <span class="kw">true</span> })
-<span class="var">Sec</span>.<span class="var">Weapon</span> <span class="op">=</span> <span class="var">Tabs</span>.<span class="var">Main</span>:<span class="fn">AddSection</span>({ <span class="var">Title</span> <span class="op">=</span> <span class="str">"Weapons"</span>, <span class="var">Icon</span> <span class="op">=</span> <span class="str">"solar:home"</span>, <span class="var">Open</span> <span class="op">=</span> <span class="kw">false</span> })</code></div>
+<span class="var">Sec</span>.<span class="var">Weapon</span> <span class="op">=</span> <span class="var">Tabs</span>.<span class="var">Main</span>:<span class="fn">AddSection</span>({ <span class="var">Title</span> <span class="op">=</span> <span class="str">"Weapons"</span>, <span class="var">Icon</span> <span class="op">=</span> <span class="str">"solar:home"</span>, <span class="var">Open</span> <span class="op">=</span> <span class="kw">false</span> })</code></div></div>
         </div>
         <div id="sec-basic" class="stab-content">
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <code><span class="var">Tabs</span>.<span class="var">Main</span>:<span class="fn">AddSection</span>({ <span class="var">Title</span> <span class="op">=</span> <span class="str">"Player"</span>, <span class="var">Icon</span> <span class="op">=</span> <span class="str">"lucide:user"</span>, <span class="var">Open</span> <span class="op">=</span> <span class="kw">true</span> })
-<span class="var">Tabs</span>.<span class="var">Main</span>:<span class="fn">AddSection</span>({ <span class="var">Title</span> <span class="op">=</span> <span class="str">"Weapons"</span>, <span class="var">Icon</span> <span class="op">=</span> <span class="str">"solar:home"</span>, <span class="var">Open</span> <span class="op">=</span> <span class="kw">false</span> })</code></div>
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="var">Tabs</span>.<span class="var">Main</span>:<span class="fn">AddSection</span>({ <span class="var">Title</span> <span class="op">=</span> <span class="str">"Player"</span>, <span class="var">Icon</span> <span class="op">=</span> <span class="str">"lucide:user"</span>, <span class="var">Open</span> <span class="op">=</span> <span class="kw">true</span> })
+<span class="var">Tabs</span>.<span class="var">Main</span>:<span class="fn">AddSection</span>({ <span class="var">Title</span> <span class="op">=</span> <span class="str">"Weapons"</span>, <span class="var">Icon</span> <span class="op">=</span> <span class="str">"solar:home"</span>, <span class="var">Open</span> <span class="op">=</span> <span class="kw">false</span> })</code></div></div>
         </div>
         <div id="sec-full" class="stab-content">
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <code><span class="var">Tabs</span>.<span class="var">Main</span>:<span class="fn">AddSection</span>({
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="var">Tabs</span>.<span class="var">Main</span>:<span class="fn">AddSection</span>({
     <span class="var">Title</span>          <span class="op">=</span> <span class="str">"Player"</span>,
     <span class="var">TextXAlignment</span> <span class="op">=</span> <span class="str">"Left"</span>,  <span class="cm">-- "Left", "Center", "Right". optional</span>
     <span class="var">Icon</span>           <span class="op">=</span> <span class="str">"lucide:user"</span>,
     <span class="var">Open</span>           <span class="op">=</span> <span class="kw">true</span>
-})</code></div>
+})</code></div></div>
         </div>
 
         <!-- ══ TABBOX — FROM DOC 2 ══ -->
@@ -982,8 +968,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
           </div>
 
           <h3>Dengan Icon</h3>
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <code><span class="kw">local</span> <span class="var">BoxLeft</span> <span class="op">=</span> <span class="var">Tabs</span>.<span class="var">Main</span>:<span class="fn">AddSection</span>({
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="kw">local</span> <span class="var">BoxLeft</span> <span class="op">=</span> <span class="var">Tabs</span>.<span class="var">Main</span>:<span class="fn">AddSection</span>({
     <span class="var">Title</span>  <span class="op">=</span> <span class="str">"Auto Farm"</span>,
     <span class="var">Icon</span>   <span class="op">=</span> <span class="str">"lucide:cpu"</span>,
     <span class="var">Tabbox</span> <span class="op">=</span> <span class="str">"Left"</span>,
@@ -992,24 +977,22 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
     <span class="var">Title</span>  <span class="op">=</span> <span class="str">"Settings"</span>,
     <span class="var">Icon</span>   <span class="op">=</span> <span class="str">"lucide:settings"</span>,
     <span class="var">Tabbox</span> <span class="op">=</span> <span class="str">"Right"</span>,
-})</code>
+})</code></div>
           </div>
 
           <h3>Tanpa Icon (Text Saja)</h3>
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <code><span class="kw">local</span> <span class="var">BoxLeft</span> <span class="op">=</span> <span class="var">Tabs</span>.<span class="var">Main</span>:<span class="fn">AddSection</span>({
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="kw">local</span> <span class="var">BoxLeft</span> <span class="op">=</span> <span class="var">Tabs</span>.<span class="var">Main</span>:<span class="fn">AddSection</span>({
     <span class="var">Title</span>  <span class="op">=</span> <span class="str">"Auto Farm"</span>,
     <span class="var">Tabbox</span> <span class="op">=</span> <span class="str">"Left"</span>,
 })
 <span class="kw">local</span> <span class="var">BoxRight</span> <span class="op">=</span> <span class="var">Tabs</span>.<span class="var">Main</span>:<span class="fn">AddSection</span>({
     <span class="var">Title</span>  <span class="op">=</span> <span class="str">"Settings"</span>,
     <span class="var">Tabbox</span> <span class="op">=</span> <span class="str">"Right"</span>,
-})</code>
+})</code></div>
           </div>
 
           <h3>Contoh Lengkap dengan Elemen</h3>
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <code><span class="kw">local</span> <span class="var">BoxLeft</span> <span class="op">=</span> <span class="var">Tabs</span>.<span class="var">Main</span>:<span class="fn">AddSection</span>({
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="kw">local</span> <span class="var">BoxLeft</span> <span class="op">=</span> <span class="var">Tabs</span>.<span class="var">Main</span>:<span class="fn">AddSection</span>({
     <span class="var">Title</span>  <span class="op">=</span> <span class="str">"Auto Farm"</span>,
     <span class="var">Icon</span>   <span class="op">=</span> <span class="str">"lucide:cpu"</span>,
     <span class="var">Open</span>   <span class="op">=</span> <span class="kw">true</span>,
@@ -1033,7 +1016,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
     <span class="var">Title</span>     <span class="op">=</span> <span class="str">"Speed"</span>,
     <span class="var">Min</span>       <span class="op">=</span> <span class="num">1</span>, <span class="var">Max</span> <span class="op">=</span> <span class="num">100</span>, <span class="var">Default</span> <span class="op">=</span> <span class="num">16</span>,
     <span class="var">Callback</span>  <span class="op">=</span> <span class="kw">function</span>(<span class="var">v</span>) <span class="kw">end</span>
-})</code>
+})</code></div>
           </div>
 
           <h3>Properties</h3>
@@ -1056,20 +1039,18 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
           </div>
 
           <h3>Deklarasi dengan Locked</h3>
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <code><span class="cm">-- Section terkunci saat dibuat</span>
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="cm">-- Section terkunci saat dibuat</span>
 <span class="kw">local</span> <span class="var">MySection</span> <span class="op">=</span> <span class="var">MyTab</span>:<span class="fn">AddSection</span>({
     <span class="var">Title</span>       <span class="op">=</span> <span class="str">"Aimbot"</span>,
     <span class="var">Icon</span>        <span class="op">=</span> <span class="str">"lucide:crosshair"</span>,
     <span class="var">Open</span>        <span class="op">=</span> <span class="kw">true</span>,
     <span class="var">Locked</span>      <span class="op">=</span> <span class="kw">true</span>,
     <span class="var">LockMessage</span> <span class="op">=</span> <span class="str">"Coming Soon"</span>,
-})</code>
+})</code></div>
           </div>
 
           <h3>Dynamic Lock</h3>
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <code><span class="cm">-- Buka kunci section secara dinamis</span>
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="cm">-- Buka kunci section secara dinamis</span>
 <span class="var">MySection</span>:<span class="fn">SetLocked</span>(<span class="kw">false</span>)
 
 <span class="cm">-- Kunci kembali dengan pesan berbeda</span>
@@ -1077,12 +1058,11 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
 <span class="var">MySection</span>:<span class="fn">SetLockMessage</span>(<span class="str">"Updated!"</span>)
 
 <span class="cm">-- Cek status kunci</span>
-<span class="fn">print</span>(<span class="var">MySection</span>:<span class="fn">GetLocked</span>())  <span class="cm">-- true / false</span></code>
+<span class="fn">print</span>(<span class="var">MySection</span>:<span class="fn">GetLocked</span>())  <span class="cm">-- true / false</span></code></div>
           </div>
 
           <h3>Contoh Use Case</h3>
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <code><span class="cm">-- Tab VIP: terkunci by default</span>
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="cm">-- Tab VIP: terkunci by default</span>
 <span class="kw">local</span> <span class="var">TabVIP</span> <span class="op">=</span> <span class="var">Window</span>:<span class="fn">AddTab</span>({
     <span class="var">Name</span>        <span class="op">=</span> <span class="str">"VIP"</span>,
     <span class="var">Icon</span>        <span class="op">=</span> <span class="str">"lucide:crown"</span>,
@@ -1101,7 +1081,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
 <span class="kw">if</span> <span class="var">isVIP</span> <span class="kw">then</span>
     <span class="var">TabVIP</span>:<span class="fn">SetLocked</span>(<span class="kw">false</span>)
     <span class="var">SecAimbot</span>:<span class="fn">SetLocked</span>(<span class="kw">false</span>)
-<span class="kw">end</span></code>
+<span class="kw">end</span></code></div>
           </div>
 
           <h3>Properties</h3>
@@ -1151,8 +1131,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
         </div>
 
         <h3>Notify() — Shorthand</h3>
-        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-          <code><span class="cm">-- Minimal</span>
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="cm">-- Minimal</span>
 <span class="fn">Notify</span>(<span class="str">"Script berhasil diload!"</span>)
 
 <span class="cm">-- Lengkap</span>
@@ -1162,7 +1141,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
     <span class="str">"Default"</span>,                   <span class="cm">-- Color</span>
     <span class="str">"My Script"</span>,                 <span class="cm">-- Title</span>
     <span class="str">"Success"</span>                    <span class="cm">-- Description</span>
-)</code>
+)</code></div>
         </div>
         <div class="table-wrap"><table>
           <thead><tr><th>Parameter</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
@@ -1176,8 +1155,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
         </table></div>
 
         <h3>MakeNotify() — Full Config</h3>
-        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-          <code><span class="kw">local</span> <span class="var">Notif</span> <span class="op">=</span> <span class="var">VelarisUI</span>:<span class="fn">MakeNotify</span>({
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="kw">local</span> <span class="var">Notif</span> <span class="op">=</span> <span class="var">VelarisUI</span>:<span class="fn">MakeNotify</span>({
     <span class="var">Title</span>       <span class="op">=</span> <span class="str">"My Script"</span>,
     <span class="var">Description</span> <span class="op">=</span> <span class="str">"Success"</span>,
     <span class="var">Content</span>     <span class="op">=</span> <span class="str">"Script telah diload dengan sukses!"</span>,
@@ -1188,7 +1166,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
 })
 
 <span class="cm">-- Tutup manual sebelum waktunya</span>
-<span class="var">Notif</span>:<span class="fn">Close</span>()</code>
+<span class="var">Notif</span>:<span class="fn">Close</span>()</code></div>
         </div>
         <div class="table-wrap"><table>
           <thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
@@ -1222,8 +1200,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
           <div class="page-title">Dialog</div>
           <div class="page-subtitle">Modal konfirmasi dengan tombol pilihan</div>
         </div>
-        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-          <code><span class="var">VelarisUI</span>:<span class="fn">Dialog</span>({
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="var">VelarisUI</span>:<span class="fn">Dialog</span>({
     <span class="var">Title</span>   <span class="op">=</span> <span class="str">"Confirmation"</span>,
     <span class="var">Content</span> <span class="op">=</span> <span class="str">"Are you sure you want to continue?"</span>,
     <span class="var">Buttons</span> <span class="op">=</span> {
@@ -1236,7 +1213,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
             <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>() <span class="kw">end</span>
         }
     }
-})</code>
+})</code></div>
         </div>
         <div class="table-wrap"><table>
           <thead><tr><th>Property</th><th>Type</th><th>Description</th></tr></thead>
@@ -1267,23 +1244,21 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
           <div class="stab" onclick="stab(this,'btn-fn')">Functions</div>
         </div>
         <div id="btn-single" class="stab-content active">
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <code><span class="var">Sec</span>.<span class="var">Botton</span>:<span class="fn">AddButton</span>({
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="var">Sec</span>.<span class="var">Botton</span>:<span class="fn">AddButton</span>({
     <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Example"</span>,
     <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>()
         <span class="fn">print</span>(<span class="str">"This is an example button"</span>)
         <span class="fn">Notify</span>(<span class="str">"Example clicked!"</span>, <span class="num">2</span>)
     <span class="kw">end</span>
-})</code></div>
+})</code></div></div>
         </div>
         <div id="btn-dual" class="stab-content">
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <code><span class="var">Sec</span>.<span class="var">Botton</span>:<span class="fn">AddButton</span>({
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="var">Sec</span>.<span class="var">Botton</span>:<span class="fn">AddButton</span>({
     <span class="var">Title</span>       <span class="op">=</span> <span class="str">"Example"</span>,
     <span class="var">Callback</span>    <span class="op">=</span> <span class="kw">function</span>() <span class="fn">Notify</span>(<span class="str">"Example enabled!"</span>, <span class="num">2</span>) <span class="kw">end</span>,
     <span class="var">SubTitle</span>    <span class="op">=</span> <span class="str">"Example Off"</span>,
     <span class="var">SubCallback</span> <span class="op">=</span> <span class="kw">function</span>() <span class="fn">Notify</span>(<span class="str">"Example disabled!"</span>, <span class="num">2</span>) <span class="kw">end</span>
-})</code></div>
+})</code></div></div>
         </div>
         <div id="btn-v2" class="stab-content">
           <p>Button V2 menampilkan layout lebih besar dengan dukungan <code class="il">Content</code> (subtitle) dan ikon. Jika <code class="il">Icon</code> tidak diisi, V2 secara otomatis menampilkan chevron <code class="il">›</code> di sisi kanan dan memberikan efek hover warna aksen pada judul.</p>
@@ -1297,8 +1272,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
               <tr><td><em>(kosong)</em></td><td>—</td><td>Otomatis tampilkan chevron › dengan hover effect</td></tr>
             </tbody>
           </table></div>
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <code><span class="cm">-- Dengan ikon rbxassetid</span>
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="cm">-- Dengan ikon rbxassetid</span>
 <span class="var">Sec</span>.<span class="var">Button</span>:<span class="fn">AddButton</span>({
     <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Open Inventory"</span>,
     <span class="var">Content</span>  <span class="op">=</span> <span class="str">"Manage your items"</span>,
@@ -1329,7 +1303,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
     <span class="var">Version</span>  <span class="op">=</span> <span class="str">"V2"</span>,
     <span class="var">Icon</span>     <span class="op">=</span> <span class="str">"solar:home-bold"</span>,
     <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>() <span class="kw">end</span>
-})</code></div>
+})</code></div></div>
           <div class="table-wrap"><table>
             <thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
             <tbody>
@@ -1344,8 +1318,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
         </div>
         <div id="btn-locked" class="stab-content">
           <p>Gunakan property <code class="il">Locked = true</code> untuk menonaktifkan button. Berlaku untuk Button V1 maupun V2.</p>
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <code><span class="cm">-- Button V1 Locked</span>
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="cm">-- Button V1 Locked</span>
 <span class="var">Sec</span>.<span class="var">Button</span>:<span class="fn">AddButton</span>({
     <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Locked"</span>,
     <span class="var">Locked</span>   <span class="op">=</span> <span class="kw">true</span>,
@@ -1363,14 +1336,13 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
     <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>()
         <span class="fn">print</span>(<span class="str">"This button is locked"</span>)
     <span class="kw">end</span>
-})</code></div>
+})</code></div></div>
           <p>Gunakan <code class="il">:SetLocked(state)</code> untuk mengunci/membuka button secara dinamis:</p>
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <code><span class="kw">local</span> <span class="var">MyBtn</span> <span class="op">=</span> <span class="var">Sec</span>.<span class="var">Button</span>:<span class="fn">AddButton</span>({ <span class="var">Title</span> <span class="op">=</span> <span class="str">"Dynamic Lock"</span>, <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>() <span class="kw">end</span> })
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="kw">local</span> <span class="var">MyBtn</span> <span class="op">=</span> <span class="var">Sec</span>.<span class="var">Button</span>:<span class="fn">AddButton</span>({ <span class="var">Title</span> <span class="op">=</span> <span class="str">"Dynamic Lock"</span>, <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>() <span class="kw">end</span> })
 
 <span class="var">MyBtn</span>:<span class="fn">SetLocked</span>(<span class="kw">true</span>)   <span class="cm">-- kunci</span>
 <span class="var">MyBtn</span>:<span class="fn">SetLocked</span>(<span class="kw">false</span>)  <span class="cm">-- buka</span>
-<span class="fn">print</span>(<span class="var">MyBtn</span>:<span class="fn">GetLocked</span>()) <span class="cm">-- cek status</span></code></div>
+<span class="fn">print</span>(<span class="var">MyBtn</span>:<span class="fn">GetLocked</span>()) <span class="cm">-- cek status</span></code></div></div>
         </div>
         <div id="btn-fn" class="stab-content">
           <h3>V1</h3>
@@ -1422,8 +1394,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
           <div class="stab" onclick="stab(this,'tog-fn')">Functions</div>
         </div>
         <div id="tog-basic" class="stab-content active">
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <code><span class="var">Sec</span>.<span class="var">Toggle</span>:<span class="fn">AddToggle</span>({
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="var">Sec</span>.<span class="var">Toggle</span>:<span class="fn">AddToggle</span>({
     <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Example"</span>,
     <span class="var">Default</span>  <span class="op">=</span> <span class="kw">false</span>,
     <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">value</span>)
@@ -1433,41 +1404,38 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
             <span class="cm">-- Code saat OFF</span>
         <span class="kw">end</span>
     <span class="kw">end</span>
-})</code></div>
+})</code></div></div>
         </div>
         <div id="tog-title2" class="stab-content">
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <code><span class="var">Sec</span>.<span class="var">Toggle</span>:<span class="fn">AddToggle</span>({
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="var">Sec</span>.<span class="var">Toggle</span>:<span class="fn">AddToggle</span>({
     <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Example"</span>,
     <span class="var">Title2</span>   <span class="op">=</span> <span class="str">"Example Sub Title"</span>,
     <span class="var">Default</span>  <span class="op">=</span> <span class="kw">false</span>,
     <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">value</span>)
         <span class="fn">Notify</span>(<span class="var">value</span> <span class="kw">and</span> <span class="str">"Enabled!"</span> <span class="kw">or</span> <span class="str">"Disabled!"</span>, <span class="num">2</span>)
     <span class="kw">end</span>
-})</code></div>
+})</code></div></div>
         </div>
         <div id="tog-content" class="stab-content">
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <code><span class="var">Sec</span>.<span class="var">Toggle</span>:<span class="fn">AddToggle</span>({
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="var">Sec</span>.<span class="var">Toggle</span>:<span class="fn">AddToggle</span>({
     <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Example"</span>,
     <span class="var">Content</span>  <span class="op">=</span> <span class="str">"This is an example toggle description"</span>,
     <span class="var">Default</span>  <span class="op">=</span> <span class="kw">false</span>,
     <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">value</span>)
         <span class="fn">Notify</span>(<span class="var">value</span> <span class="kw">and</span> <span class="str">"Enabled!"</span> <span class="kw">or</span> <span class="str">"Disabled!"</span>, <span class="num">2</span>)
     <span class="kw">end</span>
-})</code></div>
+})</code></div></div>
         </div>
         <div id="tog-checkbox" class="stab-content">
           <p>Gunakan <code class="il">Type = "Checkbox"</code> untuk tampilan kotak centang (✓) alih-alih slider toggle biasa.</p>
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <code><span class="var">Sec</span>.<span class="var">Toggle</span>:<span class="fn">AddToggle</span>({
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="var">Sec</span>.<span class="var">Toggle</span>:<span class="fn">AddToggle</span>({
     <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Enable Feature"</span>,
     <span class="var">Type</span>     <span class="op">=</span> <span class="str">"Checkbox"</span>,   <span class="cm">-- tampilan checkbox</span>
     <span class="var">Default</span>  <span class="op">=</span> <span class="kw">false</span>,
     <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">value</span>)
         <span class="fn">print</span>(<span class="str">"Checked:"</span>, <span class="var">value</span>)
     <span class="kw">end</span>
-})</code></div>
+})</code></div></div>
           <div class="table-wrap"><table>
             <thead><tr><th>Type</th><th>Tampilan</th></tr></thead>
             <tbody>
@@ -1477,15 +1445,14 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
           </table></div>
         </div>
         <div id="tog-locked" class="stab-content">
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <code><span class="var">Sec</span>.<span class="var">Toggle</span>:<span class="fn">AddToggle</span>({
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="var">Sec</span>.<span class="var">Toggle</span>:<span class="fn">AddToggle</span>({
     <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Toggle Locked"</span>,
     <span class="var">Locked</span>   <span class="op">=</span> <span class="kw">true</span>,
     <span class="var">Default</span>  <span class="op">=</span> <span class="kw">false</span>,
     <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">value</span>)
         <span class="fn">print</span>(<span class="str">"Toggle value:"</span>, <span class="var">value</span>)
     <span class="kw">end</span>
-})</code></div>
+})</code></div></div>
         </div>
         <div id="tog-fn" class="stab-content">
           <div class="table-wrap"><table>
@@ -1519,8 +1486,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
           <div class="stab" onclick="stab(this,'sl-fn')">Functions</div>
         </div>
         <div id="sl-basic" class="stab-content active">
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <code><span class="var">Sec</span>.<span class="var">Slider</span>:<span class="fn">AddSlider</span>({
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="var">Sec</span>.<span class="var">Slider</span>:<span class="fn">AddSlider</span>({
     <span class="var">Title</span>     <span class="op">=</span> <span class="str">"Example"</span>,
     <span class="var">Content</span>   <span class="op">=</span> <span class="str">"Example slider description"</span>,
     <span class="var">Min</span>       <span class="op">=</span> <span class="num">0</span>,
@@ -1530,15 +1496,14 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
     <span class="var">Callback</span>  <span class="op">=</span> <span class="kw">function</span>(<span class="var">value</span>)
         <span class="fn">print</span>(<span class="str">"Slider value:"</span>, <span class="var">value</span>)
     <span class="kw">end</span>
-})</code></div>
+})</code></div></div>
         </div>
         <div id="sl-alt" class="stab-content">
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <code><span class="var">Sec</span>.<span class="var">Slider</span>:<span class="fn">AddSlider</span>({
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="var">Sec</span>.<span class="var">Slider</span>:<span class="fn">AddSlider</span>({
     <span class="var">Title</span>     <span class="op">=</span> <span class="str">"Speed"</span>,
     <span class="var">Min</span>       <span class="op">=</span> <span class="num">0</span>, <span class="var">Max</span> <span class="op">=</span> <span class="num">100</span>, <span class="var">Default</span> <span class="op">=</span> <span class="num">70</span>, <span class="var">Increment</span> <span class="op">=</span> <span class="num">5</span>,
     <span class="var">Callback</span>  <span class="op">=</span> <span class="kw">function</span>(<span class="var">value</span>) <span class="fn">print</span>(<span class="str">"Value:"</span>, <span class="var">value</span>) <span class="kw">end</span>
-})</code></div>
+})</code></div></div>
         </div>
         <div id="sl-fn" class="stab-content">
           <div class="table-wrap"><table>
@@ -1576,18 +1541,16 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
           <div class="stab" onclick="stab(this,'dd-fn')">Functions</div>
         </div>
         <div id="dd-single" class="stab-content active">
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <code><span class="var">Sec</span>.<span class="var">Dropdwon</span>:<span class="fn">AddDropdown</span>({
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="var">Sec</span>.<span class="var">Dropdwon</span>:<span class="fn">AddDropdown</span>({
     <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Example"</span>,
     <span class="var">Options</span>  <span class="op">=</span> { <span class="str">"Option A"</span>, <span class="str">"Option B"</span>, <span class="str">"Option C"</span> },
     <span class="var">Multi</span>    <span class="op">=</span> <span class="kw">false</span>,
     <span class="var">Default</span>  <span class="op">=</span> <span class="str">"Option A"</span>,
     <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">value</span>) <span class="fn">print</span>(<span class="str">"Selected:"</span>, <span class="var">value</span>) <span class="kw">end</span>
-})</code></div>
+})</code></div></div>
         </div>
         <div id="dd-multi" class="stab-content">
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <code><span class="var">Sec</span>.<span class="var">Dropdwon</span>:<span class="fn">AddDropdown</span>({
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="var">Sec</span>.<span class="var">Dropdwon</span>:<span class="fn">AddDropdown</span>({
     <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Example"</span>,
     <span class="var">Options</span>  <span class="op">=</span> { <span class="str">"Option 1"</span>, <span class="str">"Option 2"</span>, <span class="str">"Option 3"</span>, <span class="str">"Option 4"</span> },
     <span class="var">Multi</span>    <span class="op">=</span> <span class="kw">true</span>,
@@ -1595,11 +1558,10 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
     <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">selectedTable</span>)
         <span class="kw">for</span> <span class="var">_</span>, <span class="var">v</span> <span class="kw">in</span> <span class="fn">ipairs</span>(<span class="var">selectedTable</span>) <span class="kw">do</span> <span class="fn">print</span>(<span class="str">"- "</span> <span class="op">..</span> <span class="var">v</span>) <span class="kw">end</span>
     <span class="kw">end</span>
-})</code></div>
+})</code></div></div>
         </div>
         <div id="dd-label" class="stab-content">
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <code><span class="var">Sec</span>.<span class="var">Dropdwon</span>:<span class="fn">AddDropdown</span>({
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="var">Sec</span>.<span class="var">Dropdwon</span>:<span class="fn">AddDropdown</span>({
     <span class="var">Title</span>   <span class="op">=</span> <span class="str">"Example"</span>,
     <span class="var">Options</span> <span class="op">=</span> {
         { <span class="var">Label</span> <span class="op">=</span> <span class="str">"Option 1"</span>, <span class="var">Value</span> <span class="op">=</span> <span class="str">"value_1"</span> },
@@ -1607,12 +1569,11 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
     },
     <span class="var">Multi</span>    <span class="op">=</span> <span class="kw">false</span>, <span class="var">Default</span> <span class="op">=</span> <span class="str">"value_1"</span>,
     <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">value</span>) <span class="fn">print</span>(<span class="str">"Value:"</span>, <span class="var">value</span>) <span class="kw">end</span>
-})</code></div>
+})</code></div></div>
         </div>
         <div id="dd-disabled" class="stab-content">
           <p>Gunakan property <code class="il">DisabledValues</code> untuk menonaktifkan opsi tertentu saat dropdown dibuat. Opsi yang dinonaktifkan tampil redup dan tidak bisa dipilih. Gunakan <code class="il">:SetDisabledValues()</code> untuk mengubahnya secara dinamis.</p>
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <code><span class="cm">-- Nonaktifkan opsi tertentu saat deklarasi</span>
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="cm">-- Nonaktifkan opsi tertentu saat deklarasi</span>
 <span class="var">Sec</span>.<span class="var">Dropdown</span>:<span class="fn">AddDropdown</span>({
     <span class="var">Title</span>          <span class="op">=</span> <span class="str">"Rarity"</span>,
     <span class="var">Options</span>        <span class="op">=</span> { <span class="str">"Common"</span>, <span class="str">"Rare"</span>, <span class="str">"Epic"</span>, <span class="str">"Legendary"</span> },
@@ -1628,7 +1589,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
 })
 
 <span class="var">MyDrop</span>:<span class="fn">SetDisabledValues</span>({ <span class="str">"Bow"</span>, <span class="str">"Staff"</span> })  <span class="cm">-- kunci Bow &amp; Staff</span>
-<span class="var">MyDrop</span>:<span class="fn">SetDisabledValues</span>({})               <span class="cm">-- buka semua kembali</span></code></div>
+<span class="var">MyDrop</span>:<span class="fn">SetDisabledValues</span>({})               <span class="cm">-- buka semua kembali</span></code></div></div>
           <div class="table-wrap"><table>
             <thead><tr><th>Property / Method</th><th>Type</th><th>Description</th></tr></thead>
             <tbody>
@@ -1676,8 +1637,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
           <div class="stab" onclick="stab(this,'inp-fn')">Functions</div>
         </div>
         <div id="inp-ex" class="stab-content active">
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <code><span class="var">Sec</span>.<span class="var">Input</span>:<span class="fn">AddInput</span>({
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="var">Sec</span>.<span class="var">Input</span>:<span class="fn">AddInput</span>({
     <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Username"</span>,
     <span class="var">Content</span>  <span class="op">=</span> <span class="str">"Enter your username"</span>,
     <span class="var">Default</span>  <span class="op">=</span> <span class="var">game</span>.<span class="var">Players</span>.<span class="var">LocalPlayer</span>.<span class="var">Name</span>,
@@ -1695,13 +1655,12 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
             <span class="fn">Notify</span>(<span class="str">"Invalid amount!"</span>, <span class="num">3</span>)
         <span class="kw">end</span>
     <span class="kw">end</span>
-})</code></div>
+})</code></div></div>
         </div>
         <div id="inp-types" class="stab-content">
           <h3>Textarea</h3>
           <p>Gunakan <code class="il">Type = "Textarea"</code> untuk input multi-baris.</p>
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <code><span class="var">Sec</span>.<span class="var">Input</span>:<span class="fn">AddInput</span>({
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="var">Sec</span>.<span class="var">Input</span>:<span class="fn">AddInput</span>({
     <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Type Textarea"</span>,
     <span class="var">Type</span>     <span class="op">=</span> <span class="str">"Textarea"</span>,
     <span class="var">Content</span>  <span class="op">=</span> <span class="str">"Enter your text"</span>,
@@ -1709,11 +1668,10 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
     <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">value</span>)
         <span class="fn">print</span>(<span class="str">"Text:"</span>, <span class="var">value</span>)
     <span class="kw">end</span>
-})</code></div>
+})</code></div></div>
           <h3>InputIcon</h3>
           <p>Gunakan <code class="il">InputIcon</code> untuk menambahkan icon di dalam field input.</p>
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <code><span class="var">Sec</span>.<span class="var">Input</span>:<span class="fn">AddInput</span>({
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="var">Sec</span>.<span class="var">Input</span>:<span class="fn">AddInput</span>({
     <span class="var">Title</span>      <span class="op">=</span> <span class="str">"Input Icon"</span>,
     <span class="var">InputIcon</span>  <span class="op">=</span> <span class="str">"lucide:bird"</span>,
     <span class="var">Content</span>    <span class="op">=</span> <span class="str">"Enter your username"</span>,
@@ -1721,7 +1679,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
     <span class="var">Callback</span>   <span class="op">=</span> <span class="kw">function</span>(<span class="var">value</span>)
         <span class="fn">print</span>(<span class="str">"Value:"</span>, <span class="var">value</span>)
     <span class="kw">end</span>
-})</code></div>
+})</code></div></div>
           <h3>Properties</h3>
           <div class="table-wrap"><table>
             <thead><tr><th>Property</th><th>Type</th><th>Description</th></tr></thead>
@@ -1768,8 +1726,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
           <div class="stab" onclick="stab(this,'pan-fn')">Functions</div>
         </div>
         <div id="pan-single" class="stab-content active">
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <code><span class="var">Sec</span>.<span class="var">Panel</span>:<span class="fn">AddPanel</span>({
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="var">Sec</span>.<span class="var">Panel</span>:<span class="fn">AddPanel</span>({
     <span class="var">Title</span>          <span class="op">=</span> <span class="str">"Example"</span>,
     <span class="var">Placeholder</span>    <span class="op">=</span> <span class="str">"Example_Name"</span>,
     <span class="var">Default</span>        <span class="op">=</span> <span class="str">"ExampleDefault"</span>,
@@ -1777,17 +1734,16 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
     <span class="var">ButtonCallback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">value</span>)
         <span class="fn">Notify</span>(<span class="str">"Action executed!"</span>, <span class="num">2</span>)
     <span class="kw">end</span>
-})</code></div>
+})</code></div></div>
         </div>
         <div id="pan-dual" class="stab-content">
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <code><span class="var">Sec</span>.<span class="var">Panel</span>:<span class="fn">AddPanel</span>({
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="var">Sec</span>.<span class="var">Panel</span>:<span class="fn">AddPanel</span>({
     <span class="var">Title</span>             <span class="op">=</span> <span class="str">"Example"</span>,
     <span class="var">ButtonText</span>        <span class="op">=</span> <span class="str">"Save"</span>,
     <span class="var">ButtonCallback</span>    <span class="op">=</span> <span class="kw">function</span>(<span class="var">v</span>) <span class="fn">Notify</span>(<span class="str">"Saved!"</span>, <span class="num">2</span>) <span class="kw">end</span>,
     <span class="var">SubButtonText</span>     <span class="op">=</span> <span class="str">"Load"</span>,
     <span class="var">SubButtonCallback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">v</span>) <span class="fn">Notify</span>(<span class="str">"Loaded!"</span>, <span class="num">2</span>) <span class="kw">end</span>
-})</code></div>
+})</code></div></div>
         </div>
         <div id="pan-fn" class="stab-content">
           <div class="table-wrap"><table>
@@ -1826,8 +1782,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
         </div>
 
         <div id="par-basic" class="stab-content active">
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <code><span class="cm">-- Simple</span>
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="cm">-- Simple</span>
 <span class="var">Sec</span>.<span class="var">Paragraph</span>:<span class="fn">AddParagraph</span>({
     <span class="var">Title</span>   <span class="op">=</span> <span class="str">"Example"</span>,
     <span class="var">Content</span> <span class="op">=</span> <span class="str">"This is an example paragraph.\nUse \\n for new lines."</span>
@@ -1849,7 +1804,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
     <span class="var">ButtonCallback</span> <span class="op">=</span> <span class="kw">function</span>()
         <span class="fn">print</span>(<span class="str">"Support action triggered"</span>)
     <span class="kw">end</span>
-})</code></div>
+})</code></div></div>
         </div>
 
         <div id="par-color" class="stab-content">
@@ -1860,8 +1815,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
           </div>
 
           <h3>Menggunakan Nama Tema</h3>
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <code><span class="var">Sec</span>.<span class="var">Paragraph</span>:<span class="fn">AddParagraph</span>({
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="var">Sec</span>.<span class="var">Paragraph</span>:<span class="fn">AddParagraph</span>({
     <span class="var">Title</span>          <span class="op">=</span> <span class="str">"Velaris Official Discord"</span>,
     <span class="var">Content</span>        <span class="op">=</span> <span class="str">"Velaris UI Library best"</span>,
     <span class="var">Color</span>          <span class="op">=</span> <span class="str">"Sky"</span>,
@@ -1881,17 +1835,16 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
     <span class="kw">end</span>,
     <span class="var">SubButtonText</span>     <span class="op">=</span> <span class="str">"Link"</span>,
     <span class="var">SubButtonCallback</span> <span class="op">=</span> <span class="kw">function</span>() <span class="kw">end</span>,
-})</code></div>
+})</code></div></div>
 
           <h3>Menggunakan Color3.fromRGB</h3>
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <code><span class="var">Sec</span>.<span class="var">Paragraph</span>:<span class="fn">AddParagraph</span>({
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="var">Sec</span>.<span class="var">Paragraph</span>:<span class="fn">AddParagraph</span>({
     <span class="var">Title</span>          <span class="op">=</span> <span class="str">"Custom Color"</span>,
     <span class="var">Content</span>        <span class="op">=</span> <span class="str">"Warna kustom dengan Color3"</span>,
     <span class="var">Color</span>          <span class="op">=</span> <span class="var">Color3</span>.<span class="fn">fromRGB</span>(<span class="num">70</span>, <span class="num">130</span>, <span class="num">220</span>),
     <span class="var">ButtonText</span>     <span class="op">=</span> <span class="str">"Action"</span>,
     <span class="var">ButtonCallback</span> <span class="op">=</span> <span class="kw">function</span>() <span class="kw">end</span>,
-})</code></div>
+})</code></div></div>
 
           <h3>Color Value Types</h3>
           <div class="table-wrap"><table>
@@ -1906,18 +1859,16 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
         <div id="par-media" class="stab-content">
           <p>Tambahkan gambar atau video ke dalam paragraph dengan property <code class="il">MediaType</code>.</p>
           <h3>Image</h3>
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <code><span class="var">Sec</span>.<span class="var">Paragraph</span>:<span class="fn">AddParagraph</span>({
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="var">Sec</span>.<span class="var">Paragraph</span>:<span class="fn">AddParagraph</span>({
     <span class="var">Title</span>       <span class="op">=</span> <span class="str">"Preview"</span>,
     <span class="var">Content</span>     <span class="op">=</span> <span class="str">"Gambar preview item."</span>,
     <span class="var">MediaType</span>   <span class="op">=</span> <span class="str">"Image"</span>,
     <span class="var">MediaId</span>     <span class="op">=</span> <span class="str">"rbxassetid://1234567890"</span>,
     <span class="var">MediaWidth</span>  <span class="op">=</span> <span class="num">80</span>,
     <span class="var">MediaHeight</span> <span class="op">=</span> <span class="num">60</span>,
-})</code></div>
+})</code></div></div>
           <h3>Video</h3>
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <code><span class="kw">local</span> <span class="var">Para</span> <span class="op">=</span> <span class="var">Sec</span>.<span class="var">Paragraph</span>:<span class="fn">AddParagraph</span>({
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="kw">local</span> <span class="var">Para</span> <span class="op">=</span> <span class="var">Sec</span>.<span class="var">Paragraph</span>:<span class="fn">AddParagraph</span>({
     <span class="var">Title</span>       <span class="op">=</span> <span class="str">"Tutorial"</span>,
     <span class="var">Content</span>     <span class="op">=</span> <span class="str">"Klik play untuk memutar video."</span>,
     <span class="var">MediaType</span>   <span class="op">=</span> <span class="str">"Video"</span>,
@@ -1929,7 +1880,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
 })
 
 <span class="var">Para</span>:<span class="fn">StartVideo</span>()
-<span class="var">Para</span>:<span class="fn">StopVideo</span>()</code></div>
+<span class="var">Para</span>:<span class="fn">StopVideo</span>()</code></div></div>
           <div class="table-wrap"><table>
             <thead><tr><th>Property</th><th>Type</th><th>Description</th></tr></thead>
             <tbody>
@@ -1945,12 +1896,11 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
 
         <div id="par-badge" class="stab-content">
           <p>Gunakan property <code class="il">Badge</code> untuk menampilkan label status. Lihat halaman <a href="#" onclick="show('badge',getSL('badge'));return false" style="color:var(--info-text)">Badge</a> untuk detail lengkap.</p>
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <code><span class="var">Sec</span>.<span class="var">Paragraph</span>:<span class="fn">AddParagraph</span>({
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="var">Sec</span>.<span class="var">Paragraph</span>:<span class="fn">AddParagraph</span>({
     <span class="var">Title</span>   <span class="op">=</span> <span class="str">"Example Badge Bug"</span>,
     <span class="var">Content</span> <span class="op">=</span> <span class="str">"This is Bug paragraph."</span>,
     <span class="var">Badge</span>   <span class="op">=</span> <span class="str">"Bug"</span>,     <span class="cm">-- "Bug" | "New" | "Warning" | "Fixed" | "Beta" | "Hot" | "Soon"</span>
-})</code></div>
+})</code></div></div>
         </div>
 
         <div id="par-fn" class="stab-content">
@@ -1996,21 +1946,19 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
         </div>
 
         <div id="ep-basic" class="stab-content active">
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <code><span class="kw">local</span> <span class="var">EP</span> <span class="op">=</span> <span class="var">Sec</span>.<span class="var">Paragraph</span>:<span class="fn">AddEditableParagraph</span>({
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="kw">local</span> <span class="var">EP</span> <span class="op">=</span> <span class="var">Sec</span>.<span class="var">Paragraph</span>:<span class="fn">AddEditableParagraph</span>({
     <span class="var">Title</span>       <span class="op">=</span> <span class="str">"Notes"</span>,
     <span class="var">Placeholder</span> <span class="op">=</span> <span class="str">"Type your notes here..."</span>,
     <span class="var">Default</span>     <span class="op">=</span> <span class="str">""</span>,
     <span class="var">Callback</span>    <span class="op">=</span> <span class="kw">function</span>(<span class="var">value</span>)
         <span class="fn">print</span>(<span class="str">"Text changed:"</span>, <span class="var">value</span>)
     <span class="kw">end</span>
-})</code></div>
+})</code></div></div>
         </div>
 
         <div id="ep-button" class="stab-content">
           <p>Tambahkan tombol aksi di bawah TextBox menggunakan <code class="il">ButtonText</code> dan <code class="il">ButtonCallback</code>.</p>
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <code><span class="kw">local</span> <span class="var">EP</span> <span class="op">=</span> <span class="var">Sec</span>.<span class="var">Paragraph</span>:<span class="fn">AddEditableParagraph</span>({
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="kw">local</span> <span class="var">EP</span> <span class="op">=</span> <span class="var">Sec</span>.<span class="var">Paragraph</span>:<span class="fn">AddEditableParagraph</span>({
     <span class="var">Title</span>          <span class="op">=</span> <span class="str">"Custom Script"</span>,
     <span class="var">Placeholder</span>    <span class="op">=</span> <span class="str">"Masukkan script..."</span>,
     <span class="var">Default</span>        <span class="op">=</span> <span class="str">""</span>,
@@ -2019,7 +1967,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
         <span class="fn">print</span>(<span class="str">"Executing:"</span>, <span class="var">text</span>)
     <span class="kw">end</span>,
     <span class="var">Callback</span>       <span class="op">=</span> <span class="kw">function</span>(<span class="var">value</span>) <span class="kw">end</span>
-})</code></div>
+})</code></div></div>
           <h3>Properties</h3>
           <div class="table-wrap"><table>
             <thead><tr><th>Property</th><th>Type</th><th>Description</th></tr></thead>
@@ -2076,21 +2024,19 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
         </div>
 
         <div id="kb-basic" class="stab-content active">
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <code><span class="kw">local</span> <span class="var">MyKeybind</span> <span class="op">=</span> <span class="var">Section</span>:<span class="fn">AddKeybind</span>({
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="kw">local</span> <span class="var">MyKeybind</span> <span class="op">=</span> <span class="var">Section</span>:<span class="fn">AddKeybind</span>({
     <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Toggle ESP"</span>,
     <span class="var">Content</span>  <span class="op">=</span> <span class="str">"Tekan untuk toggle"</span>,
     <span class="var">Value</span>    <span class="op">=</span> <span class="str">"RightShift"</span>,
     <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">key</span>)
         <span class="fn">print</span>(<span class="str">"fired:"</span>, <span class="var">key</span>)
     <span class="kw">end</span>
-})</code>
+})</code></div>
           </div>
         </div>
 
         <div id="kb-full" class="stab-content">
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <code><span class="kw">local</span> <span class="var">FlyBind</span> <span class="op">=</span> <span class="var">Section</span>:<span class="fn">AddKeybind</span>({
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="kw">local</span> <span class="var">FlyBind</span> <span class="op">=</span> <span class="var">Section</span>:<span class="fn">AddKeybind</span>({
     <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Fly"</span>,
     <span class="var">Content</span>  <span class="op">=</span> <span class="str">"Toggle flight mode"</span>,
     <span class="var">Value</span>    <span class="op">=</span> <span class="str">"F"</span>,           <span class="cm">-- default key</span>
@@ -2103,7 +2049,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
     <span class="var">Changed</span>  <span class="op">=</span> <span class="kw">function</span>(<span class="var">key</span>, <span class="var">mode</span>)
         <span class="fn">print</span>(<span class="str">"changed to:"</span>, <span class="var">key</span>, <span class="var">mode</span>)
     <span class="kw">end</span>,
-})</code>
+})</code></div>
           </div>
 
           <h3>Properties</h3>
@@ -2125,8 +2071,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
         </div>
 
         <div id="kb-locked" class="stab-content">
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <code><span class="cm">-- Locked saat deklarasi</span>
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="cm">-- Locked saat deklarasi</span>
 <span class="kw">local</span> <span class="var">MyBind</span> <span class="op">=</span> <span class="var">Section</span>:<span class="fn">AddKeybind</span>({
     <span class="var">Title</span>       <span class="op">=</span> <span class="str">"Fly"</span>,
     <span class="var">Value</span>       <span class="op">=</span> <span class="str">"F"</span>,
@@ -2138,7 +2083,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
 <span class="cm">-- Dynamic lock</span>
 <span class="var">MyBind</span>:<span class="fn">SetLocked</span>(<span class="kw">true</span>)
 <span class="var">MyBind</span>:<span class="fn">SetLocked</span>(<span class="kw">false</span>)
-<span class="var">MyBind</span>:<span class="fn">SetLockMessage</span>(<span class="str">"Premium only"</span>)</code>
+<span class="var">MyBind</span>:<span class="fn">SetLockMessage</span>(<span class="str">"Premium only"</span>)</code></div>
           </div>
         </div>
 
@@ -2156,14 +2101,13 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
               <tr><td>:SetLockMessage(text)</td><td>—</td><td>Ubah teks pesan overlay kunci</td></tr>
             </tbody>
           </table></div>
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <code><span class="var">FlyBind</span>:<span class="fn">Set</span>(<span class="str">"G"</span>)
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="var">FlyBind</span>:<span class="fn">Set</span>(<span class="str">"G"</span>)
 <span class="fn">print</span>(<span class="var">FlyBind</span>:<span class="fn">Get</span>())       <span class="cm">-- "G"</span>
 <span class="fn">print</span>(<span class="var">FlyBind</span>:<span class="fn">GetMode</span>())   <span class="cm">-- "Toggle"</span>
 <span class="fn">print</span>(<span class="var">FlyBind</span>:<span class="fn">GetState</span>())  <span class="cm">-- true / false</span>
 <span class="var">FlyBind</span>:<span class="fn">Clear</span>()             <span class="cm">-- reset ke "None"</span>
 <span class="var">FlyBind</span>:<span class="fn">SetLocked</span>(<span class="kw">true</span>)
-<span class="var">FlyBind</span>:<span class="fn">SetLockMessage</span>(<span class="str">"Premium only"</span>)</code>
+<span class="var">FlyBind</span>:<span class="fn">SetLockMessage</span>(<span class="str">"Premium only"</span>)</code></div>
           </div>
         </div>
 
@@ -2193,21 +2137,19 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
         </div>
 
         <div id="cp-basic" class="stab-content active">
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <code><span class="kw">local</span> <span class="var">MyCP</span> <span class="op">=</span> <span class="var">Sec</span>.<span class="var">Color</span>:<span class="fn">AddColorpicker</span>({
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="kw">local</span> <span class="var">MyCP</span> <span class="op">=</span> <span class="var">Sec</span>.<span class="var">Color</span>:<span class="fn">AddColorpicker</span>({
     <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Background Color"</span>,
     <span class="var">Default</span>  <span class="op">=</span> <span class="var">Color3</span>.<span class="fn">fromRGB</span>(<span class="num">0</span>, <span class="num">208</span>, <span class="num">255</span>),
     <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">color</span>, <span class="var">alpha</span>)
         <span class="fn">print</span>(<span class="str">"Color:"</span>, <span class="var">color</span>)
         <span class="fn">print</span>(<span class="str">"Alpha:"</span>, <span class="var">alpha</span>)
     <span class="kw">end</span>
-})</code>
+})</code></div>
           </div>
         </div>
 
         <div id="cp-full" class="stab-content">
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <code><span class="kw">local</span> <span class="var">MyCP</span> <span class="op">=</span> <span class="var">Sec</span>.<span class="var">Color</span>:<span class="fn">AddColorpicker</span>({
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="kw">local</span> <span class="var">MyCP</span> <span class="op">=</span> <span class="var">Sec</span>.<span class="var">Color</span>:<span class="fn">AddColorpicker</span>({
     <span class="var">Title</span>       <span class="op">=</span> <span class="str">"ESP Color"</span>,
     <span class="var">Content</span>     <span class="op">=</span> <span class="str">"Warna garis ESP pada player"</span>,  <span class="cm">-- deskripsi di bawah title</span>
     <span class="var">Icon</span>        <span class="op">=</span> <span class="str">"lucide:palette"</span>,              <span class="cm">-- opsional</span>
@@ -2219,7 +2161,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
         <span class="fn">print</span>(<span class="str">"Color picked:"</span>, <span class="var">color</span>)
         <span class="fn">print</span>(<span class="str">"Alpha:"</span>, <span class="var">alpha</span>)
     <span class="kw">end</span>
-})</code>
+})</code></div>
           </div>
 
           <h3>Properties</h3>
@@ -2244,8 +2186,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
         </div>
 
         <div id="cp-locked" class="stab-content">
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <code><span class="cm">-- Locked saat deklarasi</span>
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="cm">-- Locked saat deklarasi</span>
 <span class="kw">local</span> <span class="var">MyCP</span> <span class="op">=</span> <span class="var">Sec</span>.<span class="var">Color</span>:<span class="fn">AddColorpicker</span>({
     <span class="var">Title</span>       <span class="op">=</span> <span class="str">"Team Color"</span>,
     <span class="var">Default</span>     <span class="op">=</span> <span class="var">Color3</span>.<span class="fn">fromRGB</span>(<span class="num">255</span>, <span class="num">255</span>, <span class="num">255</span>),
@@ -2257,7 +2198,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
 <span class="cm">-- Dynamic lock</span>
 <span class="var">MyCP</span>:<span class="fn">SetLocked</span>(<span class="kw">true</span>)
 <span class="var">MyCP</span>:<span class="fn">SetLocked</span>(<span class="kw">false</span>)
-<span class="fn">print</span>(<span class="var">MyCP</span>:<span class="fn">GetLocked</span>())   <span class="cm">-- true / false</span></code>
+<span class="fn">print</span>(<span class="var">MyCP</span>:<span class="fn">GetLocked</span>())   <span class="cm">-- true / false</span></code></div>
           </div>
         </div>
 
@@ -2279,8 +2220,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
           </table></div>
 
           <h3>Contoh Penggunaan API</h3>
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <code><span class="kw">local</span> <span class="var">MyCP</span> <span class="op">=</span> <span class="var">Sec</span>.<span class="var">Color</span>:<span class="fn">AddColorpicker</span>({
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="kw">local</span> <span class="var">MyCP</span> <span class="op">=</span> <span class="var">Sec</span>.<span class="var">Color</span>:<span class="fn">AddColorpicker</span>({
     <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Highlight"</span>,
     <span class="var">Default</span>  <span class="op">=</span> <span class="var">Color3</span>.<span class="fn">fromRGB</span>(<span class="num">255</span>, <span class="num">165</span>, <span class="num">0</span>),
     <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">c</span>, <span class="var">a</span>) <span class="kw">end</span>
@@ -2299,7 +2239,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
 <span class="var">MyCP</span>:<span class="fn">SetContent</span>(<span class="str">"Updated description"</span>)
 
 <span class="cm">-- Hapus elemen</span>
-<span class="var">MyCP</span>:<span class="fn">Destroy</span>()</code>
+<span class="var">MyCP</span>:<span class="fn">Destroy</span>()</code></div>
           </div>
         </div>
 
@@ -2316,11 +2256,10 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
           <div class="page-title">Divider &amp; SubSection</div>
           <div class="page-subtitle">Pemisah visual dan sub-label dalam section</div>
         </div>
-        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-          <code><span class="var">Sec</span>.<span class="var">Other</span> <span class="op">=</span> <span class="var">Tabs</span>.<span class="var">Main</span>:<span class="fn">AddSection</span>(<span class="str">"SubSection &amp; Divider"</span>)
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="var">Sec</span>.<span class="var">Other</span> <span class="op">=</span> <span class="var">Tabs</span>.<span class="var">Main</span>:<span class="fn">AddSection</span>(<span class="str">"SubSection &amp; Divider"</span>)
 
 <span class="var">Sec</span>.<span class="var">Other</span>:<span class="fn">AddDivider</span>()
-<span class="var">Sec</span>.<span class="var">Other</span>:<span class="fn">AddSubSection</span>(<span class="str">"Example Sub Section"</span>)</code>
+<span class="var">Sec</span>.<span class="var">Other</span>:<span class="fn">AddSubSection</span>(<span class="str">"Example Sub Section"</span>)</code></div>
         </div>
         <div class="page-nav">
           <button class="pnav-btn" onclick="show('colorpicker',getSL('colorpicker'))"><span class="pnav-btn-label">← Previous</span><span class="pnav-btn-name">ColorPicker</span></button>
@@ -2358,91 +2297,82 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
         <p>Cukup tambahkan <code class="il">Badge = "..."</code> ke property elemen manapun.</p>
 
         <h3>Button</h3>
-        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-          <code><span class="var">Sec</span>:<span class="fn">AddButton</span>({
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="var">Sec</span>:<span class="fn">AddButton</span>({
     <span class="var">Title</span>    <span class="op">=</span> <span class="str">"New Feature"</span>,
     <span class="var">Badge</span>    <span class="op">=</span> <span class="str">"New"</span>,
     <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>() <span class="kw">end</span>
-})</code>
+})</code></div>
         </div>
 
         <h3>Toggle</h3>
-        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-          <code><span class="var">Sec</span>:<span class="fn">AddToggle</span>({
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="var">Sec</span>:<span class="fn">AddToggle</span>({
     <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Buggy Toggle"</span>,
     <span class="var">Badge</span>    <span class="op">=</span> <span class="str">"Bug"</span>,
     <span class="var">Default</span>  <span class="op">=</span> <span class="kw">false</span>,
     <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">v</span>) <span class="kw">end</span>
-})</code>
+})</code></div>
         </div>
 
         <h3>Slider</h3>
-        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-          <code><span class="var">Sec</span>:<span class="fn">AddSlider</span>({
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="var">Sec</span>:<span class="fn">AddSlider</span>({
     <span class="var">Title</span>     <span class="op">=</span> <span class="str">"Speed"</span>,
     <span class="var">Badge</span>     <span class="op">=</span> <span class="str">"Fixed"</span>,
     <span class="var">Min</span>       <span class="op">=</span> <span class="num">0</span>, <span class="var">Max</span> <span class="op">=</span> <span class="num">100</span>, <span class="var">Default</span> <span class="op">=</span> <span class="num">50</span>,
     <span class="var">Callback</span>  <span class="op">=</span> <span class="kw">function</span>(<span class="var">v</span>) <span class="kw">end</span>
-})</code>
+})</code></div>
         </div>
 
         <h3>Dropdown</h3>
-        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-          <code><span class="var">Sec</span>:<span class="fn">AddDropdown</span>({
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="var">Sec</span>:<span class="fn">AddDropdown</span>({
     <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Select Mode"</span>,
     <span class="var">Badge</span>    <span class="op">=</span> <span class="str">"Warning"</span>,
     <span class="var">Options</span>  <span class="op">=</span> { <span class="str">"A"</span>, <span class="str">"B"</span>, <span class="str">"C"</span> },
     <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">v</span>) <span class="kw">end</span>
-})</code>
+})</code></div>
         </div>
 
         <h3>Input</h3>
-        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-          <code><span class="var">Sec</span>:<span class="fn">AddInput</span>({
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="var">Sec</span>:<span class="fn">AddInput</span>({
     <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Username"</span>,
     <span class="var">Badge</span>    <span class="op">=</span> <span class="str">"New"</span>,
     <span class="var">Default</span>  <span class="op">=</span> <span class="str">""</span>,
     <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">v</span>) <span class="kw">end</span>
-})</code>
+})</code></div>
         </div>
 
         <h3>Panel</h3>
-        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-          <code><span class="var">Sec</span>:<span class="fn">AddPanel</span>({
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="var">Sec</span>:<span class="fn">AddPanel</span>({
     <span class="var">Title</span>          <span class="op">=</span> <span class="str">"Action Panel"</span>,
     <span class="var">Badge</span>          <span class="op">=</span> <span class="str">"Bug"</span>,
     <span class="var">ButtonText</span>     <span class="op">=</span> <span class="str">"Execute"</span>,
     <span class="var">ButtonCallback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">v</span>) <span class="kw">end</span>
-})</code>
+})</code></div>
         </div>
 
         <h3>Paragraph</h3>
-        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-          <code><span class="var">Sec</span>:<span class="fn">AddParagraph</span>({
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="var">Sec</span>:<span class="fn">AddParagraph</span>({
     <span class="var">Title</span>   <span class="op">=</span> <span class="str">"Changelog"</span>,
     <span class="var">Content</span> <span class="op">=</span> <span class="str">"Fixed crash issue on load."</span>,
     <span class="var">Badge</span>   <span class="op">=</span> <span class="str">"Fixed"</span>,
-})</code>
+})</code></div>
         </div>
 
         <h3>Keybind</h3>
-        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-          <code><span class="var">Sec</span>:<span class="fn">AddKeybind</span>({
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="var">Sec</span>:<span class="fn">AddKeybind</span>({
     <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Toggle ESP"</span>,
     <span class="var">Badge</span>    <span class="op">=</span> <span class="str">"Warning"</span>,
     <span class="var">Value</span>    <span class="op">=</span> <span class="str">"RightShift"</span>,
     <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">key</span>) <span class="kw">end</span>
-})</code>
+})</code></div>
         </div>
 
         <h3>ColorPicker</h3>
-        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-          <code><span class="var">Sec</span>:<span class="fn">AddColorpicker</span>({
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="var">Sec</span>:<span class="fn">AddColorpicker</span>({
     <span class="var">Title</span>    <span class="op">=</span> <span class="str">"ESP Color"</span>,
     <span class="var">Badge</span>    <span class="op">=</span> <span class="str">"New"</span>,
     <span class="var">Default</span>  <span class="op">=</span> <span class="var">Color3</span>.<span class="fn">fromRGB</span>(<span class="num">255</span>, <span class="num">80</span>, <span class="num">80</span>),
     <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">c</span>, <span class="var">a</span>) <span class="kw">end</span>
-})</code>
+})</code></div>
         </div>
 
         <div class="page-nav">
@@ -2467,98 +2397,88 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
         <p>Tambahkan <code class="il">Locked = true</code> pada property elemen manapun. Bisa juga dikombinasikan dengan <code class="il">Badge</code>.</p>
 
         <h3>Button</h3>
-        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-          <code><span class="var">Sec</span>:<span class="fn">AddButton</span>({
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="var">Sec</span>:<span class="fn">AddButton</span>({
     <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Locked Button"</span>,
     <span class="var">Locked</span>   <span class="op">=</span> <span class="kw">true</span>,
     <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>() <span class="kw">end</span>
-})</code>
+})</code></div>
         </div>
 
         <h3>Toggle</h3>
-        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-          <code><span class="var">Sec</span>:<span class="fn">AddToggle</span>({
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="var">Sec</span>:<span class="fn">AddToggle</span>({
     <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Locked Toggle"</span>,
     <span class="var">Locked</span>   <span class="op">=</span> <span class="kw">true</span>,
     <span class="var">Default</span>  <span class="op">=</span> <span class="kw">false</span>,
     <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">v</span>) <span class="kw">end</span>
-})</code>
+})</code></div>
         </div>
 
         <h3>Slider</h3>
-        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-          <code><span class="var">Sec</span>:<span class="fn">AddSlider</span>({
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="var">Sec</span>:<span class="fn">AddSlider</span>({
     <span class="var">Title</span>     <span class="op">=</span> <span class="str">"Locked Slider"</span>,
     <span class="var">Locked</span>    <span class="op">=</span> <span class="kw">true</span>,
     <span class="var">Min</span>       <span class="op">=</span> <span class="num">0</span>, <span class="var">Max</span> <span class="op">=</span> <span class="num">100</span>, <span class="var">Default</span> <span class="op">=</span> <span class="num">50</span>,
     <span class="var">Callback</span>  <span class="op">=</span> <span class="kw">function</span>(<span class="var">v</span>) <span class="kw">end</span>
-})</code>
+})</code></div>
         </div>
 
         <h3>Dropdown</h3>
-        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-          <code><span class="var">Sec</span>:<span class="fn">AddDropdown</span>({
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="var">Sec</span>:<span class="fn">AddDropdown</span>({
     <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Locked Dropdown"</span>,
     <span class="var">Locked</span>   <span class="op">=</span> <span class="kw">true</span>,
     <span class="var">Options</span>  <span class="op">=</span> { <span class="str">"A"</span>, <span class="str">"B"</span>, <span class="str">"C"</span> },
     <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">v</span>) <span class="kw">end</span>
-})</code>
+})</code></div>
         </div>
 
         <h3>Input</h3>
-        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-          <code><span class="var">Sec</span>:<span class="fn">AddInput</span>({
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="var">Sec</span>:<span class="fn">AddInput</span>({
     <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Locked Input"</span>,
     <span class="var">Locked</span>   <span class="op">=</span> <span class="kw">true</span>,
     <span class="var">Default</span>  <span class="op">=</span> <span class="str">""</span>,
     <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">v</span>) <span class="kw">end</span>
-})</code>
+})</code></div>
         </div>
 
         <h3>Panel</h3>
-        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-          <code><span class="var">Sec</span>:<span class="fn">AddPanel</span>({
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="var">Sec</span>:<span class="fn">AddPanel</span>({
     <span class="var">Title</span>          <span class="op">=</span> <span class="str">"Locked Panel"</span>,
     <span class="var">Locked</span>         <span class="op">=</span> <span class="kw">true</span>,
     <span class="var">ButtonText</span>     <span class="op">=</span> <span class="str">"Action"</span>,
     <span class="var">ButtonCallback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">v</span>) <span class="kw">end</span>
-})</code>
+})</code></div>
         </div>
 
         <h3>Paragraph</h3>
-        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-          <code><span class="var">Sec</span>:<span class="fn">AddParagraph</span>({
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="var">Sec</span>:<span class="fn">AddParagraph</span>({
     <span class="var">Title</span>   <span class="op">=</span> <span class="str">"Locked Info"</span>,
     <span class="var">Content</span> <span class="op">=</span> <span class="str">"This element is locked."</span>,
     <span class="var">Locked</span>  <span class="op">=</span> <span class="kw">true</span>,
-})</code>
+})</code></div>
         </div>
 
         <h3>Keybind</h3>
-        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-          <code><span class="var">Sec</span>:<span class="fn">AddKeybind</span>({
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="var">Sec</span>:<span class="fn">AddKeybind</span>({
     <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Locked Keybind"</span>,
     <span class="var">Locked</span>   <span class="op">=</span> <span class="kw">true</span>,
     <span class="var">Value</span>    <span class="op">=</span> <span class="str">"RightShift"</span>,
     <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">key</span>) <span class="kw">end</span>
-})</code>
+})</code></div>
         </div>
 
         <h3>ColorPicker</h3>
-        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-          <code><span class="var">Sec</span>:<span class="fn">AddColorpicker</span>({
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="var">Sec</span>:<span class="fn">AddColorpicker</span>({
     <span class="var">Title</span>       <span class="op">=</span> <span class="str">"Locked Color"</span>,
     <span class="var">Locked</span>      <span class="op">=</span> <span class="kw">true</span>,
     <span class="var">LockMessage</span> <span class="op">=</span> <span class="str">"Premium Only"</span>,
     <span class="var">Default</span>     <span class="op">=</span> <span class="var">Color3</span>.<span class="fn">fromRGB</span>(<span class="num">255</span>, <span class="num">255</span>, <span class="num">255</span>),
     <span class="var">Callback</span>    <span class="op">=</span> <span class="kw">function</span>(<span class="var">c</span>, <span class="var">a</span>) <span class="kw">end</span>
-})</code>
+})</code></div>
         </div>
 
         <h2>Dynamic Lock — SetLocked</h2>
         <p>Semua elemen mendukung method <code class="il">:SetLocked(state)</code> dan <code class="il">:GetLocked()</code> untuk mengunci/membuka secara dinamis.</p>
-        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-          <code><span class="cm">-- Contoh pada Toggle (berlaku sama untuk semua elemen)</span>
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="cm">-- Contoh pada Toggle (berlaku sama untuk semua elemen)</span>
 <span class="kw">local</span> <span class="var">MyToggle</span> <span class="op">=</span> <span class="var">Sec</span>:<span class="fn">AddToggle</span>({
     <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Dynamic Lock"</span>,
     <span class="var">Default</span>  <span class="op">=</span> <span class="kw">false</span>,
@@ -2567,13 +2487,12 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
 
 <span class="var">MyToggle</span>:<span class="fn">SetLocked</span>(<span class="kw">true</span>)    <span class="cm">-- kunci elemen</span>
 <span class="var">MyToggle</span>:<span class="fn">SetLocked</span>(<span class="kw">false</span>)   <span class="cm">-- buka elemen</span>
-<span class="fn">print</span>(<span class="var">MyToggle</span>:<span class="fn">GetLocked</span>())  <span class="cm">-- true / false</span></code>
+<span class="fn">print</span>(<span class="var">MyToggle</span>:<span class="fn">GetLocked</span>())  <span class="cm">-- true / false</span></code></div>
         </div>
 
         <h2>Kombinasi Badge + Locked</h2>
         <p>Kedua property bisa dipakai bersamaan pada elemen apapun.</p>
-        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-          <code><span class="var">Sec</span>:<span class="fn">AddButton</span>({
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="var">Sec</span>:<span class="fn">AddButton</span>({
     <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Coming Soon"</span>,
     <span class="var">Badge</span>    <span class="op">=</span> <span class="str">"New"</span>,
     <span class="var">Locked</span>   <span class="op">=</span> <span class="kw">true</span>,
@@ -2586,7 +2505,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
     <span class="var">Locked</span>   <span class="op">=</span> <span class="kw">true</span>,
     <span class="var">Default</span>  <span class="op">=</span> <span class="kw">false</span>,
     <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">v</span>) <span class="kw">end</span>
-})</code>
+})</code></div>
         </div>
 
         <h2>Universal Functions</h2>
@@ -2613,8 +2532,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
           <div class="page-subtitle">Jalankan contoh lengkap VelarisUI</div>
         </div>
         <p>Load file example secara langsung menggunakan loadstring berikut:</p>
-        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
-          <code><span class="fn">loadstring</span>(<span class="var">game</span>:<span class="fn">HttpGet</span>(<span class="str">"https://raw.githubusercontent.com/nhfudzfsrzggt/brigida/refs/heads/main/full_example.lua"</span>))()</code>
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="fn">loadstring</span>(<span class="var">game</span>:<span class="fn">HttpGet</span>(<span class="str">"https://raw.githubusercontent.com/nhfudzfsrzggt/brigida/refs/heads/main/full_example.lua"</span>))()</code></div>
         </div>
         <div class="info-box">
           💬 Butuh bantuan? Join Discord: <code class="il">discord.gg/ECxQFc97F5</code>
@@ -2820,7 +2738,9 @@ function stab(tabEl, contentId) {
 }
 
 function copyCode(btn) {
-  const text = btn.nextElementSibling.innerText;
+  const inner = btn.nextElementSibling;
+  const code = inner && inner.querySelector ? inner.querySelector('code') : inner;
+  const text = (code || inner).innerText;
   navigator.clipboard.writeText(text).then(() => {
     const orig = btn.textContent;
     btn.textContent = 'Copied!';
