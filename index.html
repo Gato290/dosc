@@ -2959,13 +2959,47 @@ function show(id, linkEl) {
   if (pg) pg.classList.add('active');
   document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
   if (linkEl) linkEl.classList.add('active');
+  else {
+    const auto = document.querySelector(`.nav-link[onclick*="'${id}'"]`);
+    if (auto) auto.classList.add('active');
+  }
   document.querySelector('.main').scrollTo(0, 0);
   window.scrollTo(0, 0);
+  history.pushState({ page: id }, '', '#' + id.charAt(0).toUpperCase() + id.slice(1));
 }
 
 function getSL(id) {
   return document.querySelector(`.nav-link[onclick*="'${id}'"]`);
 }
+
+// Handle back/forward
+window.addEventListener('popstate', function(e) {
+  const id = e.state && e.state.page
+    ? e.state.page
+    : (location.hash.slice(1).toLowerCase() || 'loadstring');
+  const linkEl = document.querySelector(`.nav-link[onclick*="'${id}'"]`);
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const pg = document.getElementById('page-' + id);
+  if (pg) pg.classList.add('active');
+  document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+  if (linkEl) linkEl.classList.add('active');
+  document.querySelector('.main').scrollTo(0, 0);
+});
+
+// Load from hash on page open
+(function() {
+  const hash = location.hash.slice(1);
+  const id = hash ? hash.toLowerCase() : 'loadstring';
+  const pg = document.getElementById('page-' + id);
+  if (pg) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    pg.classList.add('active');
+    const linkEl = document.querySelector(`.nav-link[onclick*="'${id}'"]`);
+    document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+    if (linkEl) linkEl.classList.add('active');
+    history.replaceState({ page: id }, '', '#' + hash.charAt(0).toUpperCase() + hash.slice(1));
+  }
+})();
 
 function stab(tabEl, contentId) {
   const parent = tabEl.closest('.page');
