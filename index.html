@@ -495,6 +495,10 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
     <span class="var">ThemeTransparency</span> <span class="op">=</span> <span class="num">0.15</span>,                 <span class="cm">-- Transparansi gambar Theme</span>
     <span class="var">ShowUser</span>          <span class="op">=</span> <span class="kw">true</span>,                  <span class="cm">-- Tampilkan nama &amp; avatar user</span>
     <span class="var">Search</span>            <span class="op">=</span> <span class="kw">true</span>,                  <span class="cm">-- Aktifkan search bar di tab</span>
+    <span class="var">BackgroundVideo</span>   <span class="op">=</span> <span class="str">"ASSET_ID"</span>,           <span class="cm">-- (opsional) ID video background</span>
+    <span class="var">Animation</span>         <span class="op">=</span> <span class="kw">false</span>,                 <span class="cm">-- Efek typewriter pada Title &amp; Footer</span>
+    <span class="var">TypeDelay</span>         <span class="op">=</span> <span class="num">0.07</span>,                  <span class="cm">-- Jeda antar karakter (detik)</span>
+    <span class="var">TypePause</span>         <span class="op">=</span> <span class="num">2.5</span>,                   <span class="cm">-- Jeda setelah teks selesai (detik)</span>
     <span class="var">Config</span> <span class="op">=</span> {
         <span class="var">AutoSave</span> <span class="op">=</span> <span class="kw">true</span>,
         <span class="var">AutoLoad</span> <span class="op">=</span> <span class="kw">true</span>,
@@ -508,8 +512,8 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
           <table>
             <thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
             <tbody>
-              <tr><td>Title</td><td>string</td><td><code class="il">"Chloe X"</code></td><td>Judul utama di topbar window.</td></tr>
-              <tr><td>Footer</td><td>string</td><td><code class="il">"Chloee :3"</code></td><td>Teks footer di samping title.</td></tr>
+              <tr><td>Title</td><td>string</td><td><code class="il">""</code></td><td>Judul utama di topbar window.</td></tr>
+              <tr><td>Footer</td><td>string</td><td><code class="il">""</code></td><td>Teks footer di samping title.</td></tr>
               <tr><td>Content</td><td>string</td><td><code class="il">""</code></td><td>Teks kecil di bawah topbar (opsional).</td></tr>
               <tr><td>Color</td><td>string | Color3</td><td><code class="il">"Default"</code></td><td>Tema warna UI. Bisa nama tema atau Color3.</td></tr>
               <tr><td>Version</td><td>number</td><td><code class="il">1</code></td><td>Versi config — jika berubah, config lama di-reset.</td></tr>
@@ -526,6 +530,10 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
               <tr><td>Search</td><td>boolean</td><td><code class="il">false</code></td><td>Aktifkan search bar di atas daftar tab.</td></tr>
               <tr><td>Config.AutoSave</td><td>boolean</td><td><code class="il">true</code></td><td>Otomatis simpan settings ke file.</td></tr>
               <tr><td>Config.AutoLoad</td><td>boolean</td><td><code class="il">true</code></td><td>Otomatis load settings saat start.</td></tr>
+              <tr><td>BackgroundVideo</td><td>string</td><td><code class="il">""</code></td><td>Asset ID video background window (tanpa prefix). Video diputar looping tanpa suara dengan gradient overlay.</td></tr>
+              <tr><td>Animation</td><td>boolean</td><td><code class="il">false</code></td><td>Aktifkan efek typewriter pada Title dan Footer — keduanya diketik dan dihapus bergantian secara terus-menerus.</td></tr>
+              <tr><td>TypeDelay</td><td>number</td><td><code class="il">0.07</code></td><td>Jeda antar karakter saat efek typewriter (detik). Hanya berlaku jika <code class="il">Animation = true</code>.</td></tr>
+              <tr><td>TypePause</td><td>number</td><td><code class="il">2.5</code></td><td>Jeda setelah teks selesai diketik sebelum mulai dihapus (detik). Hanya berlaku jika <code class="il">Animation = true</code>.</td></tr>
             </tbody>
           </table>
         </div>
@@ -776,7 +784,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
     <span class="var">Name</span>        <span class="op">=</span> <span class="str">"Combat"</span>,
     <span class="var">Icon</span>        <span class="op">=</span> <span class="str">"lucide:sword"</span>,
     <span class="var">Locked</span>      <span class="op">=</span> <span class="kw">true</span>,
-    <span class="var">LockMessage</span> <span class="op">=</span> <span class="str">"VIP Only"</span>,
+    <span class="var">LockMessage</span> <span class="op">=</span> <span class="str">"Locked"</span>,  <span class="cm">-- pesan lock (optional)</span>
 })</code></div>
           </div>
 
@@ -846,12 +854,29 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
 <span class="var">Tabs</span>.<span class="var">Main</span>:<span class="fn">AddSection</span>({ <span class="var">Title</span> <span class="op">=</span> <span class="str">"Weapons"</span>, <span class="var">Icon</span> <span class="op">=</span> <span class="str">"solar:home"</span>, <span class="var">Open</span> <span class="op">=</span> <span class="kw">false</span> })</code></div></div>
         </div>
         <div id="sec-full" class="stab-content">
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="var">Tabs</span>.<span class="var">Main</span>:<span class="fn">AddSection</span>({
-    <span class="var">Title</span>          <span class="op">=</span> <span class="str">"Player"</span>,
-    <span class="var">TextXAlignment</span> <span class="op">=</span> <span class="str">"Left"</span>,  <span class="cm">-- "Left", "Center", "Right". optional</span>
-    <span class="var">Icon</span>           <span class="op">=</span> <span class="str">"lucide:user"</span>,
-    <span class="var">Open</span>           <span class="op">=</span> <span class="kw">true</span>
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="kw">local</span> <span class="var">Section</span> <span class="op">=</span> <span class="var">Tabs</span>.<span class="var">Main</span>:<span class="fn">AddSection</span>({
+    <span class="var">Title</span>          <span class="op">=</span> <span class="str">"Player"</span>,       <span class="cm">-- nama section</span>
+    <span class="var">Icon</span>           <span class="op">=</span> <span class="str">"lucide:user"</span>,  <span class="cm">-- icon (optional)</span>
+    <span class="var">Open</span>           <span class="op">=</span> <span class="kw">true</span>,           <span class="cm">-- langsung terbuka (optional)</span>
+    <span class="var">Locked</span>         <span class="op">=</span> <span class="kw">false</span>,          <span class="cm">-- kunci section (optional)</span>
+    <span class="var">LockMessage</span>    <span class="op">=</span> <span class="str">"Locked"</span>,       <span class="cm">-- pesan lock (optional)</span>
+    <span class="var">TextXAlignment</span> <span class="op">=</span> <span class="str">"Left"</span>,         <span class="cm">-- "Left", "Center", "Right" (optional)</span>
+    <span class="var">Transparency</span>   <span class="op">=</span> <span class="kw">true</span>,           <span class="cm">-- header transparan (optional)</span>
 })</code></div></div>
+
+          <h3>Properties</h3>
+          <div class="table-wrap"><table>
+            <thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+            <tbody>
+              <tr><td>Title</td><td>string</td><td><code class="il">"Section"</code></td><td>Nama/judul section</td></tr>
+              <tr><td>Icon</td><td>string</td><td><code class="il">""</code></td><td>Icon di samping judul (rbxassetid, lucide:, solar:)</td></tr>
+              <tr><td>Open</td><td>boolean</td><td><code class="il">false</code></td><td>Section langsung terbuka saat dibuat</td></tr>
+              <tr><td>Locked</td><td>boolean</td><td><code class="il">false</code></td><td>Kunci section saat pertama kali dibuat</td></tr>
+              <tr><td>LockMessage</td><td>string</td><td><code class="il">"Locked"</code></td><td>Pesan yang ditampilkan di overlay kunci</td></tr>
+              <tr><td>TextXAlignment</td><td>string</td><td><code class="il">"Left"</code></td><td>Alignment judul: <code class="il">"Left"</code>, <code class="il">"Center"</code>, atau <code class="il">"Right"</code></td></tr>
+              <tr><td>Transparency</td><td>boolean</td><td><code class="il">false</code></td><td>Sembunyikan background dan garis divider section</td></tr>
+            </tbody>
+          </table></div>
         </div>
 
         <!-- ══ TABBOX — FROM DOC 2 ══ -->
@@ -1670,6 +1695,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
         <div class="subtabs">
           <div class="stab active" onclick="stab(this,'par-basic')">Basic</div>
           <div class="stab" onclick="stab(this,'par-color')">Color Card</div>
+          <div class="stab" onclick="stab(this,'par-btncolor')">Button Color</div>
           <div class="stab" onclick="stab(this,'par-media')">Media</div>
           <div class="stab" onclick="stab(this,'par-badge')">Badge</div>
           <div class="stab" onclick="stab(this,'par-fn')">Functions</div>
@@ -1748,6 +1774,63 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
               <tr><td>Color3</td><td><code class="il">Color3.fromRGB(70, 130, 220)</code></td><td>Warna RGB kustom</td></tr>
             </tbody>
           </table></div>
+
+          <h3>ButtonColor &amp; SubButtonColor</h3>
+          <p>Ubah warna tombol di dalam paragraph secara independen menggunakan <code class="il">ButtonColor</code> dan <code class="il">SubButtonColor</code>. Jika tidak diisi, tombol menggunakan warna putih transparan default.</p>
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="var">Sec</span>.<span class="var">Paragraph</span>:<span class="fn">AddParagraph</span>({
+    <span class="var">Title</span>             <span class="op">=</span> <span class="str">"Velaris UI"</span>,
+    <span class="var">Content</span>           <span class="op">=</span> <span class="str">"Powered by Velaris UI Library"</span>,
+    <span class="var">Color</span>             <span class="op">=</span> <span class="var">Color3</span>.<span class="fn">fromRGB</span>(<span class="num">220</span>, <span class="num">100</span>, <span class="num">90</span>),
+    <span class="var">ButtonText</span>        <span class="op">=</span> <span class="str">"Discord"</span>,
+    <span class="var">ButtonColor</span>       <span class="op">=</span> <span class="var">Color3</span>.<span class="fn">fromRGB</span>(<span class="num">100</span>, <span class="num">180</span>, <span class="num">255</span>),  <span class="cm">-- warna tombol kiri</span>
+    <span class="var">ButtonCallback</span>    <span class="op">=</span> <span class="kw">function</span>() <span class="kw">end</span>,
+    <span class="var">SubButtonText</span>     <span class="op">=</span> <span class="str">"Website"</span>,
+    <span class="var">SubButtonColor</span>    <span class="op">=</span> <span class="var">Color3</span>.<span class="fn">fromRGB</span>(<span class="num">80</span>, <span class="num">220</span>, <span class="num">120</span>),   <span class="cm">-- warna tombol kanan</span>
+    <span class="var">SubButtonCallback</span> <span class="op">=</span> <span class="kw">function</span>() <span class="kw">end</span>,
+})</code></div></div>
+          <div class="table-wrap"><table>
+            <thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+            <tbody>
+              <tr><td>ButtonColor</td><td>Color3</td><td><code class="il">nil</code></td><td>Warna background tombol utama. Jika nil, menggunakan putih transparan</td></tr>
+              <tr><td>SubButtonColor</td><td>Color3</td><td><code class="il">nil</code></td><td>Warna background tombol kedua (SubButton). Jika nil, menggunakan putih transparan</td></tr>
+            </tbody>
+          </table></div>
+        </div>
+
+        <div id="par-btncolor" class="stab-content">
+          <p>Gunakan <code class="il">ButtonColor</code> dan <code class="il">SubButtonColor</code> untuk mengubah warna latar tombol di dalam paragraph. Nilai berupa <code class="il">Color3</code>.</p>
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="cm">-- Satu tombol dengan warna kustom</span>
+<span class="var">Sec</span>.<span class="var">Paragraph</span>:<span class="fn">AddParagraph</span>({
+    <span class="var">Title</span>          <span class="op">=</span> <span class="str">"Velaris Discord"</span>,
+    <span class="var">Content</span>        <span class="op">=</span> <span class="str">"Join komunitas kami"</span>,
+    <span class="var">ButtonText</span>     <span class="op">=</span> <span class="str">"Copy Link"</span>,
+    <span class="var">ButtonColor</span>    <span class="op">=</span> <span class="var">Color3</span>.<span class="fn">fromRGB</span>(<span class="num">88</span>, <span class="num">101</span>, <span class="num">242</span>),  <span class="cm">-- Discord blue</span>
+    <span class="var">ButtonCallback</span> <span class="op">=</span> <span class="kw">function</span>() <span class="fn">setclipboard</span>(<span class="str">"discord.gg/ECxQFc97F5"</span>) <span class="kw">end</span>,
+})
+
+<span class="cm">-- Dua tombol masing-masing warna berbeda</span>
+<span class="var">Sec</span>.<span class="var">Paragraph</span>:<span class="fn">AddParagraph</span>({
+    <span class="var">Title</span>             <span class="op">=</span> <span class="str">"Velaris UI"</span>,
+    <span class="var">Content</span>           <span class="op">=</span> <span class="str">"Pilih aksi yang diinginkan"</span>,
+    <span class="var">ButtonText</span>        <span class="op">=</span> <span class="str">"Confirm"</span>,
+    <span class="var">ButtonColor</span>       <span class="op">=</span> <span class="var">Color3</span>.<span class="fn">fromRGB</span>(<span class="num">50</span>, <span class="num">200</span>, <span class="num">80</span>),   <span class="cm">-- hijau</span>
+    <span class="var">ButtonCallback</span>    <span class="op">=</span> <span class="kw">function</span>() <span class="kw">end</span>,
+    <span class="var">SubButtonText</span>     <span class="op">=</span> <span class="str">"Cancel"</span>,
+    <span class="var">SubButtonColor</span>    <span class="op">=</span> <span class="var">Color3</span>.<span class="fn">fromRGB</span>(<span class="num">220</span>, <span class="num">55</span>, <span class="num">55</span>),  <span class="cm">-- merah</span>
+    <span class="var">SubButtonCallback</span> <span class="op">=</span> <span class="kw">function</span>() <span class="kw">end</span>,
+})</code></div></div>
+
+          <h3>Properties</h3>
+          <div class="table-wrap"><table>
+            <thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+            <tbody>
+              <tr><td>ButtonColor</td><td>Color3</td><td><code class="il">nil</code></td><td>Warna latar tombol utama. Jika tidak diset, tombol pakai transparansi default (putih redup).</td></tr>
+              <tr><td>SubButtonColor</td><td>Color3</td><td><code class="il">nil</code></td><td>Warna latar tombol kedua. Hanya berlaku jika <code class="il">SubButtonText</code> diset.</td></tr>
+            </tbody>
+          </table></div>
+          <div class="info-box">
+            💡 Saat <code class="il">ButtonColor</code> diset, transparansi tombol otomatis disesuaikan (0.15) sehingga warna lebih terlihat. Tanpa <code class="il">ButtonColor</code>, tombol tampil dengan transparansi 0.85 (putih redup default).
+          </div>
         </div>
 
         <div id="par-media" class="stab-content">
@@ -2150,11 +2233,36 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
           <div class="page-title">Divider &amp; SubSection</div>
           <div class="page-subtitle">Pemisah visual dan sub-label dalam section</div>
         </div>
-        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="var">Sec</span>.<span class="var">Other</span> <span class="op">=</span> <span class="var">Tabs</span>.<span class="var">Main</span>:<span class="fn">AddSection</span>(<span class="str">"SubSection &amp; Divider"</span>)
 
-<span class="var">Sec</span>.<span class="var">Other</span>:<span class="fn">AddDivider</span>()
-<span class="var">Sec</span>.<span class="var">Other</span>:<span class="fn">AddSubSection</span>(<span class="str">"Example Sub Section"</span>)</code></div>
-        </div>
+        <h2>AddDivider</h2>
+        <p>Menambahkan garis pemisah horizontal dengan gradient warna aksen. Berguna untuk memisahkan kelompok elemen dalam satu section.</p>
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="var">Section</span>:<span class="fn">AddDivider</span>()</code></div></div>
+
+        <h2>AddSubSection</h2>
+        <p>Menambahkan sub-label teks bertema <code class="il">── [ Title ] ──</code> di dalam section. Berguna untuk mengelompokkan elemen secara visual tanpa membuat section baru.</p>
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="var">Section</span>:<span class="fn">AddSubSection</span>(<span class="str">"Combat Settings"</span>)</code></div></div>
+
+        <h2>Contoh Penggunaan</h2>
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="kw">local</span> <span class="var">Sec</span> <span class="op">=</span> <span class="var">Tabs</span>.<span class="var">Main</span>:<span class="fn">AddSection</span>({ <span class="var">Title</span> <span class="op">=</span> <span class="str">"Settings"</span>, <span class="var">Open</span> <span class="op">=</span> <span class="kw">true</span> })
+
+<span class="var">Sec</span>:<span class="fn">AddSubSection</span>(<span class="str">"Player"</span>)
+<span class="var">Sec</span>:<span class="fn">AddToggle</span>({ <span class="var">Title</span> <span class="op">=</span> <span class="str">"Auto Farm"</span>, <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">v</span>) <span class="kw">end</span> })
+<span class="var">Sec</span>:<span class="fn">AddSlider</span>({ <span class="var">Title</span> <span class="op">=</span> <span class="str">"Walk Speed"</span>, <span class="var">Min</span> <span class="op">=</span> <span class="num">16</span>, <span class="var">Max</span> <span class="op">=</span> <span class="num">100</span>, <span class="var">Default</span> <span class="op">=</span> <span class="num">16</span>, <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">v</span>) <span class="kw">end</span> })
+
+<span class="var">Sec</span>:<span class="fn">AddDivider</span>()
+
+<span class="var">Sec</span>:<span class="fn">AddSubSection</span>(<span class="str">"Combat"</span>)
+<span class="var">Sec</span>:<span class="fn">AddToggle</span>({ <span class="var">Title</span> <span class="op">=</span> <span class="str">"Auto Kill"</span>, <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">v</span>) <span class="kw">end</span> })
+<span class="var">Sec</span>:<span class="fn">AddSlider</span>({ <span class="var">Title</span> <span class="op">=</span> <span class="str">"Kill Aura Range"</span>, <span class="var">Min</span> <span class="op">=</span> <span class="num">10</span>, <span class="var">Max</span> <span class="op">=</span> <span class="num">200</span>, <span class="var">Default</span> <span class="op">=</span> <span class="num">50</span>, <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">v</span>) <span class="kw">end</span> })</code></div></div>
+
+        <div class="table-wrap"><table>
+          <thead><tr><th>Method</th><th>Parameter</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td>:AddDivider()</td><td>—</td><td>Garis pemisah horizontal dengan gradient warna aksen</td></tr>
+            <tr><td>:AddSubSection(text)</td><td>string</td><td>Sub-label <code class="il">── [ text ] ──</code> sebagai pemisah kelompok elemen</td></tr>
+          </tbody>
+        </table></div>
+
         <div class="page-nav">
           <button class="pnav-btn" onclick="show('colorpicker',getSL('colorpicker'))"><span class="pnav-btn-label">← Previous</span><span class="pnav-btn-name">ColorPicker</span></button>
           <button class="pnav-btn right" onclick="show('badge',getSL('badge'))"><span class="pnav-btn-label">Next →</span><span class="pnav-btn-name">Badge</span></button>
