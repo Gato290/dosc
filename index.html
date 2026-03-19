@@ -1834,39 +1834,46 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
         </div>
 
         <div id="par-media" class="stab-content">
-          <p>Tambahkan gambar atau video ke dalam paragraph dengan property <code class="il">MediaType</code>.</p>
+          <p>Tambahkan gambar atau video ke dalam paragraph dengan property <code class="il">MediaType</code>. Media ditampilkan <strong>full-width di atas teks</strong>, dengan garis pemisah tipis di bawahnya.</p>
+
           <h3>Image</h3>
           <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="var">Sec</span>.<span class="var">Paragraph</span>:<span class="fn">AddParagraph</span>({
-    <span class="var">Title</span>       <span class="op">=</span> <span class="str">"Preview"</span>,
-    <span class="var">Content</span>     <span class="op">=</span> <span class="str">"Gambar preview item."</span>,
-    <span class="var">MediaType</span>   <span class="op">=</span> <span class="str">"Image"</span>,
-    <span class="var">MediaId</span>     <span class="op">=</span> <span class="str">"rbxassetid://1234567890"</span>,
-    <span class="var">MediaWidth</span>  <span class="op">=</span> <span class="num">80</span>,
-    <span class="var">MediaHeight</span> <span class="op">=</span> <span class="num">60</span>,
+    <span class="var">Title</span>     <span class="op">=</span> <span class="str">"Preview"</span>,
+    <span class="var">Content</span>   <span class="op">=</span> <span class="str">"Gambar preview item."</span>,
+    <span class="var">MediaType</span> <span class="op">=</span> <span class="str">"Image"</span>,
+    <span class="var">MediaId</span>   <span class="op">=</span> <span class="str">"rbxassetid://1234567890"</span>,
+    <span class="var">ImageSize</span> <span class="op">=</span> <span class="num">160</span>,   <span class="cm">-- tinggi container gambar (px)</span>
 })</code></div></div>
+
           <h3>Video</h3>
           <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="kw">local</span> <span class="var">Para</span> <span class="op">=</span> <span class="var">Sec</span>.<span class="var">Paragraph</span>:<span class="fn">AddParagraph</span>({
-    <span class="var">Title</span>       <span class="op">=</span> <span class="str">"Tutorial"</span>,
-    <span class="var">Content</span>     <span class="op">=</span> <span class="str">"Klik play untuk memutar video."</span>,
-    <span class="var">MediaType</span>   <span class="op">=</span> <span class="str">"Video"</span>,
-    <span class="var">MediaId</span>     <span class="op">=</span> <span class="str">"rbxassetid://THUMBNAIL_ID"</span>,
-    <span class="var">VideoId</span>     <span class="op">=</span> <span class="str">"rbxassetid://VIDEO_ID"</span>,
-    <span class="var">MediaWidth</span>  <span class="op">=</span> <span class="num">120</span>,
-    <span class="var">MediaHeight</span> <span class="op">=</span> <span class="num">80</span>,
-    <span class="var">AutoPlay</span>    <span class="op">=</span> <span class="kw">false</span>,
+    <span class="var">Title</span>     <span class="op">=</span> <span class="str">"Tutorial"</span>,
+    <span class="var">Content</span>   <span class="op">=</span> <span class="str">"Klik play untuk memutar video."</span>,
+    <span class="var">MediaType</span> <span class="op">=</span> <span class="str">"Video"</span>,
+    <span class="var">MediaId</span>   <span class="op">=</span> <span class="str">"rbxassetid://THUMBNAIL_ID"</span>,  <span class="cm">-- thumbnail saat pause</span>
+    <span class="var">VideoId</span>   <span class="op">=</span> <span class="str">"rbxassetid://VIDEO_ID"</span>,
+    <span class="var">VideoSize</span> <span class="op">=</span> <span class="num">160</span>,    <span class="cm">-- tinggi container video (px)</span>
+    <span class="var">Volume</span>    <span class="op">=</span> <span class="num">50</span>,      <span class="cm">-- 0–1000 (default: 1)</span>
+    <span class="var">AutoPlay</span>  <span class="op">=</span> <span class="kw">false</span>,
 })
 
 <span class="var">Para</span>:<span class="fn">StartVideo</span>()
 <span class="var">Para</span>:<span class="fn">StopVideo</span>()</code></div></div>
+
+          <div class="info-box">
+            💡 Video player klik di mana saja pada area video untuk toggle play/pause. Saat pause, frame terakhir video tetap terlihat. Video akan loop otomatis setelah selesai.
+          </div>
+
           <div class="table-wrap"><table>
-            <thead><tr><th>Property</th><th>Type</th><th>Description</th></tr></thead>
+            <thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
             <tbody>
-              <tr><td>MediaType</td><td>string</td><td><code class="il">"Image"</code> atau <code class="il">"Video"</code></td></tr>
-              <tr><td>MediaId</td><td>string</td><td>rbxassetid gambar / thumbnail</td></tr>
-              <tr><td>VideoId</td><td>string</td><td>rbxassetid video (khusus Video)</td></tr>
-              <tr><td>MediaWidth</td><td>number</td><td>Lebar media dalam piksel (default: 80)</td></tr>
-              <tr><td>MediaHeight</td><td>number</td><td>Tinggi media dalam piksel (default: 60)</td></tr>
-              <tr><td>AutoPlay</td><td>bool</td><td>Auto-play video saat dibuat (default: false)</td></tr>
+              <tr><td>MediaType</td><td>string</td><td>—</td><td><code class="il">"Image"</code> atau <code class="il">"Video"</code></td></tr>
+              <tr><td>MediaId</td><td>string</td><td><code class="il">nil</code></td><td>rbxassetid gambar / thumbnail video saat pause</td></tr>
+              <tr><td>VideoId</td><td>string</td><td><code class="il">nil</code></td><td>rbxassetid video (khusus <code class="il">MediaType = "Video"</code>)</td></tr>
+              <tr><td>ImageSize</td><td>number</td><td><code class="il">160</code></td><td>Tinggi container gambar dalam piksel</td></tr>
+              <tr><td>VideoSize</td><td>number</td><td><code class="il">160</code></td><td>Tinggi container video dalam piksel</td></tr>
+              <tr><td>Volume</td><td>number</td><td><code class="il">1</code></td><td>Volume audio video. Range 0–1000. Support volume besar via SoundBooster</td></tr>
+              <tr><td>AutoPlay</td><td>bool</td><td><code class="il">false</code></td><td>Auto-play video saat paragraph dibuat</td></tr>
             </tbody>
           </table></div>
         </div>
