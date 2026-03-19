@@ -253,9 +253,10 @@ thead th{
   background:var(--bg-secondary);
   color:var(--text-muted);font-size:11px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;
 }
-tbody td{padding:10px 14px;border-bottom:1px solid var(--border);color:var(--text-muted);vertical-align:top}
+tbody td{padding:10px 14px;border-bottom:1px solid var(--border);color:var(--text-muted);vertical-align:middle}
 tbody tr:last-child td{border-bottom:none}
 tbody td:first-child{color:var(--text);font-family:var(--font-mono);font-size:12px}
+tbody td:nth-child(4){vertical-align:top}
 
 /* SUBTABS */
 .stab-row,.subtabs{display:flex;gap:0;border-bottom:1px solid var(--border);margin:16px 0 0}
@@ -495,7 +496,8 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
     <span class="var">ThemeTransparency</span> <span class="op">=</span> <span class="num">0.15</span>,                 <span class="cm">-- Transparansi gambar Theme</span>
     <span class="var">ShowUser</span>          <span class="op">=</span> <span class="kw">true</span>,                  <span class="cm">-- Tampilkan nama &amp; avatar user</span>
     <span class="var">Search</span>            <span class="op">=</span> <span class="kw">true</span>,                  <span class="cm">-- Aktifkan search bar di tab</span>
-    <span class="var">BackgroundVideo</span>   <span class="op">=</span> <span class="str">"ASSET_ID"</span>,           <span class="cm">-- (opsional) ID video background</span>
+    <span class="var">BackgroundVideo</span>   <span class="op">=</span> <span class="str">"https://example.com/bg.webm"</span>,  <span class="cm">-- URL atau rbxassetid</span>
+    <span class="var">BackgroundVideoOverlay</span> <span class="op">=</span> <span class="num">0.4</span>,       <span class="cm">-- transparansi overlay gelap (0-1, default: 0.4)</span>
     <span class="var">Animation</span>         <span class="op">=</span> <span class="kw">false</span>,                 <span class="cm">-- Efek typewriter pada Title &amp; Footer</span>
     <span class="var">TypeDelay</span>         <span class="op">=</span> <span class="num">0.07</span>,                  <span class="cm">-- Jeda antar karakter (detik)</span>
     <span class="var">TypePause</span>         <span class="op">=</span> <span class="num">2.5</span>,                   <span class="cm">-- Jeda setelah teks selesai (detik)</span>
@@ -530,7 +532,8 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
               <tr><td>Search</td><td>boolean</td><td><code class="il">false</code></td><td>Aktifkan search bar di atas daftar tab.</td></tr>
               <tr><td>Config.AutoSave</td><td>boolean</td><td><code class="il">true</code></td><td>Otomatis simpan settings ke file.</td></tr>
               <tr><td>Config.AutoLoad</td><td>boolean</td><td><code class="il">true</code></td><td>Otomatis load settings saat start.</td></tr>
-              <tr><td>BackgroundVideo</td><td>string</td><td><code class="il">""</code></td><td>Asset ID video background window (tanpa prefix). Video diputar looping tanpa suara dengan gradient overlay.</td></tr>
+              <tr><td>BackgroundVideo</td><td>string</td><td><code class="il">""</code></td><td>Video background window. Bisa berupa <strong>Asset ID</strong> (<code class="il">"123456"</code> atau <code class="il">"rbxassetid://123456"</code>) yang dipakai langsung, atau <strong>URL</strong> (<code class="il">"https://..."</code>) yang di-download dan di-cache otomatis menggunakan <code class="il">getcustomasset</code>.</td></tr>
+              <tr><td>BackgroundVideoOverlay</td><td>number</td><td><code class="il">0.4</code></td><td>Transparansi overlay gelap di atas video (0 = solid hitam, 1 = transparan penuh). Dipakai agar UI tetap terbaca.</td></tr>
               <tr><td>Animation</td><td>boolean</td><td><code class="il">false</code></td><td>Aktifkan efek typewriter pada Title dan Footer — keduanya diketik dan dihapus bergantian secara terus-menerus.</td></tr>
               <tr><td>TypeDelay</td><td>number</td><td><code class="il">0.07</code></td><td>Jeda antar karakter saat efek typewriter (detik). Hanya berlaku jika <code class="il">Animation = true</code>.</td></tr>
               <tr><td>TypePause</td><td>number</td><td><code class="il">2.5</code></td><td>Jeda setelah teks selesai diketik sebelum mulai dihapus (detik). Hanya berlaku jika <code class="il">Animation = true</code>.</td></tr>
@@ -547,6 +550,10 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
               <tr><td>:Tag(config)</td><td>Tambah label berwarna di topbar</td></tr>
               <tr><td>:SetToggleKey(keyCode)</td><td>Ganti tombol toggle UI secara runtime</td></tr>
               <tr><td>:DestroyGui()</td><td>Hapus seluruh UI dari CoreGui</td></tr>
+              <tr><td>:SetBackgroundVideoVolume(vol)</td><td>Set volume video background (0–10). Hanya tersedia jika <code class="il">BackgroundVideo</code> diisi.</td></tr>
+              <tr><td>:PauseBackgroundVideo()</td><td>Pause video background.</td></tr>
+              <tr><td>:PlayBackgroundVideo()</td><td>Play/resume video background.</td></tr>
+              <tr><td>:SetBackgroundVideoOverlay(trans)</td><td>Ubah transparansi overlay gelap di atas video (0–1).</td></tr>
             </tbody>
           </table>
         </div>
@@ -555,6 +562,58 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
         <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="cm">-- Ganti toggle key setelah window dibuat</span>
 <span class="var">Window</span>:<span class="fn">SetToggleKey</span>(<span class="var">Enum</span>.<span class="var">KeyCode</span>.<span class="var">RightControl</span>)</code></div>
         </div>
+
+        <h3>BackgroundVideo</h3>
+        <p>Support dua tipe input: <strong>Asset ID</strong> dipakai langsung tanpa download, sedangkan <strong>URL</strong> di-download dan di-cache otomatis menggunakan <code class="il">getcustomasset</code>. Tersedia 4 method untuk mengontrolnya setelah window dibuat:</p>
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="cm">-- Cara 1: Asset ID langsung</span>
+<span class="kw">local</span> <span class="var">Window</span> <span class="op">=</span> <span class="var">VelarisUI</span>:<span class="fn">Window</span>({
+    <span class="var">BackgroundVideo</span>        <span class="op">=</span> <span class="str">"rbxassetid://123456789"</span>,
+    <span class="var">BackgroundVideoOverlay</span> <span class="op">=</span> <span class="num">0.4</span>,
+})
+
+<span class="cm">-- Cara 2: URL (download + cache otomatis)</span>
+<span class="kw">local</span> <span class="var">Window</span> <span class="op">=</span> <span class="var">VelarisUI</span>:<span class="fn">Window</span>({
+    <span class="var">BackgroundVideo</span>        <span class="op">=</span> <span class="str">"https://example.com/bg.webm"</span>,
+    <span class="var">BackgroundVideoOverlay</span> <span class="op">=</span> <span class="num">0.4</span>,  <span class="cm">-- 0 = solid, 1 = transparan</span>
+})
+
+<span class="var">Window</span>:<span class="fn">SetBackgroundVideoVolume</span>(<span class="num">0</span>)    <span class="cm">-- mute</span>
+<span class="var">Window</span>:<span class="fn">PauseBackgroundVideo</span>()
+<span class="var">Window</span>:<span class="fn">PlayBackgroundVideo</span>()
+<span class="var">Window</span>:<span class="fn">SetBackgroundVideoOverlay</span>(<span class="num">0.6</span>)  <span class="cm">-- lebih gelap</span></code></div>
+        </div>
+        <div class="info-box">
+          ⚠️ Method BackgroundVideo hanya tersedia setelah video selesai di-load. Jika pakai URL, video di-download sekali dan di-cache di file lokal <code class="il">VelarisUI_bgvideo.webm</code>. Jika pakai Asset ID, video langsung diputar tanpa proses download.
+        </div>
+
+        <h3>Tutorial: Cara mendapatkan URL webm</h3>
+        <p>Jika kamu ingin pakai file video sebagai background (cara URL), ikuti langkah berikut:</p>
+
+        <div class="table-wrap"><table>
+          <thead><tr><th>#</th><th>Langkah</th><th>Link</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Buka <strong>Convertio</strong> dan upload file video kamu (mp4, gif, dll). Pilih format output <strong>webm</strong>, lalu klik <strong>Convert</strong> dan download hasilnya.</td>
+              <td><a href="https://convertio.co/id/" target="_blank" style="color:var(--info-text)">convertio.co/id</a></td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Buka <strong>Catbox</strong> — file host gratis. Upload file <code class="il">.webm</code> yang sudah di-download tadi.</td>
+              <td><a href="https://catbox.moe/" target="_blank" style="color:var(--info-text)">catbox.moe</a></td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>Setelah upload selesai, copy URL yang diberikan Catbox (contoh: <code class="il">https://files.catbox.moe/xxxxxx.webm</code>). Pakai URL itu di <code class="il">BackgroundVideo</code>.</td>
+              <td>—</td>
+            </tr>
+          </tbody>
+        </table></div>
+
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="kw">local</span> <span class="var">Window</span> <span class="op">=</span> <span class="var">VelarisUI</span>:<span class="fn">Window</span>({
+    <span class="var">BackgroundVideo</span>        <span class="op">=</span> <span class="str">"https://files.catbox.moe/xxxxxx.webm"</span>,
+    <span class="var">BackgroundVideoOverlay</span> <span class="op">=</span> <span class="num">0.4</span>,
+})</code></div></div>
 
         <h2>Key System</h2>
         <p>Tambahkan key system ke dalam konfigurasi Window. UI akan menunggu verifikasi key sebelum window utama muncul.</p>
