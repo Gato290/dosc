@@ -616,38 +616,40 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
 })</code></div></div>
 
         <h2>Key System</h2>
-        <p>Tambahkan key system ke dalam konfigurasi Window. UI akan menunggu verifikasi key sebelum window utama muncul.</p>
+        <p>Tambahkan key system ke dalam konfigurasi Window. UI akan menunggu verifikasi key sebelum window utama muncul. Key system sekarang menggunakan format baru dengan <code class="il">Links</code>, <code class="il">Steps</code>, dan <code class="il">Callback</code> langsung — tidak lagi menggunakan <code class="il">Buttons</code>.</p>
         <div class="code-block">
           <button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="var">KeySystem</span> <span class="op">=</span> {
-    <span class="var">Title</span>       <span class="op">=</span> <span class="str">"My Super Hub"</span>,
+    <span class="var">Title</span>       <span class="op">=</span> <span class="str">"My Hub"</span>,
     <span class="var">Icon</span>        <span class="op">=</span> <span class="str">"lucide:bird"</span>,
-    <span class="var">Note</span>        <span class="op">=</span> <span class="str">"Example Key System."</span>,
-    <span class="var">Placeholder</span> <span class="op">=</span> <span class="str">"Enter Key"</span>,
+    <span class="var">Placeholder</span> <span class="op">=</span> <span class="str">"Enter your key here"</span>,
     <span class="var">Default</span>     <span class="op">=</span> <span class="str">""</span>,
-    <span class="var">Buttons</span> <span class="op">=</span> {
-        {
-            <span class="var">Name</span>     <span class="op">=</span> <span class="str">"Exit"</span>,
-            <span class="var">Close</span>    <span class="op">=</span> <span class="kw">true</span>,    <span class="cm">-- tutup dialog tanpa verifikasi</span>
-            <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">key</span>) <span class="kw">end</span>
-        },
-        {
-            <span class="var">Name</span>     <span class="op">=</span> <span class="str">"Get Key"</span>,
-            <span class="var">Icon</span>     <span class="op">=</span> <span class="str">"lucide:link"</span>,
-            <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">key</span>)
-                <span class="cm">-- tidak return true/false → tidak menutup dialog</span>
-            <span class="kw">end</span>
-        },
-        {
-            <span class="var">Name</span>     <span class="op">=</span> <span class="str">"Submit"</span>,
-            <span class="var">Style</span>    <span class="op">=</span> <span class="str">"primary"</span>,  <span class="cm">-- tampil lebih terang</span>
-            <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">key</span>)
-                <span class="kw">if</span> <span class="var">key</span> <span class="op">==</span> <span class="str">"mykey123"</span> <span class="kw">then</span>
-                    <span class="kw">return</span> <span class="kw">true</span>   <span class="cm">-- ✓ key valid → buka window</span>
-                <span class="kw">end</span>
-                <span class="kw">return</span> <span class="kw">false</span>   <span class="cm">-- ✗ key salah → shake + highlight merah</span>
-            <span class="kw">end</span>,
-        },
+    <span class="var">DiscordText</span> <span class="op">=</span> <span class="str">"Join the Discord"</span>,
+    <span class="var">DiscordUrl</span>  <span class="op">=</span> <span class="str">"https://discord.gg/xxxxx"</span>,
+
+    <span class="var">Links</span> <span class="op">=</span> {
+        { <span class="var">Name</span> <span class="op">=</span> <span class="str">"Linkvertise"</span>, <span class="var">Icon</span> <span class="op">=</span> <span class="str">"lucide:link"</span>, <span class="var">Url</span> <span class="op">=</span> <span class="str">"https://linkvertise.com/xxxxx"</span> },
+        { <span class="var">Name</span> <span class="op">=</span> <span class="str">"LootLabs"</span>,   <span class="var">Icon</span> <span class="op">=</span> <span class="str">"lucide:gift"</span>, <span class="var">Url</span> <span class="op">=</span> <span class="str">"https://lootlabs.gg/xxxxx"</span> },
+        { <span class="var">Name</span> <span class="op">=</span> <span class="str">"Work.ink"</span>,   <span class="var">Icon</span> <span class="op">=</span> <span class="str">"lucide:pen"</span>,  <span class="var">Url</span> <span class="op">=</span> <span class="str">"https://work.ink/xxxxx"</span> },
     },
+
+    <span class="var">Steps</span> <span class="op">=</span> {
+        <span class="str">"Choose your Authorization System!"</span>,
+        <span class="str">"Complete ads ( 2 Checkpoint )"</span>,
+        <span class="str">"Copy and paste key here!!"</span>,
+    },
+
+    <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">key</span>)
+        <span class="kw">local</span> <span class="var">validKeys</span> <span class="op">=</span> {
+            <span class="str">"mykey123"</span>,
+            <span class="str">"vip-key-456"</span>,
+        }
+        <span class="kw">for</span> <span class="var">_</span>, <span class="var">v</span> <span class="kw">in</span> <span class="fn">ipairs</span>(<span class="var">validKeys</span>) <span class="kw">do</span>
+            <span class="kw">if</span> <span class="var">key</span> <span class="op">==</span> <span class="var">v</span> <span class="kw">then</span>
+                <span class="kw">return</span> <span class="kw">true</span>   <span class="cm">-- ✓ key valid → buka window</span>
+            <span class="kw">end</span>
+        <span class="kw">end</span>
+        <span class="kw">return</span> <span class="kw">false</span>   <span class="cm">-- ✗ key salah → shake + highlight input merah</span>
+    <span class="kw">end</span>,
 },</code></div>
         </div>
 
@@ -657,22 +659,23 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
           <tbody>
             <tr><td>Title</td><td>string</td><td>Judul dialog key system</td></tr>
             <tr><td>Icon</td><td>string</td><td>Icon kecil di pojok kiri atas dialog (rbxassetid, lucide:, solar:)</td></tr>
-            <tr><td>Note</td><td>string</td><td>Teks kecil di atas input field</td></tr>
             <tr><td>Placeholder</td><td>string</td><td>Placeholder teks input field</td></tr>
             <tr><td>Default</td><td>string</td><td>Teks awal di input field</td></tr>
-            <tr><td>Buttons</td><td>table</td><td>Daftar tombol di bagian bawah dialog</td></tr>
+            <tr><td>DiscordText</td><td>string</td><td>Label tombol Discord di bagian bawah dialog</td></tr>
+            <tr><td>DiscordUrl</td><td>string</td><td>URL yang dibuka saat tombol Discord diklik</td></tr>
+            <tr><td>Links</td><td>table</td><td>Daftar tombol link (get key). Setiap entry berisi <code class="il">Name</code>, <code class="il">Icon</code>, dan <code class="il">Url</code></td></tr>
+            <tr><td>Steps</td><td>table</td><td>Daftar langkah petunjuk yang ditampilkan di dialog (array string)</td></tr>
+            <tr><td>Callback</td><td>function(key)</td><td>Dipanggil saat user submit key. Return <code class="il">true</code> → key valid, buka window. Return <code class="il">false</code> → key salah, shake &amp; highlight input merah.</td></tr>
           </tbody>
         </table></div>
 
-        <h3>Button Properties</h3>
+        <h3>Links Entry Properties</h3>
         <div class="table-wrap"><table>
           <thead><tr><th>Property</th><th>Type</th><th>Description</th></tr></thead>
           <tbody>
-            <tr><td>Name</td><td>string</td><td>Teks label tombol</td></tr>
-            <tr><td>Icon</td><td>string</td><td>Icon opsional di sebelah kiri teks tombol</td></tr>
-            <tr><td>Style</td><td>string</td><td><code class="il">"primary"</code> — tombol tampil lebih terang (highlight). Tombol terakhir di list otomatis primary</td></tr>
-            <tr><td>Close</td><td>boolean</td><td><code class="il">true</code> — tutup dialog tanpa verifikasi (untuk tombol Exit / Cancel)</td></tr>
-            <tr><td>Callback</td><td>function(key)</td><td>Dipanggil saat diklik, menerima teks key. Return <code class="il">true</code> → buka window. Return <code class="il">false</code> → shake &amp; highlight input merah. Return tanpa nilai → tidak menutup (berguna untuk "Get Key")</td></tr>
+            <tr><td>Name</td><td>string</td><td>Label tombol link</td></tr>
+            <tr><td>Icon</td><td>string</td><td>Icon di sebelah kiri label (lucide:, solar:, atau rbxassetid)</td></tr>
+            <tr><td>Url</td><td>string</td><td>URL yang dibuka saat tombol diklik</td></tr>
           </tbody>
         </table></div>
 
@@ -940,74 +943,33 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
 
         <!-- ══ TABBOX — FROM DOC 2 ══ -->
         <div id="sec-tabbox" class="stab-content">
-          <p>Gunakan property <code class="il">Tabbox</code> untuk membagi section menjadi dua kolom berdampingan. Nilai <code class="il">"Left"</code> dan <code class="il">"Right"</code> akan berpasangan otomatis dalam satu baris di dalam Tab yang sama.</p>
+          <p>Gunakan <code class="il">:AddTabbox()</code> untuk membuat group tab bertingkat di dalam sebuah section biasa. Setiap kali <code class="il">:AddTabbox()</code> dipanggil, satu tab baru ditambahkan ke group yang sama. Method ini mengembalikan <code class="il">Items</code> API — tambahkan elemen ke dalamnya seperti section biasa.</p>
           <div class="info-box">
-            💡 Section dengan <code class="il">Tabbox = "Left"</code> dan <code class="il">Tabbox = "Right"</code> akan tampil berdampingan secara otomatis. Keduanya harus dibuat secara berurutan di dalam Tab yang sama.
+            💡 Semua pemanggilan <code class="il">:AddTabbox()</code> di dalam Section yang sama akan otomatis digabungkan ke satu group tabbox. Tab pertama aktif secara default. Jika jumlah tab melebihi lebar section, tab bar bisa di-scroll horizontal.
           </div>
 
-          <h3>Dengan Icon</h3>
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="kw">local</span> <span class="var">BoxLeft</span> <span class="op">=</span> <span class="var">Tabs</span>.<span class="var">Main</span>:<span class="fn">AddSection</span>({
-    <span class="var">Title</span>  <span class="op">=</span> <span class="str">"Auto Farm"</span>,
-    <span class="var">Icon</span>   <span class="op">=</span> <span class="str">"lucide:cpu"</span>,
-    <span class="var">Tabbox</span> <span class="op">=</span> <span class="str">"Left"</span>,
-})
-<span class="kw">local</span> <span class="var">BoxRight</span> <span class="op">=</span> <span class="var">Tabs</span>.<span class="var">Main</span>:<span class="fn">AddSection</span>({
-    <span class="var">Title</span>  <span class="op">=</span> <span class="str">"Settings"</span>,
-    <span class="var">Icon</span>   <span class="op">=</span> <span class="str">"lucide:settings"</span>,
-    <span class="var">Tabbox</span> <span class="op">=</span> <span class="str">"Right"</span>,
-})</code></div>
+          <h3>Contoh Dasar</h3>
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="kw">local</span> <span class="var">Section</span> <span class="op">=</span> <span class="var">Tabs</span>.<span class="var">Main</span>:<span class="fn">AddSection</span>({ <span class="var">Title</span> <span class="op">=</span> <span class="str">"Combat"</span> })
+
+<span class="kw">local</span> <span class="var">Tab1</span> <span class="op">=</span> <span class="var">Section</span>:<span class="fn">AddTabbox</span>({ <span class="var">Title</span> <span class="op">=</span> <span class="str">"Auto Farm"</span> })
+<span class="kw">local</span> <span class="var">Tab2</span> <span class="op">=</span> <span class="var">Section</span>:<span class="fn">AddTabbox</span>({ <span class="var">Title</span> <span class="op">=</span> <span class="str">"Settings"</span> })
+<span class="kw">local</span> <span class="var">Tab3</span> <span class="op">=</span> <span class="var">Section</span>:<span class="fn">AddTabbox</span>({ <span class="var">Title</span> <span class="op">=</span> <span class="str">"Info"</span>, <span class="var">Icon</span> <span class="op">=</span> <span class="str">"lucide:info"</span> })
+
+<span class="var">Tab1</span>:<span class="fn">AddToggle</span>({ <span class="var">Title</span> <span class="op">=</span> <span class="str">"Auto Collect"</span>, <span class="var">Default</span> <span class="op">=</span> <span class="kw">false</span>, <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">v</span>) <span class="kw">end</span> })
+
+<span class="var">Tab2</span>:<span class="fn">AddSlider</span>({ <span class="var">Title</span> <span class="op">=</span> <span class="str">"Speed"</span>, <span class="var">Min</span> <span class="op">=</span> <span class="num">1</span>, <span class="var">Max</span> <span class="op">=</span> <span class="num">100</span>, <span class="var">Default</span> <span class="op">=</span> <span class="num">16</span>, <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">v</span>) <span class="kw">end</span> })
+
+<span class="var">Tab3</span>:<span class="fn">AddParagraph</span>({ <span class="var">Title</span> <span class="op">=</span> <span class="str">"About"</span>, <span class="var">Content</span> <span class="op">=</span> <span class="str">"VelarisUI v0.1.9"</span> })</code></div>
           </div>
 
-          <h3>Tanpa Icon (Text Saja)</h3>
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="kw">local</span> <span class="var">BoxLeft</span> <span class="op">=</span> <span class="var">Tabs</span>.<span class="var">Main</span>:<span class="fn">AddSection</span>({
-    <span class="var">Title</span>  <span class="op">=</span> <span class="str">"Auto Farm"</span>,
-    <span class="var">Tabbox</span> <span class="op">=</span> <span class="str">"Left"</span>,
-})
-<span class="kw">local</span> <span class="var">BoxRight</span> <span class="op">=</span> <span class="var">Tabs</span>.<span class="var">Main</span>:<span class="fn">AddSection</span>({
-    <span class="var">Title</span>  <span class="op">=</span> <span class="str">"Settings"</span>,
-    <span class="var">Tabbox</span> <span class="op">=</span> <span class="str">"Right"</span>,
-})</code></div>
-          </div>
-
-          <h3>Contoh Lengkap dengan Elemen</h3>
-          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="kw">local</span> <span class="var">BoxLeft</span> <span class="op">=</span> <span class="var">Tabs</span>.<span class="var">Main</span>:<span class="fn">AddSection</span>({
-    <span class="var">Title</span>  <span class="op">=</span> <span class="str">"Auto Farm"</span>,
-    <span class="var">Icon</span>   <span class="op">=</span> <span class="str">"lucide:cpu"</span>,
-    <span class="var">Open</span>   <span class="op">=</span> <span class="kw">true</span>,
-    <span class="var">Tabbox</span> <span class="op">=</span> <span class="str">"Left"</span>,
-})
-<span class="kw">local</span> <span class="var">BoxRight</span> <span class="op">=</span> <span class="var">Tabs</span>.<span class="var">Main</span>:<span class="fn">AddSection</span>({
-    <span class="var">Title</span>  <span class="op">=</span> <span class="str">"Settings"</span>,
-    <span class="var">Icon</span>   <span class="op">=</span> <span class="str">"lucide:settings"</span>,
-    <span class="var">Open</span>   <span class="op">=</span> <span class="kw">true</span>,
-    <span class="var">Tabbox</span> <span class="op">=</span> <span class="str">"Right"</span>,
-})
-
-<span class="cm">-- Tambahkan elemen seperti biasa ke masing-masing box</span>
-<span class="var">BoxLeft</span>:<span class="fn">AddToggle</span>({
-    <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Auto Collect"</span>,
-    <span class="var">Default</span>  <span class="op">=</span> <span class="kw">false</span>,
-    <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">v</span>) <span class="kw">end</span>
-})
-
-<span class="var">BoxRight</span>:<span class="fn">AddSlider</span>({
-    <span class="var">Title</span>     <span class="op">=</span> <span class="str">"Speed"</span>,
-    <span class="var">Min</span>       <span class="op">=</span> <span class="num">1</span>, <span class="var">Max</span> <span class="op">=</span> <span class="num">100</span>, <span class="var">Default</span> <span class="op">=</span> <span class="num">16</span>,
-    <span class="var">Callback</span>  <span class="op">=</span> <span class="kw">function</span>(<span class="var">v</span>) <span class="kw">end</span>
-})</code></div>
-          </div>
-
-          <h3>Properties</h3>
+          <h3>Config AddTabbox</h3>
           <div class="table-wrap"><table>
             <thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
             <tbody>
-              <tr><td>Tabbox</td><td>string</td><td><code class="il">nil</code></td><td>Layout dua kolom. Gunakan <code class="il">"Left"</code> untuk kolom kiri dan <code class="il">"Right"</code> untuk kolom kanan.</td></tr>
+              <tr><td>Title</td><td>string</td><td><code class="il">"Tab"</code></td><td>Label teks pada tombol tab</td></tr>
+              <tr><td>Icon</td><td>string</td><td><code class="il">""</code></td><td>Icon opsional di sebelah kiri label (lucide:, solar:, rbxassetid)</td></tr>
             </tbody>
           </table></div>
-
-          <div class="info-box">
-            ⚠️ <strong>Catatan:</strong> Section <code class="il">Tabbox = "Left"</code> harus selalu dideklarasikan sebelum <code class="il">Tabbox = "Right"</code> agar layout terbentuk dengan benar.
-          </div>
         </div>
         <!-- ══ END TABBOX ══ -->
 
@@ -1124,7 +1086,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
         <div class="table-wrap"><table>
           <thead><tr><th>Parameter</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
           <tbody>
-            <tr><td>msg</td><td>string</td><td><code class="il">"Content"</code></td><td>Isi teks notifikasi (Content)</td></tr>
+            <tr><td>msg</td><td>string</td><td><code class="il">""</code></td><td>Isi teks notifikasi (Content)</td></tr>
             <tr><td>delay</td><td>number</td><td><code class="il">4</code></td><td>Durasi tampil dalam detik sebelum auto-close</td></tr>
             <tr><td>color</td><td>string | Color3</td><td><code class="il">Color3 (cyan)</code></td><td>Warna teks Description</td></tr>
             <tr><td>title</td><td>string</td><td><code class="il">Configname</code></td><td>Judul notifikasi</td></tr>
@@ -1132,38 +1094,106 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
           </tbody>
         </table></div>
 
-        <h3>MakeNotify() — Full Config</h3>
-        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="kw">local</span> <span class="var">Notif</span> <span class="op">=</span> <span class="var">VelarisUI</span>:<span class="fn">MakeNotify</span>({
-    <span class="var">Title</span>       <span class="op">=</span> <span class="str">"My Script"</span>,
-    <span class="var">Description</span> <span class="op">=</span> <span class="str">"Success"</span>,
-    <span class="var">Content</span>     <span class="op">=</span> <span class="str">"Script telah diload dengan sukses!"</span>,
-    <span class="var">Color</span>       <span class="op">=</span> <span class="str">"Default"</span>,
-    <span class="var">Time</span>        <span class="op">=</span> <span class="num">0.5</span>,
-    <span class="var">Delay</span>       <span class="op">=</span> <span class="num">5</span>,
-    <span class="var">Icon</span>        <span class="op">=</span> <span class="str">"lucide:check"</span>  <span class="cm">-- opsional, tampil di panel kiri</span>
+        <h2>MakeNotify()</h2>
+        <p>Full config API dengan support Icon dan Buttons. Icon tampil berbeda tergantung ada tidaknya Buttons.</p>
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="cm">-- Tanpa buttons → icon tampil di panel kiri besar</span>
+<span class="kw">local</span> <span class="var">Notif</span> <span class="op">=</span> <span class="var">VelarisUI</span>:<span class="fn">MakeNotify</span>({
+    <span class="var">Title</span>   <span class="op">=</span> <span class="str">"My Script"</span>,
+    <span class="var">Content</span> <span class="op">=</span> <span class="str">"Script telah diload dengan sukses!"</span>,
+    <span class="var">Icon</span>    <span class="op">=</span> <span class="str">"lucide:check"</span>,
+    <span class="var">Color</span>   <span class="op">=</span> <span class="str">"Default"</span>,
+    <span class="var">Delay</span>   <span class="op">=</span> <span class="num">5</span>,
 })
 
-<span class="cm">-- Tutup manual sebelum waktunya</span>
+<span class="cm">-- Dengan buttons → icon tampil inline kecil di samping title</span>
+<span class="var">VelarisUI</span>:<span class="fn">MakeNotify</span>({
+    <span class="var">Title</span>   <span class="op">=</span> <span class="str">"Update tersedia!"</span>,
+    <span class="var">Content</span> <span class="op">=</span> <span class="str">"Versi baru v1.2 sudah rilis."</span>,
+    <span class="var">Icon</span>    <span class="op">=</span> <span class="str">"lucide:bell"</span>,
+    <span class="var">Delay</span>   <span class="op">=</span> <span class="num">0</span>,  <span class="cm">-- 0 = tidak auto-close karena ada buttons</span>
+    <span class="var">Buttons</span> <span class="op">=</span> {
+        { <span class="var">Name</span> <span class="op">=</span> <span class="str">"Update"</span>, <span class="var">Primary</span> <span class="op">=</span> <span class="kw">true</span>, <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>() <span class="fn">print</span>(<span class="str">"update!"</span>) <span class="kw">end</span> },
+        { <span class="var">Name</span> <span class="op">=</span> <span class="str">"Nanti"</span>, <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>() <span class="kw">end</span> },
+    },
+})
+
+<span class="cm">-- Tutup manual</span>
 <span class="var">Notif</span>:<span class="fn">Close</span>()</code></div>
         </div>
         <div class="table-wrap"><table>
           <thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
           <tbody>
             <tr><td>Title</td><td>string</td><td><code class="il">"Velaris UI"</code></td><td>Judul notifikasi</td></tr>
-            <tr><td>Description</td><td>string</td><td><code class="il">"Notification"</code></td><td>Teks berwarna kecil di samping judul</td></tr>
-            <tr><td>Content</td><td>string</td><td><code class="il">"Content"</code></td><td>Isi teks utama notifikasi</td></tr>
+            <tr><td>Description</td><td>string</td><td><code class="il">""</code></td><td>Teks berwarna kecil di samping judul (opsional)</td></tr>
+            <tr><td>Content</td><td>string</td><td><code class="il">""</code></td><td>Isi teks utama notifikasi</td></tr>
             <tr><td>Color</td><td>string | Color3</td><td><code class="il">Color3 (cyan)</code></td><td>Warna teks Description</td></tr>
             <tr><td>Time</td><td>number</td><td><code class="il">0.5</code></td><td>Durasi animasi slide-in/out (detik)</td></tr>
-            <tr><td>Delay</td><td>number</td><td><code class="il">5</code></td><td>Durasi tampil sebelum auto-close (detik)</td></tr>
-            <tr><td>Icon</td><td>string</td><td><code class="il">""</code></td><td>Icon di panel kiri notifikasi (rbxassetid, lucide:, solar:). Opsional</td></tr>
+            <tr><td>Delay</td><td>number</td><td><code class="il">5</code></td><td>Durasi tampil sebelum auto-close. Jika ada Buttons dan Delay = <code class="il">0</code>, notif tidak auto-close</td></tr>
+            <tr><td>Icon</td><td>string</td><td><code class="il">""</code></td><td>Icon notifikasi. Tanpa Buttons → panel kiri besar. Dengan Buttons → inline kecil di samping Title</td></tr>
+            <tr><td>Buttons</td><td>table</td><td><code class="il">{}</code></td><td>Daftar tombol di bawah konten. Setiap button memiliki <code class="il">Name</code>, <code class="il">Primary</code>, <code class="il">Icon</code>, dan <code class="il">Callback</code></td></tr>
           </tbody>
         </table></div>
+
+        <h3>Button Properties (MakeNotify)</h3>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Property</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td>Name</td><td>string</td><td>Label tombol</td></tr>
+            <tr><td>Primary</td><td>boolean</td><td>Tampilan lebih terang (highlight). Semua button sama lebar</td></tr>
+            <tr><td>Icon</td><td>string</td><td>Icon opsional di sebelah label</td></tr>
+            <tr><td>Callback</td><td>function</td><td>Dipanggil saat diklik, lalu notif otomatis ditutup</td></tr>
+          </tbody>
+        </table></div>
+
         <div class="table-wrap"><table>
           <thead><tr><th>Method</th><th>Description</th></tr></thead>
           <tbody>
-            <tr><td>:Close()</td><td>Tutup notifikasi secara manual sebelum Delay habis. Return <code class="il">false</code> jika sudah pernah dipanggil</td></tr>
+            <tr><td>:Close()</td><td>Tutup notifikasi secara manual. Return <code class="il">false</code> jika sudah pernah dipanggil</td></tr>
           </tbody>
         </table></div>
+
+        <h2>GuiFunc:Notify()</h2>
+        <p>Notifikasi card bergaya modern dengan accent bar, progress bar, dan tombol yang di-return dari <code class="il">Window</code>. Berbeda dari <code class="il">MakeNotify</code> — notifikasi ini terikat ke window dan menggunakan warna accent window secara otomatis.</p>
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="cm">-- Simple dengan progress bar auto-close</span>
+<span class="var">Window</span>:<span class="fn">Notify</span>({
+    <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Loaded!"</span>,
+    <span class="var">Content</span>  <span class="op">=</span> <span class="str">"Script v1.0 berhasil diload."</span>,
+    <span class="var">Duration</span> <span class="op">=</span> <span class="num">5</span>,  <span class="cm">-- auto-close + progress bar</span>
+})
+
+<span class="cm">-- Dengan tombol (tidak auto-close)</span>
+<span class="var">Window</span>:<span class="fn">Notify</span>({
+    <span class="var">Title</span>   <span class="op">=</span> <span class="str">"Konfirmasi"</span>,
+    <span class="var">Content</span> <span class="op">=</span> <span class="str">"Apakah kamu ingin reset settings?"</span>,
+    <span class="var">Buttons</span> <span class="op">=</span> {
+        { <span class="var">Name</span> <span class="op">=</span> <span class="str">"Reset"</span>,  <span class="var">Primary</span> <span class="op">=</span> <span class="kw">true</span>, <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>() <span class="fn">print</span>(<span class="str">"reset"</span>) <span class="kw">end</span> },
+        { <span class="var">Name</span> <span class="op">=</span> <span class="str">"Batal"</span>, <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>() <span class="kw">end</span> },
+    },
+})</code></div>
+        </div>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td>Title</td><td>string</td><td><code class="il">"Notification"</code></td><td>Judul card notifikasi</td></tr>
+            <tr><td>Content</td><td>string</td><td><code class="il">""</code></td><td>Isi teks di bawah judul</td></tr>
+            <tr><td>Duration</td><td>number</td><td><code class="il">5</code></td><td>Durasi auto-close + progress bar (detik). Diabaikan jika ada Buttons</td></tr>
+            <tr><td>Buttons</td><td>table</td><td><code class="il">{}</code></td><td>Daftar tombol. Jika diisi, progress bar tidak muncul dan notif tidak auto-close</td></tr>
+          </tbody>
+        </table></div>
+
+        <h3>Button Properties (GuiFunc:Notify)</h3>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Property</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td>Name</td><td>string</td><td>Label tombol</td></tr>
+            <tr><td>Primary</td><td>boolean</td><td>Tombol pertama di-set Primary secara default. Primary = pakai accent color window</td></tr>
+            <tr><td>Callback</td><td>function</td><td>Dipanggil saat diklik, lalu card otomatis dihapus</td></tr>
+          </tbody>
+        </table></div>
+
+        <div class="info-box">
+          💡 Perbedaan utama: <strong>MakeNotify</strong> adalah global function dari <code class="il">VelarisUI</code>, bisa dipakai sebelum window dibuat. <strong>GuiFunc:Notify</strong> adalah method dari return Window, menggunakan warna accent window secara otomatis.
+        </div>
 
         <div class="page-nav">
           <button class="pnav-btn" onclick="show('section',getSL('section'))"><span class="pnav-btn-label">← Previous</span><span class="pnav-btn-name">Section</span></button>
