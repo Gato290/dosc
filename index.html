@@ -501,6 +501,12 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
     <span class="var">Animation</span>         <span class="op">=</span> <span class="kw">false</span>,                 <span class="cm">-- Efek typewriter pada Title &amp; Footer</span>
     <span class="var">TypeDelay</span>         <span class="op">=</span> <span class="num">0.07</span>,                  <span class="cm">-- Jeda antar karakter (detik)</span>
     <span class="var">TypePause</span>         <span class="op">=</span> <span class="num">2.5</span>,                   <span class="cm">-- Jeda setelah teks selesai (detik)</span>
+    <span class="var">DiscordSet</span> <span class="op">=</span> {
+        <span class="var">Enable</span> <span class="op">=</span> <span class="kw">true</span>,
+        <span class="var">Title</span>  <span class="op">=</span> <span class="str">"My Hub"</span>,            <span class="cm">-- nama yang ditampilkan</span>
+        <span class="var">Link</span>   <span class="op">=</span> <span class="str">"https://discord.gg/xxxxx"</span>,
+        <span class="var">Icon</span>   <span class="op">=</span> <span class="str">"lucide:message-circle"</span>, <span class="cm">-- opsional</span>
+    },
     <span class="var">Config</span> <span class="op">=</span> {
         <span class="var">AutoSave</span> <span class="op">=</span> <span class="kw">true</span>,
         <span class="var">AutoLoad</span> <span class="op">=</span> <span class="kw">true</span>,
@@ -537,6 +543,10 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
               <tr><td>Animation</td><td>boolean</td><td><code class="il">false</code></td><td>Aktifkan efek typewriter pada Title dan Footer — keduanya diketik dan dihapus bergantian secara terus-menerus.</td></tr>
               <tr><td>TypeDelay</td><td>number</td><td><code class="il">0.07</code></td><td>Jeda antar karakter saat efek typewriter (detik). Hanya berlaku jika <code class="il">Animation = true</code>.</td></tr>
               <tr><td>TypePause</td><td>number</td><td><code class="il">2.5</code></td><td>Jeda setelah teks selesai diketik sebelum mulai dihapus (detik). Hanya berlaku jika <code class="il">Animation = true</code>.</td></tr>
+              <tr><td>DiscordSet.Enable</td><td>boolean</td><td><code class="il">false</code></td><td>Aktifkan tombol Discord di bagian bawah sidebar tab.</td></tr>
+              <tr><td>DiscordSet.Title</td><td>string</td><td><code class="il">"DISCORD"</code></td><td>Nama yang ditampilkan di atas teks "JOIN DISCORD".</td></tr>
+              <tr><td>DiscordSet.Link</td><td>string</td><td><code class="il">""</code></td><td>URL Discord. Klik tombol akan menyalin link ke clipboard.</td></tr>
+              <tr><td>DiscordSet.Icon</td><td>string</td><td><code class="il">""</code></td><td>Icon tombol Discord (lucide:, solar:, rbxassetid). Default: icon Discord.</td></tr>
             </tbody>
           </table>
         </div>
@@ -1402,6 +1412,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
           <div class="stab" onclick="stab(this,'tog-fn')">Functions</div>
         </div>
         <div id="tog-basic" class="stab-content active">
+          <p>Toggle mendukung <strong>drag horizontal</strong> — geser langsung di atas pill kiri/kanan. Gerakan vertikal otomatis dibatalkan agar tidak mengganggu scroll. Tap biasa tetap berfungsi untuk flip nilai.</p>
           <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="var">Sec</span>.<span class="var">Toggle</span>:<span class="fn">AddToggle</span>({
     <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Example"</span>,
     <span class="var">Default</span>  <span class="op">=</span> <span class="kw">false</span>,
@@ -1491,6 +1502,8 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
         <div class="subtabs">
           <div class="stab active" onclick="stab(this,'sl-basic')">Basic</div>
           <div class="stab" onclick="stab(this,'sl-alt')">Alternative</div>
+          <div class="stab" onclick="stab(this,'sl-tooltip')">Tooltip</div>
+          <div class="stab" onclick="stab(this,'sl-icon')">Icon</div>
           <div class="stab" onclick="stab(this,'sl-fn')">Functions</div>
         </div>
         <div id="sl-basic" class="stab-content active">
@@ -1505,6 +1518,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
         <span class="fn">print</span>(<span class="str">"Slider value:"</span>, <span class="var">value</span>)
     <span class="kw">end</span>
 })</code></div></div>
+          <p>Nilai juga bisa diketik langsung di textbox di sebelah kanan track — tekan Enter untuk apply.</p>
         </div>
         <div id="sl-alt" class="stab-content">
           <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="var">Sec</span>.<span class="var">Slider</span>:<span class="fn">AddSlider</span>({
@@ -1513,18 +1527,51 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
     <span class="var">Callback</span>  <span class="op">=</span> <span class="kw">function</span>(<span class="var">value</span>) <span class="fn">print</span>(<span class="str">"Value:"</span>, <span class="var">value</span>) <span class="kw">end</span>
 })</code></div></div>
         </div>
+        <div id="sl-tooltip" class="stab-content">
+          <p>Tampilkan tooltip nilai di atas thumb saat sedang di-drag dengan menambahkan <code class="il">Tooltip = true</code>.</p>
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="var">Sec</span>.<span class="var">Slider</span>:<span class="fn">AddSlider</span>({
+    <span class="var">Title</span>     <span class="op">=</span> <span class="str">"Volume"</span>,
+    <span class="var">Min</span>       <span class="op">=</span> <span class="num">0</span>,
+    <span class="var">Max</span>       <span class="op">=</span> <span class="num">100</span>,
+    <span class="var">Default</span>   <span class="op">=</span> <span class="num">50</span>,
+    <span class="var">Increment</span> <span class="op">=</span> <span class="num">1</span>,
+    <span class="var">Tooltip</span>   <span class="op">=</span> <span class="kw">true</span>,   <span class="cm">-- tampilkan tooltip nilai saat drag</span>
+    <span class="var">Callback</span>  <span class="op">=</span> <span class="kw">function</span>(<span class="var">value</span>) <span class="fn">print</span>(<span class="var">value</span>) <span class="kw">end</span>
+})</code></div></div>
+        </div>
+        <div id="sl-icon" class="stab-content">
+          <p>Tambahkan icon di kiri dan kanan track menggunakan <code class="il">IconFrom</code> dan <code class="il">IconTo</code>. Support semua format icon (lucide:, solar:, rbxassetid, URL).</p>
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="var">Sec</span>.<span class="var">Slider</span>:<span class="fn">AddSlider</span>({
+    <span class="var">Title</span>     <span class="op">=</span> <span class="str">"Brightness"</span>,
+    <span class="var">Min</span>       <span class="op">=</span> <span class="num">0</span>,
+    <span class="var">Max</span>       <span class="op">=</span> <span class="num">100</span>,
+    <span class="var">Default</span>   <span class="op">=</span> <span class="num">50</span>,
+    <span class="var">Increment</span> <span class="op">=</span> <span class="num">1</span>,
+    <span class="var">IconFrom</span>  <span class="op">=</span> <span class="str">"lucide:sun-dim"</span>,   <span class="cm">-- icon kiri track</span>
+    <span class="var">IconTo</span>    <span class="op">=</span> <span class="str">"lucide:sun"</span>,        <span class="cm">-- icon kanan track</span>
+    <span class="var">Callback</span>  <span class="op">=</span> <span class="kw">function</span>(<span class="var">value</span>) <span class="fn">print</span>(<span class="var">value</span>) <span class="kw">end</span>
+})</code></div></div>
+        </div>
         <div id="sl-fn" class="stab-content">
           <div class="table-wrap"><table>
             <thead><tr><th>Method / Property</th><th>Description</th></tr></thead>
             <tbody>
               <tr><td>.Value</td><td>Nilai slider saat ini</td></tr>
-              <tr><td>:Set(value)</td><td>Set nilai slider</td></tr>
-              <tr><td>:GetValue()</td><td>Ambil nilai slider</td></tr>
-              <tr><td>:SetMin(min)</td><td>Ubah nilai minimum</td></tr>
-              <tr><td>:SetMax(max)</td><td>Ubah nilai maximum</td></tr>
+              <tr><td>:Set(value)</td><td>Set nilai slider secara programatik</td></tr>
+              <tr><td>:GetValue()</td><td>Ambil nilai slider saat ini</td></tr>
+              <tr><td>:SetMin(min)</td><td>Ubah batas minimum secara runtime</td></tr>
+              <tr><td>:SetMax(max)</td><td>Ubah batas maximum secara runtime</td></tr>
               <tr><td>:SetLocked(state)</td><td>Kunci/buka elemen</td></tr>
               <tr><td>:GetLocked()</td><td>Cek status kunci</td></tr>
               <tr><td>:SetLockMessage(text)</td><td>Ubah teks pesan di overlay kunci</td></tr>
+            </tbody>
+          </table></div>
+          <div class="table-wrap"><table>
+            <thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+            <tbody>
+              <tr><td>Tooltip</td><td>boolean</td><td><code class="il">false</code></td><td>Tampilkan tooltip nilai di atas thumb saat drag</td></tr>
+              <tr><td>IconFrom</td><td>string</td><td><code class="il">nil</code></td><td>Icon di kiri track (lucide:, solar:, rbxassetid, URL)</td></tr>
+              <tr><td>IconTo</td><td>string</td><td><code class="il">nil</code></td><td>Icon di kanan track</td></tr>
             </tbody>
           </table></div>
         </div>
