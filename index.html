@@ -1415,6 +1415,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
           <p>Toggle mendukung <strong>drag horizontal</strong> — geser langsung di atas pill kiri/kanan. Gerakan vertikal otomatis dibatalkan agar tidak mengganggu scroll. Tap biasa tetap berfungsi untuk flip nilai.</p>
           <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="var">Sec</span>.<span class="var">Toggle</span>:<span class="fn">AddToggle</span>({
     <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Example"</span>,
+    <span class="var">Flag</span>     <span class="op">=</span> <span class="str">"my_toggle"</span>,  <span class="cm">-- key untuk auto-save config</span>
     <span class="var">Default</span>  <span class="op">=</span> <span class="kw">false</span>,
     <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">value</span>)
         <span class="kw">if</span> <span class="var">value</span> <span class="kw">then</span>
@@ -1485,6 +1486,12 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
               <tr><td>:SetLockMessage(text)</td><td>Ubah teks pesan di overlay kunci</td></tr>
             </tbody>
           </table></div>
+          <div class="table-wrap"><table>
+            <thead><tr><th>Config Property</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+            <tbody>
+              <tr><td>Flag</td><td>string</td><td><code class="il">Title</code></td><td>Key unik untuk menyimpan nilai ke config. Jika tidak diisi, otomatis pakai Title. Gunakan Flag jika ada dua toggle dengan judul sama.</td></tr>
+            </tbody>
+          </table></div>
         </div>
         <div class="page-nav">
           <button class="pnav-btn" onclick="show('button',getSL('button'))"><span class="pnav-btn-label">← Previous</span><span class="pnav-btn-name">Button</span></button>
@@ -1509,6 +1516,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
         <div id="sl-basic" class="stab-content active">
           <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="var">Sec</span>.<span class="var">Slider</span>:<span class="fn">AddSlider</span>({
     <span class="var">Title</span>     <span class="op">=</span> <span class="str">"Example"</span>,
+    <span class="var">Flag</span>      <span class="op">=</span> <span class="str">"my_slider"</span>,  <span class="cm">-- key untuk auto-save config</span>
     <span class="var">Content</span>   <span class="op">=</span> <span class="str">"Example slider description"</span>,
     <span class="var">Min</span>       <span class="op">=</span> <span class="num">0</span>,
     <span class="var">Max</span>       <span class="op">=</span> <span class="num">100</span>,
@@ -1572,6 +1580,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
               <tr><td>Tooltip</td><td>boolean</td><td><code class="il">false</code></td><td>Tampilkan tooltip nilai di atas thumb saat drag</td></tr>
               <tr><td>IconFrom</td><td>string</td><td><code class="il">nil</code></td><td>Icon di kiri track (lucide:, solar:, rbxassetid, URL)</td></tr>
               <tr><td>IconTo</td><td>string</td><td><code class="il">nil</code></td><td>Icon di kanan track</td></tr>
+              <tr><td>Flag</td><td>string</td><td><code class="il">Title</code></td><td>Key unik untuk menyimpan nilai ke config. Jika tidak diisi, otomatis pakai Title.</td></tr>
             </tbody>
           </table></div>
         </div>
@@ -1598,6 +1607,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
         <div id="dd-single" class="stab-content active">
           <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="var">Sec</span>.<span class="var">Dropdwon</span>:<span class="fn">AddDropdown</span>({
     <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Example"</span>,
+    <span class="var">Flag</span>     <span class="op">=</span> <span class="str">"my_dropdown"</span>,  <span class="cm">-- key untuk auto-save config</span>
     <span class="var">Options</span>  <span class="op">=</span> { <span class="str">"Option A"</span>, <span class="str">"Option B"</span>, <span class="str">"Option C"</span> },
     <span class="var">Multi</span>    <span class="op">=</span> <span class="kw">false</span>,
     <span class="var">Default</span>  <span class="op">=</span> <span class="str">"Option A"</span>,
@@ -1672,6 +1682,12 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
               <tr><td>:SetLockMessage(text)</td><td>Ubah teks pesan di overlay kunci</td></tr>
             </tbody>
           </table></div>
+          <div class="table-wrap"><table>
+            <thead><tr><th>Config Property</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+            <tbody>
+              <tr><td>Flag</td><td>string</td><td><code class="il">Title</code></td><td>Key unik untuk menyimpan pilihan ke config. Jika tidak diisi, otomatis pakai Title.</td></tr>
+            </tbody>
+          </table></div>
         </div>
         <div class="page-nav">
           <button class="pnav-btn" onclick="show('slider',getSL('slider'))"><span class="pnav-btn-label">← Previous</span><span class="pnav-btn-name">Slider</span></button>
@@ -1694,6 +1710,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
         <div id="inp-ex" class="stab-content active">
           <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="var">Sec</span>.<span class="var">Input</span>:<span class="fn">AddInput</span>({
     <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Username"</span>,
+    <span class="var">Flag</span>     <span class="op">=</span> <span class="str">"my_input"</span>,  <span class="cm">-- key untuk auto-save config</span>
     <span class="var">Content</span>  <span class="op">=</span> <span class="str">"Enter your username"</span>,
     <span class="var">Default</span>  <span class="op">=</span> <span class="var">game</span>.<span class="var">Players</span>.<span class="var">LocalPlayer</span>.<span class="var">Name</span>,
     <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">value</span>) <span class="fn">print</span>(<span class="str">"Username:"</span>, <span class="var">value</span>) <span class="kw">end</span>
@@ -1761,6 +1778,12 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
               <tr><td>:SetLockMessage(text)</td><td>Ubah teks pesan di overlay kunci</td></tr>
             </tbody>
           </table></div>
+          <div class="table-wrap"><table>
+            <thead><tr><th>Config Property</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+            <tbody>
+              <tr><td>Flag</td><td>string</td><td><code class="il">Title</code></td><td>Key unik untuk menyimpan nilai ke config. Jika tidak diisi, otomatis pakai Title.</td></tr>
+            </tbody>
+          </table></div>
         </div>
         <div class="page-nav">
           <button class="pnav-btn" onclick="show('dropdown',getSL('dropdown'))"><span class="pnav-btn-label">← Previous</span><span class="pnav-btn-name">Dropdown</span></button>
@@ -1783,6 +1806,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
         <div id="pan-single" class="stab-content active">
           <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="var">Sec</span>.<span class="var">Panel</span>:<span class="fn">AddPanel</span>({
     <span class="var">Title</span>          <span class="op">=</span> <span class="str">"Example"</span>,
+    <span class="var">Flag</span>           <span class="op">=</span> <span class="str">"my_panel"</span>,  <span class="cm">-- key untuk auto-save config</span>
     <span class="var">Placeholder</span>    <span class="op">=</span> <span class="str">"Example_Name"</span>,
     <span class="var">Default</span>        <span class="op">=</span> <span class="str">"ExampleDefault"</span>,
     <span class="var">ButtonText</span>     <span class="op">=</span> <span class="str">"Example Action"</span>,
@@ -1812,6 +1836,12 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
               <tr><td>:SetLocked(state)</td><td>Kunci/buka elemen</td></tr>
               <tr><td>:GetLocked()</td><td>Cek status kunci</td></tr>
               <tr><td>:SetLockMessage(text)</td><td>Ubah teks pesan di overlay kunci</td></tr>
+            </tbody>
+          </table></div>
+          <div class="table-wrap"><table>
+            <thead><tr><th>Config Property</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+            <tbody>
+              <tr><td>Flag</td><td>string</td><td><code class="il">Title</code></td><td>Key unik untuk menyimpan nilai input ke config. Jika tidak diisi, otomatis pakai Title.</td></tr>
             </tbody>
           </table></div>
         </div>
@@ -2146,6 +2176,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:28px 0}
         <div id="kb-basic" class="stab-content active">
           <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button><div class="code-block-inner"><code><span class="kw">local</span> <span class="var">MyKeybind</span> <span class="op">=</span> <span class="var">Section</span>:<span class="fn">AddKeybind</span>({
     <span class="var">Title</span>    <span class="op">=</span> <span class="str">"Toggle ESP"</span>,
+    <span class="var">Flag</span>     <span class="op">=</span> <span class="str">"my_keybind"</span>,  <span class="cm">-- key untuk auto-save config</span>
     <span class="var">Content</span>  <span class="op">=</span> <span class="str">"Tekan untuk toggle"</span>,
     <span class="var">Value</span>    <span class="op">=</span> <span class="str">"RightShift"</span>,
     <span class="var">Callback</span> <span class="op">=</span> <span class="kw">function</span>(<span class="var">key</span>)
